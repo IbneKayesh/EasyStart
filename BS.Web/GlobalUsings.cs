@@ -1,0 +1,9 @@
+﻿global using BS.DBC.Database;
+global using BS.DMO.Models.Setup;
+global using BS.Infra.Services.Setup;
+global using BS.Infra.Services.Utility;
+global using BS.Web.Controllers;
+global using BS.Web.Models;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.EntityFrameworkCore;
+global using System.Diagnostics;

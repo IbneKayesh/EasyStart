@@ -1,0 +1,34 @@
+﻿namespace BS.DMO.Models
+{
+    public class AuditTable
+    {
+        public AuditTable()
+        {
+            IS_ACTIVE = true;
+
+            CREATE_USER = "BS1";
+            CREATE_DATE = DateTime.Now;
+
+            UPDATE_USER = "BS2";
+            UPDATE_DATE = DateTime.Now;
+            REVISE_NO = 0;
+            //Data Edit Restrict for multiple Users
+        }
+
+        [Display(Name = "Status")]
+        public bool IS_ACTIVE { get; set; }
+
+        public string CREATE_USER { get; set; }
+        public DateTime CREATE_DATE { get; set; }
+
+        public string UPDATE_USER { get; set; }
+        public DateTime UPDATE_DATE { get; set; }
+
+
+        [Display(Name = "Revise No")]
+        public int REVISE_NO { get; set; }
+
+        [Timestamp]
+        public byte[]? RowVersion { get; set; }
+    }
+}
