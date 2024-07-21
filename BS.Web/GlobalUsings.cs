@@ -1,9 +1,11 @@
 ﻿global using BS.DBC.Database;
 global using BS.DMO.Models.Admin;
 global using BS.DMO.Models.Company;
+global using BS.DMO.Models.SalesOrder;
 global using BS.DMO.Models.Setup;
 global using BS.Infra.DbHelper;
 global using BS.Infra.Services.Company;
+global using BS.Infra.Services.SalesOrder;
 global using BS.Infra.Services.Security;
 global using BS.Infra.Services.Setup;
 global using BS.Infra.Services.Utility;

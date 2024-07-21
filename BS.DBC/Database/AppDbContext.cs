@@ -27,6 +27,11 @@
         public DbSet<SECTIONS> SECTIONS { get; set; }
         public DbSet<SUB_SECTIONS> SUB_SECTIONS { get; set; }
 
+        //Sales Booking
+        public DbSet<SB_MASTER> SB_MASTER { get; set; }
+        public DbSet<SB_CHILD> SB_CHILD { get; set; }
+
+
         public DbSet<Abc>? Abc { get; set; }
 
     }

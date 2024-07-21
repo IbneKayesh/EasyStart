@@ -1,5 +1,4 @@
-using BS.DMO.Models.Setup;
-using BS.DMO.ViewModels.Security;
+using BS.DMO.Models.SalesOrder;
 
 namespace BS.Web.Controllers
 {
@@ -21,7 +20,7 @@ namespace BS.Web.Controllers
             userLoginInfoService.AddLog("Dev", sessionId);
 
 
-            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<SUB_SECTIONS>();
+            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<SB_MASTER>();
            // table_script = Services.Power.ClassObjectSanitizer.SetForSave<DEPARTMENTS>();
             //table_script = Services.Power.RazorSanitizer.Create<DEPARTMENTS>();
             //table_script = Services.Power.RazorSanitizer.Select<DEPARTMENTS>();

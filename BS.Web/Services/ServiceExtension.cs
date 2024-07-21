@@ -32,6 +32,9 @@
             services.AddTransient<SectionService>();
             services.AddTransient<SubSectionService>();
 
+            //SalesBooking
+            services.AddTransient<SalesBookingService>();
+
             //services.AddScoped<IUnitOfWork, UnitOfWork>();
             //services.AddScoped<ITransactionNoBuilderRep, TransactionNoBuilderRep>();
             //services.Configure<APP_CONFIG>(configuration.GetSection("AppConfig"));

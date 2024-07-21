@@ -5,10 +5,26 @@
         public IActionResult Index()
         {
             List<PageNumberInfo> pageNumberInfos = new List<PageNumberInfo>();
-            pageNumberInfos.AddRange(Company_1_Module());
+            //pageNumberInfos.AddRange(Company_1_Module());
             //pageNumberInfos.AddRange(Setup_2_Module());
+            pageNumberInfos.AddRange(SalesOrder_15_Module());
 
             return View(pageNumberInfos.OrderByDescending(x => x.ControllerID).ThenByDescending(t => t.AreaID));
+        }
+        private List<PageNumberInfo> SalesOrder_15_Module()
+        {
+            List<PageNumberInfo> pageNumberInfos =
+              [
+                new PageNumberInfo
+                {
+                    AreaID =15, Area = "SalesOrder", ControllerID=1, Controller= "SalesBooking", ActionID = 1, Action ="Index", PageID = "15-1-1", PageInfo="Index - Sales Booking"
+                },
+                new PageNumberInfo
+                {
+                    AreaID =15, Area = "SalesOrder", ControllerID=1, Controller= "SalesBooking", ActionID = 2, Action ="Create", PageID = "15-1-2", PageInfo="Create/Edit - SalesBooking"
+                },
+            ];
+            return pageNumberInfos;
         }
         private List<PageNumberInfo> Company_1_Module()
         {
