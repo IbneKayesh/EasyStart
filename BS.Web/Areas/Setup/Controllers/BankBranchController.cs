@@ -1,71 +1,85 @@
 ﻿using BS.Infra.DbHelper;
+using BS.Infra.Services.Setup;
+using BS.Web.Services;
 
 namespace BS.Web.Areas.Setup.Controllers
 {
     [Area("Setup")]
     public class BankBranchController : BaseController
     {
-        private readonly BankBranchService bankBranchService;
-        public BankBranchController(BankBranchService _bankBranchService)
+        private readonly BankBranchService bankBranchS;
+        private readonly BankInfoService bankInfoS;
+        public BankBranchController(BankBranchService _bankBranchService, BankInfoService _bankInfoService)
         {
-            bankBranchService = _bankBranchService;
+            bankBranchS = _bankBranchService;
+            bankInfoS = _bankInfoService;
         }
         public IActionResult Index()
         {
-            var entityList = bankBranchService.GetAll();
+            @ViewData["PageNo"] = "231";
+            var entityList = bankBranchS.GetAll();
             return View(entityList);
         }
         public IActionResult Create()
         {
+            @ViewData["PageNo"] = "232";
+            Dropdown_CreateEdit();
             return View("AddUpdate", new BANK_BRANCH());
         }
         [HttpPost]
         public IActionResult AddUpdate(BANK_BRANCH obj)
         {
+            @ViewData["PageNo"] = "232";
+            EQResult eQResult = new EQResult();
             if (ModelState.IsValid)
             {
-                EQResult eQResult = bankBranchService.Insert(obj, UserId);
-                TempData["msg"] = eQResult.Messages;
+                eQResult = bankBranchS.Insert(obj, UserId);
+                TempData["msg"] = eQResult.messages;
 
-                if (eQResult.Success && eQResult.Rows > 0)
+                if (eQResult.success && eQResult.rows > 0)
                 {
                     return RedirectToAction(nameof(Index));
                 }
             }
+            else
+            {
+                var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+                ModelState.AddModelError("", errors);
+            }
+            Dropdown_CreateEdit();
             return View(obj);
         }
         public IActionResult Edit(string id)
         {
+            @ViewData["PageNo"] = "232";
+            Dropdown_CreateEdit();
             if (!string.IsNullOrWhiteSpace(id))
             {
-                var entity = bankBranchService.GetById(id);
+                var entity = bankBranchS.GetById(id);
                 if (entity != null)
                 {
                     return View("AddUpdate", entity);
                 }
                 else
                 {
-                    TempData["msg"] = NotifyServices.NotFound();
+                    TempData["msg"] = NotifyService.NotFound();
                 }
             }
             else
             {
-                TempData["msg"] = NotifyServices.Error("Invalid ID, Parameter is required");
+                TempData["msg"] = NotifyService.Error("Invalid ID, Parameter is required");
             }
             return RedirectToAction(nameof(Index));
         }
+        private void Dropdown_CreateEdit()
+        {
+            ViewBag.BANK_ID = bankInfoS.GetAllActive();
+        }
+
         public IActionResult Delete(string id)
         {
-            if (!string.IsNullOrWhiteSpace(id))
-            {
-                EQResult eQResult = bankBranchService.Delete(id);
-                TempData["msg"] = eQResult.Messages;
-            }
-            else
-            {
-                TempData["msg"] = NotifyServices.Error("Invalid ID, Parameter is required");
-            }
-            return RedirectToAction(nameof(Index));
+            EQResult eQResult = bankBranchS.Delete(id);
+            return Json(eQResult);
         }
     }
 }

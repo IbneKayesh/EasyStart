@@ -1,4 +1,5 @@
 ﻿using BS.Infra.DbHelper;
+using BS.Infra.Services.Utility;
 
 namespace BS.Infra.Services.Setup
 {
@@ -12,7 +13,7 @@ namespace BS.Infra.Services.Setup
         public EQResult Insert(BANK_INFO obj, string userId)
         {
             EQResult eQResult = new EQResult();
-            eQResult.Entities = "BANK_INFO";
+            eQResult.entities = "BANK_INFO";
             try
             {
                 if (obj.ID == Guid.Empty.ToString())
@@ -30,9 +31,9 @@ namespace BS.Infra.Services.Setup
                     //End Audit
 
                     dbCtx.BANK_INFO.Add(obj);
-                    eQResult.Rows = dbCtx.SaveChanges();
-                    eQResult.Success = true;
-                    eQResult.Messages = NotifyServices.SaveSuccess();
+                    eQResult.rows = dbCtx.SaveChanges();
+                    eQResult.success = true;
+                    eQResult.messages = NotifyService.SaveSuccess();
                     return eQResult;
                 }
                 else
@@ -48,32 +49,33 @@ namespace BS.Infra.Services.Setup
                             entity.SHORT_NAME = obj.SHORT_NAME;
                             entity.CO_ADDRESS = obj.CO_ADDRESS;
                             //Start Audit
+                            entity.IS_ACTIVE = obj.IS_ACTIVE;
                             entity.UPDATE_USER = userId;
                             entity.UPDATE_DATE = DateTime.Now;
                             entity.REVISE_NO = entity.REVISE_NO + 1;
                             //End Audit
                             dbCtx.Entry(entity).State = EntityState.Modified;
-                            eQResult.Rows = dbCtx.SaveChanges();
-                            eQResult.Success = true;
-                            eQResult.Messages = NotifyServices.EditSuccess();
+                            eQResult.rows = dbCtx.SaveChanges();
+                            eQResult.success = true;
+                            eQResult.messages = NotifyService.EditSuccess();
                             return eQResult;
                         }
                         else
                         {
-                            eQResult.Messages = NotifyServices.EditRestricted();
+                            eQResult.messages = NotifyService.EditRestricted();
                             return eQResult;
                         }
                     }
                     else
                     {
-                        eQResult.Messages = NotifyServices.NotFound();
+                        eQResult.messages = NotifyService.NotFound();
                         return eQResult;
                     }
                 }
             }
             catch (Exception ex)
             {
-                eQResult.Messages = NotifyServices.Error(ex.Message == string.Empty ? ex.InnerException.Message : ex.Message);
+                eQResult.messages = NotifyService.Error(ex.Message == string.Empty ? ex.InnerException.Message : ex.Message);
                 return eQResult;
             }
             finally
@@ -84,24 +86,43 @@ namespace BS.Infra.Services.Setup
 
         public List<BANK_INFO> GetAll()
         {
-            return dbCtx.BANK_INFO.OrderBy(x => x.BANK_NAME).ToList();
+            FormattableString sql = $@"SELECT BI.*
+                    FROM BANK_INFO BI
+                    ORDER BY BI.BANK_NAME";
+            return dbCtx.Database.SqlQuery<BANK_INFO>(sql).ToList();
+        }
+        public List<BANK_INFO> GetAllActive()
+        {
+            FormattableString sql = $@"SELECT BI.*
+                    FROM BANK_INFO BI
+                    WHERE BI.IS_ACTIVE = 1
+                    ORDER BY BI.BANK_NAME";
+            return dbCtx.Database.SqlQuery<BANK_INFO>(sql).ToList();
         }
         public BANK_INFO GetById(string id)
         {
-            return dbCtx.BANK_INFO.Find(id);
+            FormattableString sql = $@"SELECT BI.*
+                    FROM BANK_INFO BI
+                    WHERE BI.ID = {id}";
+            return dbCtx.Database.SqlQuery<BANK_INFO>(sql).ToList().FirstOrDefault();
         }
 
         public EQResult Delete(string id)
         {
             EQResult eQResult = new EQResult();
-            eQResult.Entities = "BANK_INFO";
+            eQResult.entities = "BANK_INFO";
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                eQResult.messages = NotifyService.InvalidRequestString();
+                return eQResult;
+            }
             try
             {
                 //check child entity
                 int anyChild = dbCtx.BANK_BRANCH.Where(x => x.BANK_ID == id).Count();
                 if (anyChild > 0)
                 {
-                    eQResult.Messages = NotifyServices.DeleteHasChild("Branch", anyChild, "Bank");
+                    eQResult.messages = NotifyService.DeleteHasChildString("Branch", anyChild, "Bank");
                     return eQResult;
                 }
 
@@ -111,21 +132,21 @@ namespace BS.Infra.Services.Setup
                 {
                     //TODO : Delete property
                     dbCtx.BANK_INFO.Remove(entity);
-                    eQResult.Rows = dbCtx.SaveChanges();
-                    eQResult.Success = true;
-                    eQResult.Messages = NotifyServices.DeletedSuccess(entity.BANK_NAME);
+                    eQResult.rows = dbCtx.SaveChanges();
+                    eQResult.success = true;
+                    eQResult.messages = NotifyService.DeletedSuccessString(entity.BANK_NAME!);
                     return eQResult;
                 }
                 else
                 {
-                    eQResult.Messages = NotifyServices.NotFound();
+                    eQResult.messages = NotifyService.NotFoundString();
                     return eQResult;
                 }
             }
             catch (Exception ex)
             {
                 string msg = ex.Message == string.Empty ? ex.InnerException.Message : ex.Message;
-                eQResult.Messages = NotifyServices.Error(msg.Replace("'", ""));
+                eQResult.messages = msg.Replace("'", "");
                 return eQResult;
             }
             finally

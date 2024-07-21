@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BS.Infra.Services.Utility;
+using Microsoft.EntityFrameworkCore;
 
 namespace BS.Infra.Services.Setup
 {
@@ -12,7 +13,7 @@ namespace BS.Infra.Services.Setup
         public EQResult Insert(BANK_BRANCH obj, string userId)
         {
             EQResult eQResult = new EQResult();
-            eQResult.Entities = "BANK_BRANCH";
+            eQResult.entities = "BANK_BRANCH";
             try
             {
                 if (obj.ID == Guid.Empty.ToString())
@@ -30,9 +31,9 @@ namespace BS.Infra.Services.Setup
                     //End Audit
 
                     dbCtx.BANK_BRANCH.Add(obj);
-                    eQResult.Rows = dbCtx.SaveChanges();
-                    eQResult.Success = true;
-                    eQResult.Messages = NotifyServices.SaveSuccess();
+                    eQResult.rows = dbCtx.SaveChanges();
+                    eQResult.success = true;
+                    eQResult.messages = NotifyService.SaveSuccess();
                     return eQResult;
                 }
                 else
@@ -56,27 +57,27 @@ namespace BS.Infra.Services.Setup
                             entity.REVISE_NO = entity.REVISE_NO + 1;
                             //End Audit
                             dbCtx.Entry(entity).State = EntityState.Modified;
-                            eQResult.Rows = dbCtx.SaveChanges();
-                            eQResult.Success = true;
-                            eQResult.Messages = NotifyServices.EditSuccess();
+                            eQResult.rows = dbCtx.SaveChanges();
+                            eQResult.success = true;
+                            eQResult.messages = NotifyService.EditSuccess();
                             return eQResult;
                         }
                         else
                         {
-                            eQResult.Messages = NotifyServices.EditRestricted();
+                            eQResult.messages = NotifyService.EditRestricted();
                             return eQResult;
                         }
                     }
                     else
                     {
-                        eQResult.Messages = NotifyServices.NotFound();
+                        eQResult.messages = NotifyService.NotFound();
                         return eQResult;
                     }
                 }
             }
             catch (Exception ex)
             {
-                eQResult.Messages = NotifyServices.Error(ex.Message == string.Empty ? ex.InnerException.Message : ex.Message);
+                eQResult.messages = NotifyService.Error(ex.Message == string.Empty ? ex.InnerException!.Message : ex.Message);
                 return eQResult;
             }
             finally
@@ -104,7 +105,7 @@ namespace BS.Infra.Services.Setup
         public EQResult Delete(string id)
         {
             EQResult eQResult = new EQResult();
-            eQResult.Entities = "BANK_BRANCH";
+            eQResult.entities = "BANK_BRANCH";
             try
             {
                 //check child entity
@@ -121,21 +122,21 @@ namespace BS.Infra.Services.Setup
                 {
                     //TODO : Delete property
                     dbCtx.BANK_BRANCH.Remove(entity);
-                    eQResult.Rows = dbCtx.SaveChanges();
-                    eQResult.Success = true;
-                    eQResult.Messages = NotifyServices.DeletedSuccess(entity.BRANCH_NAME);
+                    eQResult.rows = dbCtx.SaveChanges();
+                    eQResult.success = true;
+                    eQResult.messages = NotifyService.DeletedSuccess(entity.BRANCH_NAME);
                     return eQResult;
                 }
                 else
                 {
-                    eQResult.Messages = NotifyServices.NotFound();
+                    eQResult.messages = NotifyService.NotFound();
                     return eQResult;
                 }
             }
             catch (Exception ex)
             {
                 string msg = ex.Message == string.Empty ? ex.InnerException.Message : ex.Message;
-                eQResult.Messages = NotifyServices.Error(msg.Replace("'", ""));
+                eQResult.messages = NotifyService.Error(msg.Replace("'", ""));
                 return eQResult;
             }
             finally

@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@ViewData["Title"] | BS</title>
+    <title>@ViewData["Title"] | @ViewData["PageNo"] | BS</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="~/assets/plugins/fontawesome-free/css/all.min.css">
     <!-- Jquery UI -->
@@ -21,6 +21,10 @@
     <link rel="stylesheet" href="~/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="~/assets/dist/css/adminlte.min.css">
+    <!--Alertify-->
+    <link href="~/assets/alertifyjs/css/alertify.min.css" rel="stylesheet" />
+    <link href="~/assets/alertifyjs/css/themes/bootstrap.min.css" rel="stylesheet" />
+
     <style type="text/css">
         body {
             zoom: 95%;
@@ -162,7 +166,10 @@
                     <a href="https://www.facebook.com/ApprenticeProgrammer/" class="nav-link" target="_blank">Contact</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a asp-area="" asp-controller="Home" asp-action="Features" class="nav-link">Features</a>
+                    <a asp-area="" asp-controller="PageNumber" asp-action="Index" class="nav-link">Pages</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a asp-area="Admin" asp-controller="Database" asp-action="Index" class="nav-link">Database Backup</a>
                 </li>
             </ul>
 
@@ -293,7 +300,7 @@
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
                 <img src="~/assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">My Asset</span>
+                <span class="brand-text font-weight-light">ES BS</span>
             </a>
 
             <!-- Sidebar -->
@@ -673,6 +680,18 @@
     <!-- AdminLTE App -->
     <script src="~/assets/dist/js/adminlte.min.js"></script>
 
+    <!--Alertify-->
+    <script src="~/assets/alertifyjs/alertify.min.js"></script>
+
+    <script type="text/javascript">
+        //override defaults
+        alertify.defaults.transition = "zoom";
+        alertify.defaults.theme.ok = "btn btn-primary";
+        alertify.defaults.theme.cancel = "btn btn-danger";
+        alertify.defaults.theme.input = "form-control";
+    </script>
+
+
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function () {
             var url = window.location;
@@ -770,6 +789,24 @@
                     window.location.href = url; // Reload the URL
                 }
             });
+
+            $(".delete-confirm").click(function () {
+                var url = $(this).data('url');
+                alertify.confirm('Delete', "Do you want to delete now?", function () {
+                    $.get(url, function (data, status) {
+                        if (data.success) {
+                            $(this).parents("tr").remove();
+                            //alertify.success(data.messages);
+                            $.notify(data.messages, 'success');
+                        } else {
+                            $.notify(data.messages, 'error');
+                            //alertify.error(data.messages);
+                        }
+                    });
+                }, function () {
+                    alertify.error('Cancel')
+                })
+            })
         });
     </script>
     @await RenderSectionAsync("Scripts", required: false)

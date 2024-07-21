@@ -1,4 +1,5 @@
 using BS.DMO.Models.Setup;
+using BS.Infra.Services.Security;
 
 namespace BS.Web.Controllers
 {
@@ -20,10 +21,11 @@ namespace BS.Web.Controllers
             userLoginInfoService.AddLog("Dev", sessionId);
 
 
-            //string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<BANK_BRANCH>();
-            // return View("Index",table_script);
+            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<LEAVE_CALENDAR>();
+            table_script = Services.Power.ClassObjectSanitizer.SetForSave<LEAVE_CALENDAR>();
+            return View("Index",table_script);
 
-            return View();
+            //return View();
         }
 
         public IActionResult Privacy()

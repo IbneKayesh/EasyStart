@@ -67,7 +67,7 @@ namespace BS.Web.Services.Power
             if (type == typeof(float) || type == typeof(float?)) return "REAL";
             if (type == typeof(byte) || type == typeof(byte?)) return "TINYINT";
 
-            return null;
+            return null!;
             //throw new NotSupportedException($"Type {type.Name} is not supported.");
         }
 

@@ -4,14 +4,14 @@
     {
         public EQResult()
         {
-            Success = false;
-            Rows = 0;
-            Messages = "Messages";
-            Entities = "Entities";
+            success = false;
+            rows = 0;
+            messages = "Messages";
+            entities = "Entities";
         }
-        public bool Success { get; set; }
-        public int Rows { get; set; }
-        public string Messages { get; set; }
-        public string Entities { get; set; }
+        public bool success { get; set; }
+        public int rows { get; set; }
+        public string messages { get; set; }
+        public string entities { get; set; }
     }
 }

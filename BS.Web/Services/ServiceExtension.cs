@@ -17,7 +17,12 @@
             //Setup
             services.AddTransient<BankInfoService>();
             services.AddTransient<BankBranchService>();
-            //services.AddTransient<StockTrnService>();
+            services.AddTransient<CountryInfoService>();
+            services.AddTransient<CurrencyInfoService>();
+            services.AddTransient<CurrencyConvRateService>();
+            services.AddTransient<FinancialYearService>();
+            services.AddTransient<LeaveTypeService>();
+            services.AddTransient<LeaveCalendarService>();
 
             //services.AddScoped<IUnitOfWork, UnitOfWork>();
             //services.AddScoped<ITransactionNoBuilderRep, TransactionNoBuilderRep>();

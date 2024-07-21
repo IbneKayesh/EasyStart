@@ -18,9 +18,12 @@
         [Display(Name = "Status")]
         public bool IS_ACTIVE { get; set; }
 
+
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         public string CREATE_USER { get; set; }
         public DateTime CREATE_DATE { get; set; }
 
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         public string UPDATE_USER { get; set; }
         public DateTime UPDATE_DATE { get; set; }
 

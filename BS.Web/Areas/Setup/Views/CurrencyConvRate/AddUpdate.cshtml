@@ -1,0 +1,52 @@
+﻿@model BS.DMO.Models.Setup.CURRENCY_CONV_RATE
+@{
+    ViewData["Title"] = "Currency Conversion Rate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Add/Edit @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+        </div>
+    </div>
+    <form asp-action="AddUpdate">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="ID" type="hidden" />
+            <input asp-for="RowVersion" type="hidden" />
+            <div class="form-group">
+                <label asp-for="CURRENCY_ID" class="control-label"></label>
+                <select asp-for="CURRENCY_ID" asp-items="@ViewBag.CURRENCY_ID" class="form-control form-control-sm">
+                </select>
+                <span asp-validation-for="CURRENCY_ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MONTH_ID" class="control-label"></label>
+                <input asp-for="MONTH_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Month No">
+                <span asp-validation-for="MONTH_ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YEAR_ID" class="control-label"></label>
+                <input asp-for="YEAR_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Year No">
+                <span asp-validation-for="YEAR_ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CONVERSION_RATE" class="control-label"></label>
+                <input asp-for="CONVERSION_RATE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Conversion Rate">
+                <span asp-validation-for="CONVERSION_RATE" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Index" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left"></i> Back</a>
+            <button class="btn btn-sm btn-info" type="reset"><i class="fa fa-undo"></i> Reset</button>
+            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Submit</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

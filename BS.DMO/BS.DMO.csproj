@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\HRMS\Employee\" />
+    <Folder Include="Models\HRMS\Attendance\" />
+    <Folder Include="Models\HRMS\Payroll\" />
+    <Folder Include="Models\MyDrive\" />
+    <Folder Include="Models\PM\" />
+    <Folder Include="Models\Utility\" />
+  </ItemGroup>
+
 </Project>
