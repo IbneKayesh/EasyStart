@@ -66,6 +66,7 @@ namespace BS.Web.Services.Power
             if (type == typeof(double) || type == typeof(double?)) return "FLOAT";
             if (type == typeof(float) || type == typeof(float?)) return "REAL";
             if (type == typeof(byte) || type == typeof(byte?)) return "TINYINT";
+            if (type == typeof(Byte[]) || type == typeof(Byte?)) return "TIMESTAMP";
 
             return null!;
             //throw new NotSupportedException($"Type {type.Name} is not supported.");

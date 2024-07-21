@@ -29,6 +29,8 @@
             services.AddTransient<BranchService>();
             services.AddTransient<BranchCostCenterService>();
             services.AddTransient<DepartmentService>();
+            services.AddTransient<SectionService>();
+            services.AddTransient<SubSectionService>();
 
             //services.AddScoped<IUnitOfWork, UnitOfWork>();
             //services.AddScoped<ITransactionNoBuilderRep, TransactionNoBuilderRep>();

@@ -21,9 +21,9 @@ namespace BS.Web.Controllers
             userLoginInfoService.AddLog("Dev", sessionId);
 
 
-            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<DEPARTMENTS>();
-            table_script = Services.Power.ClassObjectSanitizer.SetForSave<DEPARTMENTS>();
-            table_script = Services.Power.RazorSanitizer.Create<DEPARTMENTS>();
+            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<SUB_SECTIONS>();
+           // table_script = Services.Power.ClassObjectSanitizer.SetForSave<DEPARTMENTS>();
+            //table_script = Services.Power.RazorSanitizer.Create<DEPARTMENTS>();
             //table_script = Services.Power.RazorSanitizer.Select<DEPARTMENTS>();
 
             return View("Index", table_script);

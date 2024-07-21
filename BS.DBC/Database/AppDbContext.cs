@@ -24,6 +24,8 @@
         public DbSet<BRANCH> BRANCH { get; set; }
         public DbSet<BRANCH_COST_CENTER> BRANCH_COST_CENTER { get; set; }
         public DbSet<DEPARTMENTS> DEPARTMENTS { get; set; }
+        public DbSet<SECTIONS> SECTIONS { get; set; }
+        public DbSet<SUB_SECTIONS> SUB_SECTIONS { get; set; }
 
         public DbSet<Abc>? Abc { get; set; }
 

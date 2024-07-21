@@ -54,6 +54,22 @@
                 {
                     AreaID =3, Area = "Company", ControllerID=5, Controller= "Department", ActionID = 2, Action ="Create", PageID = "3-5-2", PageInfo="Create/Edit - Department"
                 },
+                new PageNumberInfo
+                {
+                    AreaID =3, Area = "Company", ControllerID=6, Controller= "Section", ActionID = 1, Action ="Index", PageID = "3-6-1", PageInfo="Index - Section"
+                },
+                new PageNumberInfo
+                {
+                    AreaID =3, Area = "Company", ControllerID=6, Controller= "Section", ActionID = 2, Action ="Create", PageID = "3-6-2", PageInfo="Create/Edit - Section"
+                },
+                new PageNumberInfo
+                {
+                    AreaID =3, Area = "Company", ControllerID=7, Controller= "SubSection", ActionID = 1, Action ="Index", PageID = "3-7-1", PageInfo="Index - Sub Section"
+                },
+                new PageNumberInfo
+                {
+                    AreaID =3, Area = "Company", ControllerID=7, Controller= "SubSection", ActionID = 2, Action ="Create", PageID = "3-7-2", PageInfo="Create/Edit - Sub Section"
+                },
             ];
             return pageNumberInfos;
         }
