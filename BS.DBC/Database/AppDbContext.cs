@@ -18,6 +18,12 @@
         public DbSet<LEAVE_TYPE> LEAVE_TYPE { get; set; }
         public DbSet<LEAVE_CALENDAR> LEAVE_CALENDAR { get; set; }
 
+        //Company
+        public DbSet<BRANCH_TYPE> BRANCH_TYPE { get; set; }
+        public DbSet<BUSINESS> BUSINESS { get; set; }
+        public DbSet<BRANCH> BRANCH { get; set; }
+        public DbSet<BRANCH_COST_CENTER> BRANCH_COST_CENTER { get; set; }
+        public DbSet<DEPARTMENTS> DEPARTMENTS { get; set; }
 
         public DbSet<Abc>? Abc { get; set; }
 

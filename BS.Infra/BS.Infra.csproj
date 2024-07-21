@@ -10,8 +10,4 @@
     <ProjectReference Include="..\BS.DBC\BS.DBC.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\Company\" />
-  </ItemGroup>
-
 </Project>

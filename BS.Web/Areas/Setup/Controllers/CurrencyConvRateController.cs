@@ -3,16 +3,16 @@
     [Area("Setup")]
     public class CurrencyConvRateController : BaseController
     {
-        private readonly CurrencyConvRateService CurrencyConvRateS;
-        private readonly CurrencyInfoService CurrencyInfoS;
+        private readonly CurrencyConvRateService currencyConvRateS;
+        private readonly CurrencyInfoService currencyInfoS;
         public CurrencyConvRateController(CurrencyConvRateService _currencyConvRateService, CurrencyInfoService _currencyInfoService)
         {
-            CurrencyConvRateS = _currencyConvRateService;
-            CurrencyInfoS = _currencyInfoService;
+            currencyConvRateS = _currencyConvRateService;
+            currencyInfoS = _currencyInfoService;
         }
         public IActionResult Index()
         {
-            var entityList = CurrencyConvRateS.GetAll();
+            var entityList = currencyConvRateS.GetAll();
             return View(entityList);
         }
         public IActionResult Create()
@@ -27,7 +27,7 @@
             EQResult eQResult = new EQResult();
             if (ModelState.IsValid)
             {
-                eQResult = CurrencyConvRateS.Insert(obj, UserId);
+                eQResult = currencyConvRateS.Insert(obj, UserId);
                 TempData["msg"] = eQResult.messages;
 
                 if (eQResult.success && eQResult.rows > 0)
@@ -47,7 +47,7 @@
             Dropdown_CreateEdit();
             if (!string.IsNullOrWhiteSpace(id))
             {
-                var entity = CurrencyConvRateS.GetById(id);
+                var entity = currencyConvRateS.GetById(id);
                 if (entity != null)
                 {
                     return View("AddUpdate", entity);
@@ -65,11 +65,11 @@
         }
         private void Dropdown_CreateEdit()
         {
-            ViewBag.CURRENCY_ID = new SelectList(CurrencyInfoS.GetAllActive(), "ID", "CURRENCY_NAME");
+            ViewBag.CURRENCY_ID = new SelectList(currencyInfoS.GetAllActive(), "ID", "CURRENCY_NAME");
         }
         public IActionResult Delete(string id)
         {
-            EQResult eQResult = CurrencyConvRateS.Delete(id);
+            EQResult eQResult = currencyConvRateS.Delete(id);
             return Json(eQResult);
         }
     }

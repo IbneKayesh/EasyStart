@@ -1,0 +1,89 @@
+﻿using BS.DMO.Models.Setup;
+using BS.Infra.Services.Company;
+
+namespace BS.Web.Areas.Company.Controllers
+{
+    [Area("Company")]
+    public class BranchController : BaseController
+    {
+        private readonly BranchService branchS;
+        private readonly BranchTypeService branchTypeS;
+        private readonly BusinessService businessS;
+        public BranchController(BranchService _branchService,
+            BranchTypeService _branchTypeService,
+            BusinessService _businessService
+            )
+        {
+            branchS = _branchService;
+            branchTypeS = _branchTypeService;
+            businessS = _businessService;
+        }
+        public IActionResult Index()
+        {
+            @ViewData["PageNo"] = "311";
+            var entityList = branchS.GetAll();
+            return View(entityList);
+        }
+        public IActionResult Create()
+        {
+            @ViewData["PageNo"] = "312";
+            Dropdown_CreateEdit();
+            return View("AddUpdate", new BRANCH());
+        }
+        [HttpPost]
+        public IActionResult AddUpdate(BRANCH obj)
+        {
+            @ViewData["PageNo"] = "312";
+            Dropdown_CreateEdit();
+            EQResult eQResult = new EQResult();
+            if (ModelState.IsValid)
+            {
+                eQResult = branchS.Insert(obj, UserId);
+                TempData["msg"] = eQResult.messages;
+
+                if (eQResult.success && eQResult.rows > 0)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            else
+            {
+                var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+                ModelState.AddModelError("", errors);
+            }
+            return View(obj);
+        }
+        public IActionResult Edit(string id)
+        {
+            @ViewData["PageNo"] = "312";
+            Dropdown_CreateEdit();
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                var entity = branchS.GetById(id);
+                if (entity != null)
+                {
+                    return View("AddUpdate", entity);
+                }
+                else
+                {
+                    TempData["msg"] = NotifyService.NotFound();
+                }
+            }
+            else
+            {
+                TempData["msg"] = NotifyService.Error("Invalid ID, Parameter is required");
+            }
+            return RedirectToAction(nameof(Index));
+        }
+        private void Dropdown_CreateEdit()
+        {
+            ViewBag.BRANCH_TYPE_ID = new SelectList(branchTypeS.GetAllActive(), "ID", "BRANCH_TYPE_NAME");
+            ViewBag.BUSINESS_ID = new SelectList(businessS.GetAllActive(), "ID", "BUSINESS_NAME");
+        }
+        public IActionResult Delete(string id)
+        {
+            EQResult eQResult = branchS.Delete(id);
+            return Json(eQResult);
+        }
+    }
+}

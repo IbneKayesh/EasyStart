@@ -1,5 +1,5 @@
 using BS.DMO.Models.Setup;
-using BS.Infra.Services.Security;
+using BS.DMO.ViewModels.Security;
 
 namespace BS.Web.Controllers
 {
@@ -21,13 +21,19 @@ namespace BS.Web.Controllers
             userLoginInfoService.AddLog("Dev", sessionId);
 
 
-            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<LEAVE_CALENDAR>();
-            table_script = Services.Power.ClassObjectSanitizer.SetForSave<LEAVE_CALENDAR>();
-            return View("Index",table_script);
+            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<DEPARTMENTS>();
+            table_script = Services.Power.ClassObjectSanitizer.SetForSave<DEPARTMENTS>();
+            table_script = Services.Power.RazorSanitizer.Create<DEPARTMENTS>();
+            //table_script = Services.Power.RazorSanitizer.Select<DEPARTMENTS>();
 
-            //return View();
+            return View("Index", table_script);
         }
 
+        public IActionResult LoginLog()
+        {
+            var entityList = userLoginInfoService.GetAll();
+            return View(entityList);
+        }
         public IActionResult Privacy()
         {
             return View();

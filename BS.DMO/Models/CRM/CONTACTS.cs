@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BS.DMO.Models.CRM
+﻿namespace BS.DMO.Models.CRM
 {
     public class CONTACTS
     {
@@ -19,7 +13,7 @@ namespace BS.DMO.Models.CRM
         [Display(Name = "Name")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 3)]
         [Required(ErrorMessage = "{0} is required")]
-        public string? SELLER_NAME { get; set; }
+        public string? CONTACT_NAME { get; set; }
 
         [Display(Name = "Contact")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 11)]
@@ -33,11 +27,11 @@ namespace BS.DMO.Models.CRM
 
         [Display(Name = "Address")]
         [StringLength(250, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
-        public string? HOME_ADDRESS { get; set; }
-
-        [Display(Name = "Office Address")]
-        [StringLength(250, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         public string? OFFICE_ADDRESS { get; set; }
+
+        [Display(Name = "Factory Address")]
+        [StringLength(250, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
+        public string? FACTORY_ADDRESS { get; set; }
 
         [Display(Name = "Balance Amount")]
         [Column(TypeName = "decimal(18, 6)")]

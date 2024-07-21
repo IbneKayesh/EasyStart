@@ -4,9 +4,64 @@
     {
         public IActionResult Index()
         {
+            List<PageNumberInfo> pageNumberInfos = new List<PageNumberInfo>();
+            pageNumberInfos.AddRange(Company_1_Module());
+            //pageNumberInfos.AddRange(Setup_2_Module());
+
+            return View(pageNumberInfos.OrderByDescending(x => x.ControllerID).ThenByDescending(t => t.AreaID));
+        }
+        private List<PageNumberInfo> Company_1_Module()
+        {
             List<PageNumberInfo> pageNumberInfos =
-            [
+              [
                 new PageNumberInfo
+                {
+                    AreaID =3, Area = "Company", ControllerID=1, Controller= "Business", ActionID = 1, Action ="Index", PageID = "3-1-1", PageInfo="Index - Business Information"
+                },
+                new PageNumberInfo
+                {
+                    AreaID =3, Area = "Company", ControllerID=1, Controller= "Business", ActionID = 2, Action ="Create", PageID = "3-1-2", PageInfo="Create/Edit - Business Information"
+                },
+                new PageNumberInfo
+                {
+                    AreaID =3, Area = "Company", ControllerID=2, Controller= "BranchType", ActionID = 1, Action ="Index", PageID = "3-2-1", PageInfo="Index - Branch Type Information"
+                },
+                new PageNumberInfo
+                {
+                    AreaID =3, Area = "Company", ControllerID=2, Controller= "BranchType", ActionID = 2, Action ="Create", PageID = "3-2-2", PageInfo="Create/Edit - Branch Type Information"
+                },
+                new PageNumberInfo
+                {
+                    AreaID =3, Area = "Company", ControllerID=3, Controller= "Branch", ActionID = 1, Action ="Index", PageID = "3-3-1", PageInfo="Index - Branch Information"
+                },
+                new PageNumberInfo
+                {
+                    AreaID =3, Area = "Company", ControllerID=3, Controller= "Branch", ActionID = 2, Action ="Create", PageID = "3-3-2", PageInfo="Create/Edit - Branch Information"
+                },
+                new PageNumberInfo
+                {
+                    AreaID =3, Area = "Company", ControllerID=4, Controller= "BranchCostCenter", ActionID = 1, Action ="Index", PageID = "3-4-1", PageInfo="Index - Branch Cost Center"
+                },
+                new PageNumberInfo
+                {
+                    AreaID =3, Area = "Company", ControllerID=4, Controller= "BranchCostCenter", ActionID = 2, Action ="Create", PageID = "3-4-2", PageInfo="Create/Edit - Branch Cost Center"
+                },
+                new PageNumberInfo
+                {
+                    AreaID =3, Area = "Company", ControllerID=5, Controller= "Department", ActionID = 1, Action ="Index", PageID = "3-5-1", PageInfo="Index - Department"
+                },
+                new PageNumberInfo
+                {
+                    AreaID =3, Area = "Company", ControllerID=5, Controller= "Department", ActionID = 2, Action ="Create", PageID = "3-5-2", PageInfo="Create/Edit - Department"
+                },
+            ];
+            return pageNumberInfos;
+        }
+        private List<PageNumberInfo> Setup_2_Module()
+        {
+            List<PageNumberInfo> pageNumberInfos =
+              [
+                  new PageNumberInfo
                 {
                     AreaID =2, Area = "Setup", ControllerID=1, Controller= "CountryInfo", ActionID = 1, Action ="Index", PageID = "2-1-1", PageInfo="Index - Country Information"
                 },
@@ -71,7 +126,7 @@
                     AreaID =2, Area = "Setup", ControllerID=8, Controller= "LeaveCalendar", ActionID = 2, Action ="Create", PageID = "2-8-2", PageInfo="Create/Edit - Leave Calendar"
                 },
             ];
-            return View(pageNumberInfos.OrderByDescending(x=>x.ControllerID).ThenByDescending(t=>t.AreaID));
+            return pageNumberInfos;
         }
     }
     public class PageNumberInfo()

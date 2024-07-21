@@ -1,8 +1,4 @@
-﻿using BS.Infra.DbHelper;
-using BS.Infra.Services.Setup;
-using BS.Web.Services;
-
-namespace BS.Web.Areas.Setup.Controllers
+﻿namespace BS.Web.Areas.Setup.Controllers
 {
     [Area("Setup")]
     public class BankBranchController : BaseController

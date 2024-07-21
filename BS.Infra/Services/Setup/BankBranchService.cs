@@ -1,7 +1,4 @@
-﻿using BS.Infra.Services.Utility;
-using Microsoft.EntityFrameworkCore;
-
-namespace BS.Infra.Services.Setup
+﻿namespace BS.Infra.Services.Setup
 {
     public class BankBranchService
     {
@@ -101,7 +98,14 @@ namespace BS.Infra.Services.Setup
         {
             return dbCtx.BANK_BRANCH.Find(id);
         }
-
+        public List<BANK_BRANCH> GetAllActive()
+        {
+            FormattableString sql = $@"SELECT BI.*
+                    FROM BANK_BRANCH BI
+                    WHERE BI.IS_ACTIVE = 1
+                    ORDER BY BI.BRANCH_NAME";
+            return dbCtx.Database.SqlQuery<BANK_BRANCH>(sql).ToList();
+        }
         public EQResult Delete(string id)
         {
             EQResult eQResult = new EQResult();

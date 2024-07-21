@@ -1,6 +1,5 @@
 ﻿namespace BS.Web.Services
 {
-
     internal static class ServiceExtension
     {
         public static IServiceCollection AddDataServices(this IServiceCollection services, IConfiguration configuration)
@@ -23,6 +22,13 @@
             services.AddTransient<FinancialYearService>();
             services.AddTransient<LeaveTypeService>();
             services.AddTransient<LeaveCalendarService>();
+
+            //Company
+            services.AddTransient<BusinessService>();
+            services.AddTransient<BranchTypeService>();
+            services.AddTransient<BranchService>();
+            services.AddTransient<BranchCostCenterService>();
+            services.AddTransient<DepartmentService>();
 
             //services.AddScoped<IUnitOfWork, UnitOfWork>();
             //services.AddScoped<ITransactionNoBuilderRep, TransactionNoBuilderRep>();

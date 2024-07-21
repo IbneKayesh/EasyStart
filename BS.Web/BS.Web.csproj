@@ -14,6 +14,8 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Company\Data\" />
+    <Folder Include="Areas\Company\Models\" />
     <Folder Include="Areas\Setup\Data\" />
     <Folder Include="Areas\Setup\Models\" />
     <Folder Include="wwwroot\db_backup\" />
@@ -26,6 +28,21 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BS.Infra\BS.Infra.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Company\Views\Business\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Company\Views\Business\AddUpdate.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Company\Views\Business\AddUpdate.cshtml" />
   </ItemGroup>
 
 </Project>

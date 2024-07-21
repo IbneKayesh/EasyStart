@@ -1,9 +1,4 @@
 ﻿using BS.DMO.Models.Security;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BS.Infra.Services.Security
 {
@@ -28,6 +23,22 @@ namespace BS.Infra.Services.Security
 
                 dbCtx.USER_LOGIN_INFO.Add(obj);
                 dbCtx.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error occurred while adding login log: {ex.Message}", ex);
+                //throw new Exception();
+            }
+            finally
+            {
+                dbCtx.Dispose();
+            }
+        }
+        public List<USER_LOGIN_INFO> GetAll()
+        {
+            try
+            {
+                return dbCtx.USER_LOGIN_INFO.Where(x => x.IN_TIME.Date == DateTime.Now.Date).OrderByDescending(x => x.IN_TIME).ToList();
             }
             catch (Exception ex)
             {
