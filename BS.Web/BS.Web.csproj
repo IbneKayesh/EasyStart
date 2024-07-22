@@ -12,16 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Application\Data\" />
-    <Folder Include="Areas\Application\Models\" />
-    <Folder Include="Areas\Company\Data\" />
-    <Folder Include="Areas\Company\Models\" />
-    <Folder Include="Areas\SalesOrder\Data\" />
-    <Folder Include="Areas\SalesOrder\Models\" />
-    <Folder Include="Areas\Setup\Data\" />
-    <Folder Include="Areas\Setup\Models\" />
+    <Folder Include="Areas\CRM\Controllers\" />
+    <Folder Include="Areas\CRM\Views\" />
     <Folder Include="wwwroot\db_backup\" />
   </ItemGroup>
 

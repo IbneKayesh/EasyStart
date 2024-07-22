@@ -1,4 +1,5 @@
 ﻿using BS.Infra.Services.Application;
+using BS.Infra.Services.HelpDesk;
 
 namespace BS.Web.Services
 {
@@ -29,6 +30,8 @@ namespace BS.Web.Services
             services.AddTransient<LeaveTypeService>();
             services.AddTransient<LeaveCalendarService>();
             services.AddTransient<EntityValueTextService>();
+            services.AddTransient<TrnAutoStepService>();
+            services.AddTransient<SubSectionsTrnIdService>();
 
             //Company
             services.AddTransient<BusinessService>();
@@ -39,6 +42,9 @@ namespace BS.Web.Services
             services.AddTransient<SectionService>();
             services.AddTransient<SubSectionService>();
 
+            //Help Desk
+            services.AddTransient<TaskNotesService>();
+            
             //SalesBooking
             services.AddTransient<SalesBookingService>();
 

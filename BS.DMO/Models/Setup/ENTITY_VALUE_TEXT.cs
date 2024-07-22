@@ -18,7 +18,7 @@
 
         [Display(Name = "Entity")]
         [Required(ErrorMessage = "{0} is required")]
-        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 2)]
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength =0)]
         [Column(TypeName = "nvarchar(50)")]
         public string? ENTITY_ID { get; set; }
 

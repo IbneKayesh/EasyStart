@@ -28,7 +28,9 @@
                 </div>
                 <div class="col-md-4">
                     <label asp-for="ENTITY_ID" class="control-label"></label>
-                    <input asp-for="ENTITY_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Entity / Virtual Table Name">
+                    @* <input asp-for="ENTITY_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Entity / Virtual Table Name"> *@
+                    <select asp-for="ENTITY_ID" asp-items="@ViewBag.ENTITY_ID" class="form-control form-control-sm">
+                    </select>
                     <span asp-validation-for="ENTITY_ID" class="text-danger"></span>
                 </div>
             </div>

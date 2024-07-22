@@ -1,4 +1,4 @@
-﻿using BS.DMO.Models.Application;
+﻿using BS.DMO.Models.HelpDesk;
 
 namespace BS.DBC.Database
 {
@@ -6,6 +6,12 @@ namespace BS.DBC.Database
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Other configurations or mappings go here
+            modelBuilder.Entity<SUB_SECTIONS_TRN_ID>().HasKey(sf => new { sf.SUB_SECTION_ID, sf.TRN_ID });
+            base.OnModelCreating(modelBuilder);
         }
         //Application
         public DbSet<CLASSIC_MENU> CLASSIC_MENU { get; set; }
@@ -23,6 +29,8 @@ namespace BS.DBC.Database
         public DbSet<LEAVE_TYPE> LEAVE_TYPE { get; set; }
         public DbSet<LEAVE_CALENDAR> LEAVE_CALENDAR { get; set; }
         public DbSet<ENTITY_VALUE_TEXT> ENTITY_VALUE_TEXT { get; set; }
+        public DbSet<TRN_AUTO_STEP> TRN_AUTO_STEP { get; set; }
+        public DbSet<SUB_SECTIONS_TRN_ID> SUB_SECTIONS_TRN_ID { get; set; }
 
         //Company
         public DbSet<BRANCH_TYPE> BRANCH_TYPE { get; set; }
@@ -37,7 +45,8 @@ namespace BS.DBC.Database
         public DbSet<SB_MASTER> SB_MASTER { get; set; }
         public DbSet<SB_CHILD> SB_CHILD { get; set; }
 
-
+        //Help desk
+        public DbSet<TASK_NOTES> TASK_NOTES { get; set; }
         public DbSet<Abc>? Abc { get; set; }
 
     }

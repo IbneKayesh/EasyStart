@@ -17,7 +17,8 @@
 
         public IActionResult Index()
         {
-            return View();
+            var objList = new List<SB_MASTER>();
+            return View(objList);
         }
         public IActionResult Create()
         {
@@ -50,9 +51,22 @@
         private void Dropdown_CreateEdit()
         {
             ViewBag.SUB_SECTION_ID = new SelectList(subSectionS.GetAllSalesBooking(), "ID", "SUB_SECTION_NAME");
-            var entityValue = entityValueTextS.GetListByEntityID(EntityValueText.BOOKING_SOURCE);
 
-            ViewBag.TRN_SOURCE_ID = new SelectList(entityValue, "VALUE_ID", "TEXT_ID");
+
+            //should be fix it :: in SQL formattable string
+            //string entityId = $"{EntityValueText.BOOKING_SOURCE}','{EntityValueText.PAYMENT_MODE}','{EntityValueText.PAYMENT_METHOD}";
+            //var entityValue = entityValueTextS.GetListByEntityID(entityId);
+            var entityValue = entityValueTextS.GetAll();
+            var booking_source = entityValue.Where(x => x.ENTITY_ID == EntityValueText.BOOKING_SOURCE).ToList();
+            var sb_trn_type_id = entityValue.Where(x => x.ENTITY_ID == EntityValueText.SB_TRN_TYPE_ID).ToList();
+            var payment_mode = entityValue.Where(x => x.ENTITY_ID == EntityValueText.PAYMENT_MODE).ToList();
+            var payment_method = entityValue.Where(x => x.ENTITY_ID == EntityValueText.PAYMENT_METHOD).ToList();
+
+
+            ViewBag.TRN_SOURCE_ID = new SelectList(booking_source, "VALUE_ID", "TEXT_ID", booking_source.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            ViewBag.TRN_TYPE_ID = new SelectList(sb_trn_type_id, "VALUE_ID", "TEXT_ID", sb_trn_type_id.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            ViewBag.PAYMENT_MODE = new SelectList(payment_mode, "VALUE_ID", "TEXT_ID", payment_mode.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            ViewBag.PAYMENT_METHOD = new SelectList(payment_method, "VALUE_ID", "TEXT_ID", payment_method.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
         }
     }
 }

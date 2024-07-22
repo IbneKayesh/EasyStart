@@ -90,15 +90,30 @@
         [StringLength(100, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         public string? CUSTOMER_DOCUMENT { get; set; }
 
-        [Display(Name = "Shipping")]
+        [Display(Name = "Shipping Mode")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         [Required(ErrorMessage = "{0} is required")]
-        public string? SHIPPING_ID { get; set; }
+        public string? SHIPPING_MODE_ID { get; set; }
 
+        [Display(Name = "Shipping Type")]
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
+        [Required(ErrorMessage = "{0} is required")]
+        public string? SHIPPING_TYPE_ID { get; set; }
+
+        [Display(Name = "Contact Note")]
+        [StringLength(250, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
+        public string? CONTACT_NOTE { get; set; }
+
+        [Display(Name = "Required Sample")]
+        public bool REQUIRED_SAMPLE { get; set; }
 
 
 
         //Process
+        [Display(Name = "Sample Delivery Date")]
+        [Required(ErrorMessage = "{0} is required")]
+        public DateTime LAST_SDD_DATE { get; set; }
+
         [Display(Name = "Last MFG Date")]
         [Required(ErrorMessage = "{0} is required")]
         public DateTime LAST_MFG_DATE { get; set; }
@@ -106,6 +121,9 @@
         [Display(Name = "Last Delivery Date")]
         [Required(ErrorMessage = "{0} is required")]
         public DateTime LAST_DELIVERY_DATE { get; set; }
+
+        [Display(Name = "SDD Days")]
+        public int SDD { get; set; } = 0;
 
         [Display(Name = "MFG Days")]
         public int FGD { get; set; } = 0;

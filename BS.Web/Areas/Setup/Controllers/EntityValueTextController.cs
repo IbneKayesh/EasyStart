@@ -1,7 +1,4 @@
-﻿using BS.Infra.DbHelper;
-using BS.Web.Services;
-
-namespace BS.Web.Areas.Setup.Controllers
+﻿namespace BS.Web.Areas.Setup.Controllers
 {
     [Area("Setup")]
     public class EntityValueTextController : BaseController
@@ -18,11 +15,13 @@ namespace BS.Web.Areas.Setup.Controllers
         }
         public IActionResult Create()
         {
+            Dropdown_CreateEdit();
             return View("AddUpdate", new ENTITY_VALUE_TEXT());
         }
         [HttpPost]
         public IActionResult AddUpdate(ENTITY_VALUE_TEXT obj)
         {
+            Dropdown_CreateEdit();
             EQResult eQResult = new EQResult();
             if (ModelState.IsValid)
             {
@@ -43,6 +42,7 @@ namespace BS.Web.Areas.Setup.Controllers
         }
         public IActionResult Edit(string id)
         {
+            Dropdown_CreateEdit();
             if (!string.IsNullOrWhiteSpace(id))
             {
                 var entity = entityValueTextS.GetById(id);
@@ -60,6 +60,10 @@ namespace BS.Web.Areas.Setup.Controllers
                 TempData["msg"] = NotifyService.Error("Invalid ID, Parameter is required");
             }
             return RedirectToAction(nameof(Index));
+        }
+        private void Dropdown_CreateEdit()
+        {
+            ViewBag.ENTITY_ID = new SelectList(EntityValueText.GetAll());
         }
         public IActionResult Delete(string id)
         {

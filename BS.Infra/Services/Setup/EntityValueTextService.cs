@@ -49,9 +49,9 @@
                     //Start Audit
                     //obj.IS_ACTIVE = true;
                     obj.CREATE_USER = userId;
-                    //obj.CREATE_DATE = DateTime.Now;
+                    obj.CREATE_DATE = DateTime.Now;
                     obj.UPDATE_USER = userId;
-                    //obj.UPDATE_DATE = DateTime.Now;
+                    obj.UPDATE_DATE = DateTime.Now;
                     //obj.REVISE_NO = 0;
                     //End Audit
 
@@ -77,7 +77,7 @@
         {
             FormattableString sql = $@"SELECT BI.*
                     FROM ENTITY_VALUE_TEXT BI
-                    ORDER BY BI.ENTITY_ID";
+                    ORDER BY BI.ENTITY_ID, BI.VALUE_ID";
             return dbCtx.Database.SqlQuery<ENTITY_VALUE_TEXT>(sql).ToList();
         }
         public List<ENTITY_VALUE_TEXT> GetAllActive()
@@ -98,7 +98,7 @@
         public List<ENTITY_VALUE_TEXT> GetListByEntityID(string entityId)
         {
             FormattableString sql = $@"SELECT BI.*
-                    FROM ENTITY_VALUE_TEXT BI WHERE BI.ENTITY_ID ={entityId}";
+                    FROM ENTITY_VALUE_TEXT BI WHERE BI.ENTITY_ID = {entityId} order by VALUE_ID";
             return dbCtx.Database.SqlQuery<ENTITY_VALUE_TEXT>(sql).ToList();
         }
         public EQResult Delete(string id)

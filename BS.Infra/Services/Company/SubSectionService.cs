@@ -21,9 +21,9 @@
                     //Start Audit
                     //obj.IS_ACTIVE = true;
                     obj.CREATE_USER = userId;
-                    //obj.CREATE_DATE = DateTime.Now;
+                    obj.CREATE_DATE = DateTime.Now;
                     obj.UPDATE_USER = userId;
-                    //obj.UPDATE_DATE = DateTime.Now;
+                    obj.UPDATE_DATE = DateTime.Now;
                     //obj.REVISE_NO = 0;
                     //End Audit
 
@@ -51,7 +51,6 @@
                             entity.EMAIL_ADDRESS = obj.EMAIL_ADDRESS;
                             entity.MAX_EMPLOYEE = obj.MAX_EMPLOYEE;
                             entity.MAX_SALARY = obj.MAX_SALARY;
-                            entity.SALES_BOOKING = obj.SALES_BOOKING;
                             //Start Audit
                             entity.IS_ACTIVE = obj.IS_ACTIVE;
                             entity.UPDATE_USER = userId;
@@ -109,7 +108,7 @@ ORDER BY D.ID, S.SUB_SECTION_NAME";
         {
             FormattableString sql = $@"SELECT BI.*
                     FROM SUB_SECTIONS BI
-                    WHERE BI.IS_ACTIVE = 1 AND BI.SALES_BOOKING = 1
+                    WHERE BI.IS_ACTIVE = 1
                     ORDER BY BI.SUB_SECTION_NAME";
             return dbCtx.Database.SqlQuery<SUB_SECTIONS>(sql).ToList();
         }

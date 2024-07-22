@@ -55,8 +55,5 @@
         [Display(Name = "Max Total Salary")]
         [Required(ErrorMessage = "{0} is required")]
         public int MAX_SALARY { get; set; }
-
-        [Display(Name = "Sales Booking")]
-        public bool SALES_BOOKING { get; set; }
     }
 }

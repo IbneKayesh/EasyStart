@@ -49,9 +49,9 @@
                     //Start Audit
                     //obj.IS_ACTIVE = true;
                     obj.CREATE_USER = userId;
-                    //obj.CREATE_DATE = DateTime.Now;
+                    obj.CREATE_DATE = DateTime.Now;
                     obj.UPDATE_USER = userId;
-                    //obj.UPDATE_DATE = DateTime.Now;
+                    obj.UPDATE_DATE = DateTime.Now;
                     //obj.REVISE_NO = 0;
                     //End Audit
 
