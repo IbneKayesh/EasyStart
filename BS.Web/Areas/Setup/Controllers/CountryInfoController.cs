@@ -13,19 +13,16 @@ namespace BS.Web.Areas.Setup.Controllers
         }
         public IActionResult Index()
         {
-            @ViewData["PageNo"] = "211";
             var entityList = countryInfoS.GetAll();
             return View(entityList);
         }
         public IActionResult Create()
         {
-            @ViewData["PageNo"] = "212";
             return View("AddUpdate", new COUNTRY_INFO());
         }
         [HttpPost]
         public IActionResult AddUpdate(COUNTRY_INFO obj)
         {
-            @ViewData["PageNo"] = "212";
             EQResult eQResult = new EQResult();
             if (ModelState.IsValid)
             {
@@ -46,7 +43,6 @@ namespace BS.Web.Areas.Setup.Controllers
         }
         public IActionResult Edit(string id)
         {
-            @ViewData["PageNo"] = "212";
             if (!string.IsNullOrWhiteSpace(id))
             {
                 var entity = countryInfoS.GetById(id);

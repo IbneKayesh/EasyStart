@@ -1,4 +1,6 @@
-﻿namespace BS.Web.Services
+﻿using BS.Infra.Services.Application;
+
+namespace BS.Web.Services
 {
     internal static class ServiceExtension
     {
@@ -10,6 +12,10 @@
                 .UseSqlServer(configuration.GetConnectionString(StaticKeys.ConnectionString))
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
+
+            //Application
+            services.AddScoped<ClassicMenuService>();
+            
             //Utility
             services.AddTransient<UserLoginInfoService>();
 
@@ -22,6 +28,7 @@
             services.AddTransient<FinancialYearService>();
             services.AddTransient<LeaveTypeService>();
             services.AddTransient<LeaveCalendarService>();
+            services.AddTransient<EntityValueTextService>();
 
             //Company
             services.AddTransient<BusinessService>();

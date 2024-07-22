@@ -12,20 +12,17 @@
         }
         public IActionResult Index()
         {
-            @ViewData["PageNo"] = "311";
             var entityList = subSectionS.GetAll();
             return View(entityList);
         }
         public IActionResult Create()
         {
-            @ViewData["PageNo"] = "312";
             Dropdown_CreateEdit();
             return View("AddUpdate", new SUB_SECTIONS());
         }
         [HttpPost]
         public IActionResult AddUpdate(SUB_SECTIONS obj)
         {
-            @ViewData["PageNo"] = "312";
             Dropdown_CreateEdit();
             EQResult eQResult = new EQResult();
             if (ModelState.IsValid)
@@ -47,7 +44,6 @@
         }
         public IActionResult Edit(string id)
         {
-            @ViewData["PageNo"] = "312";
             Dropdown_CreateEdit();
             if (!string.IsNullOrWhiteSpace(id))
             {

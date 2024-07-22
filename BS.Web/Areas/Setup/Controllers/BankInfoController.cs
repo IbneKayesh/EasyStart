@@ -13,19 +13,16 @@ namespace BS.Web.Areas.Setup.Controllers
         }
         public IActionResult Index()
         {
-            @ViewData["PageNo"] = "221";
             var entityList = bankInfoS.GetAll();
             return View(entityList);
         }
         public IActionResult Create()
         {
-            @ViewData["PageNo"] = "222";
             return View("AddUpdate", new BANK_INFO());
         }
         [HttpPost]
         public IActionResult AddUpdate(BANK_INFO obj)
         {
-            @ViewData["PageNo"] = "222";
             EQResult eQResult = new EQResult();
             if (ModelState.IsValid)
             {
@@ -46,7 +43,6 @@ namespace BS.Web.Areas.Setup.Controllers
         }
         public IActionResult Edit(string id)
         {
-            @ViewData["PageNo"] = "222";
             if (!string.IsNullOrWhiteSpace(id))
             {
                 var entity = bankInfoS.GetById(id);

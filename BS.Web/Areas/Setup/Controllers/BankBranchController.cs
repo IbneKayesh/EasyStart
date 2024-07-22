@@ -12,20 +12,17 @@
         }
         public IActionResult Index()
         {
-            @ViewData["PageNo"] = "231";
             var entityList = bankBranchS.GetAll();
             return View(entityList);
         }
         public IActionResult Create()
         {
-            @ViewData["PageNo"] = "232";
             Dropdown_CreateEdit();
             return View("AddUpdate", new BANK_BRANCH());
         }
         [HttpPost]
         public IActionResult AddUpdate(BANK_BRANCH obj)
         {
-            @ViewData["PageNo"] = "232";
             EQResult eQResult = new EQResult();
             if (ModelState.IsValid)
             {
@@ -47,7 +44,6 @@
         }
         public IActionResult Edit(string id)
         {
-            @ViewData["PageNo"] = "232";
             Dropdown_CreateEdit();
             if (!string.IsNullOrWhiteSpace(id))
             {

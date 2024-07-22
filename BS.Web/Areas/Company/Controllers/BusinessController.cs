@@ -10,19 +10,16 @@
         }
         public IActionResult Index()
         {
-            @ViewData["PageNo"] = "311";
             var entityList = businessS.GetAll();
             return View(entityList);
         }
         public IActionResult Create()
         {
-            @ViewData["PageNo"] = "312";
             return View("AddUpdate", new BUSINESS());
         }
         [HttpPost]
         public IActionResult AddUpdate(BUSINESS obj)
         {
-            @ViewData["PageNo"] = "312";
             EQResult eQResult = new EQResult();
             if (ModelState.IsValid)
             {
@@ -43,7 +40,6 @@
         }
         public IActionResult Edit(string id)
         {
-            @ViewData["PageNo"] = "312";
             if (!string.IsNullOrWhiteSpace(id))
             {
                 var entity = businessS.GetById(id);

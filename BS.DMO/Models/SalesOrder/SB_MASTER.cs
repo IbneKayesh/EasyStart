@@ -90,6 +90,11 @@
         [StringLength(100, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         public string? CUSTOMER_DOCUMENT { get; set; }
 
+        [Display(Name = "Shipping")]
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
+        [Required(ErrorMessage = "{0} is required")]
+        public string? SHIPPING_ID { get; set; }
+
 
 
 
@@ -139,6 +144,7 @@
         [Column(TypeName = "decimal(18, 6)")]
         public decimal NET_AMOUNT { get; set; } = 0;
 
+
         //Payment
         [Display(Name = "Advanced Payment Amount")]
         [Column(TypeName = "decimal(18, 6)")]
@@ -151,8 +157,7 @@
         [Display(Name = "Due Amount")]
         [Required(ErrorMessage = "{0} is required")]
         [Column(TypeName = "decimal(18, 6)")]
-        public decimal DUE_AMOUNT { get; set; } = 0; //
-
+        public decimal DUE_AMOUNT { get; set; } = 0; 
 
         [Display(Name = "Payment Mode")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]

@@ -16,7 +16,6 @@ namespace BS.Web.Areas.SalesOrder.Controllers
         }
         public IActionResult Create()
         {
-            //@ViewData["PageNo"] = "312";
             //Dropdown_CreateEdit();
             var obj = salesBookingS.NewSalesBooking();
             return View("AddUpdate", obj);
@@ -24,7 +23,6 @@ namespace BS.Web.Areas.SalesOrder.Controllers
         [HttpPost]
         public IActionResult AddUpdate(NEW_SB_VM obj)
         {
-            //@ViewData["PageNo"] = "312";
             //Dropdown_CreateEdit();
             EQResult eQResult = new EQResult();
             if (ModelState.IsValid)

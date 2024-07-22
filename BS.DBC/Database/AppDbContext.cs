@@ -1,10 +1,15 @@
-﻿namespace BS.DBC.Database
+﻿using BS.DMO.Models.Application;
+
+namespace BS.DBC.Database
 {
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
+        //Application
+        public DbSet<CLASSIC_MENU> CLASSIC_MENU { get; set; }
+
         //Utility
         public DbSet<USER_LOGIN_INFO> USER_LOGIN_INFO { get; set; }
 
@@ -17,6 +22,7 @@
         public DbSet<FINANCIAL_YEAR> FINANCIAL_YEAR { get; set; }
         public DbSet<LEAVE_TYPE> LEAVE_TYPE { get; set; }
         public DbSet<LEAVE_CALENDAR> LEAVE_CALENDAR { get; set; }
+        public DbSet<ENTITY_VALUE_TEXT> ENTITY_VALUE_TEXT { get; set; }
 
         //Company
         public DbSet<BRANCH_TYPE> BRANCH_TYPE { get; set; }

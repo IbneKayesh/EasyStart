@@ -10,19 +10,16 @@
         }
         public IActionResult Index()
         {
-            @ViewData["PageNo"] = "311";
             var entityList = branchTypeS.GetAll();
             return View(entityList);
         }
         public IActionResult Create()
         {
-            @ViewData["PageNo"] = "312";
             return View("AddUpdate", new BRANCH_TYPE());
         }
         [HttpPost]
         public IActionResult AddUpdate(BRANCH_TYPE obj)
         {
-            @ViewData["PageNo"] = "312";
             EQResult eQResult = new EQResult();
             if (ModelState.IsValid)
             {
@@ -43,7 +40,6 @@
         }
         public IActionResult Edit(string id)
         {
-            @ViewData["PageNo"] = "312";
             if (!string.IsNullOrWhiteSpace(id))
             {
                 var entity = branchTypeS.GetById(id);
