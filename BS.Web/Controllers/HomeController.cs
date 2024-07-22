@@ -1,5 +1,4 @@
-using BS.DMO.Models.Application;
-using BS.DMO.Models.SalesOrder;
+using BS.Web.Models;
 
 namespace BS.Web.Controllers
 {
@@ -21,8 +20,8 @@ namespace BS.Web.Controllers
             userLoginInfoService.AddLog("Dev", sessionId);
 
 
-            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<ENTITY_VALUE_TEXT>();
-           // table_script = Services.Power.ClassObjectSanitizer.SetForSave<DEPARTMENTS>();
+            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<SB_MASTER>();
+            // table_script = Services.Power.ClassObjectSanitizer.SetForSave<DEPARTMENTS>();
             //table_script = Services.Power.RazorSanitizer.Create<DEPARTMENTS>();
             //table_script = Services.Power.RazorSanitizer.Select<DEPARTMENTS>();
 
@@ -33,6 +32,25 @@ namespace BS.Web.Controllers
         {
             var entityList = userLoginInfoService.GetAll();
             return View(entityList);
+        }
+
+
+
+        public IActionResult Login()
+        {
+            var sessionId = HttpContext.Session.Id;
+            var UserSession = new USER_SESSION()
+            {
+                SESSION_ID = sessionId,
+                USER_ID = "Dev User 1",
+                USER_NAME = "Zakia",
+                USER_EMAIL = "zakia@gmail.com"
+            };
+            HttpContext.Session.Set<USER_SESSION>(StaticKeys.SessionName, UserSession);
+
+            TempData["msg"] = AlertifyJsService.Success(UserSession.USER_NAME + " logged in successfully");
+
+            return RedirectToAction("Index");
         }
         public IActionResult Privacy()
         {

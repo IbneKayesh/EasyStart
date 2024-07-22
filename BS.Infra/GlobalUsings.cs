@@ -7,3 +7,4 @@ global using BS.Infra.DbHelper;
 global using BS.Infra.Services.Utility;
 global using Microsoft.EntityFrameworkCore;
 global using BS.DMO.ViewModels.SalesOrder;
+global using BS.DMO.Models.SalesOrder;

@@ -95,7 +95,12 @@
                     WHERE BI.VALUE_ID = {id}";
             return dbCtx.Database.SqlQuery<ENTITY_VALUE_TEXT>(sql).ToList().FirstOrDefault();
         }
-
+        public List<ENTITY_VALUE_TEXT> GetListByEntityID(string entityId)
+        {
+            FormattableString sql = $@"SELECT BI.*
+                    FROM ENTITY_VALUE_TEXT BI WHERE BI.ENTITY_ID ={entityId}";
+            return dbCtx.Database.SqlQuery<ENTITY_VALUE_TEXT>(sql).ToList();
+        }
         public EQResult Delete(string id)
         {
             EQResult eQResult = new EQResult();

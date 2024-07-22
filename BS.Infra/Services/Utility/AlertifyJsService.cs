@@ -16,5 +16,9 @@ namespace BS.Infra.Services.Utility
         {
             return $@"alertify.success('Record has been updated successfully!','success');";
         }
+        public static string Success(string message)
+        {
+            return $@"alertify.success('{message}!');";
+        }
     }
 }

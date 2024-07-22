@@ -51,6 +51,7 @@
                             entity.EMAIL_ADDRESS = obj.EMAIL_ADDRESS;
                             entity.MAX_EMPLOYEE = obj.MAX_EMPLOYEE;
                             entity.MAX_SALARY = obj.MAX_SALARY;
+                            entity.SALES_BOOKING = obj.SALES_BOOKING;
                             //Start Audit
                             entity.IS_ACTIVE = obj.IS_ACTIVE;
                             entity.UPDATE_USER = userId;
@@ -100,6 +101,15 @@ ORDER BY D.ID, S.SUB_SECTION_NAME";
             FormattableString sql = $@"SELECT BI.*
                     FROM SUB_SECTIONS BI
                     WHERE BI.IS_ACTIVE = 1
+                    ORDER BY BI.SUB_SECTION_NAME";
+            return dbCtx.Database.SqlQuery<SUB_SECTIONS>(sql).ToList();
+        }
+
+        public List<SUB_SECTIONS> GetAllSalesBooking()
+        {
+            FormattableString sql = $@"SELECT BI.*
+                    FROM SUB_SECTIONS BI
+                    WHERE BI.IS_ACTIVE = 1 AND BI.SALES_BOOKING = 1
                     ORDER BY BI.SUB_SECTION_NAME";
             return dbCtx.Database.SqlQuery<SUB_SECTIONS>(sql).ToList();
         }

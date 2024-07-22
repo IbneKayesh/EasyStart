@@ -22,7 +22,7 @@
             if (item.CHILD_NODE == "N")
             {
                 <a class="btn btn-app @item.MENU_COLOR" asp-area="@item.MENU_AREA" asp-controller="@item.MENU_CONTROLLER" asp-action="@item.MENU_ACTION" title="@item.MENU_NOTE" target="_blank">
-                    @if(!string.IsNullOrWhiteSpace(item.PAGE_ID))
+                    @if (!string.IsNullOrWhiteSpace(item.PAGE_ID))
                     {
                         <span class="badge bg-gray">@item.PAGE_ID</span>
                     }

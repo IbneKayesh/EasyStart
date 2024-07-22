@@ -27,7 +27,7 @@
             EQResult eQResult = new EQResult();
             if (ModelState.IsValid)
             {
-                eQResult = currencyInfoS.Insert(obj, UserId);
+                eQResult = currencyInfoS.Insert(obj, user_session.USER_ID);
                 TempData["msg"] = eQResult.messages;
 
                 if (eQResult.success && eQResult.rows > 0)

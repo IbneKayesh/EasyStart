@@ -1,6 +1,4 @@
-﻿using BS.DMO.Models.SalesOrder;
-
-namespace BS.Infra.Services.SalesOrder
+﻿namespace BS.Infra.Services.SalesOrder
 {
     public class SalesBookingService
     {
@@ -9,7 +7,7 @@ namespace BS.Infra.Services.SalesOrder
         {
             dbCtx = _dbContext;
         }
-        public NEW_SB_VM NewSalesBooking()
+        public NEW_SB_VM NewSalesBooking(string userId, string userName)
         {
             var obj = new NEW_SB_VM();
             obj.SB_MASTER = new SB_MASTER
@@ -20,6 +18,11 @@ namespace BS.Infra.Services.SalesOrder
                 TRN_NO = "SB-0001",
                 REF_TRN_ID = "SB-0001",
                 TRN_DATE = DateTime.Now,
+                FROM_USER_ID = userId,
+                TO_USER_ID = userName,
+                 
+
+
                 //TRN_ID = ENUM_TRN_ID.PO.ToString(),
                 //TRN_NO = TransactionNoService.CreateNewTrn(ENUM_TRN_ID.PO),
             };

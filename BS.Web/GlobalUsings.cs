@@ -17,3 +17,7 @@ global using Microsoft.AspNetCore.Mvc.Rendering;
 global using Microsoft.Data.SqlClient;
 global using Microsoft.EntityFrameworkCore;
 global using System.Diagnostics;
+global using BS.DMO.ViewModels.SalesOrder;
+global using BS.DMO.ViewModels.Security;
+global using Microsoft.AspNetCore.Mvc.Filters;
+global using BS.DMO.StaticValues;

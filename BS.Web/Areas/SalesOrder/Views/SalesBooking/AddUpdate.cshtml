@@ -24,7 +24,8 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label asp-for="SB_MASTER.TRN_SOURCE_ID" class="control-label"></label>
-                            <input asp-for="SB_MASTER.TRN_SOURCE_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Trn No">
+                            <select asp-for="SB_MASTER.TRN_SOURCE_ID" asp-items="@ViewBag.TRN_SOURCE_ID" class="form-control form-control-sm">
+                            </select>
                             <span asp-validation-for="SB_MASTER.TRN_SOURCE_ID" class="text-danger"></span>
                         </div>
                         <div class="col-md-3">
@@ -66,7 +67,8 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label asp-for="SB_MASTER.SUB_SECTION_ID" class="control-label"></label>
-                            <input asp-for="SB_MASTER.SUB_SECTION_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Sub Section Id">
+                            <select asp-for="SB_MASTER.SUB_SECTION_ID" asp-items="@ViewBag.SUB_SECTION_ID" class="form-control form-control-sm">
+                            </select>
                             <span asp-validation-for="SB_MASTER.SUB_SECTION_ID" class="text-danger"></span>
                         </div>
                         <div class="col-md-2">

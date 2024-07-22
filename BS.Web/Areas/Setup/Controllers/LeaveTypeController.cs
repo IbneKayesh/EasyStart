@@ -26,7 +26,7 @@ namespace BS.Web.Areas.Setup.Controllers
             EQResult eQResult = new EQResult();
             if (ModelState.IsValid)
             {
-                eQResult = leaveTypeS.Insert(obj, UserId);
+                eQResult = leaveTypeS.Insert(obj, user_session.USER_ID);
                 TempData["msg"] = eQResult.messages;
 
                 if (eQResult.success && eQResult.rows > 0)
