@@ -108,8 +108,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label asp-for="SB_MASTER.CONTACT_ID" class="control-label"></label>
-                            <select asp-for="SB_MASTER.CONTACT_ID" asp-items="@ViewBag.CONTACT_ID" class="form-control form-control-sm">
-                            </select>
+                            <input asp-for="SB_MASTER.CONTACT_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Customer Name">
                             <span asp-validation-for="SB_MASTER.CONTACT_ID" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
@@ -393,4 +392,88 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+
+        $(document).ready(function () {
+            var id = $("#SB_MASTER_CONTACT_ID1");
+            $(id).keydown(function () {
+                $(this).css("background-color", "white");
+            });
+            $(id).autocomplete({
+                source: function (request, response) {
+                    console.log(request.term);
+                    $.ajax({
+                        url: '/Suppliers/FindSupplier',
+                        data: { "search_term": request.term },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.SUPPLIER_NAME + " - " + item.CONTACT_NO, value: item.SUPPLIER_NAME + " - " + item.CONTACT_NO, supplier_id: item.ID, supplier_name: item.SUPPLIER_NAME + " - " + item.CONTACT_NO, office_address: item.OFFICE_ADDRESS };
+                            }))
+                        },
+                        error: function (result) {
+                            alert('Not Match');
+                        }
+                    });
+                },
+                change: function (event, ui) {
+                    if (ui.item == null || ui.item == undefined) {
+                        $(this).val('');
+                        $(this).css("background-color", "mistyrose");
+                        setTimeout(function () {
+                            $(id).focus();
+                        }, 200);
+                    } else {
+                        $('#PO_MASTER_SUPPLIER_ID').val(ui.item.supplier_id);
+                        $('#PO_MASTER_SUPPLIER_NAME').val(ui.item.supplier_name);
+                    }
+                },
+                minLength: 3
+            });
+        });
+        $(document).ready(function () {
+            AutoCompleteSearch('/CRM/Contacts/FindCustomer', 3, 'SB_MASTER_CONTACT_ID', 'SB_MASTER_CONTACT_ID:ID,SB_MASTER_CONTACT_ADDRESS_ID:CONTACT_NAME');
+        });
+
+        function AutoCompleteSearch(url, minLen, searchInputId, JsonPropertyInputId) {
+            var id = $("#" + searchInputId);
+            $(id).keydown(function () {
+                $(this).css("background-color", "white");
+            });
+            $(id).autocomplete({
+                source: function (request, response) {
+                    console.log(request.term);
+                    $.ajax({
+                        url: url,
+                        data: { "search_term": request.term },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                console.log(item);
+                                return { label: item.CONTACT_NAME + " - " + item.CONTACT_NO, value: item.ID };
+                            }))
+                        },
+                        error: function (result) {
+                            alert('Not Match');
+                        }
+                    });
+                },
+                change: function (event, ui) {
+                    if (ui.item == null || ui.item == undefined) {
+                        $(this).val('');
+                        $(this).css("background-color", "mistyrose");
+                        setTimeout(function () {
+                            $(id).focus();
+                        }, 200);
+                    } else {
+                        $('#PO_MASTER_SUPPLIER_ID').val(ui.item.supplier_id);
+                        $('#PO_MASTER_SUPPLIER_NAME').val(ui.item.supplier_name);
+                    }
+                },
+                minLength: minLen
+            });
+        }
+    </script>
 }

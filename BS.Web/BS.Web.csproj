@@ -33,6 +33,10 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Update="Areas\Inventory\Views\ProductBrand\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -42,10 +46,15 @@
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Areas\Company\Views\Business\AddUpdate.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\CRM\Views\Contacts\AddUpdate.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Inventory\Views\ProductBrand\AddUpdate.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\CRM\Views\Contacts\AddUpdate.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Inventory\Views\ProductBrand\AddUpdate.cshtml" />
   </ItemGroup>
 
 </Project>

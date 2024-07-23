@@ -109,6 +109,10 @@
                     ORDER BY BI.CONTACT_NAME";
             return dbCtx.Database.SqlQuery<CONTACTS>(sql).ToList();
         }
+        public List<CONTACTS> GetByName(string contactName)
+        {
+           return dbCtx.CONTACTS.Where(x=>x.IS_CUSTOMER && x.CONTACT_NAME.Contains(contactName)).ToList();
+        }
         public List<CONTACTS> GetAllActive()
         {
             FormattableString sql = $@"SELECT BI.*

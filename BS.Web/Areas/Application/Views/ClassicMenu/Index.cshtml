@@ -8,6 +8,9 @@
         <h3 class="card-title">@ViewData["Title"]</h3>
     </div>
     <div class="card-body">
+        <a class="btn btn-app" asp-area="Application" asp-controller="ClassicMenu" asp-action="Index">
+            <i class="fas fa-home"></i> Home
+        </a>
         @if (Model != null && Model.Count() > 0)
         {
             if (@Model.FirstOrDefault().PARENT_NODE != "N")

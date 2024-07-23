@@ -39,6 +39,10 @@ namespace BS.Web.Services.Power
                 {
                     sb.Append(" NOT NULL");
                 }
+                if (isRequired)
+                {
+                    sb.Append(" NOT NULL");
+                }
 
                 if (isPrimaryKey)
                 {
@@ -79,12 +83,12 @@ namespace BS.Web.Services.Power
 
         private static bool IsPrimaryKey(PropertyInfo prop)
         {
-            return Attribute.IsDefined(prop, typeof(KeyAttribute));
+            return prop.Name == "ID" || Attribute.IsDefined(prop, typeof(KeyAttribute));
         }
 
         private static bool IsRequired(PropertyInfo prop)
         {
-            return Attribute.IsDefined(prop, typeof(RequiredAttribute));
+            return prop.Name == "ID" || Attribute.IsDefined(prop, typeof(RequiredAttribute));
         }
 
         private static string GetStringLength(PropertyInfo prop)

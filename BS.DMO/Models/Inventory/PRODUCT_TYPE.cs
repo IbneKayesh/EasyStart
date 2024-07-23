@@ -15,10 +15,12 @@ namespace BS.DMO.Models.Inventory
         public string ID { get; set; }
 
 
-        public string? PRODUCT_TYPE_NAME { get; set; }
-        public string? PRODUCT_TYPE_DESC { get; set; }
+        public string? TYPE_NAME { get; set; }
+        public string? TYPE_DESC { get; set; }
+
+        public bool IS_MASTER_PRODUCT { get; set; }
         public bool IS_PURCHASE { get; set; }
         public bool IS_SALES { get; set; }
-        public bool IS_MASTER_PRODUCT { get; set; }
+        public bool IS_STOCK { get; set; }
     }
 }

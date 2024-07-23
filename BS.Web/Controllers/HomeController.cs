@@ -1,3 +1,5 @@
+using BS.DMO.Models.Inventory;
+
 namespace BS.Web.Controllers
 {
     public class HomeController : Controller
@@ -18,10 +20,10 @@ namespace BS.Web.Controllers
             userLoginInfoService.AddLog("Dev", sessionId);
 
 
-            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<CONTACT_ADDRESS>();
-             //table_script = Services.Power.ClassObjectSanitizer.SetForSave<CONTACTS>();
-            //table_script = Services.Power.RazorSanitizer.Create<CONTACTS>();
-            //table_script = Services.Power.RazorSanitizer.Select<CONTACTS>();
+            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<PRODUCT_BRAND>();
+            //table_script = Services.Power.ClassObjectSanitizer.SetForSave<CONTACTS>();
+            table_script = Services.Power.RazorSanitizer.Create<PRODUCT_BRAND>();
+            //table_script = Services.Power.RazorSanitizer.Select<PRODUCT_BRAND>();
 
             return View("Index", table_script);
         }

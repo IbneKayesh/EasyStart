@@ -15,7 +15,7 @@ namespace BS.DMO.Models.Inventory
         public string ID { get; set; }
 
 
-        public string? PRODUCT_CATEGORY_NAME { get; set; }
-        public string? PRODUCT_CATEGORY_DESC { get; set; }
+        public string? CATEGORY_NAME { get; set; }
+        public string? CATEGORY_DESC { get; set; }
     }
 }

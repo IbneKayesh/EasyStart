@@ -1,4 +1,6 @@
-﻿namespace BS.DBC.Database
+﻿using BS.DMO.Models.Inventory;
+
+namespace BS.DBC.Database
 {
     public class AppDbContext : DbContext
     {
@@ -35,6 +37,7 @@
 
         //HRMS
         //Inventory
+        public DbSet<PRODUCT_BRAND> PRODUCT_BRAND { get; set; }
         //My Drive
         //PM
 

@@ -1,4 +1,6 @@
-﻿namespace BS.Web.Services
+﻿using BS.Infra.Services.Inventory;
+
+namespace BS.Web.Services
 {
     internal static class ServiceExtension
     {
@@ -31,6 +33,7 @@
             services.AddTransient<TaskNotesService>();
             //HRMS
             //Inventory
+            services.AddTransient<ProductBrandService>();
             //My Drive
             //PM
             //Sales Order

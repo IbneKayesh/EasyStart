@@ -138,5 +138,14 @@ namespace BS.Web.Areas.CRM.Controllers
             EQResult eQResult = contactsS.Delete_ContactAddress(id);
             return Json(eQResult);
         }
+
+
+        //API
+        [HttpPost]
+        public IActionResult FindCustomer(string search_term)
+        {
+            var obj = contactsS.GetByName(search_term.ToLower());
+            return Json(obj);
+        }
     }
 }

@@ -9,7 +9,7 @@
         public string ID { get; set; }
 
 
-        public string? PRODUCT_CATEGORY_NAME { get; set; }
-        public string? PRODUCT_CATEGORY_DESC { get; set; }
+        public string? STATUS_NAME { get; set; }
+        public string? STATUS_DESC { get; set; }
     }
 }
