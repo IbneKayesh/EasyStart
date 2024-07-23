@@ -18,10 +18,10 @@ namespace BS.Web.Controllers
             userLoginInfoService.AddLog("Dev", sessionId);
 
 
-            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<SUB_SECTIONS_TRN_ID>();
-            // table_script = Services.Power.ClassObjectSanitizer.SetForSave<DEPARTMENTS>();
-            //table_script = Services.Power.RazorSanitizer.Create<DEPARTMENTS>();
-            //table_script = Services.Power.RazorSanitizer.Select<DEPARTMENTS>();
+            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<CONTACTS>();
+             table_script = Services.Power.ClassObjectSanitizer.SetForSave<CONTACTS>();
+            //table_script = Services.Power.RazorSanitizer.Create<CONTACTS>();
+            //table_script = Services.Power.RazorSanitizer.Select<CONTACTS>();
 
             return View("Index", table_script);
         }

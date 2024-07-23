@@ -1,6 +1,6 @@
-﻿@model BS.DMO.Models.Setup.TRN_AUTO_STEP
+﻿@model BS.DMO.Models.Setup.SUB_SECTIONS_TRN_ID
 @{
-    ViewData["Title"] = "Transaction Auto Step";
+    ViewData["Title"] = "Sub Section Transaction";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -17,20 +17,16 @@
             <input asp-for="RowVersion" type="hidden" />
             <div class="row">
                 <div class="col-md-3">
+                    <label asp-for="SUB_SECTION_ID" class="control-label"></label>
+                    <select asp-for="SUB_SECTION_ID" asp-items="@ViewBag.SUB_SECTION_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="SUB_SECTION_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
                     <label asp-for="TRN_ID" class="control-label"></label>
                     <select asp-for="TRN_ID" asp-items="@ViewBag.TRN_ID" class="form-control form-control-sm">
                     </select>
                     <span asp-validation-for="TRN_ID" class="text-danger"></span>
-                </div>
-                <div class="col-md-3">
-                    <label asp-for="IS_POSTED" class="control-label"></label>
-                    <input asp-for="IS_POSTED" type="checkbox" class="form-control form-control-sm">
-                    <span asp-validation-for="IS_POSTED" class="text-danger"></span>
-                </div>
-                <div class="col-md-3">
-                    <label asp-for="IS_APPROVE" class="control-label"></label>
-                    <input asp-for="IS_APPROVE" type="checkbox" class="form-control form-control-sm">
-                    <span asp-validation-for="IS_APPROVE" class="text-danger"></span>
                 </div>
                 <div class="col-md-3">
                     <label asp-for="IS_ACTIVE" class="control-label"></label>

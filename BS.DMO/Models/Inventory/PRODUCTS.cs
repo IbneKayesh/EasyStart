@@ -27,5 +27,6 @@ namespace BS.DMO.Models.Inventory
         public string? PRODUCT_IMG { get; set; }
         public decimal LAST_PURCHASE_RATE { get; set; }
         public decimal LAST_SALES_RATE { get; set; }
+
     }
 }

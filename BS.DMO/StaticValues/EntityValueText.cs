@@ -37,6 +37,11 @@
         /// </summary>
         public static string CONTACT_CATEGORY_ID = "CONTACT_CATEGORY_ID";
 
+        
+        /// <summary>
+        /// Color codes :: Theam, Colors, Hex
+        /// </summary>
+        public static string COLOR_CODE = "COLOR_CODE";
         public static List<string> GetAll()
         {
             return new List<string>()
@@ -48,6 +53,7 @@
                 "SHIPPING_TYPE_ID",
                 "SHIPPING_MODE_ID",
                 "CONTACT_CATEGORY_ID",
+                "COLOR_CODE"
             };
         }
     }

@@ -215,18 +215,14 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            <div class="content-header p-1 border-bottom border-dark">
-                <div class="container-fluid">
+            <div class="content-header p-1 border-bottom border-secondary">
+                <div class="container">
                     <div class="row">
                         <div class="col-sm-6 m-0">
                             @Html.Raw(ViewBag.BackLink) @ViewData["Title"]
                         </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item">@(string.IsNullOrEmpty(frm_area) ? "SBS" : @frm_area)</li>
-                                <li class="breadcrumb-item">@frm_controller</li>
-                                <li class="breadcrumb-item active">@frm_action / @ViewData["Title"]</li>
-                            </ol>
+                        <div class="col-sm-6 text-right">
+                            <p>Easy Start Business Solution : Your digital partner</p>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->

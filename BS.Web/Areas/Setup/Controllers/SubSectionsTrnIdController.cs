@@ -1,14 +1,14 @@
-﻿using BS.DMO.Models.Setup;
-
-namespace BS.Web.Areas.Setup.Controllers
+﻿namespace BS.Web.Areas.Setup.Controllers
 {
     [Area("Setup")]
     public class SubSectionsTrnIdController : BaseController
     {
         private readonly SubSectionsTrnIdService subSectionsTrnIdS;
-        public SubSectionsTrnIdController(SubSectionsTrnIdService _subSectionsTrnIdService)
+        private readonly SubSectionService subSectionS;
+        public SubSectionsTrnIdController(SubSectionsTrnIdService _subSectionsTrnIdService, SubSectionService _subSectionService)
         {
             subSectionsTrnIdS = _subSectionsTrnIdService;
+            subSectionS = _subSectionService;
         }
         public IActionResult Index()
         {
@@ -42,12 +42,12 @@ namespace BS.Web.Areas.Setup.Controllers
             }
             return View(obj);
         }
-        public IActionResult Edit(string id)
+        public IActionResult Edit(string trn_id, string sub_section_id)
         {
             Dropdown_CreateEdit();
-            if (!string.IsNullOrWhiteSpace(id))
+            if (!string.IsNullOrWhiteSpace(trn_id) && !string.IsNullOrWhiteSpace(sub_section_id))
             {
-                var entity = subSectionsTrnIdS.GetById(id);
+                var entity = subSectionsTrnIdS.GetById(trn_id, sub_section_id);
                 if (entity != null)
                 {
                     return View("AddUpdate", entity);
@@ -66,11 +66,13 @@ namespace BS.Web.Areas.Setup.Controllers
 
         private void Dropdown_CreateEdit()
         {
+            ViewBag.SUB_SECTION_ID = new SelectList(subSectionS.GetAllSalesBooking(), "ID", "SUB_SECTION_NAME");
             ViewBag.TRN_ID = new SelectList(TransactionID.GetAll());
         }
-        public IActionResult Delete(string id)
+        [HttpGet]
+        public IActionResult Delete(string trn_id, string sub_section_id)
         {
-            EQResult eQResult = subSectionsTrnIdS.Delete(id);
+            EQResult eQResult = subSectionsTrnIdS.Delete(trn_id, sub_section_id);
             return Json(eQResult);
         }
     }

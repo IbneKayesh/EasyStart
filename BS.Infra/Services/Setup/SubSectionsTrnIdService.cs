@@ -14,7 +14,7 @@
             try
             {
                 //old entity
-                var entity = dbCtx.SUB_SECTIONS_TRN_ID.Find(obj.TRN_ID);
+                var entity = dbCtx.SUB_SECTIONS_TRN_ID.Where(x => x.TRN_ID == obj.TRN_ID && x.SUB_SECTION_ID == obj.SUB_SECTION_ID).FirstOrDefault();
                 if (entity != null)
                 {
                     if (entity.RowVersion.SequenceEqual(obj.RowVersion))
@@ -69,12 +69,13 @@
             }
         }
 
-        public List<SUB_SECTIONS_TRN_ID> GetAll()
+        public List<SUB_SECTIONS_TRN_ID_VM> GetAll()
         {
-            FormattableString sql = $@"SELECT LT.*
+            FormattableString sql = $@"SELECT LT.*,ss.SUB_SECTION_NAME
                     FROM SUB_SECTIONS_TRN_ID LT
+					join SUB_SECTIONS ss on lt.sub_section_id=ss.id
                     ORDER BY LT.TRN_ID";
-            return dbCtx.Database.SqlQuery<SUB_SECTIONS_TRN_ID>(sql).ToList();
+            return dbCtx.Database.SqlQuery<SUB_SECTIONS_TRN_ID_VM>(sql).ToList();
         }
         public List<SUB_SECTIONS_TRN_ID> GetAllActive()
         {
@@ -84,19 +85,19 @@
                     ORDER BY LT.TRN_ID";
             return dbCtx.Database.SqlQuery<SUB_SECTIONS_TRN_ID>(sql).ToList();
         }
-        public SUB_SECTIONS_TRN_ID GetById(string id)
+        public SUB_SECTIONS_TRN_ID GetById(string trn_id, string sub_section_id)
         {
             FormattableString sql = $@"SELECT LT.*
                     FROM SUB_SECTIONS_TRN_ID LT
-                    WHERE LT.TRN_ID = {id}";
+                    WHERE LT.TRN_ID = {trn_id} AND LT.SUB_SECTION_ID = {sub_section_id}";
             return dbCtx.Database.SqlQuery<SUB_SECTIONS_TRN_ID>(sql).ToList().FirstOrDefault()!;
         }
 
-        public EQResult Delete(string id)
+        public EQResult Delete(string trn_id, string sub_section_id)
         {
             EQResult eQResult = new EQResult();
             eQResult.entities = "SUB_SECTIONS_TRN_ID";
-            if (string.IsNullOrWhiteSpace(id))
+            if (string.IsNullOrWhiteSpace(trn_id) && string.IsNullOrWhiteSpace(sub_section_id))
             {
                 eQResult.messages = NotifyService.InvalidRequestString();
                 return eQResult;
@@ -104,7 +105,7 @@
             try
             {
                 //old entity
-                var entity = dbCtx.SUB_SECTIONS_TRN_ID.Find(id);
+                var entity = dbCtx.SUB_SECTIONS_TRN_ID.Where(x => x.TRN_ID == trn_id && x.SUB_SECTION_ID == sub_section_id).FirstOrDefault();
                 if (entity != null)
                 {
                     //TODO : Delete property

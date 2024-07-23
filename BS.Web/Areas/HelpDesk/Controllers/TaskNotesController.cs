@@ -10,8 +10,9 @@ namespace BS.Web.Areas.HelpDesk.Controllers
         }
     }
 }
-//Section trn in Setuo
 //Contacts
 //Contact Address
 //Sales Booking
 //Inventory
+//Open pages as tab instead of new window
+//product warranty claim

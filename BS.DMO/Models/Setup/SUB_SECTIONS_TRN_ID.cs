@@ -14,11 +14,5 @@
         [Display(Name = "Transaction Id")]
         [Required(ErrorMessage = "{0} is required")]
         public string? TRN_ID { get; set; }
-
-
-
-        //[NotMapped]
-        //[Display(Name = "Section")]
-        //public string? SECTION_NAME { get; set; }
     }
 }

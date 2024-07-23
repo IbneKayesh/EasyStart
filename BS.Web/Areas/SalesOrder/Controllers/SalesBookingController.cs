@@ -6,13 +6,15 @@
         private readonly SalesBookingService salesBookingS;
         private readonly SubSectionService subSectionS;
         private readonly EntityValueTextService entityValueTextS;
+        private readonly ContactsService contactsS;
         public SalesBookingController(SalesBookingService _salesBookingService,
             SubSectionService _subSectionService,
-            EntityValueTextService _entityValueTextService)
+            EntityValueTextService _entityValueTextService, ContactsService _contactsService)
         {
             salesBookingS = _salesBookingService;
             subSectionS = _subSectionService;
             entityValueTextS = _entityValueTextService;
+            contactsS = _contactsService;
         }
 
         public IActionResult Index()
@@ -51,6 +53,7 @@
         private void Dropdown_CreateEdit()
         {
             ViewBag.SUB_SECTION_ID = new SelectList(subSectionS.GetAllSalesBooking(), "ID", "SUB_SECTION_NAME");
+            ViewBag.CONTACT_ID = new SelectList(contactsS.GetAllActive(), "ID", "CONTACT_NAME");
 
 
             //should be fix it :: in SQL formattable string

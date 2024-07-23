@@ -1,6 +1,6 @@
-﻿@model IEnumerable<BS.DMO.Models.Setup.TRN_AUTO_STEP>
+﻿@model IEnumerable<BS.DMO.ViewModels.Setup.SUB_SECTIONS_TRN_ID_VM>
 @{
-    ViewData["Title"] = "Transaction Auto Step";
+    ViewData["Title"] = "Sub Section Transaction";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="card card-primary card-outline">
@@ -15,9 +15,8 @@
         <table class="table table-hover table-sm">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Auto Post</th>
-                    <th>Auto Approve</th>
+                    <th>Sub Section</th>
+                    <th>Transaction</th>
                     <th>Status</th>
                     <th>#</th>
                 </tr>
@@ -27,20 +26,17 @@
                 {
                     <tr>
                         <td>
+                            @Html.DisplayFor(modelItem => item.SUB_SECTION_NAME)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.TRN_ID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IS_POSTED)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IS_APPROVE)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.IS_ACTIVE)
                         </td>
                         <td>
-                            <a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@item.TRN_ID"><i class="fa fa-edit"></i> Edit</a>
-                            <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="TransactionAutoStep/Delete/@item.TRN_ID"><i class="fa fa-trash"></i> Delete</button>
+                            <a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-trn_id="@item.TRN_ID" asp-route-sub_section_id="@item.SUB_SECTION_ID"><i class="fa fa-edit"></i> Edit</a>
+                            <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="SubSectionsTrnId/Delete?trn_id=@item.TRN_ID&sub_section_id=@item.SUB_SECTION_ID"><i class="fa fa-trash"></i> Delete</button>
                         </td>
                     </tr>
                 }

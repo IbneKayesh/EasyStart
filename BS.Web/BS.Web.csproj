@@ -12,8 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\CRM\Controllers\" />
-    <Folder Include="Areas\CRM\Views\" />
     <Folder Include="wwwroot\db_backup\" />
   </ItemGroup>
 
@@ -31,6 +29,10 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Update="Areas\CRM\Views\Contacts\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +41,11 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Areas\Company\Views\Business\AddUpdate.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\CRM\Views\Contacts\AddUpdate.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\CRM\Views\Contacts\AddUpdate.cshtml" />
   </ItemGroup>
 
 </Project>

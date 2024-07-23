@@ -1,6 +1,4 @@
-﻿using BS.DMO.Models.HelpDesk;
-
-namespace BS.DBC.Database
+﻿namespace BS.DBC.Database
 {
     public class AppDbContext : DbContext
     {
@@ -13,12 +11,37 @@ namespace BS.DBC.Database
             modelBuilder.Entity<SUB_SECTIONS_TRN_ID>().HasKey(sf => new { sf.SUB_SECTION_ID, sf.TRN_ID });
             base.OnModelCreating(modelBuilder);
         }
+        //Admin
+
         //Application
         public DbSet<CLASSIC_MENU> CLASSIC_MENU { get; set; }
 
-        //Utility
-        public DbSet<USER_LOGIN_INFO> USER_LOGIN_INFO { get; set; }
+        //Company
+        public DbSet<BRANCH_TYPE> BRANCH_TYPE { get; set; }
+        public DbSet<BUSINESS> BUSINESS { get; set; }
+        public DbSet<BRANCH> BRANCH { get; set; }
+        public DbSet<BRANCH_COST_CENTER> BRANCH_COST_CENTER { get; set; }
+        public DbSet<DEPARTMENTS> DEPARTMENTS { get; set; }
+        public DbSet<SECTIONS> SECTIONS { get; set; }
+        public DbSet<SUB_SECTIONS> SUB_SECTIONS { get; set; }
 
+        //CRM
+        public DbSet<CONTACTS> CONTACTS { get; set; }
+
+        //Help desk
+        public DbSet<TASK_NOTES> TASK_NOTES { get; set; }
+        public DbSet<Abc>? Abc { get; set; }
+
+        //HRMS
+        //Inventory
+        //My Drive
+        //PM
+
+        //Sales Order
+        public DbSet<SB_MASTER> SB_MASTER { get; set; }
+        public DbSet<SB_CHILD> SB_CHILD { get; set; }
+
+        //Security
         //Setup
         public DbSet<BANK_INFO> BANK_INFO { get; set; }
         public DbSet<BANK_BRANCH> BANK_BRANCH { get; set; }
@@ -32,22 +55,8 @@ namespace BS.DBC.Database
         public DbSet<TRN_AUTO_STEP> TRN_AUTO_STEP { get; set; }
         public DbSet<SUB_SECTIONS_TRN_ID> SUB_SECTIONS_TRN_ID { get; set; }
 
-        //Company
-        public DbSet<BRANCH_TYPE> BRANCH_TYPE { get; set; }
-        public DbSet<BUSINESS> BUSINESS { get; set; }
-        public DbSet<BRANCH> BRANCH { get; set; }
-        public DbSet<BRANCH_COST_CENTER> BRANCH_COST_CENTER { get; set; }
-        public DbSet<DEPARTMENTS> DEPARTMENTS { get; set; }
-        public DbSet<SECTIONS> SECTIONS { get; set; }
-        public DbSet<SUB_SECTIONS> SUB_SECTIONS { get; set; }
-
-        //Sales Booking
-        public DbSet<SB_MASTER> SB_MASTER { get; set; }
-        public DbSet<SB_CHILD> SB_CHILD { get; set; }
-
-        //Help desk
-        public DbSet<TASK_NOTES> TASK_NOTES { get; set; }
-        public DbSet<Abc>? Abc { get; set; }
+        //Utility
+        public DbSet<USER_LOGIN_INFO> USER_LOGIN_INFO { get; set; }
 
     }
 }

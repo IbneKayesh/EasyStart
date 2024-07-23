@@ -108,7 +108,8 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label asp-for="SB_MASTER.CONTACT_ID" class="control-label"></label>
-                            <input asp-for="SB_MASTER.CONTACT_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Customer">
+                            <select asp-for="SB_MASTER.CONTACT_ID" asp-items="@ViewBag.CONTACT_ID" class="form-control form-control-sm">
+                            </select>
                             <span asp-validation-for="SB_MASTER.CONTACT_ID" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">

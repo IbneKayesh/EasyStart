@@ -8,3 +8,7 @@ global using BS.Infra.Services.Utility;
 global using Microsoft.EntityFrameworkCore;
 global using BS.DMO.ViewModels.SalesOrder;
 global using BS.DMO.Models.SalesOrder;
+global using BS.Infra.Services.Application;
+global using BS.Infra.Services.CRM;
+global using BS.Infra.Services.HelpDesk;
+global using BS.DMO.Models.CRM;

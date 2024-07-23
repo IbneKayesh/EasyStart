@@ -1,7 +1,4 @@
-﻿using BS.Infra.Services.Application;
-using BS.Infra.Services.HelpDesk;
-
-namespace BS.Web.Services
+﻿namespace BS.Web.Services
 {
     internal static class ServiceExtension
     {
@@ -13,13 +10,32 @@ namespace BS.Web.Services
                 .UseSqlServer(configuration.GetConnectionString(StaticKeys.ConnectionString))
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
-
+            //Admin
+            
             //Application
             services.AddScoped<ClassicMenuService>();
-            
-            //Utility
-            services.AddTransient<UserLoginInfoService>();
 
+            //Company
+            services.AddTransient<BusinessService>();
+            services.AddTransient<BranchTypeService>();
+            services.AddTransient<BranchService>();
+            services.AddTransient<BranchCostCenterService>();
+            services.AddTransient<DepartmentService>();
+            services.AddTransient<SectionService>();
+            services.AddTransient<SubSectionService>();
+
+            //CRM
+            services.AddTransient<ContactsService>();
+
+            //Help Desk
+            services.AddTransient<TaskNotesService>();
+            //HRMS
+            //Inventory
+            //My Drive
+            //PM
+            //Sales Order
+            services.AddTransient<SalesBookingService>();
+            //Security
             //Setup
             services.AddTransient<BankInfoService>();
             services.AddTransient<BankBranchService>();
@@ -33,20 +49,8 @@ namespace BS.Web.Services
             services.AddTransient<TrnAutoStepService>();
             services.AddTransient<SubSectionsTrnIdService>();
 
-            //Company
-            services.AddTransient<BusinessService>();
-            services.AddTransient<BranchTypeService>();
-            services.AddTransient<BranchService>();
-            services.AddTransient<BranchCostCenterService>();
-            services.AddTransient<DepartmentService>();
-            services.AddTransient<SectionService>();
-            services.AddTransient<SubSectionService>();
-
-            //Help Desk
-            services.AddTransient<TaskNotesService>();
-            
-            //SalesBooking
-            services.AddTransient<SalesBookingService>();
+            //Utility
+            services.AddTransient<UserLoginInfoService>();
 
             //services.AddScoped<IUnitOfWork, UnitOfWork>();
             //services.AddScoped<ITransactionNoBuilderRep, TransactionNoBuilderRep>();
