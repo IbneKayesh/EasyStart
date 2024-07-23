@@ -66,7 +66,7 @@
 
         private void Dropdown_CreateEdit()
         {
-            ViewBag.SUB_SECTION_ID = new SelectList(subSectionS.GetAllSalesBooking(), "ID", "SUB_SECTION_NAME");
+            ViewBag.SUB_SECTION_ID = new SelectList(subSectionS.GetAllActive(), "ID", "SUB_SECTION_NAME");
             ViewBag.TRN_ID = new SelectList(TransactionID.GetAll());
         }
         [HttpGet]

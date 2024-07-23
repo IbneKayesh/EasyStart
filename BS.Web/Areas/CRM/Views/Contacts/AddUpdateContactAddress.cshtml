@@ -1,0 +1,66 @@
+﻿@model BS.DMO.Models.CRM.CONTACT_ADDRESS
+@{
+    ViewData["Title"] = "Contact Address";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Add/Edit @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+        </div>
+    </div>
+    <form asp-action="AddUpdateContactAddress">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="ID" type="hidden" />
+            <input asp-for="CONTACT_ID" type="hidden" />
+            <input asp-for="RowVersion" type="hidden" />
+            <div class="row">
+                <div class="col-md-3">
+                    <label asp-for="CONTACT_PERSON" class="control-label"></label>
+                    <input asp-for="CONTACT_PERSON" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Contact Person">
+                    <span asp-validation-for="CONTACT_PERSON" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="CONTACT_NO" class="control-label"></label>
+                    <input asp-for="CONTACT_NO" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Contact No">
+                    <span asp-validation-for="CONTACT_NO" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="EMAIL_ADDRESS" class="control-label"></label>
+                    <input asp-for="EMAIL_ADDRESS" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Email Address">
+                    <span asp-validation-for="EMAIL_ADDRESS" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <label asp-for="OFFICE_ADDRESS" class="control-label"></label>
+                    <input asp-for="OFFICE_ADDRESS" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Office Address">
+                    <span asp-validation-for="OFFICE_ADDRESS" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="IS_DEFAULT" class="control-label"></label>
+                    <input asp-for="IS_DEFAULT" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_DEFAULT" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="IS_ACTIVE" class="control-label"></label>
+                    <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Index" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left"></i> Back</a>
+            <button class="btn btn-sm btn-info" type="reset"><i class="fa fa-undo"></i> Reset</button>
+            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Submit</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+         await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

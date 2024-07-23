@@ -52,6 +52,7 @@
                             entity.CONTACT_CATEGORY_ID = obj.CONTACT_CATEGORY_ID;
                             entity.CONTACT_GROUP = obj.CONTACT_GROUP;
                             entity.CONTACT_NAME = obj.CONTACT_NAME;
+                            entity.CONTACT_PERSON = obj.CONTACT_PERSON;
                             entity.CONTACT_NO = obj.CONTACT_NO;
                             entity.EMAIL_ADDRESS = obj.EMAIL_ADDRESS;
                             entity.OFFICE_ADDRESS = obj.OFFICE_ADDRESS;
@@ -171,5 +172,154 @@
                 dbCtx.Dispose();
             }
         }
+
+        //Contact Address
+        public EQResult Insert_ContactAddress(CONTACT_ADDRESS obj, string userId)
+        {
+            DateTime dateTime = DateTime.Now;
+            EQResult eQResult = new EQResult();
+            eQResult.entities = "CONTACT_ADDRESS";
+            try
+            {
+                if (obj.ID == Guid.Empty.ToString())
+                {
+                    //new entity
+                    obj.ID = Guid.NewGuid().ToString();
+
+                    //Start Audit
+                    //obj.IS_ACTIVE = true;
+                    obj.CREATE_USER = userId;
+                    obj.CREATE_DATE = dateTime;
+                    obj.UPDATE_USER = userId;
+                    obj.UPDATE_DATE = dateTime;
+                    //obj.REVISE_NO = 0;
+                    //End Audit
+
+                    dbCtx.CONTACT_ADDRESS.Add(obj);
+                    eQResult.rows = dbCtx.SaveChanges();
+                    eQResult.success = true;
+                    eQResult.messages = NotifyService.SaveSuccess();
+                    return eQResult;
+                }
+                else
+                {
+                    //old entity
+                    var entity = dbCtx.CONTACT_ADDRESS.Find(obj.ID);
+                    if (entity != null)
+                    {
+                        if (entity.RowVersion.SequenceEqual(obj.RowVersion))
+                        {
+                            //TODO : Update property
+                            entity.CONTACT_PERSON = obj.CONTACT_PERSON;
+                            entity.CONTACT_NO = obj.CONTACT_NO;
+                            entity.EMAIL_ADDRESS = obj.EMAIL_ADDRESS;
+                            entity.OFFICE_ADDRESS = obj.OFFICE_ADDRESS;
+                            entity.IS_DEFAULT = obj.IS_DEFAULT;
+                            //Start Audit
+                            entity.IS_ACTIVE = obj.IS_ACTIVE;
+                            entity.UPDATE_USER = userId;
+                            entity.UPDATE_DATE = dateTime;
+                            entity.REVISE_NO = entity.REVISE_NO + 1;
+                            //End Audit
+                            dbCtx.Entry(entity).State = EntityState.Modified;
+                            eQResult.rows = dbCtx.SaveChanges();
+                            eQResult.success = true;
+                            eQResult.messages = NotifyService.EditSuccess();
+                            return eQResult;
+                        }
+                        else
+                        {
+                            eQResult.messages = NotifyService.EditRestricted();
+                            return eQResult;
+                        }
+                    }
+                    else
+                    {
+                        eQResult.messages = NotifyService.NotFound();
+                        return eQResult;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if(ex.Message == "An error occurred while saving the entity changes. See the inner exception for details.")
+                {
+                    eQResult.messages = NotifyService.Error(ex.InnerException.Message);
+                }
+                else
+                {
+                    eQResult.messages = NotifyService.Error(ex.Message == string.Empty ? ex.InnerException.Message : ex.Message);
+                }
+                return eQResult;
+            }
+            finally
+            {
+                dbCtx.Dispose();
+            }
+        }
+
+        public List<CONTACT_ADDRESS> GetAll_ContactAddress(string contactId)
+        {
+            FormattableString sql = $@"SELECT BI.*
+                    FROM CONTACT_ADDRESS BI WHERE BI.CONTACT_ID = {contactId}
+                    ORDER BY BI.CONTACT_PERSON";
+            return dbCtx.Database.SqlQuery<CONTACT_ADDRESS>(sql).ToList();
+        }
+        public CONTACT_ADDRESS GetById_ContactAddress(string id)
+        {
+            FormattableString sql = $@"SELECT BI.*
+                    FROM CONTACT_ADDRESS BI
+                    WHERE BI.ID = {id}";
+            return dbCtx.Database.SqlQuery<CONTACT_ADDRESS>(sql).ToList().FirstOrDefault();
+        }
+
+        public EQResult Delete_ContactAddress(string id)
+        {
+            EQResult eQResult = new EQResult();
+            eQResult.entities = "CONTACT_ADDRESS";
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                eQResult.messages = NotifyService.InvalidRequestString();
+                return eQResult;
+            }
+            try
+            {
+                //check child entity
+                //int anyChild = dbCtx.BANK_BRANCH.Where(x => x.BANK_ID == id).Count();
+                //if (anyChild > 0)
+                //{
+                //    eQResult.messages = NotifyService.DeleteHasChildString("Branch", anyChild, "Bank");
+                //    return eQResult;
+                //}
+
+                //old entity
+                var entity = dbCtx.CONTACT_ADDRESS.Find(id);
+                if (entity != null)
+                {
+                    //TODO : Delete property
+                    dbCtx.CONTACT_ADDRESS.Remove(entity);
+                    eQResult.rows = dbCtx.SaveChanges();
+                    eQResult.success = true;
+                    eQResult.messages = NotifyService.DeletedSuccessString(entity.OFFICE_ADDRESS!);
+                    return eQResult;
+                }
+                else
+                {
+                    eQResult.messages = NotifyService.NotFoundString();
+                    return eQResult;
+                }
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message == string.Empty ? ex.InnerException.Message : ex.Message;
+                eQResult.messages = msg.Replace("'", "");
+                return eQResult;
+            }
+            finally
+            {
+                dbCtx.Dispose();
+            }
+        }
+
     }
 }

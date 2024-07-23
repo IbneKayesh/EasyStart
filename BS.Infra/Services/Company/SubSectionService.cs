@@ -104,12 +104,15 @@ ORDER BY D.ID, S.SUB_SECTION_NAME";
             return dbCtx.Database.SqlQuery<SUB_SECTIONS>(sql).ToList();
         }
 
-        public List<SUB_SECTIONS> GetAllSalesBooking()
+        public List<SUB_SECTIONS> GetAllByTrnID(string trnId)
         {
-            FormattableString sql = $@"SELECT BI.*
-                    FROM SUB_SECTIONS BI
-                    WHERE BI.IS_ACTIVE = 1
-                    ORDER BY BI.SUB_SECTION_NAME";
+            FormattableString sql = $@"SELECT SS.*
+                        FROM SUB_SECTIONS SS
+                        JOIN SUB_SECTIONS_TRN_ID SST ON SS.ID = SST.SUB_SECTION_ID
+                        WHERE SS.IS_ACTIVE = 1
+                        AND SST.IS_ACTIVE = 1
+                        AND SST.TRN_ID = {trnId}
+                        ORDER BY SS.SUB_SECTION_NAME";
             return dbCtx.Database.SqlQuery<SUB_SECTIONS>(sql).ToList();
         }
         public SUB_SECTIONS GetById(string id)

@@ -52,7 +52,7 @@
         }
         private void Dropdown_CreateEdit()
         {
-            ViewBag.SUB_SECTION_ID = new SelectList(subSectionS.GetAllSalesBooking(), "ID", "SUB_SECTION_NAME");
+            ViewBag.SUB_SECTION_ID = new SelectList(subSectionS.GetAllByTrnID(TransactionID.SB), "ID", "SUB_SECTION_NAME");
             ViewBag.CONTACT_ID = new SelectList(contactsS.GetAllActive(), "ID", "CONTACT_NAME");
 
 
@@ -62,12 +62,16 @@
             var entityValue = entityValueTextS.GetAll();
             var booking_source = entityValue.Where(x => x.ENTITY_ID == EntityValueText.BOOKING_SOURCE).ToList();
             var sb_trn_type_id = entityValue.Where(x => x.ENTITY_ID == EntityValueText.SB_TRN_TYPE_ID).ToList();
+            var shipping_mode_id = entityValue.Where(x => x.ENTITY_ID == EntityValueText.SHIPPING_MODE_ID).ToList();
+            var shipping_type_id = entityValue.Where(x => x.ENTITY_ID == EntityValueText.SHIPPING_TYPE_ID).ToList();
             var payment_mode = entityValue.Where(x => x.ENTITY_ID == EntityValueText.PAYMENT_MODE).ToList();
             var payment_method = entityValue.Where(x => x.ENTITY_ID == EntityValueText.PAYMENT_METHOD).ToList();
 
 
             ViewBag.TRN_SOURCE_ID = new SelectList(booking_source, "VALUE_ID", "TEXT_ID", booking_source.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
             ViewBag.TRN_TYPE_ID = new SelectList(sb_trn_type_id, "VALUE_ID", "TEXT_ID", sb_trn_type_id.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            ViewBag.SHIPPING_MODE_ID = new SelectList(shipping_mode_id, "VALUE_ID", "TEXT_ID", shipping_mode_id.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            ViewBag.SHIPPING_TYPE_ID = new SelectList(shipping_type_id, "VALUE_ID", "TEXT_ID", shipping_type_id.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
             ViewBag.PAYMENT_MODE = new SelectList(payment_mode, "VALUE_ID", "TEXT_ID", payment_mode.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
             ViewBag.PAYMENT_METHOD = new SelectList(payment_method, "VALUE_ID", "TEXT_ID", payment_method.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
         }

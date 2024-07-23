@@ -1,4 +1,6 @@
-﻿namespace BS.Web.Areas.CRM.Controllers
+﻿using BS.DMO.Models.CRM;
+
+namespace BS.Web.Areas.CRM.Controllers
 {
     [Area("CRM")]
     public class ContactsController : BaseController
@@ -77,6 +79,64 @@
         }
 
 
-        //API
+        //Contact Address
+        public IActionResult ContactAddress(string contactId)
+        {
+            var entityList = contactsS.GetAll_ContactAddress(contactId);
+            return View(entityList);
+        }
+        public IActionResult CreateContactAddress(string contactId)
+        {
+            var obj = new CONTACT_ADDRESS();
+            obj.CONTACT_ID = contactId;
+            return View("AddUpdateContactAddress", obj);
+        }
+        public IActionResult EditContactAddress(string id)
+        {
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                var entity = contactsS.GetById_ContactAddress(id);
+                if (entity != null)
+                {
+                    return View("AddUpdateContactAddress", entity);
+                }
+                else
+                {
+                    TempData["msg"] = NotifyService.NotFound();
+                }
+            }
+            else
+            {
+                TempData["msg"] = NotifyService.Error("Invalid ID, Parameter is required");
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult AddUpdateContactAddress(CONTACT_ADDRESS obj)
+        {
+            EQResult eQResult = new EQResult();
+            if (ModelState.IsValid)
+            {
+                eQResult = contactsS.Insert_ContactAddress(obj, user_session.USER_ID);
+                TempData["msg"] = eQResult.messages;
+
+                if (eQResult.success && eQResult.rows > 0)
+                {
+                    return RedirectToAction(nameof(ContactAddress), new { contactId = obj.CONTACT_ID });
+                }
+            }
+            else
+            {
+                var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+                ModelState.AddModelError("", errors);
+            }
+            return View(obj);
+        }
+        public IActionResult DeleteContactAddress(string id)
+        {
+            EQResult eQResult = contactsS.Delete_ContactAddress(id);
+            return Json(eQResult);
+        }
     }
 }

@@ -18,8 +18,8 @@ namespace BS.Web.Controllers
             userLoginInfoService.AddLog("Dev", sessionId);
 
 
-            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<CONTACTS>();
-             table_script = Services.Power.ClassObjectSanitizer.SetForSave<CONTACTS>();
+            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<CONTACT_ADDRESS>();
+             //table_script = Services.Power.ClassObjectSanitizer.SetForSave<CONTACTS>();
             //table_script = Services.Power.RazorSanitizer.Create<CONTACTS>();
             //table_script = Services.Power.RazorSanitizer.Select<CONTACTS>();
 

@@ -27,6 +27,7 @@
 
         //CRM
         public DbSet<CONTACTS> CONTACTS { get; set; }
+        public DbSet<CONTACT_ADDRESS> CONTACT_ADDRESS { get; set; }
 
         //Help desk
         public DbSet<TASK_NOTES> TASK_NOTES { get; set; }

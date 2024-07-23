@@ -30,9 +30,13 @@
         [Required(ErrorMessage = "{0} is required")]
         public string? CONTACT_NAME { get; set; }
 
+        [Display(Name = "Contact Person")]
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 3)]
+        [Required(ErrorMessage = "{0} is required")]
+        public string? CONTACT_PERSON { get; set; }
 
         [Display(Name = "Contact No")]
-        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 11)]
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 3)]
         [Required(ErrorMessage = "{0} is required")]
         public string? CONTACT_NO { get; set; }
 
