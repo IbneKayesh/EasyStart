@@ -1,4 +1,7 @@
-﻿namespace BS.Infra.Services.Setup
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+
+namespace BS.Infra.Services.Setup
 {
     public class EntityValueTextService
     {
@@ -101,6 +104,19 @@
                     FROM ENTITY_VALUE_TEXT BI WHERE BI.ENTITY_ID = {entityId} order by VALUE_ID";
             return dbCtx.Database.SqlQuery<ENTITY_VALUE_TEXT>(sql).ToList();
         }
+
+        // Chat GPT Result
+        public List<ENTITY_VALUE_TEXT> GetListByEntityID(List<string> entityIds)
+        {
+            string sql = $@"SELECT BI.*
+        FROM ENTITY_VALUE_TEXT BI
+        WHERE BI.ENTITY_ID IN ({string.Join(",", entityIds.Select(id => $"@p{id}"))})
+        ORDER BY VALUE_ID";
+
+            object[] parameters = entityIds.Select((id, index) => new SqlParameter($"p{id}", id)).ToArray();
+            return dbCtx.Database.SqlQueryRaw<ENTITY_VALUE_TEXT>(sql, parameters).ToList();
+        }
+
         public EQResult Delete(string id)
         {
             EQResult eQResult = new EQResult();

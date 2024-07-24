@@ -37,6 +37,13 @@ namespace BS.Web.Services
             services.AddTransient<ProductCategoryService>();
             services.AddTransient<ProductClassService>();
             services.AddTransient<ProductGroupService>();
+            services.AddTransient<ProductSourceService>();
+            services.AddTransient<UnitChildService>();
+            services.AddTransient<UnitMasterService>();
+            services.AddTransient<SegmentNameTypeService>();
+            services.AddTransient<ProductTypeService>();
+            services.AddTransient<ProductStatusService>();
+            services.AddTransient<ProductSegmentService>();
             //My Drive
             //PM
             //Sales Order

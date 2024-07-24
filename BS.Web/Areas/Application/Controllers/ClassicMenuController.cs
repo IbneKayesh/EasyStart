@@ -1,4 +1,6 @@
-﻿using BS.Infra.Services.Application;
+﻿using BS.DMO.Models.Application;
+using BS.DMO.ViewModels.Security;
+using BS.Infra.Services.Application;
 
 namespace BS.Web.Areas.Application.Controllers
 {
@@ -12,7 +14,47 @@ namespace BS.Web.Areas.Application.Controllers
         }
         public IActionResult Index(string prev, string next)
         {
-            var entityList = classicMenuS.GetAll(prev, next);
+            //1 :: check session and load all menus from db, pick only 1st nodes
+            //2 :: get from session and filter them
+            List<CLASSIC_MENU> entityList = new List<CLASSIC_MENU>();
+            var session = HttpContext.Session;
+            if (session.GetString("menu") == null)
+            {
+                var sessionData = classicMenuS.GetAll();
+                HttpContext.Session.Set<List<CLASSIC_MENU>>("menu", sessionData);
+
+                entityList = (from a in sessionData
+                              where a.PARENT_NODE == "N"
+                              orderby a.PAGE_ID
+                              select a).ToList();
+            }
+            else
+            {
+                var sessionData = session.GetObject<List<CLASSIC_MENU>>("menu");
+                if (next != null)
+                {
+                    entityList = (from a in sessionData
+                                  where a.PARENT_NODE == next
+                                  orderby a.PAGE_ID
+                                  select a).ToList();
+
+                }
+                else if (prev != null)
+                {
+                    entityList = (from a in sessionData
+                                  join b in sessionData on a.PARENT_NODE equals b.PARENT_NODE
+                                  where b.MENU_ID == prev
+                                  orderby a.PAGE_ID
+                                  select a).ToList();
+                }
+                else
+                {
+                    entityList = (from a in sessionData
+                                  where a.PARENT_NODE == "N"
+                                  orderby a.PAGE_ID
+                                  select a).ToList();
+                }
+            }
             return View(entityList);
         }
     }

@@ -1,0 +1,49 @@
+﻿@model BS.DMO.Models.Inventory.UNIT_MASTER
+@{
+    ViewData["Title"] = "Unit Master";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Add/Edit @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+        </div>
+    </div>
+    <form asp-action="AddUpdate">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="ID" type="hidden" />
+            <input asp-for="RowVersion" type="hidden" />
+            <div class="row">
+
+                <div class="col-md-4">
+                    <label asp-for="UNIT_MASTER_NAME" class="control-label"></label>
+                    <input asp-for="UNIT_MASTER_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Master Unit UOM Name">
+                    <span asp-validation-for="UNIT_MASTER_NAME" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="UNIT_MASTER_SHORT_NAME" class="control-label"></label>
+                    <input asp-for="UNIT_MASTER_SHORT_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Master Unit UOM Short Name">
+                    <span asp-validation-for="UNIT_MASTER_SHORT_NAME" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="IS_ACTIVE" class="control-label"></label>
+                    <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Index" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left"></i> Back</a>
+            <button class="btn btn-sm btn-info" type="reset"><i class="fa fa-undo"></i> Reset</button>
+            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Submit</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

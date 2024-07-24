@@ -55,11 +55,18 @@
             ViewBag.SUB_SECTION_ID = new SelectList(subSectionS.GetAllByTrnID(TransactionID.SB), "ID", "SUB_SECTION_NAME");
             ViewBag.CONTACT_ID = new SelectList(contactsS.GetAllActive(), "ID", "CONTACT_NAME");
 
+            List<string> entityIds = new List<string>()
+            {
+                EntityValueText.BOOKING_SOURCE,
+                EntityValueText.SB_TRN_TYPE_ID,
+                EntityValueText.SHIPPING_MODE_ID,
+                EntityValueText.SHIPPING_TYPE_ID,
+                EntityValueText.PAYMENT_MODE,
+                EntityValueText.PAYMENT_METHOD
+            };
+            var entityValue = entityValueTextS.GetListByEntityID(entityIds);
 
-            //should be fix it :: in SQL formattable string
-            //string entityId = $"{EntityValueText.BOOKING_SOURCE}','{EntityValueText.PAYMENT_MODE}','{EntityValueText.PAYMENT_METHOD}";
-            //var entityValue = entityValueTextS.GetListByEntityID(entityId);
-            var entityValue = entityValueTextS.GetAll();
+            //var entityValue = entityValueTextS.GetAll();
             var booking_source = entityValue.Where(x => x.ENTITY_ID == EntityValueText.BOOKING_SOURCE).ToList();
             var sb_trn_type_id = entityValue.Where(x => x.ENTITY_ID == EntityValueText.SB_TRN_TYPE_ID).ToList();
             var shipping_mode_id = entityValue.Where(x => x.ENTITY_ID == EntityValueText.SHIPPING_MODE_ID).ToList();

@@ -41,6 +41,13 @@ namespace BS.DBC.Database
         public DbSet<PRODUCT_CATEGORY> PRODUCT_CATEGORY { get; set; }
         public DbSet<PRODUCT_CLASS> PRODUCT_CLASS { get; set; }
         public DbSet<PRODUCT_GROUP> PRODUCT_GROUP { get; set; }
+        public DbSet<PRODUCT_SOURCE> PRODUCT_SOURCE { get; set; }
+        public DbSet<UNIT_CHILD> UNIT_CHILD { get; set; }
+        public DbSet<UNIT_MASTER> UNIT_MASTER { get; set; }
+        public DbSet<PRODUCT_SEGMENTS> PRODUCT_SEGMENTS { get; set; }
+        public DbSet<SEGMENT_NAME_TYPE> SEGMENT_NAME_TYPE { get; set; }
+        public DbSet<PRODUCT_TYPE> PRODUCT_TYPE { get; set; }
+        public DbSet<PRODUCT_STATUS> PRODUCT_STATUS { get; set; }
         //My Drive
         //PM
 

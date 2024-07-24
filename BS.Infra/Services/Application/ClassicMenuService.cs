@@ -34,5 +34,11 @@ namespace BS.Infra.Services.Application
                 return dbCtx.Database.SqlQuery<CLASSIC_MENU>(sql).ToList();
             }
         }
+
+        public List<CLASSIC_MENU> GetAll()
+        {
+            FormattableString sql = $@"select * from CLASSIC_MENU order by MENU_ID";
+            return dbCtx.Database.SqlQuery<CLASSIC_MENU>(sql).ToList();
+        }
     }
 }
