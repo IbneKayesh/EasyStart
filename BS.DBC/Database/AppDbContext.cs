@@ -1,4 +1,4 @@
-﻿using BS.DMO.Models.Inventory;
+﻿
 
 namespace BS.DBC.Database
 {
@@ -38,6 +38,9 @@ namespace BS.DBC.Database
         //HRMS
         //Inventory
         public DbSet<PRODUCT_BRAND> PRODUCT_BRAND { get; set; }
+        public DbSet<PRODUCT_CATEGORY> PRODUCT_CATEGORY { get; set; }
+        public DbSet<PRODUCT_CLASS> PRODUCT_CLASS { get; set; }
+        public DbSet<PRODUCT_GROUP> PRODUCT_GROUP { get; set; }
         //My Drive
         //PM
 

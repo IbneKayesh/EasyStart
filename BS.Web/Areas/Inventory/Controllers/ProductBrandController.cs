@@ -1,8 +1,4 @@
-﻿using BS.DMO.Models.Inventory;
-using BS.Infra.Services.Inventory;
-using Microsoft.AspNetCore.Mvc;
-
-namespace BS.Web.Areas.Inventory.Controllers
+﻿namespace BS.Web.Areas.Inventory.Controllers
 {
     [Area("Inventory")]
     public class ProductBrandController : BaseController

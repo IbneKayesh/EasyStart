@@ -15,15 +15,12 @@ namespace BS.Web.Controllers
 
         public IActionResult Index()
         {
-            //Login Log
-            var sessionId = HttpContext.Session.Id;
-            userLoginInfoService.AddLog("Dev", sessionId);
 
 
-            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<PRODUCT_BRAND>();
-            //table_script = Services.Power.ClassObjectSanitizer.SetForSave<CONTACTS>();
-            table_script = Services.Power.RazorSanitizer.Create<PRODUCT_BRAND>();
-            //table_script = Services.Power.RazorSanitizer.Select<PRODUCT_BRAND>();
+            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<PRODUCT_GROUP>();
+            //table_script = Services.Power.ClassObjectSanitizer.SetForSave<PRODUCT_CLASS>();
+            //table_script = Services.Power.RazorSanitizer.Create<PRODUCT_CLASS>();
+            //table_script = Services.Power.RazorSanitizer.Select<PRODUCT_CLASS>();
 
             return View("Index", table_script);
         }
@@ -38,7 +35,11 @@ namespace BS.Web.Controllers
 
         public IActionResult Login()
         {
+            //Login Log
             var sessionId = HttpContext.Session.Id;
+            userLoginInfoService.AddLog("Dev", sessionId);
+
+
             var UserSession = new USER_SESSION()
             {
                 SESSION_ID = sessionId,

@@ -35,15 +35,10 @@ namespace BS.Web.Services.Power
                     sb.Append($"({stringLength})");
                 }
 
-                if (!isNullable && !isPrimaryKey)
+                if ((!isNullable && !isPrimaryKey) || isRequired)
                 {
                     sb.Append(" NOT NULL");
                 }
-                if (isRequired)
-                {
-                    sb.Append(" NOT NULL");
-                }
-
                 if (isPrimaryKey)
                 {
                     sb.Append(" PRIMARY KEY");

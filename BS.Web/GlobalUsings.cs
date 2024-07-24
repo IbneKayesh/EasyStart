@@ -25,3 +25,5 @@ global using Microsoft.Data.SqlClient;
 global using Microsoft.EntityFrameworkCore;
 global using System.Diagnostics;
 global using BS.DMO.Models.CRM;
+global using BS.DMO.Models.Inventory;
+global using BS.Infra.Services.Inventory;

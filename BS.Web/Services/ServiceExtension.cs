@@ -34,6 +34,9 @@ namespace BS.Web.Services
             //HRMS
             //Inventory
             services.AddTransient<ProductBrandService>();
+            services.AddTransient<ProductCategoryService>();
+            services.AddTransient<ProductClassService>();
+            services.AddTransient<ProductGroupService>();
             //My Drive
             //PM
             //Sales Order

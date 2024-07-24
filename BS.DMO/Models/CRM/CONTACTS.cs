@@ -2,6 +2,7 @@
 {
     public class CONTACTS : AuditTable
     {
+        //lat long
         public CONTACTS()
         {
             ID = Guid.Empty.ToString();

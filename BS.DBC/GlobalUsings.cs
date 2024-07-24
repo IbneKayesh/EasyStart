@@ -10,3 +10,4 @@ global using BS.DMO.Models.Setup;
 global using Microsoft.EntityFrameworkCore;
 global using System.Data;
 global using System.Reflection;
+global using BS.DMO.Models.Inventory;
