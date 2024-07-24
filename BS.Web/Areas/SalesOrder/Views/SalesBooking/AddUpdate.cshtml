@@ -433,47 +433,61 @@
             });
         });
         $(document).ready(function () {
-            AutoCompleteSearch('/CRM/Contacts/FindCustomer', 3, 'SB_MASTER_CONTACT_ID', 'SB_MASTER_CONTACT_ID:ID,SB_MASTER_CONTACT_ADDRESS_ID:CONTACT_NAME');
+            //AutoCompleteSearch1('/CRM/Contacts/FindCustomer', 3, 'SB_MASTER_CONTACT_ID', 'SB_MASTER_CONTACT_ID:ID,SB_MASTER_CONTACT_ADDRESS_ID:CONTACT_CATEGORY_ID,SB_MASTER_CUSTOMER_REF_NO:CONTACT_GROUP');
+            var autoCompleteMapping = {
+                //'label': 'ID',
+                'label': ['ID', 'CONTACT_NAME', 'CONTACT_GROUP'],
+                'value': 'ID',
+                'SB_MASTER_CONTACT_ADDRESS_ID': 'CONTACT_CATEGORY_ID',
+                'SB_MASTER_CUSTOMER_REF_NO': 'CONTACT_GROUP',
+                'SB_MASTER_CUSTOMER_DOCUMENT': 'CONTACT_NAME',
+            };
+            //url, lenght, search input, and input with json property
+            autoCompleteFunction('/CRM/Contacts/FindCustomer', 3, 'SB_MASTER_CONTACT_ID', autoCompleteMapping);
+            function autoCompleteFunction(url, minLength, searchInputId, mapping) {
+                $(`#${searchInputId}`).autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: url,
+                            dataType: "json",
+                            type: "POST",
+                            data: { "search_term": request.term },
+                            success: function (data) {
+                                var mappedData = $.map(data, function (item) {
+                                    console.log(item)
+                                    var mappedItem = {};
+                                    Object.keys(mapping).forEach(function (key) {
+                                        //mappedItem[key] = item[mapping[key]];
+                                        if (key === 'label') {
+                                            // Construct the label from multiple properties
+                                            mappedItem[key] = mapping[key].map(prop => item[prop]).join(' - ');
+                                        } else {
+                                            mappedItem[key] = item[mapping[key]];
+                                        }
+                                    });
+                                    return mappedItem;
+                                });
+                               // console.log(mappedData);
+                                response(mappedData); // Pass the transformed data to autocomplete
+                            },
+                            error: function (xhr, status, error) {
+                                console.error("AJAX Error:", status, error);
+                            }
+                        });
+                    },
+                    minLength: minLength, // Minimum characters before triggering autocomplete
+                    change: function (event, ui) {
+                        // Populate specified fields on select
+                        Object.keys(mapping).forEach(function (key) {
+                            var targetId = key;
+                            var sourceProperty = mapping[key];
+                            //$(`#${targetId}`).val(ui.item[mapping[targetId]]);
+                            $(`#${targetId}`).val(ui.item[targetId]);
+                        });
+                    }
+                });
+            }
         });
 
-        function AutoCompleteSearch(url, minLen, searchInputId, JsonPropertyInputId) {
-            var id = $("#" + searchInputId);
-            $(id).keydown(function () {
-                $(this).css("background-color", "white");
-            });
-            $(id).autocomplete({
-                source: function (request, response) {
-                    console.log(request.term);
-                    $.ajax({
-                        url: url,
-                        data: { "search_term": request.term },
-                        dataType: "json",
-                        type: "POST",
-                        success: function (data) {
-                            response($.map(data, function (item) {
-                                console.log(item);
-                                return { label: item.CONTACT_NAME + " - " + item.CONTACT_NO, value: item.ID };
-                            }))
-                        },
-                        error: function (result) {
-                            alert('Not Match');
-                        }
-                    });
-                },
-                change: function (event, ui) {
-                    if (ui.item == null || ui.item == undefined) {
-                        $(this).val('');
-                        $(this).css("background-color", "mistyrose");
-                        setTimeout(function () {
-                            $(id).focus();
-                        }, 200);
-                    } else {
-                        $('#PO_MASTER_SUPPLIER_ID').val(ui.item.supplier_id);
-                        $('#PO_MASTER_SUPPLIER_NAME').val(ui.item.supplier_name);
-                    }
-                },
-                minLength: minLen
-            });
-        }
     </script>
 }
