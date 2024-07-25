@@ -12,6 +12,9 @@ namespace BS.DBC.Database
             // Other configurations or mappings go here
             modelBuilder.Entity<SUB_SECTIONS_TRN_ID>().HasKey(sf => new { sf.SUB_SECTION_ID, sf.TRN_ID });
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<SUB_SECTIONS_BUSINESS_LINE>().HasKey(sf => new { sf.SUB_SECTION_ID, sf.BUSINESS_LINE_ID });
+            base.OnModelCreating(modelBuilder);
         }
         //Admin
 
@@ -26,6 +29,8 @@ namespace BS.DBC.Database
         public DbSet<DEPARTMENTS> DEPARTMENTS { get; set; }
         public DbSet<SECTIONS> SECTIONS { get; set; }
         public DbSet<SUB_SECTIONS> SUB_SECTIONS { get; set; }
+        public DbSet<BUSINESS_LINE> BUSINESS_LINE { get; set; }
+        public DbSet<SUB_SECTIONS_BUSINESS_LINE> SUB_SECTIONS_BUSINESS_LINE { get; set; }
 
         //CRM
         public DbSet<CONTACTS> CONTACTS { get; set; }

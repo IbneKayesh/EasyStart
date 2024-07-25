@@ -10,8 +10,10 @@ namespace BS.Web.Areas.HelpDesk.Controllers
         }
     }
 }
-//Sales Booking > Contact Autocomplete make generic, make SQL format with like and IN () key
+//make SQL format with like and IN () key
 //Open pages as tab instead of new window
 //product warranty claim
 
-//BUSINESS_LINE, SUB_SECTIONS_BUSINESS_LINE
+//SUB_SECTIONS_BUSINESS_LINE
+//product
+//order booking detail

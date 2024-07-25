@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BS.DMO.Models.Company
+﻿namespace BS.DMO.Models.Company
 {
-    internal class SUB_SECTIONS_BUSINESS_LINE
+    public class SUB_SECTIONS_BUSINESS_LINE : AuditTable
     {
+        [Key, Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Display(Name = "Sub Section Id")]
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
+        [Required(ErrorMessage = "{0} is required")]
+        public string? SUB_SECTION_ID { get; set; }
+
+
+        [Key, Column(Order = 1)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Display(Name = "Business Line Id")]
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
+        [Required(ErrorMessage = "{0} is required")]
+        public string? BUSINESS_LINE_ID { get; set; }
     }
 }

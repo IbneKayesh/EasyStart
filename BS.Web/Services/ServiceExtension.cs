@@ -25,6 +25,7 @@ namespace BS.Web.Services
             services.AddTransient<DepartmentService>();
             services.AddTransient<SectionService>();
             services.AddTransient<SubSectionService>();
+            services.AddTransient<BusinessLineService>();
 
             //CRM
             services.AddTransient<ContactsService>();

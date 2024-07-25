@@ -6,9 +6,11 @@
 <form asp-action="AddUpdate">
     <div id="accordion">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input asp-for="SB_MASTER.ID" type="hidden" />
-        <input asp-for="SB_MASTER.TRN_ID" type="hidden" />
-        <input asp-for="SB_MASTER.RowVersion" type="hidden" />
+        <input asp-for="SB_MASTER_VM.ID" type="hidden" />
+        <input asp-for="SB_MASTER_VM.TRN_ID" type="hidden" />
+        <input asp-for="SB_MASTER_VM.RowVersion" type="hidden" />
+        <input asp-for="SB_MASTER_VM.CONTACT_ID" type="hidden" />
+        <input asp-for="SB_MASTER_VM.CONTACT_ADDRESS_ID" type="hidden" />
 
         <div class="card card-primary card-outline">
             <div class="card-header">
@@ -22,38 +24,38 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-2">
-                            <label asp-for="SB_MASTER.TRN_SOURCE_ID" class="control-label"></label>
-                            <select asp-for="SB_MASTER.TRN_SOURCE_ID" asp-items="@ViewBag.TRN_SOURCE_ID" class="form-control form-control-sm">
+                            <label asp-for="SB_MASTER_VM.TRN_SOURCE_ID" class="control-label"></label>
+                            <select asp-for="SB_MASTER_VM.TRN_SOURCE_ID" asp-items="@ViewBag.TRN_SOURCE_ID" class="form-control form-control-sm">
                             </select>
-                            <span asp-validation-for="SB_MASTER.TRN_SOURCE_ID" class="text-danger"></span>
+                            <span asp-validation-for="SB_MASTER_VM.TRN_SOURCE_ID" class="text-danger"></span>
                         </div>
                         <div class="col-md-2">
-                            <label asp-for="SB_MASTER.TRN_TYPE_ID" class="control-label"></label>
-                            <select asp-for="SB_MASTER.TRN_TYPE_ID" asp-items="@ViewBag.TRN_TYPE_ID" class="form-control form-control-sm">
+                            <label asp-for="SB_MASTER_VM.TRN_TYPE_ID" class="control-label"></label>
+                            <select asp-for="SB_MASTER_VM.TRN_TYPE_ID" asp-items="@ViewBag.TRN_TYPE_ID" class="form-control form-control-sm">
                             </select>
-                            <span asp-validation-for="SB_MASTER.TRN_TYPE_ID" class="text-danger"></span>
+                            <span asp-validation-for="SB_MASTER_VM.TRN_TYPE_ID" class="text-danger"></span>
                         </div>
                         <div class="col-md-3">
-                            <label asp-for="SB_MASTER.TRN_NO" class="control-label"></label>
-                            <input asp-for="SB_MASTER.TRN_NO" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Trn No" readonly>
-                            <span asp-validation-for="SB_MASTER.TRN_NO" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.TRN_NO" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.TRN_NO" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Trn No" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.TRN_NO" class="text-danger"></span>
                         </div>
                         <div class="col-md-3">
-                            <label asp-for="SB_MASTER.REF_TRN_ID" class="control-label"></label>
-                            <input asp-for="SB_MASTER.REF_TRN_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Ref Trn No">
-                            <span asp-validation-for="SB_MASTER.REF_TRN_ID" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.REF_TRN_ID" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.REF_TRN_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Ref Trn No">
+                            <span asp-validation-for="SB_MASTER_VM.REF_TRN_ID" class="text-danger"></span>
                         </div>
                         <div class="col-md-2">
-                            <label asp-for="SB_MASTER.TRN_DATE" class="control-label"></label>
-                            <input asp-for="SB_MASTER.TRN_DATE" type="date" class="form-control form-control-sm" autocomplete="off" placeholder="Trn Date">
-                            <span asp-validation-for="SB_MASTER.TRN_DATE" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.TRN_DATE" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.TRN_DATE" type="date" class="form-control form-control-sm" autocomplete="off" placeholder="Trn Date">
+                            <span asp-validation-for="SB_MASTER_VM.TRN_DATE" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-10">
-                            <label asp-for="SB_MASTER.TRN_NOTE" class="control-label"></label>
-                            <input asp-for="SB_MASTER.TRN_NOTE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Trn Note">
-                            <span asp-validation-for="SB_MASTER.TRN_NOTE" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.TRN_NOTE" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.TRN_NOTE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Trn Note">
+                            <span asp-validation-for="SB_MASTER_VM.TRN_NOTE" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -71,25 +73,25 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.SUB_SECTION_ID" class="control-label"></label>
-                            <select asp-for="SB_MASTER.SUB_SECTION_ID" asp-items="@ViewBag.SUB_SECTION_ID" class="form-control form-control-sm">
+                            <label asp-for="SB_MASTER_VM.SUB_SECTION_ID" class="control-label"></label>
+                            <select asp-for="SB_MASTER_VM.SUB_SECTION_ID" asp-items="@ViewBag.SUB_SECTION_ID" class="form-control form-control-sm">
                             </select>
-                            <span asp-validation-for="SB_MASTER.SUB_SECTION_ID" class="text-danger"></span>
+                            <span asp-validation-for="SB_MASTER_VM.SUB_SECTION_ID" class="text-danger"></span>
                         </div>
                         <div class="col-md-2">
-                            <label asp-for="SB_MASTER.FROM_USER_ID" class="control-label"></label>
-                            <input asp-for="SB_MASTER.FROM_USER_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="From User">
-                            <span asp-validation-for="SB_MASTER.FROM_USER_ID" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.FROM_USER_ID" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.FROM_USER_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="From User">
+                            <span asp-validation-for="SB_MASTER_VM.FROM_USER_ID" class="text-danger"></span>
                         </div>
                         <div class="col-md-2">
-                            <label asp-for="SB_MASTER.TO_USER_ID" class="control-label"></label>
-                            <input asp-for="SB_MASTER.TO_USER_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="To User">
-                            <span asp-validation-for="SB_MASTER.TO_USER_ID" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.TO_USER_ID" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.TO_USER_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="To User">
+                            <span asp-validation-for="SB_MASTER_VM.TO_USER_ID" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.TRN_DOCUMENT" class="control-label"></label>
-                            <input asp-for="SB_MASTER.TRN_DOCUMENT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Document">
-                            <span asp-validation-for="SB_MASTER.TRN_DOCUMENT" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.TRN_DOCUMENT" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.TRN_DOCUMENT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Document">
+                            <span asp-validation-for="SB_MASTER_VM.TRN_DOCUMENT" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -107,38 +109,38 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.CONTACT_ID" class="control-label"></label>
-                            <input asp-for="SB_MASTER.CONTACT_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Customer Name">
-                            <span asp-validation-for="SB_MASTER.CONTACT_ID" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.CONTACT_NAME" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.CONTACT_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Customer Name">
+                            <span asp-validation-for="SB_MASTER_VM.CONTACT_NAME" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.CONTACT_ADDRESS_ID" class="control-label"></label>
-                            <input asp-for="SB_MASTER.CONTACT_ADDRESS_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Customer Bill Address">
-                            <span asp-validation-for="SB_MASTER.CONTACT_ADDRESS_ID" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.OFFICE_ADDRESS" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.OFFICE_ADDRESS" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Customer Bill Address">
+                            <span asp-validation-for="SB_MASTER_VM.OFFICE_ADDRESS" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.CUSTOMER_REF_NO" class="control-label"></label>
-                            <input asp-for="SB_MASTER.CUSTOMER_REF_NO" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Customer Ref No">
-                            <span asp-validation-for="SB_MASTER.CUSTOMER_REF_NO" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.CUSTOMER_REF_NO" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.CUSTOMER_REF_NO" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Customer Ref No">
+                            <span asp-validation-for="SB_MASTER_VM.CUSTOMER_REF_NO" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.CUSTOMER_DOCUMENT" class="control-label"></label>
-                            <input asp-for="SB_MASTER.CUSTOMER_DOCUMENT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Customer Document">
-                            <span asp-validation-for="SB_MASTER.CUSTOMER_DOCUMENT" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.CUSTOMER_DOCUMENT" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.CUSTOMER_DOCUMENT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Customer Document">
+                            <span asp-validation-for="SB_MASTER_VM.CUSTOMER_DOCUMENT" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.SHIPPING_MODE_ID" class="control-label"></label>
-                            <select asp-for="SB_MASTER.SHIPPING_MODE_ID" asp-items="@ViewBag.SHIPPING_MODE_ID" class="form-control form-control-sm">
+                            <label asp-for="SB_MASTER_VM.SHIPPING_MODE_ID" class="control-label"></label>
+                            <select asp-for="SB_MASTER_VM.SHIPPING_MODE_ID" asp-items="@ViewBag.SHIPPING_MODE_ID" class="form-control form-control-sm">
                             </select>
-                            <span asp-validation-for="SB_MASTER.SHIPPING_MODE_ID" class="text-danger"></span>
+                            <span asp-validation-for="SB_MASTER_VM.SHIPPING_MODE_ID" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.SHIPPING_TYPE_ID" class="control-label"></label>
-                            <select asp-for="SB_MASTER.SHIPPING_TYPE_ID" asp-items="@ViewBag.SHIPPING_TYPE_ID" class="form-control form-control-sm">
+                            <label asp-for="SB_MASTER_VM.SHIPPING_TYPE_ID" class="control-label"></label>
+                            <select asp-for="SB_MASTER_VM.SHIPPING_TYPE_ID" asp-items="@ViewBag.SHIPPING_TYPE_ID" class="form-control form-control-sm">
                             </select>
-                            <span asp-validation-for="SB_MASTER.SHIPPING_TYPE_ID" class="text-danger"></span>
+                            <span asp-validation-for="SB_MASTER_VM.SHIPPING_TYPE_ID" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -156,24 +158,34 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3">
-                            <label asp-for="SB_MASTER.LAST_MFG_DATE" class="control-label"></label>
-                            <input asp-for="SB_MASTER.LAST_MFG_DATE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Last MFG Date">
-                            <span asp-validation-for="SB_MASTER.LAST_MFG_DATE" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.LAST_SDD_DATE" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.LAST_SDD_DATE" type="text" class="form-control form-control-sm datetimepicker-input" data-toggle="datetimepicker" data-target="#SB_MASTER_VM_LAST_SDD_DATE" autocomplete="off" placeholder="Last MFG Date">
+                            <span asp-validation-for="SB_MASTER_VM.LAST_SDD_DATE" class="text-danger"></span>
                         </div>
                         <div class="col-md-3">
-                            <label asp-for="SB_MASTER.LAST_DELIVERY_DATE" class="control-label"></label>
-                            <input asp-for="SB_MASTER.LAST_DELIVERY_DATE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Last Delivery Date">
-                            <span asp-validation-for="SB_MASTER.LAST_DELIVERY_DATE" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.LAST_MFG_DATE" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.LAST_MFG_DATE" type="text" class="form-control form-control-sm datetimepicker-input" data-toggle="datetimepicker" data-target="#SB_MASTER_VM_LAST_MFG_DATE" autocomplete="off" placeholder="Last MFG Date">
+                            <span asp-validation-for="SB_MASTER_VM.LAST_MFG_DATE" class="text-danger"></span>
                         </div>
-                        <div class="col-md-2">
-                            <label asp-for="SB_MASTER.FGD" class="control-label"></label>
-                            <input asp-for="SB_MASTER.FGD" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="FGD Days" readonly>
-                            <span asp-validation-for="SB_MASTER.FGD" class="text-danger"></span>
+                        <div class="col-md-3">
+                            <label asp-for="SB_MASTER_VM.LAST_DELIVERY_DATE" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.LAST_DELIVERY_DATE" type="text" class="form-control form-control-sm datetimepicker-input" data-toggle="datetimepicker" data-target="#SB_MASTER_VM_LAST_DELIVERY_DATE" autocomplete="off" placeholder="Last Delivery Date">
+                            <span asp-validation-for="SB_MASTER_VM.LAST_DELIVERY_DATE" class="text-danger"></span>
                         </div>
-                        <div class="col-md-2">
-                            <label asp-for="SB_MASTER.LDD" class="control-label"></label>
-                            <input asp-for="SB_MASTER.LDD" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="LDD Days" readonly>
-                            <span asp-validation-for="SB_MASTER.LDD" class="text-danger"></span>
+                        <div class="col-md-1">
+                            <label asp-for="SB_MASTER_VM.SDD" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.SDD" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="FGD Days" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.SDD" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-1">
+                            <label asp-for="SB_MASTER_VM.FGD" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.FGD" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="FGD Days" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.FGD" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-1">
+                            <label asp-for="SB_MASTER_VM.LDD" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.LDD" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="LDD Days" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.LDD" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -191,41 +203,41 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-1">
-                            <label asp-for="SB_MASTER.TRN_VALID_DAYS" class="control-label"></label>
-                            <input asp-for="SB_MASTER.TRN_VALID_DAYS" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Trn Valid Days">
-                            <span asp-validation-for="SB_MASTER.TRN_VALID_DAYS" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.TRN_VALID_DAYS" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.TRN_VALID_DAYS" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Trn Valid Days">
+                            <span asp-validation-for="SB_MASTER_VM.TRN_VALID_DAYS" class="text-danger"></span>
                         </div>
                         <div class="col-md-3">
-                            <label asp-for="SB_MASTER.TRN_AMOUNT" class="control-label"></label>
-                            <input asp-for="SB_MASTER.TRN_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Trn Amount" readonly>
-                            <span asp-validation-for="SB_MASTER.TRN_AMOUNT" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.TRN_AMOUNT" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.TRN_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Trn Amount" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.TRN_AMOUNT" class="text-danger"></span>
                         </div>
                         <div class="col-md-2">
-                            <label asp-for="SB_MASTER.CHARGE_AMOUNT" class="control-label"></label>
-                            <input asp-for="SB_MASTER.CHARGE_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Charge Amount">
-                            <span asp-validation-for="SB_MASTER.CHARGE_AMOUNT" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.CHARGE_AMOUNT" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.CHARGE_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Charge Amount">
+                            <span asp-validation-for="SB_MASTER_VM.CHARGE_AMOUNT" class="text-danger"></span>
                         </div>
                         <div class="col-md-3">
-                            <label asp-for="SB_MASTER.DISCOUNT_AMOUNT" class="control-label"></label>
-                            <input asp-for="SB_MASTER.DISCOUNT_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Discount Amount" readonly>
-                            <span asp-validation-for="SB_MASTER.DISCOUNT_AMOUNT" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.DISCOUNT_AMOUNT" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.DISCOUNT_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Discount Amount" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.DISCOUNT_AMOUNT" class="text-danger"></span>
                         </div>
                         <div class="col-md-3">
-                            <label asp-for="SB_MASTER.ADD_DISCOUNT_AMOUNT" class="control-label"></label>
-                            <input asp-for="SB_MASTER.ADD_DISCOUNT_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Additionl Discount Amount">
-                            <span asp-validation-for="SB_MASTER.ADD_DISCOUNT_AMOUNT" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.ADD_DISCOUNT_AMOUNT" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.ADD_DISCOUNT_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Additionl Discount Amount">
+                            <span asp-validation-for="SB_MASTER_VM.ADD_DISCOUNT_AMOUNT" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.VAT_AMOUNT" class="control-label"></label>
-                            <input asp-for="SB_MASTER.VAT_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="VAT Amount" readonly>
-                            <span asp-validation-for="SB_MASTER.VAT_AMOUNT" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.VAT_AMOUNT" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.VAT_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="VAT Amount" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.VAT_AMOUNT" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.NET_AMOUNT" class="control-label"></label>
-                            <input asp-for="SB_MASTER.NET_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Net Amount" readonly>
-                            <span asp-validation-for="SB_MASTER.NET_AMOUNT" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.NET_AMOUNT" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.NET_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Net Amount" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.NET_AMOUNT" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -243,38 +255,38 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.ADVANCED_PAYMENT_AMOUNT" class="control-label"></label>
-                            <input asp-for="SB_MASTER.ADVANCED_PAYMENT_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Advanced Payment">
-                            <span asp-validation-for="SB_MASTER.ADVANCED_PAYMENT_AMOUNT" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.ADVANCED_PAYMENT_AMOUNT" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.ADVANCED_PAYMENT_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Advanced Payment">
+                            <span asp-validation-for="SB_MASTER_VM.ADVANCED_PAYMENT_AMOUNT" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.PAID_AMOUNT" class="control-label"></label>
-                            <input asp-for="SB_MASTER.PAID_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Paid Amount" readonly>
-                            <span asp-validation-for="SB_MASTER.PAID_AMOUNT" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.PAID_AMOUNT" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.PAID_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Paid Amount" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.PAID_AMOUNT" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.DUE_AMOUNT" class="control-label"></label>
-                            <input asp-for="SB_MASTER.DUE_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="due Amount" readonly>
-                            <span asp-validation-for="SB_MASTER.DUE_AMOUNT" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.DUE_AMOUNT" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.DUE_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="due Amount" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.DUE_AMOUNT" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.PAYMENT_MODE" class="control-label"></label>
-                            <select asp-for="SB_MASTER.PAYMENT_MODE" asp-items="@ViewBag.PAYMENT_MODE" class="form-control form-control-sm">
+                            <label asp-for="SB_MASTER_VM.PAYMENT_MODE" class="control-label"></label>
+                            <select asp-for="SB_MASTER_VM.PAYMENT_MODE" asp-items="@ViewBag.PAYMENT_MODE" class="form-control form-control-sm">
                             </select>
-                            <span asp-validation-for="SB_MASTER.PAYMENT_MODE" class="text-danger"></span>
+                            <span asp-validation-for="SB_MASTER_VM.PAYMENT_MODE" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.PAYMENT_METHOD" class="control-label"></label>
-                            <select asp-for="SB_MASTER.PAYMENT_METHOD" asp-items="@ViewBag.PAYMENT_METHOD" class="form-control form-control-sm">
+                            <label asp-for="SB_MASTER_VM.PAYMENT_METHOD" class="control-label"></label>
+                            <select asp-for="SB_MASTER_VM.PAYMENT_METHOD" asp-items="@ViewBag.PAYMENT_METHOD" class="form-control form-control-sm">
                             </select>
-                            <span asp-validation-for="SB_MASTER.PAYMENT_METHOD" class="text-danger"></span>
+                            <span asp-validation-for="SB_MASTER_VM.PAYMENT_METHOD" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.IS_PAID" class="control-label"></label>
-                            <input asp-for="SB_MASTER.IS_PAID" type="checkbox" class="form-control form-control-sm" disabled>
-                            <span asp-validation-for="SB_MASTER.IS_PAID" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.IS_PAID" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.IS_PAID" type="checkbox" class="form-control form-control-sm" disabled>
+                            <span asp-validation-for="SB_MASTER_VM.IS_PAID" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -292,75 +304,75 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3">
-                            <label asp-for="SB_MASTER.IS_CANCELLED" class="control-label"></label>
-                            <input asp-for="SB_MASTER.IS_CANCELLED" type="checkbox" class="form-control form-control-sm" disabled>
-                            <span asp-validation-for="SB_MASTER.IS_CANCELLED" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.IS_CANCELLED" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.IS_CANCELLED" type="checkbox" class="form-control form-control-sm" disabled>
+                            <span asp-validation-for="SB_MASTER_VM.IS_CANCELLED" class="text-danger"></span>
                         </div>
                         <div class="col-md-3">
-                            <label asp-for="SB_MASTER.CANCELLED_USER_ID" class="control-label"></label>
-                            <input asp-for="SB_MASTER.CANCELLED_USER_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Cancelled User Id" readonly>
-                            <span asp-validation-for="SB_MASTER.CANCELLED_USER_ID" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.CANCELLED_USER_ID" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.CANCELLED_USER_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Cancelled User Id" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.CANCELLED_USER_ID" class="text-danger"></span>
                         </div>
                         <div class="col-md-2">
-                            <label asp-for="SB_MASTER.CANCELLED_DATE" class="control-label"></label>
-                            <input asp-for="SB_MASTER.CANCELLED_DATE" type="date" class="form-control form-control-sm" autocomplete="off" placeholder="Cancelled Date" readonly>
-                            <span asp-validation-for="SB_MASTER.CANCELLED_DATE" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.CANCELLED_DATE" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.CANCELLED_DATE" type="date" class="form-control form-control-sm" autocomplete="off" placeholder="Cancelled Date" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.CANCELLED_DATE" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.CANCELLED_NOTE" class="control-label"></label>
-                            <input asp-for="SB_MASTER.CANCELLED_NOTE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Cancelled Note" readonly>
-                            <span asp-validation-for="SB_MASTER.CANCELLED_NOTE" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.CANCELLED_NOTE" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.CANCELLED_NOTE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Cancelled Note" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.CANCELLED_NOTE" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <label asp-for="SB_MASTER.IS_POSTED" class="control-label"></label>
-                            <input asp-for="SB_MASTER.IS_POSTED" type="checkbox" class="form-control form-control-sm" disabled>
-                            <span asp-validation-for="SB_MASTER.IS_POSTED" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.IS_POSTED" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.IS_POSTED" type="checkbox" class="form-control form-control-sm" disabled>
+                            <span asp-validation-for="SB_MASTER_VM.IS_POSTED" class="text-danger"></span>
                         </div>
                         <div class="col-md-3">
-                            <label asp-for="SB_MASTER.POSTED_USER_ID" class="control-label"></label>
-                            <input asp-for="SB_MASTER.POSTED_USER_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Posted User Id" readonly>
-                            <span asp-validation-for="SB_MASTER.POSTED_USER_ID" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.POSTED_USER_ID" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.POSTED_USER_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Posted User Id" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.POSTED_USER_ID" class="text-danger"></span>
                         </div>
                         <div class="col-md-2">
-                            <label asp-for="SB_MASTER.POSTED_DATE" class="control-label"></label>
-                            <input asp-for="SB_MASTER.POSTED_DATE" type="date" class="form-control form-control-sm" autocomplete="off" placeholder="Posted Date" readonly>
-                            <span asp-validation-for="SB_MASTER.POSTED_DATE" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.POSTED_DATE" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.POSTED_DATE" type="date" class="form-control form-control-sm" autocomplete="off" placeholder="Posted Date" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.POSTED_DATE" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.POSTED_NOTE" class="control-label"></label>
-                            <input asp-for="SB_MASTER.POSTED_NOTE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Posted Note" readonly>
-                            <span asp-validation-for="SB_MASTER.POSTED_NOTE" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.POSTED_NOTE" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.POSTED_NOTE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Posted Note" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.POSTED_NOTE" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <label asp-for="SB_MASTER.IS_APPROVE" class="control-label"></label>
-                            <input asp-for="SB_MASTER.IS_APPROVE" type="checkbox" class="form-control form-control-sm" disabled>
-                            <span asp-validation-for="SB_MASTER.IS_APPROVE" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.IS_APPROVE" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.IS_APPROVE" type="checkbox" class="form-control form-control-sm" disabled>
+                            <span asp-validation-for="SB_MASTER_VM.IS_APPROVE" class="text-danger"></span>
                         </div>
                         <div class="col-md-3">
-                            <label asp-for="SB_MASTER.APPROVE_USER_ID" class="control-label"></label>
-                            <input asp-for="SB_MASTER.APPROVE_USER_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Approve User Id" readonly>
-                            <span asp-validation-for="SB_MASTER.APPROVE_USER_ID" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.APPROVE_USER_ID" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.APPROVE_USER_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Approve User Id" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.APPROVE_USER_ID" class="text-danger"></span>
                         </div>
                         <div class="col-md-2">
-                            <label asp-for="SB_MASTER.APPROVE_DATE" class="control-label"></label>
-                            <input asp-for="SB_MASTER.APPROVE_DATE" type="date" class="form-control form-control-sm" autocomplete="off" placeholder="Approve Date" readonly>
-                            <span asp-validation-for="SB_MASTER.APPROVE_DATE" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.APPROVE_DATE" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.APPROVE_DATE" type="date" class="form-control form-control-sm" autocomplete="off" placeholder="Approve Date" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.APPROVE_DATE" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
-                            <label asp-for="SB_MASTER.APPROVE_NOTE" class="control-label"></label>
-                            <input asp-for="SB_MASTER.APPROVE_NOTE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Approve Note" readonly>
-                            <span asp-validation-for="SB_MASTER.APPROVE_NOTE" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.APPROVE_NOTE" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.APPROVE_NOTE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Approve Note" readonly>
+                            <span asp-validation-for="SB_MASTER_VM.APPROVE_NOTE" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <label asp-for="SB_MASTER.NEXT_STEP" class="control-label"></label>
-                            <input asp-for="SB_MASTER.NEXT_STEP" type="checkbox" class="form-control form-control-sm" disabled>
-                            <span asp-validation-for="SB_MASTER.NEXT_STEP" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.NEXT_STEP" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.NEXT_STEP" type="checkbox" class="form-control form-control-sm" disabled>
+                            <span asp-validation-for="SB_MASTER_VM.NEXT_STEP" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -393,101 +405,41 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     <script>
+        var csInputJsonMapping = {
+            'label': ['CONTACT_GROUP', 'CONTACT_NAME', 'CONTACT_PERSON'],
+            'value': 'CONTACT_NAME',
+            'SB_MASTER_VM_CONTACT_ID': 'ID',
+            'SB_MASTER_VM_CUSTOMER_REF_NO': 'CONTACT_PERSON',
+        };
+        autocompletesearch('/CRM/Contacts/FindCustomer', 3, 'SB_MASTER_VM_CONTACT_NAME', csInputJsonMapping);
 
-        $(document).ready(function () {
-            var id = $("#SB_MASTER_CONTACT_ID1");
-            $(id).keydown(function () {
-                $(this).css("background-color", "white");
-            });
-            $(id).autocomplete({
-                source: function (request, response) {
-                    console.log(request.term);
-                    $.ajax({
-                        url: '/Suppliers/FindSupplier',
-                        data: { "search_term": request.term },
-                        dataType: "json",
-                        type: "POST",
-                        success: function (data) {
-                            response($.map(data, function (item) {
-                                return { label: item.SUPPLIER_NAME + " - " + item.CONTACT_NO, value: item.SUPPLIER_NAME + " - " + item.CONTACT_NO, supplier_id: item.ID, supplier_name: item.SUPPLIER_NAME + " - " + item.CONTACT_NO, office_address: item.OFFICE_ADDRESS };
-                            }))
-                        },
-                        error: function (result) {
-                            alert('Not Match');
-                        }
-                    });
-                },
-                change: function (event, ui) {
-                    if (ui.item == null || ui.item == undefined) {
-                        $(this).val('');
-                        $(this).css("background-color", "mistyrose");
-                        setTimeout(function () {
-                            $(id).focus();
-                        }, 200);
-                    } else {
-                        $('#PO_MASTER_SUPPLIER_ID').val(ui.item.supplier_id);
-                        $('#PO_MASTER_SUPPLIER_NAME').val(ui.item.supplier_name);
-                    }
-                },
-                minLength: 3
-            });
-        });
-        $(document).ready(function () {
-            //AutoCompleteSearch1('/CRM/Contacts/FindCustomer', 3, 'SB_MASTER_CONTACT_ID', 'SB_MASTER_CONTACT_ID:ID,SB_MASTER_CONTACT_ADDRESS_ID:CONTACT_CATEGORY_ID,SB_MASTER_CUSTOMER_REF_NO:CONTACT_GROUP');
-            var autoCompleteMapping = {
-                //'label': 'ID',
-                'label': ['ID', 'CONTACT_NAME', 'CONTACT_GROUP'],
-                'value': 'ID',
-                'SB_MASTER_CONTACT_ADDRESS_ID': 'CONTACT_CATEGORY_ID',
-                'SB_MASTER_CUSTOMER_REF_NO': 'CONTACT_GROUP',
-                'SB_MASTER_CUSTOMER_DOCUMENT': 'CONTACT_NAME',
-            };
-            //url, lenght, search input, and input with json property
-            autoCompleteFunction('/CRM/Contacts/FindCustomer', 3, 'SB_MASTER_CONTACT_ID', autoCompleteMapping);
-            function autoCompleteFunction(url, minLength, searchInputId, mapping) {
-                $(`#${searchInputId}`).autocomplete({
-                    source: function (request, response) {
-                        $.ajax({
-                            url: url,
-                            dataType: "json",
-                            type: "POST",
-                            data: { "search_term": request.term },
-                            success: function (data) {
-                                var mappedData = $.map(data, function (item) {
-                                    console.log(item)
-                                    var mappedItem = {};
-                                    Object.keys(mapping).forEach(function (key) {
-                                        //mappedItem[key] = item[mapping[key]];
-                                        if (key === 'label') {
-                                            // Construct the label from multiple properties
-                                            mappedItem[key] = mapping[key].map(prop => item[prop]).join(' - ');
-                                        } else {
-                                            mappedItem[key] = item[mapping[key]];
-                                        }
-                                    });
-                                    return mappedItem;
-                                });
-                               // console.log(mappedData);
-                                response(mappedData); // Pass the transformed data to autocomplete
-                            },
-                            error: function (xhr, status, error) {
-                                console.error("AJAX Error:", status, error);
-                            }
-                        });
+        $("#SB_MASTER_VM_CONTACT_NAME").blur(function () {
+            let contactId = $('#SB_MASTER_VM_CONTACT_ID').val();
+            if (contactId) {
+
+                $('#SB_MASTER_VM_CONTACT_ADDRESS_ID').val('');
+                $('#SB_MASTER_VM_OFFICE_ADDRESS').val('');
+
+                $.ajax({
+                    url: `/CRM/Contacts/FindCustomerDefaultAddress?customerId=${contactId}`,
+                    type: 'GET',
+                    success: function (response) {
+                        $('#SB_MASTER_VM_CONTACT_ADDRESS_ID').val(response.ID);
+                        $('#SB_MASTER_VM_OFFICE_ADDRESS').val(response.OFFICE_ADDRESS);
                     },
-                    minLength: minLength, // Minimum characters before triggering autocomplete
-                    change: function (event, ui) {
-                        // Populate specified fields on select
-                        Object.keys(mapping).forEach(function (key) {
-                            var targetId = key;
-                            var sourceProperty = mapping[key];
-                            //$(`#${targetId}`).val(ui.item[mapping[targetId]]);
-                            $(`#${targetId}`).val(ui.item[targetId]);
-                        });
+                    error: function (error) {
+                        console.error('Error fetching contact address:', error);
                     }
                 });
+            } else {
+                alertify.error('Contact ID is not found');
             }
         });
 
+        $(function () {
+            $('#SB_MASTER_VM_LAST_SDD_DATE').datetimepicker();
+            $('#SB_MASTER_VM_LAST_MFG_DATE').datetimepicker();
+            $('#SB_MASTER_VM_LAST_DELIVERY_DATE').datetimepicker();
+        });
     </script>
 }

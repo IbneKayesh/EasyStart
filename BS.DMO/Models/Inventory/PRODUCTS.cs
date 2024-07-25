@@ -19,7 +19,8 @@ namespace BS.DMO.Models.Inventory
         public string? PRODUCT_TYPE_ID { get; set; }
         public string? PRODUCT_CLASS_ID { get; set; }
         public string? PRODUCT_CATEGORY_ID { get; set; }
-        //BUSINESS_LINE_ID
+        public string? BUSINESS_LINE_ID { get; set; }
+
 
         public string? BAR_CODE { get; set; }
         public string? PRODUCT_NAME { get; set; }

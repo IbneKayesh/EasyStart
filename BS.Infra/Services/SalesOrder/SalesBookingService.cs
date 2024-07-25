@@ -1,4 +1,5 @@
 ﻿using BS.DMO.StaticValues;
+using BS.DMO.ViewModels.Inventory;
 
 namespace BS.Infra.Services.SalesOrder
 {
@@ -12,7 +13,7 @@ namespace BS.Infra.Services.SalesOrder
         public NEW_SB_VM NewSalesBooking(string userId, string userName)
         {
             var obj = new NEW_SB_VM();
-            obj.SB_MASTER = new SB_MASTER
+            obj.SB_MASTER_VM = new SB_MASTER_VM
             {
                 TRN_ID = TransactionID.SB,
                 TRN_NO = "SB-0001",
@@ -38,32 +39,36 @@ namespace BS.Infra.Services.SalesOrder
             eQResult.entities = "SB_MASTER";
             try
             {
-                var TrnAutoStepService = dbCtx.TRN_AUTO_STEP.Where(x => x.TRN_ID == obj.SB_MASTER.TRN_ID && x.IS_ACTIVE).FirstOrDefault();
-                if (obj.SB_MASTER.ID == Guid.Empty.ToString())
+
+                SB_MASTER sb_master = new SB_MASTER();
+                ObjectMappingHelper.MapProperties<SB_MASTER_VM, SB_MASTER>(obj.SB_MASTER_VM, sb_master);
+
+                var TrnAutoStepService = dbCtx.TRN_AUTO_STEP.Where(x => x.TRN_ID == obj.SB_MASTER_VM.TRN_ID && x.IS_ACTIVE).FirstOrDefault();
+                if (obj.SB_MASTER_VM.ID == Guid.Empty.ToString())
                 {
                     //new entity
-                    obj.SB_MASTER.ID = Guid.NewGuid().ToString();
+                    sb_master.ID = Guid.NewGuid().ToString();
 
-                    obj.SB_MASTER.IS_POSTED = TrnAutoStepService != null ? TrnAutoStepService.IS_POSTED : false;
-                    obj.SB_MASTER.POSTED_USER_ID = TrnAutoStepService != null ? userId : null;
-                    obj.SB_MASTER.POSTED_DATE = TrnAutoStepService != null ? dateTime : null;
-                    obj.SB_MASTER.POSTED_NOTE = TrnAutoStepService != null ? "AUTO" : null;
+                    sb_master.IS_POSTED = TrnAutoStepService != null ? TrnAutoStepService.IS_POSTED : false;
+                    sb_master.POSTED_USER_ID = TrnAutoStepService != null ? userId : null;
+                    sb_master.POSTED_DATE = TrnAutoStepService != null ? dateTime : null;
+                    sb_master.POSTED_NOTE = TrnAutoStepService != null ? "AUTO" : null;
 
-                    obj.SB_MASTER.IS_APPROVE = TrnAutoStepService != null ? TrnAutoStepService.IS_APPROVE : false;
-                    obj.SB_MASTER.APPROVE_USER_ID = TrnAutoStepService != null ? userId : null;
-                    obj.SB_MASTER.APPROVE_DATE = TrnAutoStepService != null ? dateTime : null;
-                    obj.SB_MASTER.APPROVE_NOTE = TrnAutoStepService != null ? "AUTO" : null;
+                    sb_master.IS_APPROVE = TrnAutoStepService != null ? TrnAutoStepService.IS_APPROVE : false;
+                    sb_master.APPROVE_USER_ID = TrnAutoStepService != null ? userId : null;
+                    sb_master.APPROVE_DATE = TrnAutoStepService != null ? dateTime : null;
+                    sb_master.APPROVE_NOTE = TrnAutoStepService != null ? "AUTO" : null;
 
                     //Start Audit
                     //obj.IS_ACTIVE = true;
-                    obj.SB_MASTER.CREATE_USER = userId;
-                    obj.SB_MASTER.CREATE_DATE = dateTime;
-                    obj.SB_MASTER.UPDATE_USER = userId;
-                    obj.SB_MASTER.UPDATE_DATE = dateTime;
+                    sb_master.CREATE_USER = userId;
+                    sb_master.CREATE_DATE = dateTime;
+                    sb_master.UPDATE_USER = userId;
+                    sb_master.UPDATE_DATE = dateTime;
                     //obj.REVISE_NO = 0;
                     //End Audit
 
-                    dbCtx.SB_MASTER.Add(obj.SB_MASTER);
+                    dbCtx.SB_MASTER.Add(sb_master);
                     eQResult.rows = dbCtx.SaveChanges();
                     eQResult.success = true;
                     eQResult.messages = NotifyService.SaveSuccess();
@@ -72,10 +77,10 @@ namespace BS.Infra.Services.SalesOrder
                 else
                 {
                     //old entity
-                    var entity = dbCtx.SB_MASTER.Find(obj.SB_MASTER.ID);
+                    var entity = dbCtx.SB_MASTER.Find(sb_master.ID);
                     if (entity != null)
                     {
-                        if (entity.RowVersion.SequenceEqual(obj.SB_MASTER.RowVersion))
+                        if (entity.RowVersion.SequenceEqual(obj.SB_MASTER_VM.RowVersion))
                         {
                             //TODO : Update property
 
@@ -85,18 +90,18 @@ namespace BS.Infra.Services.SalesOrder
                             //entity.MAX_BALANCE_LIMIT = obj.MAX_BALANCE_LIMIT;
                             //entity.OPEN_DATE = obj.OPEN_DATE;
 
-                            obj.SB_MASTER.IS_POSTED = TrnAutoStepService != null ? TrnAutoStepService.IS_POSTED : false;
-                            obj.SB_MASTER.POSTED_USER_ID = TrnAutoStepService != null ? userId : null;
-                            obj.SB_MASTER.POSTED_DATE = TrnAutoStepService != null ? dateTime : null;
-                            obj.SB_MASTER.POSTED_NOTE = TrnAutoStepService != null ? "AUTO" : null;
+                            entity.IS_POSTED = TrnAutoStepService != null ? TrnAutoStepService.IS_POSTED : false;
+                            entity.POSTED_USER_ID = TrnAutoStepService != null ? userId : null;
+                            entity.POSTED_DATE = TrnAutoStepService != null ? dateTime : null;
+                            entity.POSTED_NOTE = TrnAutoStepService != null ? "AUTO" : null;
 
-                            obj.SB_MASTER.IS_APPROVE = TrnAutoStepService != null ? TrnAutoStepService.IS_APPROVE : false;
-                            obj.SB_MASTER.APPROVE_USER_ID = TrnAutoStepService != null ? userId : null;
-                            obj.SB_MASTER.APPROVE_DATE = TrnAutoStepService != null ? dateTime : null;
-                            obj.SB_MASTER.APPROVE_NOTE = TrnAutoStepService != null ? "AUTO" : null;
+                            entity.IS_APPROVE = TrnAutoStepService != null ? TrnAutoStepService.IS_APPROVE : false;
+                            entity.APPROVE_USER_ID = TrnAutoStepService != null ? userId : null;
+                            entity.APPROVE_DATE = TrnAutoStepService != null ? dateTime : null;
+                            entity.APPROVE_NOTE = TrnAutoStepService != null ? "AUTO" : null;
 
                             //Start Audit
-                            entity.IS_ACTIVE = obj.SB_MASTER.IS_ACTIVE;
+                            entity.IS_ACTIVE = sb_master.IS_ACTIVE;
                             entity.UPDATE_USER = userId;
                             entity.UPDATE_DATE = dateTime;
                             entity.REVISE_NO = entity.REVISE_NO + 1;
@@ -122,13 +127,28 @@ namespace BS.Infra.Services.SalesOrder
             }
             catch (Exception ex)
             {
-                eQResult.messages = NotifyService.Error(ex.Message == string.Empty ? ex.InnerException.Message : ex.Message);
+                if (ex.Message == "An error occurred while saving the entity changes. See the inner exception for details.")
+                {
+                    eQResult.messages = ex.InnerException.Message;
+                }
+                else
+                {
+                    eQResult.messages = ex.Message == string.Empty ? ex.InnerException.Message : ex.Message;
+                }
                 return eQResult;
             }
             finally
             {
                 dbCtx.Dispose();
             }
+        }
+
+
+
+        public List<SB_MASTER> GetAllUnposted()
+        {
+            FormattableString sql = $@"SELECT SB.* FROM SB_MASTER SB WHERE SB.IS_POSTED = 0";
+            return dbCtx.Database.SqlQuery<SB_MASTER>(sql).ToList();
         }
     }
 }

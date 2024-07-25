@@ -19,7 +19,7 @@
 
         public IActionResult Index()
         {
-            var objList = new List<SB_MASTER>();
+            var objList = salesBookingS.GetAllUnposted();
             return View(objList);
         }
         public IActionResult Create()
@@ -36,11 +36,17 @@
             if (ModelState.IsValid)
             {
                 eQResult = salesBookingS.Insert(obj, user_session.USER_ID);
-                TempData["msg"] = eQResult.messages;
-
-                if (eQResult.success && eQResult.rows > 0)
+                if (eQResult.success)
                 {
-                    return RedirectToAction(nameof(Index));
+                    if (eQResult.success && eQResult.rows > 0)
+                    {
+                        TempData["msg"] = eQResult.messages;
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", eQResult.messages);
                 }
             }
             else

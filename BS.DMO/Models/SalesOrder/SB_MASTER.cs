@@ -7,8 +7,9 @@
         {
             ID = Guid.Empty.ToString();
             TRN_DATE = DateTime.Now;
-            LAST_MFG_DATE = DateTime.Now.AddDays(2);
-            LAST_DELIVERY_DATE = DateTime.Now.AddDays(3);
+            LAST_SDD_DATE = DateTime.Now.AddDays(2);
+            LAST_MFG_DATE = DateTime.Now.AddDays(5);
+            LAST_DELIVERY_DATE = DateTime.Now.AddDays(7);
             IS_POSTED = false;
         }
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

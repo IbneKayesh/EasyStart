@@ -277,6 +277,12 @@
             return dbCtx.Database.SqlQuery<CONTACT_ADDRESS>(sql).ToList().FirstOrDefault();
         }
 
+        public CONTACT_ADDRESS GetById_ContactDefaultAddress(string id)
+        {
+            FormattableString sql = $@"SELECT CA.* FROM CONTACT_ADDRESS CA WHERE CA.CONTACT_ID = {id} And CA.IS_DEFAULT = 1";
+            return dbCtx.Database.SqlQuery<CONTACT_ADDRESS>(sql).ToList().FirstOrDefault();
+        }
+
         public EQResult Delete_ContactAddress(string id)
         {
             EQResult eQResult = new EQResult();
