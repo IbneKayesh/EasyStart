@@ -8,6 +8,25 @@
             margin-left: 0.5rem;
             cursor: pointer;
         }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+            .overlay .text-bold {
+                color: white;
+                font-size: 1.2em;
+            }
+
     </style>
 }
 <div class="card card-primary card-outline card-outline-tabs">
@@ -20,9 +39,11 @@
             </li>
         </ul>
     </div>
-    <div class="card-body">
+    <div class="card-body p-1">
         <div class="tab-content" id="app-classic-menu-tabsContent">
             <div class="tab-pane fade active show" id="classic-menu-tab-home" role="tabpanel" aria-labelledby="classic-menu-home-tab">
+                <span class="btn btn-app show-top-nav">
+                    <i class="fas fa-list"></i> Menu</span>
                 <a class="btn btn-app" asp-area="Application" asp-controller="ClassicMenu" asp-action="Index">
                     <i class="fas fa-home"></i> Home
                 </a>
@@ -39,8 +60,8 @@
                 {
                     if (item.CHILD_NODE == "N")
                     {
-                        @*  <a class="btn btn-app @item.MENU_COLOR work-page" asp-area="@item.MENU_AREA" asp-controller="@item.MENU_CONTROLLER" asp-action="@item.MENU_ACTION" data-target="@item.PAGE_ID" title="@item.MENU_NOTE"> *@
-                        <a class="btn btn-app @item.MENU_COLOR work-page" data-url="/@item.MENU_AREA/@item.MENU_CONTROLLER/@item.MENU_ACTION" data-target="@item.PAGE_ID" title="@item.MENU_NOTE">
+                        @* <a class="btn btn-app @item.MENU_COLOR work-page" asp-area="@item.MENU_AREA" asp-controller="@item.MENU_CONTROLLER" asp-action="@item.MENU_ACTION" title="@item.MENU_NOTE"> *@
+                        <a class="btn btn-app @item.MENU_COLOR work-page" data-url="/@item.MENU_AREA/@item.MENU_CONTROLLER/@item.MENU_ACTION" data-menu-name="@item.MENU_NAME" data-target="@item.PAGE_ID" title="@item.MENU_NOTE">
                             @if (!string.IsNullOrWhiteSpace(item.PAGE_ID))
                             {
                                 <span class="badge bg-gray">@item.PAGE_ID</span>
@@ -70,37 +91,44 @@
         $(document).ready(function () {
             $('#classic-menu-tab-home').on('click', '.work-page', function (e) {
                 var url = $(this).data('url');
+                var menuname = $(this).data('menu-name');
                 var target = $(this).data('target');
                 var tabId = 'tab-' + target;
+
                 console.log(tabId);
+
                 // Create new tab content if it doesn't already exist
                 if ($('#' + tabId).length === 0) {
                     // Create new tab content
-                    var pageContent = $('<div class="tab-pane fade active show" id="' + tabId + '" role="tabpanel" aria-labelledby="' + tabId + '-tab">');
+                    var pageContent = $('<div class="tab-pane fade" id="' + tabId + '" role="tabpanel" aria-labelledby="' + tabId + '-tab">');
 
+                    // Add overlay to pageContent
+                    var overlay = $('<div class="overlay dark"><i class="fas fa-3x fa-sync-alt fa-spin"></i><div class="text-bold pt-2"> Loading... please wait...</div></div>');
+                    pageContent.append(overlay);
+
+                    // Create iframe
+                    var iframe = $('<iframe src="' + url + '" class="w-100" style="height: 500px;" loading="lazy"></iframe>');
+                    pageContent.append(iframe);
+
+                    // Append pageContent to tabs content
                     $('#app-classic-menu-tabsContent').append(pageContent);
-                    var pa = $('<iframe class="embed-responsive-item" src=' + url + '></iframe>');
-                    pageContent.html(pa);
 
                     // Create new tab navigation link
-                    var tabLink = $('<a class="nav-link" id="' + tabId + '-tab" data-toggle="pill" href="#' + tabId + '" role="tab" aria-controls="' + tabId + '" aria-selected="true">' + tabId + '<span class= "tab-close-button" aria-label="Close">&times;</span></a>')
+                    var tabLink = $('<a class="nav-link" id="' + tabId + '-tab" data-toggle="pill" href="#' + tabId + '" role="tab" aria-controls="' + tabId + '" aria-selected="true">' + menuname + '<span class="tab-close-button" aria-label="Close">&times;</span></a>');
                     var navItem = $('<li class="nav-item"></li>').append(tabLink);
                     $('#app-classic-menu-tabs').append(navItem);
+
                     // Activate the new tab
                     tabLink.tab('show');
-                    // Load content via AJAX
-                    // $.ajax({
-                    //     url: url,
-                    //     success: function (data) {
 
-                    //         var pa = $('<iframe src=' + url + '></iframe>').append(data);
-                    //         pageContent.html(pa);
-                    //     },
-                    //     error: function (xhr, status, error) {
-                    //         pageContent.html('<p>Error loading content. Please try again later.</p>');
-                    //         console.error("AJAX Error:", status, error);
-                    //     }
-                    // });
+                    // Handle iframe load event to hide overlay
+                    iframe.on('load', function () {
+                        setTimeout(function () {
+                            overlay.fadeOut();
+                        }, 100); // Short delay to ensure the iframe is fully loaded
+                    });
+
+                   
                 } else {
                     // If tab already exists, activate it
                     $('#' + tabId + '-tab').tab('show');
