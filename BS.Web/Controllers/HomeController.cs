@@ -53,7 +53,18 @@ namespace BS.Web.Controllers
         }
         public IActionResult Privacy()
         {
-            return View();
+            ViewData["PageName"] = "Privacy";
+            return View("Privacy");
+        }
+        public IActionResult Page1()
+        {
+            ViewData["PageName"] = "Page 1";
+            return View("Privacy");
+        }
+        public IActionResult Page2()
+        {
+            ViewData["PageName"] = "Page 2";
+            return View("Privacy");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
