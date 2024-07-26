@@ -1,14 +1,23 @@
-﻿namespace BS.Web.Areas.Company.Controllers
+﻿using BS.DMO.ViewModels.Company;
+
+namespace BS.Web.Areas.Company.Controllers
 {
     [Area("Company")]
     public class SubSectionController : BaseController
     {
         private readonly SubSectionService subSectionS;
         private readonly SectionService sectionS;
-        public SubSectionController(SubSectionService _subSectionService, SectionService _sectionService)
+        private readonly SubSectionsBusinessLineService subSectionsBusinessLineS;
+        private readonly BusinessLineService businessLineS;
+        public SubSectionController(SubSectionService _subSectionService,
+            SectionService _sectionService,
+            SubSectionsBusinessLineService _subSectionsBusinessLineService,
+            BusinessLineService _businessLineService)
         {
             subSectionS = _subSectionService;
             sectionS = _sectionService;
+            subSectionsBusinessLineS = _subSectionsBusinessLineService;
+            businessLineS = _businessLineService;
         }
         public IActionResult Index()
         {
@@ -70,6 +79,59 @@
         public IActionResult Delete(string id)
         {
             EQResult eQResult = subSectionS.Delete(id);
+            return Json(eQResult);
+        }
+
+
+
+        //Add remove business line
+        public IActionResult CreateBusinesLine(string id)
+        {
+            Dropdown_CreateEditBusinesLine();
+
+            var obj = new SUB_SECTIONS_BUSINESS_LINE();
+            obj.SUB_SECTION_ID = id;
+            return View("AddUpdateBusinesLine", obj);
+        }
+        [HttpPost]
+        public IActionResult CreateBusinesLine(SUB_SECTIONS_BUSINESS_LINE obj)
+        {
+            Dropdown_CreateEditBusinesLine();
+
+            EQResult eQResult = new EQResult();
+            if (ModelState.IsValid)
+            {
+                eQResult = subSectionsBusinessLineS.Insert(obj, user_session.USER_ID);
+                TempData["msg"] = eQResult.messages;
+
+                if (eQResult.success && eQResult.rows > 0)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            else
+            {
+                var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+                ModelState.AddModelError("", errors);
+            }
+            return View("AddUpdateBusinesLine", obj);
+        }
+        private void Dropdown_CreateEditBusinesLine()
+        {
+            ViewBag.BUSINESS_LINE_ID = new SelectList(businessLineS.GetAllActive(), "ID", "BUSINESS_LINE_NAME");
+        }
+
+
+
+        public IActionResult IndexBusinesLine(string id)
+        {
+            var entityList = subSectionsBusinessLineS.GetAllBySubSectionID(id);
+            return View(entityList);
+        }
+
+        public IActionResult DeleteBusinesLine(string id, string business_line_id)
+        {
+            EQResult eQResult = subSectionsBusinessLineS.Delete(id, business_line_id);
             return Json(eQResult);
         }
     }

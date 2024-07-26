@@ -15,7 +15,7 @@ namespace BS.Web.Controllers
 
         public IActionResult Index()
         {
-            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<BUSINESS_LINE>();
+            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<SUB_SECTIONS_BUSINESS_LINE>();
             //table_script = Services.Power.ClassObjectSanitizer.SetForSave<PRODUCT_CLASS>();
             //table_script = Services.Power.RazorSanitizer.Create<PRODUCT_CLASS>();
             //table_script = Services.Power.RazorSanitizer.Select<PRODUCT_CLASS>();
