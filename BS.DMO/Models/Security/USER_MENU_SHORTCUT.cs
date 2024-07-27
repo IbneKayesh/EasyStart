@@ -14,6 +14,6 @@ namespace BS.DMO.Models.Security
         }
         public string ID { get; set; }
         public string? USER_ID { get; set; }
-        public string? URL_ID { get; set; }
+        public string? MENU_ID { get; set; }
     }
 }
