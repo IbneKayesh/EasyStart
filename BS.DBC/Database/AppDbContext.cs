@@ -1,5 +1,7 @@
 ﻿
 
+using BS.DMO.Models.Setup.Security;
+
 namespace BS.DBC.Database
 {
     public class AppDbContext : DbContext
@@ -14,6 +16,9 @@ namespace BS.DBC.Database
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<SUB_SECTIONS_BUSINESS_LINE>().HasKey(sf => new { sf.SUB_SECTION_ID, sf.BUSINESS_LINE_ID });
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<MENU_ROLE>().HasKey(sf => new { sf.MENU_ID, sf.ROLE_ID });
             base.OnModelCreating(modelBuilder);
         }
         //Admin
@@ -53,6 +58,7 @@ namespace BS.DBC.Database
         public DbSet<SEGMENT_NAME_TYPE> SEGMENT_NAME_TYPE { get; set; }
         public DbSet<PRODUCT_TYPE> PRODUCT_TYPE { get; set; }
         public DbSet<PRODUCT_STATUS> PRODUCT_STATUS { get; set; }
+        public DbSet<PRODUCTS> PRODUCTS { get; set; }
         //My Drive
         //PM
 
@@ -61,6 +67,8 @@ namespace BS.DBC.Database
         public DbSet<SB_CHILD> SB_CHILD { get; set; }
 
         //Security
+        public DbSet<SECURITY_ROLE> SECURITY_ROLE { get; set; }
+        public DbSet<MENU_ROLE> MENU_ROLE { get; set; }
         //Setup
         public DbSet<BANK_INFO> BANK_INFO { get; set; }
         public DbSet<BANK_BRANCH> BANK_BRANCH { get; set; }

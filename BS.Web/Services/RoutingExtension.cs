@@ -40,6 +40,11 @@
                         pattern: "SalesOrder/{controller=Home}/{action=Index}/{id?}");
 
             endpointRoute.MapAreaControllerRoute(
+                        name: "AreaSecurity",
+                        areaName: "Security",
+                        pattern: "Security/{controller=Home}/{action=Index}/{id?}");
+
+            endpointRoute.MapAreaControllerRoute(
                         name: "AreaSetup",
                         areaName: "Setup",
                         pattern: "Setup/{controller=Home}/{action=Index}/{id?}");

@@ -84,6 +84,10 @@
         public decimal PRODUCT_WEIGHT { get; set; }
 
 
+        [Display(Name = "Ref/SKU")]
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
+        public string? REF_SKU { get; set; }
+
         [Display(Name = "Line Note")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         public string? LINE_NOTE { get; set; }

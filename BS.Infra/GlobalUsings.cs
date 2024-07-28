@@ -13,3 +13,4 @@ global using BS.Infra.Services.CRM;
 global using BS.Infra.Services.HelpDesk;
 global using BS.DMO.Models.CRM;
 global using BS.DMO.Models.Inventory;
+global using BS.DMO.Models.Application;

@@ -12,7 +12,9 @@ namespace BS.Web.Areas.HelpDesk.Controllers
 }
 //make SQL format with like and IN () key
 //product warranty claim
-
+//application menu and role menu
 
 //product
 //order booking detail
+//contact documents
+//product category picture

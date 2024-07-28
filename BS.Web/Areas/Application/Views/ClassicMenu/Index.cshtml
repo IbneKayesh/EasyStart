@@ -1,4 +1,5 @@
-﻿@model IEnumerable<BS.DMO.Models.Application.CLASSIC_MENU>
+﻿@* @model IEnumerable<BS.DMO.ViewModels.Application.CLASSIC_MENU_VM> *@
+    @model IEnumerable<BS.DMO.Models.Application.CLASSIC_MENU>
 @{
     ViewData["Title"] = "Classic Menu";
     Layout = "~/Views/Shared/_Layout_Top.cshtml";
@@ -95,8 +96,6 @@
                 var target = $(this).data('target');
                 var tabId = 'tab-' + target;
 
-                console.log(tabId);
-
                 // Create new tab content if it doesn't already exist
                 if ($('#' + tabId).length === 0) {
                     // Create new tab content
@@ -107,7 +106,7 @@
                     pageContent.append(overlay);
 
                     // Create iframe
-                    var iframe = $('<iframe src="' + url + '" class="w-100" style="height: 500px;" loading="lazy"></iframe>');
+                    var iframe = $('<iframe src="' + url + '" class="w-100" style="height: 510px;" loading="lazy"></iframe>');
                     pageContent.append(iframe);
 
                     // Append pageContent to tabs content

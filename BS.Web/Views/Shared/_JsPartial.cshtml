@@ -88,7 +88,6 @@
         });
 
         var topNavState = localStorage.getItem("tnState") || "show";
-        console.log(topNavState)
         if (topNavState === "hide") {
             $('nav.main-header').addClass('d-none');
         } else {
@@ -104,8 +103,6 @@
                 localStorage.setItem("tnState", "hide");
                 $('nav.main-header').addClass('d-none');
             }
-
-            console.log(tnState)
         })
     });
 </script>

@@ -1,6 +1,4 @@
-﻿using BS.Infra.Services.Inventory;
-
-namespace BS.Web.Services
+﻿namespace BS.Web.Services
 {
     internal static class ServiceExtension
     {
@@ -46,11 +44,13 @@ namespace BS.Web.Services
             services.AddTransient<ProductTypeService>();
             services.AddTransient<ProductStatusService>();
             services.AddTransient<ProductSegmentService>();
+            services.AddTransient<ProductsService>();
             //My Drive
             //PM
             //Sales Order
             services.AddTransient<SalesBookingService>();
             //Security
+            services.AddTransient<SecurityRoleService>();
             //Setup
             services.AddTransient<BankInfoService>();
             services.AddTransient<BankBranchService>();

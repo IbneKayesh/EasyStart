@@ -1,6 +1,4 @@
-﻿using BS.DMO.Models.Application;
-using BS.DMO.ViewModels.Security;
-using BS.Infra.Services.Application;
+﻿using BS.DMO.ViewModels.Application;
 
 namespace BS.Web.Areas.Application.Controllers
 {
@@ -16,11 +14,15 @@ namespace BS.Web.Areas.Application.Controllers
         {
             //1 :: check session and load all menus from db, pick only 1st nodes
             //2 :: get from session and filter them
+            //List<CLASSIC_MENU_VM> entityList = new List<CLASSIC_MENU_VM>();
             List<CLASSIC_MENU> entityList = new List<CLASSIC_MENU>();
             var session = HttpContext.Session;
             if (session.GetString("menu") == null)
             {
+                //string adminRoleId = "c541f83e-9ea6-4bfe-9dd5-5efb3083ee83";
+                //var sessionData = classicMenuS.GetAllByRoleId(adminRoleId);
                 var sessionData = classicMenuS.GetAll();
+                //HttpContext.Session.Set<List<CLASSIC_MENU_VM>>("menu", sessionData);
                 HttpContext.Session.Set<List<CLASSIC_MENU>>("menu", sessionData);
 
                 entityList = (from a in sessionData
@@ -30,6 +32,7 @@ namespace BS.Web.Areas.Application.Controllers
             }
             else
             {
+                //var sessionData = session.GetObject<List<CLASSIC_MENU_VM>>("menu");
                 var sessionData = session.GetObject<List<CLASSIC_MENU>>("menu");
                 if (next != null)
                 {
@@ -57,5 +60,6 @@ namespace BS.Web.Areas.Application.Controllers
             }
             return View(entityList);
         }
+
     }
 }

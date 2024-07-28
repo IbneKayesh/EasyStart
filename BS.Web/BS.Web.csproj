@@ -37,6 +37,10 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Update="Areas\Security\Views\SecurityRole\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +51,7 @@
     <_ContentIncludedByDefault Remove="Areas\Company\Views\Business\AddUpdate.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\CRM\Views\Contacts\AddUpdate.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Inventory\Views\ProductBrand\AddUpdate.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Security\Views\SecurityRole\AddUpdate.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,6 +60,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Areas\Inventory\Views\ProductBrand\AddUpdate.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Security\Views\SecurityRole\AddUpdate.cshtml" />
   </ItemGroup>
 
 </Project>
