@@ -35,6 +35,8 @@
                     </select>
                     <span asp-validation-for="PRODUCT_CLASS_ID" class="text-danger"></span>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-md-4">
                     <label asp-for="PRODUCT_CATEGORY_ID" class="control-label"></label>
                     <select asp-for="PRODUCT_CATEGORY_ID" asp-items="@ViewBag.PRODUCT_CATEGORY_ID" class="form-control form-control-sm">
@@ -53,22 +55,26 @@
                     </select>
                     <span asp-validation-for="UNIT_CHILD_ID" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+            </div>
+            <div class="row">
+                <div class="col-md-3">
                     <label asp-for="PRODUCT_CODE" class="control-label"></label>
                     <input asp-for="PRODUCT_CODE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="PRODUCT_CODE">
                     <span asp-validation-for="PRODUCT_CODE" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label asp-for="BAR_CODE" class="control-label"></label>
                     <input asp-for="BAR_CODE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="BAR_CODE">
                     <span asp-validation-for="BAR_CODE" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label asp-for="PRODUCT_NAME" class="control-label"></label>
                     <input asp-for="PRODUCT_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="PRODUCT_NAME">
                     <span asp-validation-for="PRODUCT_NAME" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+            </div>
+            <div class="row">
+                <div class="col-md-8">
                     <label asp-for="PRODUCT_DESC" class="control-label"></label>
                     <input asp-for="PRODUCT_DESC" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="PRODUCT_DESC">
                     <span asp-validation-for="PRODUCT_DESC" class="text-danger"></span>
@@ -78,42 +84,41 @@
                     <input asp-for="PRODUCT_IMG" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="PRODUCT_IMG">
                     <span asp-validation-for="PRODUCT_IMG" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+            </div>
+            <div class="row">
+             <div class="col-md-2">
                     <label asp-for="LAST_PURCHASE_RATE" class="control-label"></label>
                     <input asp-for="LAST_PURCHASE_RATE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="LAST_PURCHASE_RATE">
                     <span asp-validation-for="LAST_PURCHASE_RATE" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="LAST_SALES_RATE" class="control-label"></label>
                     <input asp-for="LAST_SALES_RATE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="LAST_SALES_RATE">
                     <span asp-validation-for="LAST_SALES_RATE" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="HAS_WARRANTY" class="control-label"></label>
                     <input asp-for="HAS_WARRANTY" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="HAS_WARRANTY">
                     <span asp-validation-for="HAS_WARRANTY" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="HAS_EXPIRY" class="control-label"></label>
                     <input asp-for="HAS_EXPIRY" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="HAS_EXPIRY">
                     <span asp-validation-for="HAS_EXPIRY" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="IS_MAIN_PRODUCT" class="control-label"></label>
                     <input asp-for="IS_MAIN_PRODUCT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="IS_MAIN_PRODUCT">
                     <span asp-validation-for="IS_MAIN_PRODUCT" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="VAT_PCT" class="control-label"></label>
                     <input asp-for="VAT_PCT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="VAT_PCT">
                     <span asp-validation-for="VAT_PCT" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
-                    <label asp-for="BASE_PRICE" class="control-label"></label>
-                    <input asp-for="BASE_PRICE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="BASE_PRICE">
-                    <span asp-validation-for="BASE_PRICE" class="text-danger"></span>
-                </div>
-                <div class="col-md-4">
+            </div>
+            <div class="row">
+                <div class="col-md-2">
                     <label asp-for="WEIGHT_PER_UNIT" class="control-label"></label>
                     <input asp-for="WEIGHT_PER_UNIT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="WEIGHT_PER_UNIT">
                     <span asp-validation-for="WEIGHT_PER_UNIT" class="text-danger"></span>
@@ -123,17 +128,24 @@
                     <input asp-for="WEIGHT_FORMULA" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="WEIGHT_FORMULA">
                     <span asp-validation-for="WEIGHT_FORMULA" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="NET_WEIGHT" class="control-label"></label>
                     <input asp-for="NET_WEIGHT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="NET_WEIGHT">
                     <span asp-validation-for="NET_WEIGHT" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">            
+            <div class="col-md-2">
+                    <label asp-for="BASE_PRICE" class="control-label"></label>
+                    <input asp-for="BASE_PRICE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="BASE_PRICE">
+                    <span asp-validation-for="BASE_PRICE" class="text-danger"></span>
                 </div>
                 <div class="col-md-4">
                     <label asp-for="PRICE_FORMULA" class="control-label"></label>
                     <input asp-for="PRICE_FORMULA" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="PRICE_FORMULA">
                     <span asp-validation-for="PRICE_FORMULA" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="NET_PRICE" class="control-label"></label>
                     <input asp-for="NET_PRICE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="NET_PRICE">
                     <span asp-validation-for="NET_PRICE" class="text-danger"></span>

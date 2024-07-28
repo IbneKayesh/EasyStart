@@ -9,12 +9,14 @@
         private readonly ProductClassService productClassS;
         private readonly ProductCategoryService productCategoryS;
         private readonly ProductBrandService productBrandS;
+        private readonly UnitChildService unitChildS;
         public ProductsController(ProductsService _productsService,
             BusinessLineService _businessLineService,
             ProductTypeService _productTypeService,
             ProductClassService _productClassService,
             ProductCategoryService _productCategoryService,
-            ProductBrandService _productBrandService)
+            ProductBrandService _productBrandService,
+            UnitChildService _unitChildService)
         {
             productsS = _productsService;
             businessLineS = _businessLineService;
@@ -22,25 +24,38 @@
             productClassS = _productClassService;
             productCategoryS = _productCategoryService;
             productBrandS = _productBrandService;
+            unitChildS = _unitChildService;
         }
         public IActionResult Index()
         {
             var entityList = productsS.GetAll();
             return View(entityList);
         }
-        public IActionResult Create()
+        public IActionResult AddUpdate(string id)
         {
             Dropdown_CreateEdit();
-            return View("AddUpdate", new PRODUCT_BRAND());
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                var entity = productsS.GetById(id);
+                if (entity != null)
+                {
+                    return View("AddUpdate", entity);
+                }
+                else
+                {
+                    TempData["msg"] = NotifyService.NotFound();
+                }
+            }
+            return View("AddUpdate", new PRODUCTS());
         }
         [HttpPost]
-        public IActionResult AddUpdate(PRODUCT_BRAND obj)
+        public IActionResult AddUpdate(PRODUCTS obj)
         {
             Dropdown_CreateEdit();
             EQResult eQResult = new EQResult();
             if (ModelState.IsValid)
             {
-                eQResult = productBrandS.Insert(obj, user_session.USER_ID);
+                eQResult = productsS.Insert(obj, user_session.USER_ID);
                 TempData["msg"] = eQResult.messages;
 
                 if (eQResult.success && eQResult.rows > 0)
@@ -55,27 +70,6 @@
             }
             return View(obj);
         }
-        public IActionResult Edit(string id)
-        {
-            Dropdown_CreateEdit();
-            if (!string.IsNullOrWhiteSpace(id))
-            {
-                var entity = productBrandS.GetById(id);
-                if (entity != null)
-                {
-                    return View("AddUpdate", entity);
-                }
-                else
-                {
-                    TempData["msg"] = NotifyService.NotFound();
-                }
-            }
-            else
-            {
-                TempData["msg"] = NotifyService.Error("Invalid ID, Parameter is required");
-            }
-            return RedirectToAction(nameof(Index));
-        }
         private void Dropdown_CreateEdit()
         {
             ViewBag.BUSINESS_LINE_ID = new SelectList(businessLineS.GetAllActive(), "ID", "BUSINESS_LINE_NAME");
@@ -83,11 +77,11 @@
             ViewBag.PRODUCT_CLASS_ID = new SelectList(productClassS.GetAllActive(), "ID", "CLASS_NAME");
             ViewBag.PRODUCT_CATEGORY_ID = new SelectList(productCategoryS.GetAllActive(), "ID", "CATEGORY_NAME");
             ViewBag.PRODUCT_BRAND_ID = new SelectList(productBrandS.GetAllActive(), "ID", "BRAND_NAME");
-            ViewBag.UNIT_CHILD_ID = new SelectList(businessLineS.GetAllActive(), "ID", "BUSINESS_LINE_NAME");
+            ViewBag.UNIT_CHILD_ID = new SelectList(unitChildS.GetAllActive(), "ID", "UNIT_NAME");
         }
         public IActionResult Delete(string id)
         {
-            EQResult eQResult = productBrandS.Delete(id);
+            EQResult eQResult = productsS.Delete(id);
             return Json(eQResult);
         }
     }
