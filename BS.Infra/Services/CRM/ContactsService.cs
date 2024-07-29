@@ -246,7 +246,7 @@
             }
             catch (Exception ex)
             {
-                if(ex.Message == "An error occurred while saving the entity changes. See the inner exception for details.")
+                if(ex.Message.Contains("See the inner exception for details"))
                 {
                     eQResult.messages = NotifyService.Error(ex.InnerException.Message);
                 }

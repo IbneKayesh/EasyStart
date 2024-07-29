@@ -1,4 +1,6 @@
+using BS.DMO.Models.HelpDesk;
 using BS.DMO.Models.Setup.Security;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BS.Web.Controllers
 {
@@ -15,10 +17,11 @@ namespace BS.Web.Controllers
 
         public IActionResult Index()
         {
-            string table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<PRODUCTS>();
-            //table_script = Services.Power.ClassObjectSanitizer.SetForSave<PRODUCT_CLASS>();
-            table_script = Services.Power.RazorSanitizer.Create<PRODUCTS>();
-            //table_script = Services.Power.RazorSanitizer.Select<PRODUCT_CLASS>();
+            string table_script = string.Empty;
+            //table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<WORK_TASK>();
+            //table_script = Services.Power.ClassObjectSanitizer.SetForSave<WORK_TASK>();
+            //table_script = Services.Power.RazorSanitizer.Create<WORK_TASK>();
+            //table_script = Services.Power.RazorSanitizer.Select<WORK_TASK>();
 
             return View("Index", table_script);
         }
@@ -49,7 +52,8 @@ namespace BS.Web.Controllers
 
             TempData["msg"] = AlertifyJsService.Success(UserSession.USER_NAME + " logged in successfully");
 
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return RedirectToAction("Index", "ClassicMenu", new { area = "Application", next = "75" });
         }
         public IActionResult Privacy()
         {

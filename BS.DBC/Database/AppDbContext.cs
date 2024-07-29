@@ -43,6 +43,7 @@ namespace BS.DBC.Database
 
         //Help desk
         public DbSet<TASK_NOTES> TASK_NOTES { get; set; }
+        public DbSet<WORK_TASK> WORK_TASK { get; set; }
         public DbSet<Abc>? Abc { get; set; }
 
         //HRMS

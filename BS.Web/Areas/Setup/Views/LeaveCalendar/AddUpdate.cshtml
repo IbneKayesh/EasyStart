@@ -1,6 +1,6 @@
 ﻿@model BS.DMO.Models.Setup.LEAVE_CALENDAR
 @{
-    ViewData["Title"] = "Leave Type";
+    ViewData["Title"] = "Leave Calendar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-md-4">
                     <label asp-for="CALENDAR_DATE" class="control-label"></label>
-                    <input asp-for="CALENDAR_DATE" class="form-control form-control-sm" autocomplete="off" placeholder="Leave Type Name">
+                    <input asp-for="CALENDAR_DATE" type="date" class="form-control form-control-sm" autocomplete="off" placeholder="Leave Type Name">
                     <span asp-validation-for="CALENDAR_DATE" class="text-danger"></span>
                 </div>
             </div>

@@ -30,6 +30,7 @@
             services.AddTransient<ContactsService>();
 
             //Help Desk
+            services.AddTransient<WorkTaskService>();
             services.AddTransient<TaskNotesService>();
             //HRMS
             //Inventory

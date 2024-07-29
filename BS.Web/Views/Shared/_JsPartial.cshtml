@@ -170,17 +170,21 @@
         });
 
         $(".delete-confirm").click(function () {
-            var url = $(this).data('url');
+            var delButton = $(this);
+            var url = delButton.data('url');
             alertify.confirm('Delete', "Do you want to delete now?", function () {
+                delButton.prop('disabled', true);
                 $.get(url, function (data, status) {
+                    delButton.prop('disabled', false);
                     if (data.success) {
-                        $(this).parents("tr").remove();
-                        //alertify.success(data.messages);
+                        delButton.closest("tr").remove();
                         $.notify(data.messages, 'success');
                     } else {
                         $.notify(data.messages, 'error');
-                        //alertify.error(data.messages);
                     }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    // Handle network errors or other exceptions
+                    $.notify('An error occurred: ' + errorThrown, 'error');
                 });
             }, function () {
                 alertify.error('Cancel')
