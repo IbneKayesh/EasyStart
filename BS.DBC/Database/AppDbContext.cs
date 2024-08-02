@@ -1,8 +1,4 @@
-﻿
-
-using BS.DMO.Models.Setup.Security;
-
-namespace BS.DBC.Database
+﻿namespace BS.DBC.Database
 {
     public class AppDbContext : DbContext
     {
@@ -42,6 +38,8 @@ namespace BS.DBC.Database
         public DbSet<CONTACT_ADDRESS> CONTACT_ADDRESS { get; set; }
 
         //Help desk
+        public DbSet<BOARDS> BOARDS { get; set; }
+        public DbSet<BOARD_GROUP> BOARD_GROUP { get; set; }
         public DbSet<TASK_NOTES> TASK_NOTES { get; set; }
         public DbSet<WORK_TASK> WORK_TASK { get; set; }
         public DbSet<Abc>? Abc { get; set; }

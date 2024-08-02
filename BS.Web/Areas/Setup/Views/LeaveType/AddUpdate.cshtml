@@ -16,20 +16,22 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="ID" type="hidden" />
             <input asp-for="RowVersion" type="hidden" />
-            <div class="form-group">
-                <label asp-for="LEAVE_TYPE_NAME" class="control-label"></label>
-                <input asp-for="LEAVE_TYPE_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Leave Type Name">
-                <span asp-validation-for="LEAVE_TYPE_NAME" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IS_WORKING_DAY" class="control-label"></label>
-                <input asp-for="IS_WORKING_DAY" type="checkbox" class="form-control form-control-sm">
-                <span asp-validation-for="IS_WORKING_DAY" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IS_ACTIVE" class="control-label"></label>
-                <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
-                <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6">
+                    <label asp-for="LEAVE_TYPE_NAME" class="control-label"></label>
+                    <input asp-for="LEAVE_TYPE_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Leave Type Name">
+                    <span asp-validation-for="LEAVE_TYPE_NAME" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="IS_WORKING_DAY" class="control-label"></label>
+                    <input asp-for="IS_WORKING_DAY" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_WORKING_DAY" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="IS_ACTIVE" class="control-label"></label>
+                    <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
+                </div>
             </div>
         </div>
         <div class="card-footer">

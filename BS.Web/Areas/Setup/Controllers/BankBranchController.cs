@@ -10,9 +10,9 @@
             bankBranchS = _bankBranchService;
             bankInfoS = _bankInfoService;
         }
-        public IActionResult Index()
+        public IActionResult Index(string bank)
         {
-            var entityList = bankBranchS.GetAll();
+            var entityList = bankBranchS.GetAll(bank);
             return View(entityList);
         }
         public IActionResult Create()

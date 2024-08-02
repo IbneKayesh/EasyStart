@@ -10,13 +10,18 @@
             STATUS_ID = Guid.Empty.ToString();
             PRIORITY_ID = Guid.Empty.ToString();
             TASK_VALUE = 0;
+            TOTAL_WORK_HOURS = 0.1m;
         }
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "ID")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 1)]
         public string ID { get; set; }
 
-        [Display(Name = "Parent Task")]
+        [Display(Name = "Type")]
+        [Required(ErrorMessage = "{0} is required")]
+        public string WT_TYPE { get; set; }
+
+        [Display(Name = "Parent")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         //[Required(ErrorMessage = "{0} is required")]
         public string? PARENT_ID { get; set; }
@@ -119,5 +124,19 @@
 
         [Display(Name = "Work End Date")]
         public DateTime? WORK_END_DATE { get; set; }
+
+        [Display(Name = "Total Work Hours")]
+        [Column(TypeName = "decimal(18, 2)")]
+        [Range(minimum: 0.01d, double.MaxValue, ErrorMessage = "{0} length is {2} between {1}")]
+        public decimal TOTAL_WORK_HOURS { get; set; }
+
+
+
+        [NotMapped]
+        public string? PARENT_TITLE { get; set; }
+        [NotMapped]
+        public string? WAIT_DURATION { get; set; }
+        [NotMapped]
+        public string? TOTAL_DURATION { get; set; }
     }
 }

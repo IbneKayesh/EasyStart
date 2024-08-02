@@ -1,7 +1,3 @@
-using BS.DMO.Models.HelpDesk;
-using BS.DMO.Models.Setup.Security;
-using static System.Net.Mime.MediaTypeNames;
-
 namespace BS.Web.Controllers
 {
     public class HomeController : Controller
@@ -18,7 +14,7 @@ namespace BS.Web.Controllers
         public IActionResult Index()
         {
             string table_script = string.Empty;
-            //table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<WORK_TASK>();
+            table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<BOARD_GROUP>();
             //table_script = Services.Power.ClassObjectSanitizer.SetForSave<WORK_TASK>();
             //table_script = Services.Power.RazorSanitizer.Create<WORK_TASK>();
             //table_script = Services.Power.RazorSanitizer.Select<WORK_TASK>();

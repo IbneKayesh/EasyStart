@@ -17,7 +17,10 @@
                 var entity = dbCtx.FINANCIAL_YEAR.Find(obj.ID);
                 if (entity != null)
                 {
-                    if (entity.RowVersion.SequenceEqual(obj.RowVersion))
+                    //special checking for empty byte, cause user Enter ID without edit mode
+                    byte[] emptyByte = obj.RowVersion == null ? Enumerable.Repeat((byte)0x20, 100).ToArray() : obj.RowVersion;
+                   
+                    if (entity.RowVersion.SequenceEqual(emptyByte))
                     {
                         //TODO : Update property
                         entity.YEAR_NAME = obj.YEAR_NAME;
@@ -64,7 +67,11 @@
             }
             catch (Exception ex)
             {
-                eQResult.messages = NotifyService.Error(ex.Message == string.Empty ? ex.InnerException.Message : ex.Message);
+                string error = ex.Message.Contains("See the inner exception for details")
+                                ? ex.InnerException?.Message ?? ex.Message
+                                : ex.Message;
+                error = error.Replace("'", "");
+                eQResult.messages = NotifyService.Error(error);
                 return eQResult;
             }
             finally
@@ -108,12 +115,12 @@
             try
             {
                 //check child entity
-                //int anyChild = dbCtx.BANK_BRANCH.Where(x => x.BANK_ID == id).Count();
-                //if (anyChild > 0)
-                //{
-                //    eQResult.messages = NotifyService.DeleteHasChildString("Branch", anyChild, "Bank");
-                //    return eQResult;
-                //}
+                int anyChild = dbCtx.LEAVE_CALENDAR.Where(x => x.FINANCIAL_YEAR_ID == id).Count();
+                if (anyChild > 0)
+                {
+                    eQResult.messages = NotifyService.DeleteHasChildString("Leave calendar", anyChild, "Financial Year");
+                    return eQResult;
+                }
 
                 //old entity
                 var entity = dbCtx.FINANCIAL_YEAR.Find(id);

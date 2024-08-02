@@ -115,12 +115,12 @@
             try
             {
                 //check child entity
-                int anyChild = dbCtx.LEAVE_TYPE.Where(x => x.ID == id).Count();
-                if (anyChild > 0)
-                {
-                    eQResult.messages = NotifyService.DeleteHasChildString("Branch", anyChild, "Bank");
-                    return eQResult;
-                }
+                //int anyChild = dbCtx.LEAVE_TYPE.Where(x => x.ID == id).Count();
+                //if (anyChild > 0)
+                //{
+                //    eQResult.messages = NotifyService.DeleteHasChildString("Branch", anyChild, "Bank");
+                //    return eQResult;
+                //}
 
                 //old entity
                 var entity = dbCtx.LEAVE_TYPE.Find(id);

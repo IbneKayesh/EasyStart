@@ -1,4 +1,6 @@
-﻿namespace BS.DMO.Models
+﻿using BS.DMO.StaticValues;
+
+namespace BS.DMO.Models
 {
     public class AuditTable
     {
@@ -13,6 +15,8 @@
             UPDATE_DATE = DateTime.Now;
             REVISE_NO = 0;
             //Data Edit Restrict for multiple Users
+
+            DATE_DISPLAY_FORMAT = AppDateFormat.DATE_DISPLAY_FORMAT;
         }
 
         [Display(Name = "Status")]
@@ -33,5 +37,8 @@
 
         [Timestamp]
         public byte[]? RowVersion { get; set; }
+
+        [NotMapped]
+        public string DATE_DISPLAY_FORMAT { get; set; }
     }
 }

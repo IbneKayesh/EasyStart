@@ -4,7 +4,7 @@
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Display(Name = "ID")]
+        [Display(Name = "Transaction ID")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 1)]
         public string? TRN_ID { get; set; }
 

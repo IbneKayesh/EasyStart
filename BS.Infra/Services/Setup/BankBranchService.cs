@@ -1,4 +1,7 @@
-﻿namespace BS.Infra.Services.Setup
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+
+namespace BS.Infra.Services.Setup
 {
     public class BankBranchService
     {
@@ -74,7 +77,11 @@
             }
             catch (Exception ex)
             {
-                eQResult.messages = NotifyService.Error(ex.Message == string.Empty ? ex.InnerException!.Message : ex.Message);
+                string error = ex.Message.Contains("See the inner exception for details")
+                               ? ex.InnerException?.Message ?? ex.Message
+                               : ex.Message;
+                error = error.Replace("'", "");
+                eQResult.messages = NotifyService.Error(error);
                 return eQResult;
             }
             finally
@@ -83,16 +90,22 @@
             }
         }
 
-        public List<BANK_BRANCH_VM> GetAll()
+        public List<BANK_BRANCH_VM> GetAll(string bankID)
         {
-            FormattableString sql = $@"SELECT BB.*, BI.BANK_NAME
+            string criteria = string.Empty;
+            List<object> param = new List<object>();
+
+            if (!string.IsNullOrWhiteSpace(bankID))
+            {
+                criteria = "Where BI.ID = @BANK_ID";
+                param.Add(new SqlParameter(parameterName: "BANK_ID", bankID));
+            }
+
+            string sql = $@"SELECT BB.*, BI.BANK_NAME
                     FROM BANK_BRANCH BB
-                    JOIN BANK_INFO BI ON BB.BANK_ID = BI.ID
+                    JOIN BANK_INFO BI ON BB.BANK_ID = BI.ID {criteria}
                     ORDER BY BI.BANK_NAME";
-
-            // var parameters = new { BankID = bankId };
-
-            return dbCtx.Database.SqlQuery<BANK_BRANCH_VM>(sql).ToList();
+            return dbCtx.Database.SqlQueryRaw<BANK_BRANCH_VM>(sql, param.ToArray()).ToList();
         }
         public BANK_BRANCH GetById(string id)
         {
@@ -128,19 +141,22 @@
                     dbCtx.BANK_BRANCH.Remove(entity);
                     eQResult.rows = dbCtx.SaveChanges();
                     eQResult.success = true;
-                    eQResult.messages = NotifyService.DeletedSuccess(entity.BRANCH_NAME);
+                    eQResult.messages = NotifyService.DeletedSuccessString(entity.BRANCH_NAME);
                     return eQResult;
                 }
                 else
                 {
-                    eQResult.messages = NotifyService.NotFound();
+                    eQResult.messages = NotifyService.NotFoundString();
                     return eQResult;
                 }
             }
             catch (Exception ex)
             {
-                string msg = ex.Message == string.Empty ? ex.InnerException.Message : ex.Message;
-                eQResult.messages = NotifyService.Error(msg.Replace("'", ""));
+                string error = ex.Message.Contains("See the inner exception for details")
+                             ? ex.InnerException?.Message ?? ex.Message
+                             : ex.Message;
+                error = error.Replace("'", "");
+                eQResult.messages = error;
                 return eQResult;
             }
             finally

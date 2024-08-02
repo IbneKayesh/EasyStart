@@ -3,6 +3,7 @@ global using BS.DMO.Models.Admin;
 global using BS.DMO.Models.Application;
 global using BS.DMO.Models.Company;
 global using BS.DMO.Models.CRM;
+global using BS.DMO.Models.HelpDesk;
 global using BS.DMO.Models.Inventory;
 global using BS.DMO.Models.Setup;
 global using BS.DMO.StaticValues;

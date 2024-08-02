@@ -40,6 +40,7 @@
         }
         public IActionResult Edit(string id)
         {
+            ViewData["editmode"] = "readonly";
             if (!string.IsNullOrWhiteSpace(id))
             {
                 var entity = financialYearS.GetById(id);

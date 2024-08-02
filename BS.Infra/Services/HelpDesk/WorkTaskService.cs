@@ -50,6 +50,7 @@ namespace BS.Infra.Services.HelpDesk
                         if (entity.RowVersion.SequenceEqual(obj.RowVersion))
                         {
                             //TODO : Update property
+                            entity.WT_TYPE = obj.WT_TYPE;
                             entity.PARENT_ID = obj.PARENT_ID;
                             entity.BG_ID = obj.BG_ID;
                             entity.STATUS_ID = obj.STATUS_ID;
@@ -176,8 +177,11 @@ namespace BS.Infra.Services.HelpDesk
             }
             catch (Exception ex)
             {
-                string msg = ex.Message == string.Empty ? ex.InnerException.Message : ex.Message;
-                eQResult.messages = msg.Replace("'", "");
+                string error = ex.Message.Contains("See the inner exception for details")
+                              ? ex.InnerException?.Message ?? ex.Message
+                              : ex.Message;
+                error = error.Replace("'", "");
+                eQResult.messages = error;
                 return eQResult;
             }
             finally

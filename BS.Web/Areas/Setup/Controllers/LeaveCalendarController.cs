@@ -13,9 +13,9 @@
             financialYearS = _financialYearService;
             leaveTypeS = _leaveTypeService;
         }
-        public IActionResult Index()
+        public IActionResult Index(string id, string leaveType)
         {
-            var entityList = leaveCalendarS.GetAll();
+            var entityList = leaveCalendarS.GetAll(id, leaveType);
             return View(entityList);
         }
         public IActionResult Create()
