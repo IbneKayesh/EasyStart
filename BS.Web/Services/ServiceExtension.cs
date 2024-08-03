@@ -33,6 +33,7 @@
             services.AddTransient<WorkTaskService>();
             services.AddTransient<TaskNotesService>();
             services.AddTransient<BoardService>();
+            services.AddTransient<TaskStatusService>();
             //HRMS
             //Inventory
             services.AddTransient<ProductBrandService>();

@@ -8,7 +8,7 @@
     <div class="card-header">
         <h3 class="card-title">Add/Edit @ViewData["Title"]</h3>
         <div class="card-tools">
-            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+            
         </div>
     </div>
     <form asp-action="AddEditWorkTask">
@@ -20,13 +20,13 @@
             <div class="row">
                 <div class="col-md-4">
                     <label asp-for="WT_TYPE" class="control-label"></label>
-                    <input asp-for="WT_TYPE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="WT_TYPE">
+                    <select asp-for="WT_TYPE" asp-items="@ViewBag.WT_TYPE" class="form-control form-control-sm">
+                    </select>
                     <span asp-validation-for="WT_TYPE" class="text-danger"></span>
                 </div>
                 <div class="col-md-4">
                     <label asp-for="PARENT_ID" class="control-label"></label>
-                    <select asp-for="PARENT_ID" asp-items="@ViewBag.BG_ID" class="form-control form-control-sm">
-                    </select>
+                    <input asp-for="PARENT_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="WT_TYPE">
                     <span asp-validation-for="PARENT_ID" class="text-danger"></span>
                 </div>
                 <div class="col-md-4">

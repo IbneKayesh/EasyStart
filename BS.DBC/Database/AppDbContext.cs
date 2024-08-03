@@ -1,4 +1,6 @@
-﻿namespace BS.DBC.Database
+﻿using BS.DMO.Models.HelpDesk.Setup;
+
+namespace BS.DBC.Database
 {
     public class AppDbContext : DbContext
     {
@@ -38,6 +40,7 @@
         public DbSet<CONTACT_ADDRESS> CONTACT_ADDRESS { get; set; }
 
         //Help desk
+        public DbSet<TASK_STATUS> TASK_STATUS { get; set; }
         public DbSet<BOARDS> BOARDS { get; set; }
         public DbSet<BOARD_GROUP> BOARD_GROUP { get; set; }
         public DbSet<TASK_NOTES> TASK_NOTES { get; set; }

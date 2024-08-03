@@ -255,7 +255,15 @@ namespace BS.Infra.Services.HelpDesk
                 var entity = dbCtx.Database.SqlQueryRaw<BOARD_GROUP>(sql, param.ToArray()).ToList();
                 foreach (BOARD_GROUP item in entity)
                 {
-                    var wt_entity = dbCtx.WORK_TASK.Where(x => x.BG_ID == item.ID).Take(item.LIMIT_ROWS).OrderBy(o => o.REQUEST_DATE).ToList();
+                    //var wt_entity = dbCtx.WORK_TASK.Where(x => x.BG_ID == item.ID).Take(item.LIMIT_ROWS).OrderByDescending(o => o.REQUEST_DATE).ToList();
+                    param = new List<object>();
+                    param.Add(new SqlParameter(parameterName: "BG_ID", item.ID));
+                    sql = $@"SELECT * FROM
+                        (
+                        SELECT TOP {item.LIMIT_ROWS} WT.* FROM WORK_TASK WT WHERE WT.BG_ID = BG_ID
+                        ) W
+                        ORDER BY W.REQUEST_DATE";
+                    var wt_entity = dbCtx.Database.SqlQueryRaw<WORK_TASK>(sql, param.ToArray()).ToList();
                     item.WORK_TASK = wt_entity;
                 }
                 return entity;

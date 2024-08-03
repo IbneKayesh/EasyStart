@@ -51,6 +51,36 @@
     @{
         await Html.RenderPartialAsync("_JsPartial");
     }
+    <script>
+        //IFrame page protection
+        if (window.self !== window.top) {
+            // Page is loaded within an iframe
+        } else {
+            // Page is loaded directly
+            const links = document.querySelectorAll('a');
+            const buttons = document.querySelectorAll('button');
+            const inputs = document.querySelectorAll('input');
+
+            links.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                });
+                link.href = "";
+                link.setAttribute('aria-disabled', 'true');
+            });
+
+            buttons.forEach(button => {
+                button.disabled = true;
+            });
+
+            inputs.forEach(input => {
+                input.disabled = true;
+            });
+
+
+            $.notify('This page is intended for use within our application.', 'error');
+        }
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

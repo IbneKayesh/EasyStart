@@ -9,12 +9,14 @@ namespace BS.Web.Areas.HelpDesk.Controllers
         private readonly BoardService boardS;
         private readonly EntityValueTextService entityValueTextS;
         private readonly WorkTaskService workTaskS;
+        private readonly TaskStatusService taskStatusS;
         public BoardsController(BoardService _boardService, EntityValueTextService _entityValueTextS,
-            WorkTaskService _workTaskService)
+            WorkTaskService _workTaskService, TaskStatusService _taskStatusService)
         {
             boardS = _boardService;
             entityValueTextS = _entityValueTextS;
             workTaskS = _workTaskService;
+            taskStatusS = _taskStatusService;
         }
         public IActionResult Index()
         {
@@ -125,7 +127,10 @@ namespace BS.Web.Areas.HelpDesk.Controllers
         {
             Dropdown_AddEditWorkTask(board);
             WORK_TASK obj = new WORK_TASK();
-            obj.ID = id;
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                obj.ID = id;
+            }
             obj.BG_ID = bgid;
             return View("AddEditWorkTask", obj);
         }
@@ -152,7 +157,7 @@ namespace BS.Web.Areas.HelpDesk.Controllers
             Dropdown_AddEditWorkTask(obj.BG_ID);
             return View(obj);
         }
-        public IActionResult EditWorkTask(string id, string copy)
+        public IActionResult EditWorkTask(string id, string board, string bgid, string copy)
         {
             if (!string.IsNullOrWhiteSpace(id))
             {
@@ -165,6 +170,8 @@ namespace BS.Web.Areas.HelpDesk.Controllers
                         ModelState.Clear();
                         entity.ID = Guid.Empty.ToString();
                     }
+
+                    Dropdown_AddEditWorkTask(board);
                     return View("AddEditWorkTask", entity);
                 }
                 else
@@ -180,7 +187,23 @@ namespace BS.Web.Areas.HelpDesk.Controllers
         }
         private void Dropdown_AddEditWorkTask(string board)
         {
-            ViewBag.BG_ID = boardS.GetBoardGroupByBoardID(board);
+            ViewBag.BG_ID = new SelectList(boardS.GetBoardGroupByBoardID(board), "ID", "GROUP_NAME");
+            ViewBag.STATUS_ID = new SelectList(taskStatusS.GetAllActive(), "ID", "STATUS_NAME");
+            
+            List<string> entityIds = new List<string>()
+            {
+                EntityValueText.WT_TYPE,
+                EntityValueText.STATUS_ID,
+                EntityValueText.PRIORITY_ID
+            };
+            var entityValue = entityValueTextS.GetListByEntityID(entityIds);
+            var wt_type = entityValue.Where(x => x.ENTITY_ID == EntityValueText.WT_TYPE).ToList();
+            var status_id = entityValue.Where(x => x.ENTITY_ID == EntityValueText.STATUS_ID).ToList();
+            var priority_id = entityValue.Where(x => x.ENTITY_ID == EntityValueText.PRIORITY_ID).ToList();
+
+            ViewBag.WT_TYPE = new SelectList(wt_type, "VALUE_ID", "TEXT_ID", wt_type.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            //ViewBag.STATUS_ID = new SelectList(status_id, "VALUE_ID", "TEXT_ID", status_id.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            ViewBag.PRIORITY_ID = new SelectList(priority_id, "VALUE_ID", "TEXT_ID", priority_id.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
         }
     }
 }

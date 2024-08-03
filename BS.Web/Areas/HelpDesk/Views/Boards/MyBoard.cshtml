@@ -22,7 +22,7 @@
                             <span class="badge badge-secondary">@boardboard.WORK_TASK.Count</span>
                         </h3>
                         <div class="card-tools">
-                            <a class="btn btn-xs" asp-action="" asp-route-id="@boardboard.ID"><i class="fas fa-plus text-white"></i></a>
+                            <a class="btn btn-xs" asp-action="AddWorkTask" asp-route-id="" asp-route-board="@boardboard.BOARD_ID" asp-route-bgid="@boardboard.ID"><i class="fas fa-plus text-white"></i></a>
                         </div>
                     </div>
                     <div class="card-body p-0">
@@ -32,10 +32,10 @@
                                 <div class="card-header p-2">
                                     <span class="badge badge-@boardboard.BS_COLOR">@wt_item.WT_TYPE</span>
                                     <div class="card-tools">
-                                        <span class="badge badge-@boardboard.BS_COLOR">status</span>
+                                        <span class="badge badge-@boardboard.BS_COLOR">@wt_item.STATUS_ID</span>
                                         <span class="badge badge-primary">@wt_item.PROGRESS_PCT%</span>
-                                        <small class="badge badge-@boardboard.BS_COLOR">priority</small>
-                                        <a asp-action="AddEditWorkTask" asp-route-id="@wt_item.ID" class="btn btn-tool">
+                                        <small class="badge badge-@boardboard.BS_COLOR">@wt_item.PRIORITY_ID</small>
+                                        <a asp-action="EditWorkTask" asp-route-id="@wt_item.ID" asp-route-board="@boardboard.BOARD_ID" asp-route-bgid="@boardboard.ID" class="btn btn-tool">
                                             <i class="fas fa-pen"></i>
                                         </a>
                                     </div>

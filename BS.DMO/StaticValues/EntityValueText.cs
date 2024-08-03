@@ -42,6 +42,22 @@
         /// Color codes :: Theam, Colors, Hex
         /// </summary>
         public static string COLOR_CODE = "COLOR_CODE";
+
+
+        /// <summary>
+        /// Help Desk : WT_TYPE
+        /// </summary>
+        public static string WT_TYPE = "WT_TYPE";
+
+        /// <summary>
+        /// Help Desk : STATUS_ID
+        /// </summary>
+        public static string STATUS_ID = "STATUS_ID";
+
+        /// <summary>
+        /// Help Desk : PRIORITY_ID
+        /// </summary>
+        public static string PRIORITY_ID = "PRIORITY_ID";
         public static List<string> GetAll()
         {
             return new List<string>()
@@ -53,7 +69,10 @@
                 "SHIPPING_TYPE_ID",
                 "SHIPPING_MODE_ID",
                 "CONTACT_CATEGORY_ID",
-                "COLOR_CODE"
+                "COLOR_CODE",
+                "WT_TYPE",
+                "STATUS_ID",
+                "PRIORITY_ID"
             };
         }
     }
