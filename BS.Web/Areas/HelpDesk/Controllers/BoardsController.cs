@@ -84,7 +84,7 @@ namespace BS.Web.Areas.HelpDesk.Controllers
         //Board Group
         public IActionResult MyBoard(string board)
         {
-            var entityList = boardS.GetBoardGroupByBoardID(board);
+            var entityList = boardS.GetBoardGroupWithChildByBoardID(board);
             return View(entityList);
         }
         public IActionResult AddEditBoardGroup(string id, string board)
@@ -119,7 +119,7 @@ namespace BS.Web.Areas.HelpDesk.Controllers
         private void Dropdown_AddEditBoardGroup()
         {
             var entityValue = entityValueTextS.GetListByEntityID(EntityValueText.COLOR_CODE);
-            ViewBag.BS_COLOR = new SelectList(entityValue, "VALUE_ID", "TEXT_ID", entityValue.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            ViewBag.BS_COLOR = new SelectList(entityValue, "VALUE_ID", "VALUE_NAME", entityValue.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
         }
 
         //Add Edit Work Task
@@ -132,6 +132,7 @@ namespace BS.Web.Areas.HelpDesk.Controllers
                 obj.ID = id;
             }
             obj.BG_ID = bgid;
+            obj.BOARD_ID = board;
             return View("AddEditWorkTask", obj);
         }
         [HttpPost]
@@ -145,7 +146,7 @@ namespace BS.Web.Areas.HelpDesk.Controllers
 
                 if (eQResult.success && eQResult.rows > 0)
                 {
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("MyBoard", new { board = obj.BOARD_ID});
                 }
             }
             else
@@ -164,13 +165,15 @@ namespace BS.Web.Areas.HelpDesk.Controllers
                 var entity = workTaskS.GetById(id);
                 if (entity != null)
                 {
+                    //Clear for Not Mapped board ID
+                    ModelState.Clear();
+                    entity.BOARD_ID = board;
+
                     if (!string.IsNullOrWhiteSpace(copy))
                     {
                         //asign for new save
-                        ModelState.Clear();
                         entity.ID = Guid.Empty.ToString();
                     }
-
                     Dropdown_AddEditWorkTask(board);
                     return View("AddEditWorkTask", entity);
                 }
@@ -201,9 +204,9 @@ namespace BS.Web.Areas.HelpDesk.Controllers
             var status_id = entityValue.Where(x => x.ENTITY_ID == EntityValueText.STATUS_ID).ToList();
             var priority_id = entityValue.Where(x => x.ENTITY_ID == EntityValueText.PRIORITY_ID).ToList();
 
-            ViewBag.WT_TYPE = new SelectList(wt_type, "VALUE_ID", "TEXT_ID", wt_type.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
-            //ViewBag.STATUS_ID = new SelectList(status_id, "VALUE_ID", "TEXT_ID", status_id.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
-            ViewBag.PRIORITY_ID = new SelectList(priority_id, "VALUE_ID", "TEXT_ID", priority_id.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            ViewBag.WT_TYPE = new SelectList(wt_type, "VALUE_ID", "VALUE_NAME", wt_type.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            //ViewBag.STATUS_ID = new SelectList(status_id, "VALUE_ID", "VALUE_NAME", status_id.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            ViewBag.PRIORITY_ID = new SelectList(priority_id, "VALUE_ID", "VALUE_NAME", priority_id.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
         }
     }
 }

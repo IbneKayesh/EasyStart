@@ -134,7 +134,7 @@
 
 
         //Trn Amount
-        [Display(Name = "Trn Valid Days")]
+        [Display(Name = "Valid Days")]
         public int TRN_VALID_DAYS { get; set; } = 0;
 
         [Display(Name = "Amount")]

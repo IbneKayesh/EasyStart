@@ -4,16 +4,16 @@
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Display(Name = "Value")]
+        [Display(Name = "Value ID")]
         [Required(ErrorMessage = "{0} is required")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 2)]
         public string? VALUE_ID { get; set; }
 
 
-        [Display(Name = "Text")]
+        [Display(Name = "Value Name")]
         [Required(ErrorMessage = "{0} is required")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 2)]
-        public string? TEXT_ID { get; set; }
+        public string? VALUE_NAME { get; set; }
 
 
         [Display(Name = "Entity")]

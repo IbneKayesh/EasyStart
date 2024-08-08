@@ -1,8 +1,4 @@
-﻿using BS.DMO.Models.HelpDesk;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-
-namespace BS.Infra.Services.HelpDesk
+﻿namespace BS.Infra.Services.HelpDesk
 {
     public class BoardService
     {
@@ -245,7 +241,7 @@ namespace BS.Infra.Services.HelpDesk
             }
         }
 
-        public List<BOARD_GROUP> GetBoardGroupByBoardID(string boardID)
+        public List<BOARD_GROUP> GetBoardGroupWithChildByBoardID(string boardID)
         {
             List<object> param = new List<object>();
             if (!string.IsNullOrWhiteSpace(boardID))
@@ -255,17 +251,60 @@ namespace BS.Infra.Services.HelpDesk
                 var entity = dbCtx.Database.SqlQueryRaw<BOARD_GROUP>(sql, param.ToArray()).ToList();
                 foreach (BOARD_GROUP item in entity)
                 {
-                    //var wt_entity = dbCtx.WORK_TASK.Where(x => x.BG_ID == item.ID).Take(item.LIMIT_ROWS).OrderByDescending(o => o.REQUEST_DATE).ToList();
                     param = new List<object>();
                     param.Add(new SqlParameter(parameterName: "BG_ID", item.ID));
                     sql = $@"SELECT * FROM
                         (
-                        SELECT TOP {item.LIMIT_ROWS} WT.* FROM WORK_TASK WT WHERE WT.BG_ID = BG_ID
+                        SELECT TOP {item.LIMIT_ROWS} WT.*,TS.STATUS_NAME,TS.BS_COLOR FROM WORK_TASK WT
+                        JOIN TASK_STATUS TS on WT.STATUS_ID = TS.ID
+                        WHERE WT.BG_ID = @BG_ID
                         ) W
                         ORDER BY W.REQUEST_DATE";
-                    var wt_entity = dbCtx.Database.SqlQueryRaw<WORK_TASK>(sql, param.ToArray()).ToList();
-                    item.WORK_TASK = wt_entity;
+                    var wt_entity = dbCtx.Database.SqlQueryRaw<WORK_TASK_VM>(sql, param.ToArray()).ToList();
+                    foreach(WORK_TASK_VM wt  in wt_entity)
+                    {
+                        wt.WAIT_DURATION = CalculateTotalDuration(wt.REQUEST_DATE, wt.WORK_START_DATE);
+                        wt.TOTAL_DURATION = CalculateTotalDuration(wt.REQUEST_DATE, wt.WORK_END_DATE);
+                    }
+                    item.WORK_TASK_VM = wt_entity;
                 }
+                return entity;
+            }
+            else
+            {
+                return new List<BOARD_GROUP>();
+            }
+        }
+        static string CalculateTotalDuration(DateTime? startDate, DateTime? endDate)
+        {
+            if (startDate != null && endDate != null)
+            {
+                try
+                {
+                    TimeSpan duration = (endDate - startDate).Value;
+                    return $"{duration.Days}d {duration.Hours}h {duration.Minutes}m";
+                }
+                catch (FormatException ex)
+                {
+                    // Log or print the exception details
+                    Console.WriteLine($"Error formatting date: {ex.Message}");
+                }
+            }
+            else if (startDate != null)
+            {
+                return startDate.ToString();
+            }
+
+            return "-";
+        }
+        public List<BOARD_GROUP> GetBoardGroupByBoardID(string boardID)
+        {
+            List<object> param = new List<object>();
+            if (!string.IsNullOrWhiteSpace(boardID))
+            {
+                param.Add(new SqlParameter(parameterName: "BOARD_ID", boardID));
+                string sql = "select * from BOARD_GROUP bg where bg.BOARD_ID = @BOARD_ID order by bg.ORDER_BY";
+                var entity = dbCtx.Database.SqlQueryRaw<BOARD_GROUP>(sql, param.ToArray()).ToList();
                 return entity;
             }
             else

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BS.DMO.ViewModels.HelpDesk
+﻿namespace BS.DMO.ViewModels.HelpDesk
 {
     public class BOARDS_VM
     {
@@ -14,7 +8,5 @@ namespace BS.DMO.ViewModels.HelpDesk
 
         public string? PROJECT_ID { get; set; }
         public string? PROJECT_NAME { get; set; }
-
-
     }
 }

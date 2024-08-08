@@ -1,4 +1,5 @@
 ﻿using BS.DMO.Models.HelpDesk.Setup;
+using BS.DMO.Models.Transport;
 
 namespace BS.DBC.Database
 {
@@ -83,6 +84,10 @@ namespace BS.DBC.Database
         public DbSet<ENTITY_VALUE_TEXT> ENTITY_VALUE_TEXT { get; set; }
         public DbSet<TRN_AUTO_STEP> TRN_AUTO_STEP { get; set; }
         public DbSet<SUB_SECTIONS_TRN_ID> SUB_SECTIONS_TRN_ID { get; set; }
+        public DbSet<TRN_LAST_NO_LIST> TRN_LAST_NO_LIST { get; set; }
+        
+        //Transport
+        public DbSet<DELIVERY_AGENT> DELIVERY_AGENT { get; set; }
 
         //Utility
         public DbSet<USER_LOGIN_INFO> USER_LOGIN_INFO { get; set; }

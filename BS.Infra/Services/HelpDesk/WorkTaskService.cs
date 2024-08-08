@@ -74,7 +74,7 @@ namespace BS.Infra.Services.HelpDesk
                             entity.END_NOTE = obj.END_NOTE;
                             entity.WORK_REMARKS = obj.WORK_REMARKS;
                             entity.WORK_FILE = obj.WORK_FILE;
-                            entity.WORK_START_DATE = obj.WORK_START_DATE;
+                            entity.WORK_START_DATE = obj.L1_DATE == null ? obj.WORK_START_DATE : obj.L1_DATE; //Level 1 date will be start date
                             entity.WORK_END_DATE = obj.WORK_END_DATE;
                             //Start Audit
                             entity.IS_ACTIVE = obj.IS_ACTIVE;

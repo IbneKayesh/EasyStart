@@ -80,7 +80,21 @@
 
             $.notify('This page is intended for use within our application.', 'error');
         }
+        $(document).ready(function () {
+            $('form').each(function () {
+                const form = $(this);
+                const button = form.find('button[type="submit"]');
+                //button.prop('disabled', true); // Initially disable the button
+                form.on('input change', 'input, select, textarea', function () {
+                    const errorFields = form.find('.field-validation-error');
+                    button.prop('disabled', errorFields.length > 0);
+                });
+            });
+        });
+
+
     </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

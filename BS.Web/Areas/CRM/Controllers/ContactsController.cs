@@ -70,7 +70,7 @@ namespace BS.Web.Areas.CRM.Controllers
             //ViewBag.COUNTRY_ID = new SelectList(countryInfoS.GetAllActive(), "ID", "COUNTRY_NAME");
             var entityValue = entityValueTextS.GetListByEntityID(EntityValueText.CONTACT_CATEGORY_ID);
 
-            ViewBag.CONTACT_CATEGORY_ID = new SelectList(entityValue, "VALUE_ID", "TEXT_ID", entityValue.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            ViewBag.CONTACT_CATEGORY_ID = new SelectList(entityValue, "VALUE_ID", "VALUE_NAME", entityValue.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
         }
         public IActionResult Delete(string id)
         {

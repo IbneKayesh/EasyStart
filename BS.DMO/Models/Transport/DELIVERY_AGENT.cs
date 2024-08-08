@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BS.DMO.Models.Transport
+﻿namespace BS.DMO.Models.Transport
 {
-    public class DELIVERY_AGENT
+    public class DELIVERY_AGENT : AuditTable
     {
         public DELIVERY_AGENT()
         {
             ID = Guid.Empty.ToString();
         }
-        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "ID")]
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 1)]
         public string ID { get; set; }
+
+
+        [Display(Name = "Agent No")]
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 3)]
+        [Required(ErrorMessage = "{0} is required")]
+        public string? AGENT_NO { get; set; }
 
         [Display(Name = "Agent Name")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 3)]

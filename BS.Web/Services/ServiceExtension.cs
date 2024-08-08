@@ -66,6 +66,7 @@
             services.AddTransient<EntityValueTextService>();
             services.AddTransient<TrnAutoStepService>();
             services.AddTransient<SubSectionsTrnIdService>();
+            services.AddTransient<TrnLastNoListService>();
 
             //Utility
             services.AddTransient<UserLoginInfoService>();

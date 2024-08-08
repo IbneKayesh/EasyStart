@@ -1,4 +1,6 @@
-﻿namespace BS.Infra.Services.CRM
+﻿using BS.DMO.ViewModels.CRM;
+
+namespace BS.Infra.Services.CRM
 {
     public class ContactsService
     {
@@ -102,12 +104,13 @@
             }
         }
 
-        public List<CONTACTS> GetAll()
+        public List<CONTACTS_VM> GetAll()
         {
-            FormattableString sql = $@"SELECT BI.*
-                    FROM CONTACTS BI
-                    ORDER BY BI.CONTACT_NAME";
-            return dbCtx.Database.SqlQuery<CONTACTS>(sql).ToList();
+            string sql = $@"SELECT C.*,EVT.VALUE_NAME CATEGORY_NAME
+                    FROM CONTACTS C
+					JOIN ENTITY_VALUE_TEXT EVT ON C.CONTACT_CATEGORY_ID = EVT.VALUE_ID
+                    ORDER BY C.CONTACT_CATEGORY_ID,C.CONTACT_GROUP,C.CONTACT_NAME";
+            return dbCtx.Database.SqlQueryRaw<CONTACTS_VM>(sql).ToList();
         }
         public List<CONTACTS> GetByName(string contactName)
         {

@@ -16,6 +16,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="ID" type="hidden" />
             <input asp-for="REQUEST_DATE" type="hidden" />
+            <input asp-for="BOARD_ID" type="hidden" />
             <input asp-for="RowVersion" type="hidden" />
             <div class="row">
                 <div class="col-md-4">
@@ -89,7 +90,7 @@
                 </div>
                 <div class="col-md-4">
                     <label asp-for="L1_DATE" class="control-label"></label>
-                    <input asp-for="L1_DATE" type="date" class="form-control form-control-sm" autocomplete="off" placeholder="L1_DATE">
+                    <input asp-for="L1_DATE" type="datetime-local" class="form-control form-control-sm" autocomplete="off" placeholder="L1_DATE">
                     <span asp-validation-for="L1_DATE" class="text-danger"></span>
                 </div>
                 <div class="col-md-4">
@@ -104,7 +105,7 @@
                 </div>
                 <div class="col-md-4">
                     <label asp-for="L2_DATE" class="control-label"></label>
-                    <input asp-for="L2_DATE" type="datetime" class="form-control form-control-sm" autocomplete="off" placeholder="L2_DATE">
+                    <input asp-for="L2_DATE" type="datetime-local" class="form-control form-control-sm" autocomplete="off" placeholder="L2_DATE">
                     <span asp-validation-for="L2_DATE" class="text-danger"></span>
                 </div>
                 <div class="col-md-4">
@@ -119,7 +120,7 @@
                 </div>
                 <div class="col-md-4">
                     <label asp-for="END_DATE" class="control-label"></label>
-                    <input asp-for="END_DATE" type="datetime" class="form-control form-control-sm" autocomplete="off" placeholder="END_DATE">
+                    <input asp-for="END_DATE" type="datetime-local" class="form-control form-control-sm" autocomplete="off" placeholder="END_DATE">
                     <span asp-validation-for="END_DATE" class="text-danger"></span>
                 </div>
                 <div class="col-md-4">
@@ -139,12 +140,12 @@
                 </div>
                 <div class="col-md-4">
                     <label asp-for="WORK_START_DATE" class="control-label"></label>
-                    <input asp-for="WORK_START_DATE" type="date" class="form-control form-control-sm" autocomplete="off" placeholder="Work Start Date Time">
+                    <input asp-for="WORK_START_DATE" class="form-control form-control-sm" readonly placeholder="Work Start Date Time">
                     <span asp-validation-for="WORK_START_DATE" class="text-danger"></span>
                 </div>
                 <div class="col-md-4">
                     <label asp-for="WORK_END_DATE" class="control-label"></label>
-                    <input asp-for="WORK_END_DATE" type="date" class="form-control form-control-sm" autocomplete="off" placeholder="Work End Date Time">
+                    <input asp-for="WORK_END_DATE" type="datetime-local" class="form-control form-control-sm" autocomplete="off" placeholder="Work End Date Time">
                     <span asp-validation-for="WORK_END_DATE" class="text-danger"></span>
                 </div>
                 <div class="col-md-4">

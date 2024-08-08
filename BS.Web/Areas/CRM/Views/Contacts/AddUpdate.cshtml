@@ -50,7 +50,7 @@
                     <input asp-for="CONTACT_NO" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Contact No">
                     <span asp-validation-for="CONTACT_NO" class="text-danger"></span>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <label asp-for="EMAIL_ADDRESS" class="control-label"></label>
                     <input asp-for="EMAIL_ADDRESS" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Email Address">
                     <span asp-validation-for="EMAIL_ADDRESS" class="text-danger"></span>
@@ -62,53 +62,58 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-3">
+                    LAT
+                </div>
+                <div class="col-md-3">
+                    LONG
+                </div>
+                <div class="col-md-3">
                     <label asp-for="OFFICE_ADDRESS" class="control-label"></label>
                     <input asp-for="OFFICE_ADDRESS" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Office Address">
                     <span asp-validation-for="OFFICE_ADDRESS" class="text-danger"></span>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-3">
                     <label asp-for="FACTORY_ADDRESS" class="control-label"></label>
                     <input asp-for="FACTORY_ADDRESS" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Factory Address">
                     <span asp-validation-for="FACTORY_ADDRESS" class="text-danger"></span>
                 </div>
             </div>
             <div class="row border-top mt-2">
-                <div class="col-md-4">
+                <div class="col-md-1">
                     <label asp-for="IS_CUSTOMER" class="control-label"></label>
                     <input asp-for="IS_CUSTOMER" type="checkbox" class="form-control form-control-sm">
                     <span asp-validation-for="IS_CUSTOMER" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label asp-for="CUSTOMER_USER_ID" class="control-label"></label>
                     <input asp-for="CUSTOMER_USER_ID" type="text" class="form-control form-control-sm" readonly>
                     <span asp-validation-for="CUSTOMER_USER_ID" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="CUSTOMER_DATE" class="control-label"></label>
                     <input asp-for="CUSTOMER_DATE" type="text" class="form-control form-control-sm" readonly>
                     <span asp-validation-for="CUSTOMER_DATE" class="text-danger"></span>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
+
+                <div class="col-md-1">
                     <label asp-for="IS_SELLER" class="control-label"></label>
                     <input asp-for="IS_SELLER" type="checkbox" class="form-control form-control-sm">
                     <span asp-validation-for="IS_SELLER" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label asp-for="SELLER_USER_ID" class="control-label"></label>
                     <input asp-for="SELLER_USER_ID" type="text" class="form-control form-control-sm" readonly>
                     <span asp-validation-for="SELLER_USER_ID" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="SELLER_DATE" class="control-label"></label>
                     <input asp-for="SELLER_DATE" type="text" class="form-control form-control-sm" readonly>
                     <span asp-validation-for="SELLER_DATE" class="text-danger"></span>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-1">
                     <label asp-for="IS_ACTIVE" class="control-label"></label>
                     <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
                     <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>

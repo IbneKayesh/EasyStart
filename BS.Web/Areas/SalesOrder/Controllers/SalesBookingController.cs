@@ -81,12 +81,12 @@
             var payment_method = entityValue.Where(x => x.ENTITY_ID == EntityValueText.PAYMENT_METHOD).ToList();
 
 
-            ViewBag.TRN_SOURCE_ID = new SelectList(booking_source, "VALUE_ID", "TEXT_ID", booking_source.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
-            ViewBag.TRN_TYPE_ID = new SelectList(sb_trn_type_id, "VALUE_ID", "TEXT_ID", sb_trn_type_id.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
-            ViewBag.SHIPPING_MODE_ID = new SelectList(shipping_mode_id, "VALUE_ID", "TEXT_ID", shipping_mode_id.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
-            ViewBag.SHIPPING_TYPE_ID = new SelectList(shipping_type_id, "VALUE_ID", "TEXT_ID", shipping_type_id.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
-            ViewBag.PAYMENT_MODE = new SelectList(payment_mode, "VALUE_ID", "TEXT_ID", payment_mode.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
-            ViewBag.PAYMENT_METHOD = new SelectList(payment_method, "VALUE_ID", "TEXT_ID", payment_method.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            ViewBag.TRN_SOURCE_ID = new SelectList(booking_source, "VALUE_ID", "VALUE_NAME", booking_source.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            ViewBag.TRN_TYPE_ID = new SelectList(sb_trn_type_id, "VALUE_ID", "VALUE_NAME", sb_trn_type_id.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            ViewBag.SHIPPING_MODE_ID = new SelectList(shipping_mode_id, "VALUE_ID", "VALUE_NAME", shipping_mode_id.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            ViewBag.SHIPPING_TYPE_ID = new SelectList(shipping_type_id, "VALUE_ID", "VALUE_NAME", shipping_type_id.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            ViewBag.PAYMENT_MODE = new SelectList(payment_mode, "VALUE_ID", "VALUE_NAME", payment_mode.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            ViewBag.PAYMENT_METHOD = new SelectList(payment_method, "VALUE_ID", "VALUE_NAME", payment_method.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
         }
     }
 }

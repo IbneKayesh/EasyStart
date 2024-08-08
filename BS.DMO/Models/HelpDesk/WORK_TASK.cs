@@ -19,7 +19,7 @@
 
         [Display(Name = "Type")]
         [Required(ErrorMessage = "{0} is required")]
-        public string WT_TYPE { get; set; }
+        public string? WT_TYPE { get; set; }
 
         [Display(Name = "Parent")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
@@ -131,12 +131,8 @@
         public decimal TOTAL_WORK_HOURS { get; set; }
 
 
-
         [NotMapped]
-        public string? PARENT_TITLE { get; set; }
-        [NotMapped]
-        public string? WAIT_DURATION { get; set; }
-        [NotMapped]
-        public string? TOTAL_DURATION { get; set; }
+        [Display(Name = "Board")]
+        public string? BOARD_ID { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BS.DMO.Models.CRM.CONTACTS>
+﻿@model IEnumerable<BS.DMO.ViewModels.CRM.CONTACTS_VM>
 @{
     ViewData["Title"] = "Contacts";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,9 +21,6 @@
                     <th>Name</th>
                     <th>Person</th>
                     <th>Contact</th>
-                    <th>Email</th>
-                    <th>Office</th>
-                    <th>Factory</th>
                     <th>Balance</th>
                     <th>Customer</th>
                     <th>Seller</th>
@@ -39,7 +36,7 @@
                             @Html.DisplayFor(modelItem => item.CONTACT_CODE)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.CONTACT_CATEGORY_ID)
+                            @Html.DisplayFor(modelItem => item.CATEGORY_NAME)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.CONTACT_GROUP)
@@ -54,15 +51,6 @@
                             @Html.DisplayFor(modelItem => item.CONTACT_NO)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.EMAIL_ADDRESS)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.OFFICE_ADDRESS)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FACTORY_ADDRESS)
-                        </td>
-                        <td>
                             @Html.DisplayFor(modelItem => item.BALANCE_AMOUNT)
                         </td>
                         <td>
@@ -75,10 +63,15 @@
                             @Html.DisplayFor(modelItem => item.IS_ACTIVE)
                         </td>
                         <td>
-                            <a class="btn btn-primary btn-xs" asp-area="CRM" asp-controller="Contacts" asp-action="CreateContactAddress" asp-route-contactId="@item.ID"><i class="fa fa-plus"></i> Add Address</a>
-                            <a class="btn btn-primary btn-xs" asp-area="CRM" asp-controller="Contacts" asp-action="ContactAddress" asp-route-contactId="@item.ID"><i class="fa fa-list-alt"></i> Address</a>
-                            <a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-edit"></i> Edit</a>
-                            <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="BankInfo/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-secondary btn-xs dropdown-toggle" data-toggle="dropdown">Action</button>
+                                <ul class="dropdown-menu action-list">
+                                    <li><a class="btn btn-primary btn-xs btn-block" asp-area="CRM" asp-controller="Contacts" asp-action="CreateContactAddress" asp-route-contactId="@item.ID"><i class="fa fa-plus"></i> Add Address</a></li>
+                                    <li><a class="btn btn-primary btn-xs btn-block" asp-area="CRM" asp-controller="Contacts" asp-action="ContactAddress" asp-route-contactId="@item.ID"><i class="fa fa-list-alt"></i> Address</a></li>
+                                    <li><a class="btn btn-primary btn-xs btn-block" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-edit"></i> Edit</a></li>
+                                    <li><button type="button" class="btn btn-danger btn-xs btn-block delete-confirm" data-url="BankInfo/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button></li>
+                                </ul>
+                            </div>
                         </td>
                     </tr>
                 }

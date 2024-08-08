@@ -16,7 +16,7 @@ namespace BS.Web.Controllers
         public IActionResult Index()
         {
             string table_script = string.Empty;
-            table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<TASK_STATUS>();
+            table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<DELIVERY_AGENT>();
             //table_script = Services.Power.ClassObjectSanitizer.SetForSave<WORK_TASK>();
             //table_script = Services.Power.RazorSanitizer.Create<WORK_TASK>();
             //table_script = Services.Power.RazorSanitizer.Select<WORK_TASK>();

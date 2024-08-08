@@ -5,7 +5,7 @@
         public BOARD_GROUP()
         {
             ID = Guid.Empty.ToString();
-            WORK_TASK = new List<WORK_TASK>();
+            WORK_TASK_VM = new List<WORK_TASK_VM>();
         }
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "ID")]
@@ -44,7 +44,7 @@
 
         [Display(Name = "Work Task")]
         [NotMapped]
-        public List<WORK_TASK>? WORK_TASK { get; set; }
+        public List<WORK_TASK_VM>? WORK_TASK_VM { get; set; }
 
     }
 }

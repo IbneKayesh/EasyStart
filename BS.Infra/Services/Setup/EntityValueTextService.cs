@@ -23,7 +23,7 @@ namespace BS.Infra.Services.Setup
                     if (entity.RowVersion.SequenceEqual(obj.RowVersion))
                     {
                         //TODO : Update property
-                        entity.TEXT_ID = obj.TEXT_ID;
+                        entity.VALUE_NAME = obj.VALUE_NAME;
                         entity.ENTITY_ID = obj.ENTITY_ID;
                         entity.ENTITY_DESCRIPTION = obj.ENTITY_DESCRIPTION;
                         entity.IS_DEFAULT = obj.IS_DEFAULT;
@@ -144,7 +144,7 @@ namespace BS.Infra.Services.Setup
                     dbCtx.ENTITY_VALUE_TEXT.Remove(entity);
                     eQResult.rows = dbCtx.SaveChanges();
                     eQResult.success = true;
-                    eQResult.messages = NotifyService.DeletedSuccessString(entity.TEXT_ID!);
+                    eQResult.messages = NotifyService.DeletedSuccessString(entity.VALUE_NAME!);
                     return eQResult;
                 }
                 else
