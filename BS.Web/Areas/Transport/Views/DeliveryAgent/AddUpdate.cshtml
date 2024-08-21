@@ -1,0 +1,76 @@
+﻿@model BS.DMO.Models.Transport.DELIVERY_AGENT
+@{
+    ViewData["Title"] = "Delivery Agent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Add/Edit @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+        </div>
+    </div>
+    <form asp-action="AddUpdate">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="ID" type="hidden" />
+            <input asp-for="RowVersion" type="hidden" />
+            <div class="row">
+                <div class="col-md-2">
+                    <label asp-for="DELIVERY_AGENT_TYPE_ID" class="control-label"></label>
+                    <select asp-for="DELIVERY_AGENT_TYPE_ID" asp-items="@ViewBag.DELIVERY_AGENT_TYPE_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="DELIVERY_AGENT_TYPE_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="AGENT_NO" class="control-label"></label>
+                    <input asp-for="AGENT_NO" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Agent No">
+                    <span asp-validation-for="AGENT_NO" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="AGENT_NAME" class="control-label"></label>
+                    <input asp-for="AGENT_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Agent Name">
+                    <span asp-validation-for="AGENT_NAME" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="AGENT_CONTACT" class="control-label"></label>
+                    <input asp-for="AGENT_CONTACT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Cotnact">
+                    <span asp-validation-for="AGENT_CONTACT" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <label asp-for="AGENT_ADDRESS" class="control-label"></label>
+                    <input asp-for="AGENT_ADDRESS" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Address">
+                    <span asp-validation-for="AGENT_ADDRESS" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="LOAD_CAPACITY" class="control-label"></label>
+                    <input asp-for="LOAD_CAPACITY" class="form-control form-control-sm" autocomplete="off" placeholder="Load Capacity (In KG)">
+                    <span asp-validation-for="LOAD_CAPACITY" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="KPL" class="control-label"></label>
+                    <input asp-for="KPL" class="form-control form-control-sm" autocomplete="off" placeholder="KPL">
+                    <span asp-validation-for="KPL" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="IS_ACTIVE" class="control-label"></label>
+                    <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Index" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left"></i> Back</a>
+            <button class="btn btn-sm btn-info" type="reset"><i class="fa fa-undo"></i> Reset</button>
+            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Submit</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

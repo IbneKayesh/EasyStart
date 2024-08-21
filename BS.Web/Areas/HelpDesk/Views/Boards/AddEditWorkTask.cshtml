@@ -1,0 +1,175 @@
+﻿@model BS.DMO.Models.HelpDesk.WORK_TASK
+@{
+    ViewData["Title"] = "Work Task";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Add/Edit @ViewData["Title"]</h3>
+        <div class="card-tools">
+            
+        </div>
+    </div>
+    <form asp-action="AddEditWorkTask">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="ID" type="hidden" />
+            <input asp-for="REQUEST_DATE" type="hidden" />
+            <input asp-for="BOARD_ID" type="hidden" />
+            <input asp-for="RowVersion" type="hidden" />
+            <div class="row">
+                <div class="col-md-4">
+                    <label asp-for="WT_TYPE" class="control-label"></label>
+                    <select asp-for="WT_TYPE" asp-items="@ViewBag.WT_TYPE" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="WT_TYPE" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="PARENT_ID" class="control-label"></label>
+                    <input asp-for="PARENT_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="WT_TYPE">
+                    <span asp-validation-for="PARENT_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="BG_ID" class="control-label"></label>
+                    <select asp-for="BG_ID" asp-items="@ViewBag.BG_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="BG_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="STATUS_ID" class="control-label"></label>
+                    <select asp-for="STATUS_ID" asp-items="@ViewBag.STATUS_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="STATUS_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="PRIORITY_ID" class="control-label"></label>
+                    <select asp-for="PRIORITY_ID" asp-items="@ViewBag.PRIORITY_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="PRIORITY_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="TASK_TITLE" class="control-label"></label>
+                    <input asp-for="TASK_TITLE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="TASK_TITLE">
+                    <span asp-validation-for="TASK_TITLE" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="TASK_DESC" class="control-label"></label>
+                    <textarea asp-for="TASK_DESC" type="text" class="form-control" rows="5" placeholder="Write in detail"></textarea>
+                    <span asp-validation-for="TASK_DESC" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="TASK_FILE" class="control-label"></label>
+                    <input asp-for="TASK_FILE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="TASK_FILE">
+                    <span asp-validation-for="TASK_FILE" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="PROGRESS_PCT" class="control-label"></label>
+                    <input asp-for="PROGRESS_PCT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="PROGRESS_PCT">
+                    <span asp-validation-for="PROGRESS_PCT" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="TASK_VALUE" class="control-label"></label>
+                    <input asp-for="TASK_VALUE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="TASK_VALUE">
+                    <span asp-validation-for="TASK_VALUE" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="TAG_LIST" class="control-label"></label>
+                    <input asp-for="TAG_LIST" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="TAG_LIST">
+                    <span asp-validation-for="TAG_LIST" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="REQUEST_USER" class="control-label"></label>
+                    <input asp-for="REQUEST_USER" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="REQUEST_USER">
+                    <span asp-validation-for="REQUEST_USER" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="L1_USER" class="control-label"></label>
+                    <input asp-for="L1_USER" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="L1_USER">
+                    <span asp-validation-for="L1_USER" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="L1_DATE" class="control-label"></label>
+                    <input asp-for="L1_DATE" type="datetime-local" class="form-control form-control-sm" autocomplete="off" placeholder="L1_DATE">
+                    <span asp-validation-for="L1_DATE" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="L1_NOTE" class="control-label"></label>
+                    <input asp-for="L1_NOTE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="L1_NOTE">
+                    <span asp-validation-for="L1_NOTE" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="L2_USER" class="control-label"></label>
+                    <input asp-for="L2_USER" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="L2_USER">
+                    <span asp-validation-for="L2_USER" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="L2_DATE" class="control-label"></label>
+                    <input asp-for="L2_DATE" type="datetime-local" class="form-control form-control-sm" autocomplete="off" placeholder="L2_DATE">
+                    <span asp-validation-for="L2_DATE" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="L2_NOTE" class="control-label"></label>
+                    <input asp-for="L2_NOTE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="L2_NOTE">
+                    <span asp-validation-for="L2_NOTE" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="END_USER" class="control-label"></label>
+                    <input asp-for="END_USER" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="END_USER">
+                    <span asp-validation-for="END_USER" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="END_DATE" class="control-label"></label>
+                    <input asp-for="END_DATE" type="datetime-local" class="form-control form-control-sm" autocomplete="off" placeholder="END_DATE">
+                    <span asp-validation-for="END_DATE" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="END_NOTE" class="control-label"></label>
+                    <input asp-for="END_NOTE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="END_NOTE">
+                    <span asp-validation-for="END_NOTE" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="WORK_REMARKS" class="control-label"></label>
+                    <input asp-for="WORK_REMARKS" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="WORK_REMARKS">
+                    <span asp-validation-for="WORK_REMARKS" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="WORK_FILE" class="control-label"></label>
+                    <input asp-for="WORK_FILE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="WORK_FILE">
+                    <span asp-validation-for="WORK_FILE" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="WORK_START_DATE" class="control-label"></label>
+                    <input asp-for="WORK_START_DATE" class="form-control form-control-sm" readonly placeholder="Work Start Date Time">
+                    <span asp-validation-for="WORK_START_DATE" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="WORK_END_DATE" class="control-label"></label>
+                    <input asp-for="WORK_END_DATE" type="datetime-local" class="form-control form-control-sm" autocomplete="off" placeholder="Work End Date Time">
+                    <span asp-validation-for="WORK_END_DATE" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="TOTAL_WORK_HOURS" class="control-label"></label>
+                    <input asp-for="TOTAL_WORK_HOURS" class="form-control form-control-sm" autocomplete="off" placeholder="Total work hours" title="1hour 45 min input as 1.45">
+                    <span asp-validation-for="TOTAL_WORK_HOURS" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="IS_ACTIVE" class="control-label"></label>
+                    <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer">
+            <a asp-action="Index" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left"></i> Back</a>
+            <button class="btn btn-sm btn-info" type="reset"><i class="fa fa-undo"></i> Reset</button>
+            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Submit</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<BS.DMO.ViewModels.CRM.CONTACTS_VM>
+@{
+    ViewData["Title"] = "Contacts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Find your @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+        </div>
+    </div>
+
+    <div class="card-body table-responsive">
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Category</th>
+                    <th>Group</th>
+                    <th>Name</th>
+                    <th>Person</th>
+                    <th>Contact</th>
+                    <th>Balance</th>
+                    <th>Customer</th>
+                    <th>Seller</th>
+                    <th>Status</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CONTACT_CODE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CATEGORY_NAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CONTACT_GROUP)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CONTACT_NAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CONTACT_PERSON)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CONTACT_NO)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BALANCE_AMOUNT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IS_CUSTOMER)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IS_SELLER)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IS_ACTIVE)
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-secondary btn-xs dropdown-toggle" data-toggle="dropdown">Action</button>
+                                <ul class="dropdown-menu action-list">
+                                    <li><a class="btn btn-primary btn-xs btn-block" asp-area="CRM" asp-controller="Contacts" asp-action="CreateContactAddress" asp-route-contactId="@item.ID"><i class="fa fa-plus"></i> Add Address</a></li>
+                                    <li><a class="btn btn-primary btn-xs btn-block" asp-area="CRM" asp-controller="Contacts" asp-action="ContactAddress" asp-route-contactId="@item.ID"><i class="fa fa-list-alt"></i> Address</a></li>
+                                    <li><a class="btn btn-primary btn-xs btn-block" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-edit"></i> Edit</a></li>
+                                    <li><button type="button" class="btn btn-danger btn-xs btn-block delete-confirm" data-url="BankInfo/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<BS.DMO.ViewModels.HelpDesk.ROUTINE_TASK_VM>
+@{
+    ViewData["Title"] = "Routine Task";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Find your @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+        </div>
+    </div>
+
+    <div class="card-body table-responsive">
+        <table class="table table-hover table-bordered table-xs">
+            @{
+                var dateGrouped = Model.GroupBy(x => x.ROUTINE_DATE);
+                @foreach (var dateGroup in dateGrouped)
+                {
+                    <thead>
+                        <tr>
+                            <th colspan="4" class="text-center">@dateGroup.Key?.ToLongDateString()</th>
+                        </tr>
+                        <tr>
+                            <th>Routine Name</th>
+                            <th>Frequency</th>
+                            <th>Note</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    foreach (var item in dateGroup)
+                    {
+                        <tr>
+                            <td>@item.ROUTINE_NAME</td>
+                            <td>@item.ROUTINE_FREQUENCY</td>
+                            <td>@item.ROUTINE_NOTE</td>
+                            <td>
+                                @if (item.IS_DONE == "true")
+                                {
+                                    <span class="fas fa-check-circle text-success"></span>
+                                }
+                                else
+                                {
+                                    <span class="fas fa-times-circle text-danger"></span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </table>
+    </div>
+</div>

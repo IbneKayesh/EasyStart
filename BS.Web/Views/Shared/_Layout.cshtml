@@ -1,0 +1,100 @@
+﻿﻿@{
+    var frm_area = ViewContext.RouteData.Values["area"]?.ToString();
+    var frm_controller = ViewContext.RouteData.Values["controller"]?.ToString();
+    var frm_action = ViewContext.RouteData.Values["action"]?.ToString();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"] | BS</title>
+    @{
+        await Html.RenderPartialAsync("_CssPartial");
+    }
+</head>
+<body class="hold-transition layout-top-nav">
+    <div class="wrapper">
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header p-0 border-bottom border-dark">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6 text-small">
+                            <small>@Html.Raw(ViewBag.BackLink) @ViewData["Title"]</small>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6 text-right">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><small>@(string.IsNullOrEmpty(frm_area) ? "ESBS" : @frm_area)</small></li>
+                                <li class="breadcrumb-item"><small>@frm_controller</small></li>
+                                <li class="breadcrumb-item active"><small>@frm_action > @ViewData["Title"]</small></li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <div class="content mt-1">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- REQUIRED SCRIPTS -->
+    @{
+        await Html.RenderPartialAsync("_JsPartial");
+    }
+    <script>
+        //IFrame page protection
+        if (window.self !== window.top) {
+            // Page is loaded within an iframe
+        } else {
+            // Page is loaded directly
+            const links = document.querySelectorAll('a');
+            const buttons = document.querySelectorAll('button');
+            const inputs = document.querySelectorAll('input');
+
+            links.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                });
+                link.href = "";
+                link.setAttribute('aria-disabled', 'true');
+            });
+
+            buttons.forEach(button => {
+                button.disabled = true;
+            });
+
+            inputs.forEach(input => {
+                input.disabled = true;
+            });
+
+
+            $.notify('This page is intended for use within our application.', 'error');
+        }
+        $(document).ready(function () {
+            $('form').each(function () {
+                const form = $(this);
+                const button = form.find('button[type="submit"]');
+                //button.prop('disabled', true); // Initially disable the button
+                form.on('input change', 'input, select, textarea', function () {
+                    const errorFields = form.find('.field-validation-error');
+                    button.prop('disabled', errorFields.length > 0);
+                });
+            });
+        });
+
+
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

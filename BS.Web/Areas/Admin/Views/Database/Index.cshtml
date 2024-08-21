@@ -1,0 +1,45 @@
+﻿@model IEnumerable<BS.DMO.Models.Admin.DATABASE_BACKUP_RESTORE>
+@{
+    ViewData["Title"] = "Database Backup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Find your @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>File Name</th>
+                    <th>File Size</th>
+                    <th>Backup Time</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FILE_NAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FILE_SIZE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FILE_TIME)
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="Database/Delete/@item.FILE_NAME"><i class="fa fa-trash"></i> Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

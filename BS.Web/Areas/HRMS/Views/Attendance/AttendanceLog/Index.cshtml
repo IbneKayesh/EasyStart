@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BS.DMO.Models.HRMS.Attendance.ATTENDANCE_LOG>
+@{
+    ViewData["Title"] = "Attendance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Find your @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Process from Login Log</a>
+        </div>
+    </div>
+
+    <div class="card-body table-responsive">
+        <table class="table table-hover table-xs table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="2">Present: @Model.Where(x => x.ATTEN_NOTE != "Absent").Count(), Absent: @Model.Where(x => x.ATTEN_NOTE == "Absent").Count(), Total: @Model.Count()</th>
+                </tr>
+                <tr>
+                    <th>Attendance Date</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="@(item.ATTEN_NOTE =="Absent" ? "bg-danger" : "bg-success")">
+                        <td>
+                            @item.ATTEN_DATE.ToString(item.DATE_DISPLAY_FORMAT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ATTEN_NOTE)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

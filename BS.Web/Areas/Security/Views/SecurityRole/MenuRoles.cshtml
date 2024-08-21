@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BS.DMO.Models.Application.MENU_ROLE>
+@{
+    ViewData["Title"] = "Menu Roles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Find your @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="MenuItems"><i class="fa fa-chevron-left"></i> Back to List</a>
+        </div>
+    </div>
+
+    <div class="card-body table-responsive">
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>Role Id</th>
+                    <th>Status</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ROLE_ID)
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" asp-action="AddToRole" asp-route-id="@item.MENU_ID" asp-route-roleId="@item.ROLE_ID"><i class="fa fa-plus"></i> Edit Role</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

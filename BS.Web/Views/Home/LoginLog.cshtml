@@ -1,0 +1,16 @@
+﻿@model IEnumerable< BS.DMO.Models.Security.USER_LOGIN_INFO>
+@{
+    ViewData["Title"] = "Login Log";
+}
+<hr/>
+<table class="table table-sm">
+    <tr>
+        <td>Total: @Model.Count()</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.IN_TIME</td>
+        </tr>
+    }
+</table>

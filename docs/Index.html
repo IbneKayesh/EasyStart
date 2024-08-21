@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Start Business Solution</title>
+    <style>
+        body {
+            margin: 0px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 12px;
+        }
+
+        .header, .footer {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .container {
+            display: flex;
+            margin: 20px;
+            padding-bottom: 40px; /* To prevent content from hiding behind the footer */
+            height: calc(100vh - 80px); /* Full viewport height minus header and footer */
+        }
+
+        .left-panel {
+            width: 250px; /* Fixed width for the left panel */
+            margin-right: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-y: auto; /* Scrollable content */
+        }
+
+        .right-panel {
+            flex: 1; /* Takes up remaining space */
+            margin-left: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-y: auto; /* Scrollable content */
+        }
+
+
+
+
+
+
+        .menu {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-group {
+            margin-bottom: 20px;
+        }
+
+            .menu-group h3 {
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px;
+                margin: 0;
+                text-align: center;
+            }
+
+            .menu-group ul {
+                padding: 0;
+                margin: 0;
+            }
+
+                .menu-group ul li {
+                    border-bottom: 1px solid #ddd;
+                }
+
+                    .menu-group ul li a {
+                        display: block;
+                        padding: 10px;
+                        text-decoration: none;
+                        color: #333;
+                        transition: background-color 0.3s;
+                    }
+
+                        /*     .menu-group ul li a:hover {
+                                  background-color: #f4f4f4;
+                              }*/
+                        .menu-group ul li a:hover {
+                            background-color: #ddd; /* Change to your preferred hover color */
+                            color: #333; /* Optional: Change text color on hover */
+                        }
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 5px 0;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 4px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            /*background-color: #ddd;*/
+        }
+
+
+        mark {
+            background-color: lightgray;
+            color: black;
+        }
+
+        .mark-red {
+            background-color: red;
+            color: white;
+        }
+
+        .mark-green {
+            background-color: green;
+            color: white;
+        }
+
+        .mark-blue {
+            background-color: blue;
+            color: white;
+        }
+
+
+        .icon {
+            font-size: 16px;
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            text-align: center;
+            line-height: 15px;
+            border-radius: 50%;
+            color: white;
+        }
+
+        .icon-red {
+            background-color: red;
+            color: white;
+            border: 2px solid red;
+        }
+
+        .icon-green {
+            background-color: green;
+            color: white;
+            border: 2px solid green;
+        }
+
+        .icon-gray {
+            background-color: gray;
+            color: white;
+            border: 2px solid gray;
+        }
+
+        .icon-blue {
+            background-color: gray;
+            color: white;
+            border: 2px solid blue;
+        }
+
+        /* Light Cyan
+           background-color: #e0f7fa;
+
+           Light Pink
+           background-color: #ffebee;
+
+           Light Lime
+           background-color: #f1f8e9;
+
+           Light Blue: #b3e5fc
+           Light Green: #d0f4c8
+           Light Yellow: #fff9c4
+           Light Coral: #ffccbc
+        */
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>ESBS</h1>
+        <h3>Easy Start Business Solution</h3>
+    </div>
+
+    <div class="container">
+        <div class="left-panel">
+            <div class="menu-group">
+                <h3>Application</h3>
+                <ul class="menu">
+                    <li><a href="#application">Application</a></li>
+                    <li><a href="#modules">Modules</a></li>
+                </ul>
+            </div>
+            <div class="menu-group">
+                <h3>Modules</h3>
+                <ul class="menu">
+                    <li><a href="#company">Company</a></li>
+                    <li><a href="#helpdesk">Help Desk</a></li>
+                    <li><a href="#">Menu Item C</a></li>
+                </ul>
+            </div>
+            <!-- Add more menu groups as needed -->
+        </div>
+        <div class="right-panel">
+            <h2 id="application">Application</h2>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+                <tbody class="SOFTWARE" style="background-color: #fff9c4;">
+                    <tr>
+                        <td>ESBS</td>
+                        <td>Easy Start Business Solution</td>
+                    </tr>
+                    <tr>
+                        <td>Version</td>
+                        <td>1.0.0.1</td>
+                    </tr>
+                    <tr>
+                        <td>Version Description</td>
+                        <td>Feature.Issue.Fix.Improvement</td>
+                    </tr>
+                    <tr>
+                        <td>License</td>
+                        <td>FTUO</td>
+                    </tr>
+                    <tr>
+                        <td>License Description</td>
+                        <td>Free To Use Only (Personal or Commercial)</td>
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td><mark>In Development</mark></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 id="modules">Modules</h2>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+                <tbody class="MODULES" style="background-color: #f1f8e9;">
+                    <tr>
+                        <td>Company</td>
+                        <td>A Business with thier support entities setup information and personalization</td>
+                    </tr>
+                    <tr>
+                        <td>Help Desk</td>
+                        <td>Help Desk is a productivity module that leverages valuable time and reduces repetitive tasks and helps with resource planning.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <h2 id="company">Company</h2>
+            <p>A Business with thier support entities setup information and personalization</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Objectives</th>
+                        <th>Key Elements</th>
+                        <th>Details</th>
+                        <th>Timeline</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody class="BUSINESS" style="background-color: #e0f7fa;">
+                    <tr>
+                        <td rowspan="4">User Requirements</td>
+                        <td>Stories</td>
+                        <td>A BUSINESS is the main object what we have to manage using the software</td>
+                        <td rowspan="4">01-Aug-24 - </td>
+                        <td rowspan="4"><i class="icon icon-green"></i></td>
+                    </tr>
+                    <tr>
+                        <td>End Users</td>
+                        <td>Only administrative users can get access this pages</td>
+                    </tr>
+                    <tr>
+                        <td>Functional Requirements</td>
+                        <td>Add new data, Edit old data, Delete wrong data</td>
+                    </tr>
+                    <tr>
+                        <td>Non-Functional Requirements</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">Development</td>
+                        <td>Module</td>
+                        <td>This page is available under Admin</td>
+                        <td rowspan="4">01-Aug-24 - </td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Table</td>
+                        <td><mark>BUSINESS</mark></td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Columns</td>
+                        <td>ID, NAME</td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Table Relations</td>
+                        <td></td>
+                        <td><i class="icon icon-red"></i></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">Test Case</td>
+                        <td>Add New data</td>
+                        <td>
+                            <ul>
+                                <li>Insert new data, with entry User ID, entry time</li>
+                                <li>Insert Page will redirect to Index page</li>
+                            </ul>
+                        </td>
+                        <td rowspan="4">01-Aug-24 - </td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Edit old data</td>
+                        <td>
+                            <ul>
+                                <li>Edit old data, with edit User ID, edit time</li>
+                                <li>Edit Page will use Insert page</li>
+                                <li>Edit Page will redirect to Index page</li>
+                            </ul>
+                        </td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Delete wrong data</td>
+                        <td>
+                            <ul>
+                                <li>Delete wrong data, with check <mark>Child Tables</mark></li>
+                                <li>Delete operation will execute in Index page</li>
+                                <li>Show delete confirmation message, Yes button will execute delete operation</li>
+                                <li>After delete, selected row will be removed</li>
+                            </ul>
+                        </td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                </tbody>
+                <tbody class="BUSINESS_LINE" style="background-color: #ffebee; ">
+                    <tr>
+                        <td rowspan="4">User Requirements</td>
+                        <td>Stories</td>
+                        <td>A BUSINESS is the main object what we have to manage using the software</td>
+                        <td rowspan="4">01-Aug-24 - </td>
+                        <td rowspan="4"><i class="icon icon-green"></i></td>
+                    </tr>
+                    <tr>
+                        <td>End Users</td>
+                        <td>Only administrative users can get access this pages</td>
+                    </tr>
+                    <tr>
+                        <td>Functional Requirements</td>
+                        <td>Add new data, Edit old data, Delete wrong data</td>
+                    </tr>
+                    <tr>
+                        <td>Non-Functional Requirements</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">Development</td>
+                        <td>Module</td>
+                        <td>This page is available under Admin</td>
+                        <td rowspan="4">01-Aug-24 - </td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Table</td>
+                        <td><mark>BUSINESS</mark></td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Columns</td>
+                        <td>ID, NAME</td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Table Relations</td>
+                        <td></td>
+                        <td><i class="icon icon-red"></i></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">Test Case</td>
+                        <td>Add New data</td>
+                        <td>
+                            <ul>
+                                <li>Insert new data, with entry User ID, entry time</li>
+                                <li>Insert Page will redirect to Index page</li>
+                            </ul>
+                        </td>
+                        <td rowspan="4">01-Aug-24 - </td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Edit old data</td>
+                        <td>
+                            <ul>
+                                <li>Edit old data, with edit User ID, edit time</li>
+                                <li>Edit Page will use Insert page</li>
+                                <li>Edit Page will redirect to Index page</li>
+                            </ul>
+                        </td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Delete wrong data</td>
+                        <td>
+                            <ul>
+                                <li>Delete wrong data, with check <mark>Child Tables</mark></li>
+                                <li>Delete operation will execute in Index page</li>
+                                <li>Show delete confirmation message, Yes button will execute delete operation</li>
+                                <li>After delete, selected row will be removed</li>
+                            </ul>
+                        </td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 id="helpdesk">Help Desk</h2>
+            <p>Help Desk is a productivity module that leverages valuable time and reduces repetitive tasks and helps with resource planning.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Objectives</th>
+                        <th>Key Elements</th>
+                        <th>Details</th>
+                        <th>Timeline</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody class="ROUTINE_NAMES" style="background-color: #e0f7fa;">
+                    <tr>
+                        <td rowspan="4">User Requirements</td>
+                        <td>Stories</td>
+                        <td>A ROUTINE_NAMES is the name list of routine task name list. ex- Taking shower (daily)</td>
+                        <td rowspan="4">01-Aug-24 - </td>
+                        <td rowspan="4"><i class="icon icon-green"></i></td>
+                    </tr>
+                    <tr>
+                        <td>End Users</td>
+                        <td>Only administrative users can get access this pages</td>
+                    </tr>
+                    <tr>
+                        <td>Functional Requirements</td>
+                        <td>Add new data, Edit old data, Delete wrong data</td>
+                    </tr>
+                    <tr>
+                        <td>Non-Functional Requirements</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">Development</td>
+                        <td>Module</td>
+                        <td>This page is available under Help Desk > Setup</td>
+                        <td rowspan="4">01-Aug-24 - </td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Table</td>
+                        <td><mark>ROUTINE_NAMES</mark></td>
+                        <td><i class="icon icon-green"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Columns</td>
+                        <td>ID, ROUTINE_NAME, ROUTINE_FREQUENCY : BASE_MODEL</td>
+                        <td><i class="icon icon-green"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Table Relations</td>
+                        <td>Parent of : <mark>ROUTINE_TASK</mark></td>
+                        <td><i class="icon icon-green"></i></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">Test Case</td>
+                        <td>Add New data</td>
+                        <td>
+                            <ul>
+                                <li>Insert new data, with entry User ID, entry time</li>
+                                <li>Insert Page will redirect to Index page</li>
+                            </ul>
+                        </td>
+                        <td rowspan="4">01-Aug-24 - </td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Edit old data</td>
+                        <td>
+                            <ul>
+                                <li>Edit old data, with edit User ID, edit time</li>
+                                <li>Edit Page will use Insert page</li>
+                                <li>Edit Page will redirect to Index page</li>
+                            </ul>
+                        </td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Delete wrong data</td>
+                        <td>
+                            <ul>
+                                <li>Delete wrong data, with check <mark>Child Tables</mark></li>
+                                <li>Delete operation will execute in Index page</li>
+                                <li>Show delete confirmation message, Yes button will execute delete operation</li>
+                                <li>After delete, selected row will be removed</li>
+                            </ul>
+                        </td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                </tbody>
+
+                <tbody class="ROUTINE_TASK" style="background-color: #d0f4c8;">
+                    <tr>
+                        <td rowspan="4">User Requirements</td>
+                        <td>Stories</td>
+                        <td>A ROUTINE_TASK is the daily entries of user task ensure list with routine task name. ex- Date, Yes, Taking shower (daily)</td>
+                        <td rowspan="4">01-Aug-24 - </td>
+                        <td rowspan="4"><i class="icon icon-green"></i></td>
+                    </tr>
+                    <tr>
+                        <td>End Users</td>
+                        <td>All users can get access this pages</td>
+                    </tr>
+                    <tr>
+                        <td>Functional Requirements</td>
+                        <td>Add new data, Edit old data, Delete wrong data</td>
+                    </tr>
+                    <tr>
+                        <td>Non-Functional Requirements</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">Development</td>
+                        <td>Module</td>
+                        <td>This page is available under Help Desk</td>
+                        <td rowspan="4">01-Aug-24 - </td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Table</td>
+                        <td><mark>ROUTINE_TASK</mark></td>
+                        <td><i class="icon icon-green"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Columns</td>
+                        <td>ID, USER_ID, ROUTINE_NAMES_ID, ROUTINE_DATE, ROUTINE_NOTE, IS_DONE : BASE_MODEL</td>
+                        <td><i class="icon icon-green"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Table Relations</td>
+                        <td>Child of : <mark>ROUTINE_NAMES</mark></td>
+                        <td><i class="icon icon-green"></i></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">Test Case</td>
+                        <td>Add New data</td>
+                        <td>
+                            <ul>
+                                <li>Insert new data, with entry User ID, entry time</li>
+                                <li>Insert Page will redirect to Index page</li>
+                            </ul>
+                        </td>
+                        <td rowspan="4">01-Aug-24 - </td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Edit old data</td>
+                        <td>
+                            <ul>
+                                <li>Edit old data, with edit User ID, edit time</li>
+                                <li>Edit Page will use Insert page</li>
+                                <li>Edit Page will redirect to Index page</li>
+                            </ul>
+                        </td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Delete wrong data</td>
+                        <td>
+                            <ul>
+                                <li>Delete wrong data, with check <mark>Child Tables</mark></li>
+                                <li>Delete operation will execute in Index page</li>
+                                <li>Show delete confirmation message, Yes button will execute delete operation</li>
+                                <li>After delete, selected row will be removed</li>
+                            </ul>
+                        </td>
+                        <td><i class="icon icon-gray"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>ESBS -  Your Business Assistant</p>
+    </div>
+
+</body>
+</html>

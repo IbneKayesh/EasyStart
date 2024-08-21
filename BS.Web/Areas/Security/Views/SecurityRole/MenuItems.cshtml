@@ -1,0 +1,47 @@
+﻿@model IEnumerable<BS.DMO.Models.Application.CLASSIC_MENU>
+@{
+    ViewData["Title"] = "Classic Menu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Find your @ViewData["Title"]</h3>
+        <div class="card-tools">
+        </div>
+    </div>
+
+    <div class="card-body table-responsive">
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>Menu Id</th>
+                    <th>Menu Name</th>
+                    <th>Status</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MENU_ID)
+                        </td>
+                        <td>
+                            <i class="@item.MENU_ICON @item.MENU_COLOR">
+                                @Html.DisplayFor(modelItem => item.MENU_NAME)
+                            </i>
+                        </td>
+                        <td>
+                            @if (item.CHILD_NODE == "N")
+                            {
+                                <a class="btn btn-primary btn-xs" asp-action="MenuRoles" asp-route-id="@item.MENU_ID"><i class="fa fa-th"></i> Roles</a>
+                                <a class="btn btn-primary btn-xs" asp-action="AddToRole" asp-route-id="@item.MENU_ID"><i class="fa fa-plus"></i> Add to Role</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

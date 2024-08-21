@@ -1,0 +1,64 @@
+﻿@model IEnumerable<BS.DMO.Models.Application.APP_NOTIFICATIONS>
+@{
+    ViewData["Title"] = "Notifications";
+    Layout = "~/Views/Shared/_Layout_Top.cshtml";
+}
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Find your @ViewData["Title"]</h3>
+        <div class="card-tools">
+        </div>
+    </div>
+
+    <div class="card-body">
+        <table class="table table-hover table-bordered table-xs">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Body Text</th>
+                    <th>URL</th>
+                    <th>To User</th>
+                    <th>To User Group</th>
+                    <th>From User</th>
+                    <th>Priority</th>
+                    <th>Is Read</th>
+                    <th>Read Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TITLE_TEXT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BODY_TEXT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NAV_URL)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TO_USER)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TO_USER_GROUP)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FROM_USER)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PRIORITY_LEVEL)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IS_READ)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.READ_TIME)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

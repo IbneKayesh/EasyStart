@@ -1,0 +1,20 @@
+﻿@model System.String
+@{
+    ViewData["Title"] = "Home Page";
+
+    Layout = "~/Views/Shared/_Layout_Top.cshtml";
+
+    <style>
+        .tab-close-button {
+            font-size: 1.2rem;
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+    </style>
+}
+<h3>
+    <a asp-area="" asp-controller="Home" asp-action="LoginLog">Login Log</a> | 
+    <a asp-area="Application" asp-controller="ClassicMenu" asp-action="Index">Menu</a>
+</h3>
+<hr />
+<textarea cols="140" rows="10">@Model</textarea>

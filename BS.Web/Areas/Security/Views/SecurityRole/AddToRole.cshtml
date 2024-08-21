@@ -1,0 +1,62 @@
+﻿@model BS.DMO.Models.Application.MENU_ROLE
+@{
+    ViewData["Title"] = "Add to Role";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Add/Edit @ViewData["Title"]</h3>
+        <div class="card-tools">
+        </div>
+    </div>
+    <form asp-action="AddToRole">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="MENU_ID" type="hidden" />
+            <input asp-for="RowVersion" type="hidden" />
+            <div class="row">
+                <div class="col-md-6">
+                    <label asp-for="ROLE_ID" class="control-label"></label>
+                    <select asp-for="ROLE_ID" asp-items="@ViewBag.ROLE_ID" class="form-control form-control-sm">
+                    </select><span asp-validation-for="ROLE_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="IS_SELECT" class="control-label"></label>
+                    <input asp-for="IS_SELECT" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_SELECT" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="IS_INSERT" class="control-label"></label>
+                    <input asp-for="IS_INSERT" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_INSERT" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="IS_UPDATE" class="control-label"></label>
+                    <input asp-for="IS_UPDATE" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_UPDATE" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="IS_DELETE" class="control-label"></label>
+                    <input asp-for="IS_DELETE" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_DELETE" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="IS_ACTIVE" class="control-label"></label>
+                    <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a asp-action="MenuItems" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left"></i> Back</a>
+            <button class="btn btn-sm btn-info" type="reset"><i class="fa fa-undo"></i> Reset</button>
+            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Submit</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

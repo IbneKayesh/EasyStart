@@ -1,0 +1,165 @@
+﻿@model BS.DMO.Models.Inventory.PRODUCTS
+@{
+    ViewData["Title"] = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Add/Edit @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+        </div>
+    </div>
+    <form asp-action="AddUpdate">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="ID" type="hidden" />
+            <input asp-for="RowVersion" type="hidden" />
+            <div class="row">
+                <div class="col-md-2">
+                    <label asp-for="BUSINESS_LINE_ID" class="control-label"></label>
+                    <select asp-for="BUSINESS_LINE_ID" asp-items="@ViewBag.BUSINESS_LINE_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="BUSINESS_LINE_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="PRODUCT_TYPE_ID" class="control-label"></label>
+                    <select asp-for="PRODUCT_TYPE_ID" asp-items="@ViewBag.PRODUCT_TYPE_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="PRODUCT_TYPE_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="PRODUCT_CLASS_ID" class="control-label"></label>
+                    <select asp-for="PRODUCT_CLASS_ID" asp-items="@ViewBag.PRODUCT_CLASS_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="PRODUCT_CLASS_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="PRODUCT_CATEGORY_ID" class="control-label"></label>
+                    <select asp-for="PRODUCT_CATEGORY_ID" asp-items="@ViewBag.PRODUCT_CATEGORY_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="PRODUCT_CATEGORY_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="PRODUCT_BRAND_ID" class="control-label"></label>
+                    <select asp-for="PRODUCT_BRAND_ID" asp-items="@ViewBag.PRODUCT_BRAND_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="PRODUCT_BRAND_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="UNIT_CHILD_ID" class="control-label"></label>
+                    <select asp-for="UNIT_CHILD_ID" asp-items="@ViewBag.UNIT_CHILD_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="UNIT_CHILD_ID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label asp-for="PRODUCT_CODE" class="control-label"></label>
+                    <input asp-for="PRODUCT_CODE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Code">
+                    <span asp-validation-for="PRODUCT_CODE" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="BAR_CODE" class="control-label"></label>
+                    <input asp-for="BAR_CODE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Barcode">
+                    <span asp-validation-for="BAR_CODE" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="PRODUCT_NAME" class="control-label"></label>
+                    <input asp-for="PRODUCT_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Product Name">
+                    <span asp-validation-for="PRODUCT_NAME" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="PRODUCT_DESC" class="control-label"></label>
+                    <input asp-for="PRODUCT_DESC" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Product Description">
+                    <span asp-validation-for="PRODUCT_DESC" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="PRODUCT_IMG" class="control-label"></label>
+                    <input asp-for="PRODUCT_IMG" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Image">
+                    <span asp-validation-for="PRODUCT_IMG" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label asp-for="LAST_PURCHASE_RATE" class="control-label"></label>
+                    <input asp-for="LAST_PURCHASE_RATE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Last Purchase Rate">
+                    <span asp-validation-for="LAST_PURCHASE_RATE" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="LAST_SALES_RATE" class="control-label"></label>
+                    <input asp-for="LAST_SALES_RATE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Last Sales Rate">
+                    <span asp-validation-for="LAST_SALES_RATE" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="HAS_WARRANTY" class="control-label"></label>
+                    <input asp-for="HAS_WARRANTY" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="HAS_WARRANTY" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="HAS_EXPIRY" class="control-label"></label>
+                    <input asp-for="HAS_EXPIRY" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="HAS_EXPIRY" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="IS_MAIN_PRODUCT" class="control-label"></label>
+                    <input asp-for="IS_MAIN_PRODUCT" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_MAIN_PRODUCT" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="VAT_PCT" class="control-label"></label>
+                    <input asp-for="VAT_PCT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="VAT %">
+                    <span asp-validation-for="VAT_PCT" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="BASE_PRICE" class="control-label"></label>
+                    <input asp-for="BASE_PRICE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Base Price">
+                    <span asp-validation-for="BASE_PRICE" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="WEIGHT_PER_UNIT" class="control-label"></label>
+                    <input asp-for="WEIGHT_PER_UNIT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Weight Per Unit">
+                    <span asp-validation-for="WEIGHT_PER_UNIT" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label asp-for="WEIGHT_FORMULA" class="control-label"></label>
+                    <input asp-for="WEIGHT_FORMULA" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Weight Formula">
+                    <span asp-validation-for="WEIGHT_FORMULA" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="NET_WEIGHT" class="control-label"></label>
+                    <input asp-for="NET_WEIGHT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Net Weight">
+                    <span asp-validation-for="NET_WEIGHT" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="PRICE_FORMULA" class="control-label"></label>
+                    <input asp-for="PRICE_FORMULA" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Price Formula">
+                    <span asp-validation-for="PRICE_FORMULA" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="NET_PRICE" class="control-label"></label>
+                    <input asp-for="NET_PRICE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Net Price">
+                    <span asp-validation-for="NET_PRICE" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="IS_ACTIVE" class="control-label"></label>
+                    <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Index" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left"></i> Back</a>
+            <button class="btn btn-sm btn-info" type="reset"><i class="fa fa-undo"></i> Reset</button>
+            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Submit</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

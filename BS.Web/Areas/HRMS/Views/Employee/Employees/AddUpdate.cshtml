@@ -1,0 +1,55 @@
+﻿@model BS.DMO.Models.HRMS.Employee.EMPLOYEES
+@{
+    ViewData["Title"] = "Employees";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Add/Edit @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+        </div>
+    </div>
+    <form asp-action="AddUpdate">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="ID" type="hidden" />
+            <input asp-for="RowVersion" type="hidden" />
+            <div class="row">
+                <div class="col-md-1">
+                    <label asp-for="EMP_NO" class="control-label"></label>
+                    <input asp-for="EMP_NO" class="custom-input custom-input-xs" autocomplete="off" placeholder="Employee No">
+                    <span asp-validation-for="EMP_NO" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="EMP_NAME" class="control-label"></label>
+                    <input asp-for="EMP_NAME" type="text" class="custom-input custom-input-xs" autocomplete="off" placeholder="Employee Name">
+                    <span asp-validation-for="EMP_NAME" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="DESIG_ID" class="control-label"></label>
+                    <select asp-for="DESIG_ID" asp-items="@(new SelectList(ViewBag.DESIG_ID, "ID", "DESIGNATION_NAME"))" class="custom-input custom-input-xs">
+                        <option value="">Select an option</option>
+                    </select>
+                    <span asp-validation-for="DESIG_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="IS_ACTIVE" class="control-label"></label>
+                    <input asp-for="IS_ACTIVE" type="checkbox" class="custom-input custom-input-xs">
+                    <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Index" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left"></i> Back</a>
+            <button class="btn btn-sm btn-info" type="reset"><i class="fa fa-undo"></i> Reset</button>
+            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Submit</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

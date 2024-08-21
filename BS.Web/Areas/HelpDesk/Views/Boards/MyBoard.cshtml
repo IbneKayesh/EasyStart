@@ -1,0 +1,56 @@
+﻿@model IEnumerable<BS.DMO.Models.HelpDesk.BOARD_GROUP>
+@{
+    ViewData["Title"] = "My Board";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Find your @ViewData["Title"]</h3>
+        <div class="card-tools">
+        </div>
+    </div>
+
+    <div class="card-body row">
+        @foreach (var boardboard in Model)
+        {
+            <div class="col-md-3">
+                <div class="card card-row card-@boardboard.BS_COLOR">
+                    <div class="card-header p-2 pr-3">
+                        <h3 class="card-title">
+                            <a class="btn btn-xs" asp-action="AddEditBoardGroup" asp-route-id="@boardboard.ID" asp-route-board="@boardboard.BOARD_ID">@boardboard.GROUP_NAME <i class="fas fa-pen"></i></a>
+                            <span class="badge badge-secondary">@boardboard.WORK_TASK_VM.Count</span>
+                        </h3>
+                        <div class="card-tools">
+                            <a class="btn btn-xs" asp-action="AddWorkTask" asp-route-id="" asp-route-board="@boardboard.BOARD_ID" asp-route-bgid="@boardboard.ID"><i class="fas fa-plus text-white"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        @foreach (var wt_item in boardboard.WORK_TASK_VM)
+                        {
+                            <div class="card card-info card-outline p-1 mt-1 mb-2">
+                                <div class="card-header p-2">
+                                    <span class="badge badge-@boardboard.BS_COLOR">@wt_item.WT_TYPE</span>
+                                    <div class="card-tools">
+                                        <span class="badge badge-@wt_item.BS_COLOR">@wt_item.STATUS_NAME</span>
+                                        <span class="badge badge-primary">@wt_item.PROGRESS_PCT%</span>
+                                        <small class="badge badge-@boardboard.BS_COLOR">@wt_item.PRIORITY_ID</small>
+                                        <a asp-action="EditWorkTask" asp-route-id="@wt_item.ID" asp-route-board="@boardboard.BOARD_ID" asp-route-bgid="@boardboard.ID" class="btn btn-tool">
+                                            <i class="fas fa-pen"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card-body p-1">
+                                    <p>@(wt_item.TASK_TITLE.Length > 100 ? wt_item.TASK_TITLE.Substring(0, 100) : wt_item.TASK_TITLE)</p>
+                                    <small>@(wt_item.TASK_DESC.Length > 150 ? wt_item.TASK_DESC.Substring(0, 150) : wt_item.TASK_DESC)</small>
+                                    <hr />
+                                    <small>@wt_item.WAIT_DURATION ~ @wt_item.TOTAL_DURATION</small>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

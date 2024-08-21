@@ -1,0 +1,54 @@
+﻿@model BS.DMO.ViewModels.HelpDesk.ROUTINE_TASK_CREATE_VM
+@{
+    ViewData["Title"] = "Routine Task";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Add/Edit @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+        </div>
+    </div>
+    <form asp-action="AddUpdate">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <table class="table table-bordered table-sm">
+                <tr>
+                    <th colspan="4" class="text-center">@Model.ROUTINE_TASK_VM[0].ROUTINE_DATE?.ToLongDateString()</th>
+                </tr>
+                <tr>
+                    <th>Routine Name</th>
+                    <th>Frequency</th>
+                    <th>Note</th>
+                    <th>Status</th>
+                </tr>
+                @for (int i = 0; i < Model.ROUTINE_TASK_VM.Count; i++)
+                {
+                    var item = Model.ROUTINE_TASK_VM[i];
+                    <tr>
+                        <td>
+                            <input name="@Model.ROUTINE_TASK_VM[i].ID" type="hidden" value="@item.ID" />
+                            <input name="ROUTINE_TASK_VM[@i].ROUTINE_NAMES_ID" type="hidden" value="@item.ROUTINE_NAMES_ID" />
+                            @item.ROUTINE_NAME
+                        </td>
+                        <td>@item.ROUTINE_FREQUENCY</td>
+                        <td><input name="ROUTINE_TASK_VM[@i].ROUTINE_NOTE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Routine Note" value="@item.ROUTINE_NOTE"></td>
+                        <td><input name="ROUTINE_TASK_VM[@i].IS_DONE" type="checkbox" class="form-control form-control-sm" @(item.IS_DONE.ToString().ToLower() == "true" ? "checked" : "")></td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Index" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left"></i> Back</a>
+            <button class="btn btn-sm btn-info" type="reset"><i class="fa fa-undo"></i> Reset</button>
+            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Submit</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

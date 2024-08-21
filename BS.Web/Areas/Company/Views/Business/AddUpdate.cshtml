@@ -1,0 +1,82 @@
+﻿@model BS.DMO.Models.Company.BUSINESS
+@{
+    ViewData["Title"] = "Business";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Add/Edit @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+        </div>
+    </div>
+    <form asp-action="AddUpdate">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="ID" type="hidden" />
+            <input asp-for="RowVersion" type="hidden" />
+            <div class="row">
+                <div class="col-md-4">
+                    <label asp-for="BUSINESS_NAME" class="control-label"></label>
+                    <input asp-for="BUSINESS_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Business Name">
+                    <span asp-validation-for="BUSINESS_NAME" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="SHORT_NAME" class="control-label"></label>
+                    <input asp-for="SHORT_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Short Name">
+                    <span asp-validation-for="SHORT_NAME" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="ADDRESS_INFO" class="control-label"></label>
+                    <input asp-for="ADDRESS_INFO" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Address">
+                    <span asp-validation-for="ADDRESS_INFO" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label asp-for="CONTACT_NAME" class="control-label"></label>
+                    <input asp-for="CONTACT_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Contact Name">
+                    <span asp-validation-for="CONTACT_NAME" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="CONTACT_NO" class="control-label"></label>
+                    <input asp-for="CONTACT_NO" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Contact No">
+                    <span asp-validation-for="CONTACT_NO" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="EMAIL_ADDRESS" class="control-label"></label>
+                    <input asp-for="EMAIL_ADDRESS" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Email">
+                    <span asp-validation-for="EMAIL_ADDRESS" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label asp-for="MAX_EMPLOYEE" class="control-label"></label>
+                    <input asp-for="MAX_EMPLOYEE" class="form-control form-control-sm" autocomplete="off" placeholder="Max Employee">
+                    <span asp-validation-for="MAX_EMPLOYEE" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="MAX_SALARY" class="control-label"></label>
+                    <input asp-for="MAX_SALARY" class="form-control form-control-sm" autocomplete="off" placeholder="Max Total Salary">
+                    <span asp-validation-for="MAX_SALARY" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="IS_ACTIVE" class="control-label"></label>
+                    <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm" >
+                    <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Index" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left"></i> Back</a>
+            <button class="btn btn-sm btn-info" type="reset"><i class="fa fa-undo"></i> Reset</button>
+            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Submit</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,155 @@
+﻿@* @model IEnumerable<BS.DMO.ViewModels.Application.CLASSIC_MENU_VM> *@
+    @model IEnumerable<BS.DMO.Models.Application.CLASSIC_MENU>
+@{
+    ViewData["Title"] = "Classic Menu";
+    Layout = "~/Views/Shared/_Layout_Top.cshtml";
+    <style>
+        .tab-close-button {
+            font-size: 1.2rem;
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+            .overlay .text-bold {
+                color: white;
+                font-size: 1.2em;
+            }
+
+    </style>
+}
+<div class="card card-primary card-outline card-outline-tabs">
+    <div class="card-header p-0 border-bottom-0">
+        <ul class="nav nav-tabs" id="app-classic-menu-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="classic-menu-home-tab" data-toggle="pill" href="#classic-menu-tab-home" role="tab" aria-controls="classic-menu-tab-home" aria-selected="true">
+                    Home
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body p-1">
+        <div class="tab-content" id="app-classic-menu-tabsContent">
+            <div class="tab-pane fade active show" id="classic-menu-tab-home" role="tabpanel" aria-labelledby="classic-menu-home-tab">
+                <span class="btn btn-app show-top-nav">
+                    <i class="fas fa-list"></i> Menu
+                </span>
+                <a class="btn btn-app" asp-area="Application" asp-controller="ClassicMenu" asp-action="Index">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                @if (Model != null && Model.Count() > 0)
+                {
+                    if (@Model.FirstOrDefault().PARENT_NODE != "N")
+                    {
+                        <a class="btn btn-app bg-gray" asp-area="Application" asp-controller="ClassicMenu" asp-action="Index" asp-route-prev="@Model.FirstOrDefault().PARENT_NODE">
+                            <i class="fas fa-reply"></i> Back
+                        </a>
+                    }
+                }
+                @foreach (var item in Model)
+                {
+                    if (item.CHILD_NODE == "N")
+                    {
+                        @* <a class="btn btn-app @item.MENU_COLOR work-page" asp-area="@item.MENU_AREA" asp-controller="@item.MENU_CONTROLLER" asp-action="@item.MENU_ACTION" title="@item.MENU_NOTE"> *@
+                        <a class="btn btn-app @item.MENU_COLOR work-page" data-url="/@item.MENU_AREA/@item.MENU_CONTROLLER/@item.MENU_ACTION" data-menu-name="@item.MENU_NAME" data-target="@item.PAGE_ID" title="@item.MENU_NOTE">
+                            @if (!string.IsNullOrWhiteSpace(item.PAGE_ID))
+                            {
+                                <span class="badge bg-gray">@item.PAGE_ID</span>
+                            }
+                            <i class="@item.MENU_ICON"></i> @item.MENU_NAME
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-app @item.MENU_COLOR" asp-area="Application" asp-controller="ClassicMenu" asp-action="Index" asp-route-next="@item.MENU_ID">
+                            @if (!string.IsNullOrWhiteSpace(item.PAGE_ID))
+                            {
+                                <span class="badge bg-gray">@item.PAGE_ID</span>
+                            }
+                            <i class="@item.MENU_ICON"></i> @item.MENU_NAME
+                        </a>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <!-- /.card -->
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#classic-menu-tab-home').on('click', '.work-page', function (e) {
+                var url = $(this).data('url');
+                var menuname = $(this).data('menu-name');
+                var target = $(this).data('target');
+                var tabId = 'tab-' + target;
+
+                // Create new tab content if it doesn't already exist
+                if ($('#' + tabId).length === 0) {
+                    // Create new tab content
+                    var pageContent = $('<div class="tab-pane fade" id="' + tabId + '" role="tabpanel" aria-labelledby="' + tabId + '-tab">');
+
+                    // Add overlay to pageContent
+                    var overlay = $('<div class="overlay dark"><i class="fas fa-3x fa-sync-alt fa-spin"></i><div class="text-bold pt-2"> Loading... please wait...</div></div>');
+                    pageContent.append(overlay);
+
+                    // Create iframe
+                    var iframe = $('<iframe src="' + url + '" class="w-100" style="height: 510px;" loading="lazy" title="' + menuname + '"></iframe>');
+                    pageContent.append(iframe);
+
+                    // Append pageContent to tabs content
+                    $('#app-classic-menu-tabsContent').append(pageContent);
+
+                    // Create new tab navigation link
+                    var tabLink = $('<a class="nav-link" id="' + tabId + '-tab" data-toggle="pill" href="#' + tabId + '" role="tab" aria-controls="' + tabId + '" aria-selected="true">' + menuname + '<span class="tab-close-button" aria-label="Close">&times;</span></a>');
+                    var navItem = $('<li class="nav-item"></li>').append(tabLink);
+                    $('#app-classic-menu-tabs').append(navItem);
+
+                    // Activate the new tab
+                    tabLink.tab('show');
+
+                    // Handle iframe load event to hide overlay
+                    iframe.on('load', function () {
+                        setTimeout(function () {
+                            overlay.fadeOut();
+                        }, 150); // Short delay to ensure the iframe is fully loaded
+                    });
+
+
+                } else {
+                    // If tab already exists, activate it
+                    $('#' + tabId + '-tab').tab('show');
+                }
+            });
+
+            // Handle click event on tab close buttons
+            $('#app-classic-menu-tabs').on('click', '.tab-close-button', function (e) {
+                e.preventDefault();
+                var tabLink = $(this).closest('a');
+                var tabId = tabLink.attr('href').substr(1);
+
+                // Remove tab and content
+                tabLink.parent().remove(); // Remove the tab link
+                $('#' + tabId).remove(); // Remove the tab content
+
+                // Activate the first tab if there are no active tabs
+                if ($('.nav-link.active').length === 0) {
+                    $('#app-classic-menu-tabs .nav-link').first().tab('show');
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,205 @@
+﻿    <!-- jQuery -->
+<script src="~/assets/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Jquery UI -->
+<script src="~/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- PNotify -->
+<script src="~/assets/notify.min.js"></script>
+<!--Select 2-->
+<script src="~/assets/plugins/select2/js/select2.full.min.js"></script>
+
+<!-- DataTables  & Plugins -->
+<script src="~/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="~/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="~/assets/plugins/jszip/jszip.min.js"></script>
+<script src="~/assets/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/assets/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+
+<!-- Tempusdominus Bootstrap 4 (date time)-->
+<script src="~/assets/plugins/moment/moment.min.js"></script>
+<script src="~/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<!-- AdminLTE App -->
+<script src="~/assets/dist/js/adminlte.min.js"></script>
+
+<!--Alertify-->
+<script src="~/assets/alertifyjs/alertify.min.js"></script>
+<!--Easy Start App JS-->
+
+<script src="~/scripts/app.js"></script>
+
+<script type="text/javascript">
+    //override defaults
+    alertify.defaults.transition = "zoom";
+    alertify.defaults.theme.ok = "btn btn-primary";
+    alertify.defaults.theme.cancel = "btn btn-danger";
+    alertify.defaults.theme.input = "form-control";
+</script>
+
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        var url = window.location;
+        $('ul.nav-treeview a').filter(function () {
+            return this.href == url;
+        }).addClass('active');
+        $('ul.nav-sidebar a').filter(function () {
+            return this.href == url;
+        }).parent().parent().parent().addClass('menu-open').children('.nav-link').addClass('active');
+    });
+</script>
+<script>
+    $(document).scroll(function () {
+        localStorage['page'] = document.URL;
+        localStorage['scrollTop'] = $(document).scrollTop();
+    });
+    $(document).ready(function () {
+        if (localStorage['page'] == document.URL) {
+            $(document).scrollTop(localStorage['scrollTop']);
+        }
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        var sidebarState = localStorage.getItem("sidebarState") || "closed";
+        if (sidebarState === "closed") {
+            $('body').removeClass('sidebar-collapse')
+            $(window).trigger('resize')
+        } else {
+            $('body').addClass('sidebar-collapse')
+            $(window).trigger('resize')
+        }
+        $("#sbsSideBar").click(function () {
+            var sbState = $('body').hasClass('sidebar-collapse');
+            if (sbState) {
+                localStorage.setItem("sidebarState", "closed");
+            } else {
+                localStorage.setItem("sidebarState", "open");
+            }
+        });
+
+        var topNavState = localStorage.getItem("tnState") || "show";
+        if (topNavState === "hide") {
+            $('nav.main-header').addClass('d-none');
+        } else {
+            $('nav.main-header').removeClass('d-none');
+        }
+
+        $('.show-top-nav').on('click', function (e) {
+            var tnState = $('nav.main-header').hasClass('d-none');
+            if (tnState) {
+                localStorage.setItem("tnState", "show");
+                $('nav.main-header').removeClass('d-none');
+            } else {
+                localStorage.setItem("tnState", "hide");
+                $('nav.main-header').addClass('d-none');
+            }
+        })
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2();
+
+        //Date picker
+        $('.datepicker').datetimepicker({
+            format: 'L'
+        });
+        //Date and time picker
+        $('.datetimepicker').datetimepicker({ icons: { time: 'far fa-clock' } });
+    });
+    //Sweet Alert
+    @Html.Raw(TempData["msg"]);
+
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true, 
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+        $('#example3').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": true,
+            "responsive": false,
+        });
+    });
+</script>
+
+<script>
+    $('#PartialPopModal').on('show.bs.modal', function (e) {
+        var url = $(e.relatedTarget).data('url');
+        var title = $(e.relatedTarget).data('title') || 'Modal Title';
+        $('#PartialModalLabel').text(title);
+        if (url) {
+            $('#modalBodyId').load(url, function (response, status, xhr) {
+                if (status == "error") {
+                    $('#modalBodyId').empty().append('<strong class="text-danger">Unable to fetch content</strong>');
+                }
+            });
+        }
+    });
+    $(document).ready(function () {
+        $('#ModalSaveButton').click(function () {
+            $('#partialForm').submit();
+        });
+    });
+</script>
+
+<script>
+    //show confirmation message before submit
+    $(document).ready(function () {
+        $(".show-confirm").click(function () {
+            var result = confirm("Are you sure?");
+            if (result) {
+                var url = $(this).data('url');
+                window.location.href = url; // Reload the URL
+            }
+        });
+
+        $(".delete-confirm").click(function () {
+            var delButton = $(this);
+            var url = delButton.data('url');
+            alertify.confirm('Delete', "Do you want to delete now?", function () {
+                delButton.prop('disabled', true);
+                $.get(url, function (data, status) {
+                    delButton.prop('disabled', false);
+                    if (data.success) {
+                        delButton.closest("tr").remove();
+                        $.notify(data.messages, 'success');
+                    } else {
+                        $.notify(data.messages, 'error');
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    // Handle network errors or other exceptions
+                    $.notify('An error occurred: ' + errorThrown, 'error');
+                });
+            }, function () {
+                alertify.error('Cancel')
+            })
+        })
+    });
+</script>
