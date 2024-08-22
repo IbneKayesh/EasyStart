@@ -9,12 +9,20 @@
             margin: 0px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-size: 12px;
+            font-weight: 300;
+        }
+
+        .vertical-text {
+            writing-mode: vertical-rl; /* Text flows from top to bottom */
+            /* You can also use vertical-lr for bottom to top text flow */
+            text-align: center; /* Center the text horizontally */
+            transform: rotate(180deg); /* Rotate the text if necessary */
         }
 
         .header, .footer {
             background-color: #4CAF50;
             color: white;
-            padding: 10px 20px;
+            padding: 1px 5px;
             text-align: center;
             width: 100%;
         }
@@ -27,7 +35,7 @@
 
         .container {
             display: flex;
-            margin: 20px;
+            margin: 15px;
             padding-bottom: 40px; /* To prevent content from hiding behind the footer */
             height: calc(100vh - 80px); /* Full viewport height minus header and footer */
         }
@@ -110,7 +118,7 @@
 
         th, td {
             padding: 4px;
-            border: 1px solid #ddd;
+            border: 1px solid #479352;
         }
 
         th {
@@ -221,7 +229,7 @@
                 <ul class="menu">
                     <li><a href="#company">Company</a></li>
                     <li><a href="#helpdesk">Help Desk</a></li>
-                    <li><a href="#">Menu Item C</a></li>
+                    <li><a href="#bankloan">Bank Loan</a></li>
                 </ul>
             </div>
             <!-- Add more menu groups as needed -->
@@ -285,19 +293,21 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Objectives</th>
+                        <th><span class="vertical-text">Interface</span></th>
+                        <th><span class="vertical-text">Objectives</span></th>
                         <th>Key Elements</th>
-                        <th>Details</th>
-                        <th>Timeline</th>
-                        <th>Status</th>
+                        <th>Description</th>
+                        <th><span class="vertical-text">Timeline</span></th>
+                        <th><span class="vertical-text">Status</span></th>
                     </tr>
                 </thead>
                 <tbody class="BUSINESS" style="background-color: #e0f7fa;">
                     <tr>
-                        <td rowspan="4">User Requirements</td>
+                        <td rowspan="11"><span class="vertical-text">Business</span></td>
+                        <td rowspan="4"><span class="vertical-text">User Requirements</span></td>
                         <td>Stories</td>
                         <td>A BUSINESS is the main object what we have to manage using the software</td>
-                        <td rowspan="4">01-Aug-24 - </td>
+                        <td rowspan="4"><span class="vertical-text">01-Aug-24 - </span></td>
                         <td rowspan="4"><i class="icon icon-green"></i></td>
                     </tr>
                     <tr>
@@ -313,10 +323,10 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td rowspan="4">Development</td>
+                        <td rowspan="4"><span class="vertical-text">Development</span></td>
                         <td>Module</td>
                         <td>This page is available under Admin</td>
-                        <td rowspan="4">01-Aug-24 - </td>
+                        <td rowspan="4"><span class="vertical-text">01-Aug-24 - </span></td>
                         <td><i class="icon icon-gray"></i></td>
                     </tr>
                     <tr>
@@ -335,7 +345,7 @@
                         <td><i class="icon icon-red"></i></td>
                     </tr>
                     <tr>
-                        <td rowspan="4">Test Case</td>
+                        <td rowspan="4"><span class="vertical-text">Test Case</span></td>
                         <td>Add New data</td>
                         <td>
                             <ul>
@@ -343,7 +353,7 @@
                                 <li>Insert Page will redirect to Index page</li>
                             </ul>
                         </td>
-                        <td rowspan="4">01-Aug-24 - </td>
+                        <td rowspan="4"><span class="vertical-text">01-Aug-24 - </span></td>
                         <td><i class="icon icon-gray"></i></td>
                     </tr>
                     <tr>
@@ -372,10 +382,11 @@
                 </tbody>
                 <tbody class="BUSINESS_LINE" style="background-color: #ffebee; ">
                     <tr>
-                        <td rowspan="4">User Requirements</td>
+                        <td rowspan="11"><span class="vertical-text">Business Line</span></td>
+                        <td rowspan="4"><span class="vertical-text">User Requirements</span></td>
                         <td>Stories</td>
                         <td>A BUSINESS is the main object what we have to manage using the software</td>
-                        <td rowspan="4">01-Aug-24 - </td>
+                        <td rowspan="4"><span class="vertical-text">01-Aug-24 - </span></td>
                         <td rowspan="4"><i class="icon icon-green"></i></td>
                     </tr>
                     <tr>
@@ -391,10 +402,10 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td rowspan="4">Development</td>
+                        <td rowspan="4"><span class="vertical-text">Development</span></td>
                         <td>Module</td>
                         <td>This page is available under Admin</td>
-                        <td rowspan="4">01-Aug-24 - </td>
+                        <td rowspan="4"><span class="vertical-text">01-Aug-24 - </span></td>
                         <td><i class="icon icon-gray"></i></td>
                     </tr>
                     <tr>
@@ -413,7 +424,7 @@
                         <td><i class="icon icon-red"></i></td>
                     </tr>
                     <tr>
-                        <td rowspan="4">Test Case</td>
+                        <td rowspan="4"><span class="vertical-text">Test Case</span></td>
                         <td>Add New data</td>
                         <td>
                             <ul>
@@ -421,7 +432,7 @@
                                 <li>Insert Page will redirect to Index page</li>
                             </ul>
                         </td>
-                        <td rowspan="4">01-Aug-24 - </td>
+                        <td rowspan="4"><span class="vertical-text">01-Aug-24 - </span></td>
                         <td><i class="icon icon-gray"></i></td>
                     </tr>
                     <tr>
@@ -455,19 +466,21 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Objectives</th>
+                        <th><span class="vertical-text">Interface</span></th>
+                        <th><span class="vertical-text">Objectives</span></th>
                         <th>Key Elements</th>
-                        <th>Details</th>
-                        <th>Timeline</th>
-                        <th>Status</th>
+                        <th>Description</th>
+                        <th><span class="vertical-text">Timeline</span></th>
+                        <th><span class="vertical-text">Status</span></th>
                     </tr>
                 </thead>
                 <tbody class="ROUTINE_NAMES" style="background-color: #e0f7fa;">
                     <tr>
-                        <td rowspan="4">User Requirements</td>
+                        <td rowspan="11"><span class="vertical-text">Routine Task Name List</span></td>
+                        <td rowspan="4"><span class="vertical-text">User Requirements</span></td>
                         <td>Stories</td>
                         <td>A ROUTINE_NAMES is the name list of routine task name list. ex- Taking shower (daily)</td>
-                        <td rowspan="4">01-Aug-24 - </td>
+                        <td rowspan="4"><span class="vertical-text">01-Aug-24 - </span></td>
                         <td rowspan="4"><i class="icon icon-green"></i></td>
                     </tr>
                     <tr>
@@ -483,10 +496,10 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td rowspan="4">Development</td>
+                        <td rowspan="4"><span class="vertical-text">Development</span></td>
                         <td>Module</td>
                         <td>This page is available under Help Desk > Setup</td>
-                        <td rowspan="4">01-Aug-24 - </td>
+                        <td rowspan="4"><span class="vertical-text">01-Aug-24 - </span></td>
                         <td><i class="icon icon-gray"></i></td>
                     </tr>
                     <tr>
@@ -505,7 +518,7 @@
                         <td><i class="icon icon-green"></i></td>
                     </tr>
                     <tr>
-                        <td rowspan="4">Test Case</td>
+                        <td rowspan="4"><span class="vertical-text">Test Case</span></td>
                         <td>Add New data</td>
                         <td>
                             <ul>
@@ -513,7 +526,7 @@
                                 <li>Insert Page will redirect to Index page</li>
                             </ul>
                         </td>
-                        <td rowspan="4">01-Aug-24 - </td>
+                        <td rowspan="4"><span class="vertical-text">01-Aug-24 - </span></td>
                         <td><i class="icon icon-gray"></i></td>
                     </tr>
                     <tr>
@@ -543,10 +556,11 @@
 
                 <tbody class="ROUTINE_TASK" style="background-color: #d0f4c8;">
                     <tr>
-                        <td rowspan="4">User Requirements</td>
+                        <td rowspan="11"><span class="vertical-text">Daily Routine Task Entry</span></td>
+                        <td rowspan="4"><span class="vertical-text">User Requirements</span></td>
                         <td>Stories</td>
                         <td>A ROUTINE_TASK is the daily entries of user task ensure list with routine task name. ex- Date, Yes, Taking shower (daily)</td>
-                        <td rowspan="4">01-Aug-24 - </td>
+                        <td rowspan="4"><span class="vertical-text">01-Aug-24 - </span></td>
                         <td rowspan="4"><i class="icon icon-green"></i></td>
                     </tr>
                     <tr>
@@ -562,10 +576,10 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td rowspan="4">Development</td>
+                        <td rowspan="4"><span class="vertical-text">Development</span></td>
                         <td>Module</td>
                         <td>This page is available under Help Desk</td>
-                        <td rowspan="4">01-Aug-24 - </td>
+                        <td rowspan="4"><span class="vertical-text">01-Aug-24 - </span></td>
                         <td><i class="icon icon-gray"></i></td>
                     </tr>
                     <tr>
@@ -584,7 +598,7 @@
                         <td><i class="icon icon-green"></i></td>
                     </tr>
                     <tr>
-                        <td rowspan="4">Test Case</td>
+                        <td rowspan="4"><span class="vertical-text">Test Case</span></td>
                         <td>Add New data</td>
                         <td>
                             <ul>
@@ -592,7 +606,7 @@
                                 <li>Insert Page will redirect to Index page</li>
                             </ul>
                         </td>
-                        <td rowspan="4">01-Aug-24 - </td>
+                        <td rowspan="4"><span class="vertical-text">01-Aug-24 - </span></td>
                         <td><i class="icon icon-gray"></i></td>
                     </tr>
                     <tr>
@@ -619,6 +633,113 @@
                         <td><i class="icon icon-gray"></i></td>
                     </tr>
                 </tbody>
+            </table>
+
+            <h2 id="bankloan">Bank Loan</h2>
+            <p>Bank loan and scheduled payment</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th><span class="vertical-text">Interface</span></th>
+                        <th><span class="vertical-text">Objectives</span></th>
+                        <th>Key Elements</th>
+                        <th>Description</th>
+                        <th><span class="vertical-text">Timeline</span></th>
+                        <th><span class="vertical-text">Status</span></th>
+                    </tr>
+                </thead>
+                <tbody class="BANK_LOAN_MASTER" style="background-color: #e0f7fa;">
+                    <tr>
+                        <td rowspan="11"><span class="vertical-text">Bank Loan Information Entry</span></td>
+                        <td rowspan="4"><span class="vertical-text">User Requirements</span></td>
+                        <td>Stories</td>
+                        <td>A Cost center takes out loans from multiple banks, each with different amounts, interest rates, and start dates. After a few months, the business begins making payments. These payments consist of small amounts plus interest. Each bank requires a specified number of payments.</td>
+                        <td rowspan="4"><span class="vertical-text">01-Aug-24 - </span></td>
+                        <td rowspan="4"><i class="icon icon-gra"></i></td>
+                    </tr>
+                    <tr>
+                        <td>End Users</td>
+                        <td>Only accounts role users can get access this pages</td>
+                    </tr>
+                    <tr>
+                        <td>Functional Requirements</td>
+                        <td>Add new data, Edit old data, Delete wrong data</td>
+                    </tr>
+                    <tr>
+                        <td>Non-Functional Requirements</td>
+                        <td>A BANK_LOAN_MASTER, BANK_LOAN_SCHEDULE, BANK_LOAN_PAYMENTS, BANK_LOAN_FINES is the bank loan information</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4"><span class="vertical-text">Development</span></td>
+                        <td>Module</td>
+                        <td>This page is available under Accounts > Bank Loan</td>
+                        <td rowspan="4"><span class="vertical-text">01-Aug-24 - </span></td>
+                        <td><i class="icon icon-red"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Table</td>
+                        <td><mark>BANK_LOAN_MASTER</mark> <mark>BANK_LOAN_SCHEDULE</mark> <mark>BANK_LOAN_PAYMENTS</mark> <mark>BANK_LOAN_FINES</mark></td>
+                        <td><i class="icon icon-red"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Columns</td>
+                        <td>
+                            <u>BANK_LOAN_MASTER</u>
+                            <p>ID, LOAN_NO, LOAN_DATE, BRANCH_COST_CENTER_ID, LOAN_AMOUNT, INTEREST_RATE, TOTAL_AMOUNT, NO_OF_SCHEDULE, DUE_AMOUNT : BASE_MODEL</p>
+                            <u>BANK_LOAN_SCHEDULE</u>
+                            <p>ID, SCHEDULE_NO, LOAD_MASTER_ID, DUE_DATE, DUE_AMOUNT : BASE_MODEL</p>
+                            <u>BANK_LOAN_PAYMENTS</u>
+                            <p>ID, LOAN_SCHEDULE_ID, PAY_DATE, PAY_AMOUNT, IS_FINE_APPLIED : BASE_MODEL</p>
+                            <u>BANK_LOAN_FINES</u>
+                            <p>ID, LOAN_SCHEDULE_ID, FINE_DATE, FINE_AMOUNT : BASE_MODEL</p>
+                        </td>
+                        <td><i class="icon icon-red"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Table Relations</td>
+                        <td>
+                            <p><mark>BANK_LOAN_MASTER</mark> Parent of : <mark>BANK_LOAN_SCHEDULE</mark></p>
+                            <p><mark>BANK_LOAN_SCHEDULE</mark> Parent of : <mark>BANK_LOAN_PAYMENTS</mark> <mark>BANK_LOAN_FINES</mark></p>
+                        </td>
+                        <td><i class="icon icon-red"></i></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4"><span class="vertical-text">Test Case</span></td>
+                        <td>Add New data</td>
+                        <td>
+                            <ul>
+                                <li>Insert new data, with entry User ID, entry time</li>
+                                <li>Insert Page will redirect to Index page</li>
+                            </ul>
+                        </td>
+                        <td rowspan="4"><span class="vertical-text">01-Aug-24 - </span></td>
+                        <td><i class="icon icon-red"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Edit old data</td>
+                        <td>
+                            <ul>
+                                <li>Edit old data, with edit User ID, edit time</li>
+                                <li>Edit Page will use Insert page</li>
+                                <li>Edit Page will redirect to Index page</li>
+                            </ul>
+                        </td>
+                        <td><i class="icon icon-red"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Delete wrong data</td>
+                        <td>
+                            <ul>
+                                <li>Delete wrong data, with check <mark>Child Tables</mark></li>
+                                <li>Delete operation will execute in Index page</li>
+                                <li>Show delete confirmation message, Yes button will execute delete operation</li>
+                                <li>After delete, selected row will be removed</li>
+                            </ul>
+                        </td>
+                        <td><i class="icon icon-red"></i></td>
+                    </tr>
+                </tbody>
+
             </table>
         </div>
     </div>
