@@ -5,6 +5,11 @@
         public static IEndpointRouteBuilder AreaEndpointRouteBuilder(this IEndpointRouteBuilder endpointRoute)
         {
             endpointRoute.MapAreaControllerRoute(
+                        name: "AreaAccounts",
+                        areaName: "Accounts",
+                        pattern: "Accounts/{controller=Home}/{action=Index}/{id?}");
+
+            endpointRoute.MapAreaControllerRoute(
                         name: "AreaAdmin",
                         areaName: "Admin",
                         pattern: "Admin/{controller=Home}/{action=Index}/{id?}");

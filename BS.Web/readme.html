@@ -1,0 +1,293 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Navigations</title>
+    <style>
+        /* Style for the ordered list */
+        ol {
+            margin: 10px;
+            padding: 0;
+            list-style-position: inside; /* Ensures numbers are inside the list */
+            font-family: Arial, sans-serif;
+        }
+
+            /* Style for each list item */
+            ol li {
+                margin-bottom: 5px; /* Space between list items */
+                padding: 5px; /* Padding inside each list item */
+                background-color: #f4f4f4; /* Light grey background */
+                border-left: 5px solid #3498db; /* Blue border on the left */
+                border-top: 1px solid #3498db; /* Blue border on the left */
+                border-bottom: 1px solid #ff6a00; /* Blue border on the left */
+                border-right: 2px solid #ff6a00; /* Blue border on the left */
+                border-radius: 4px; /* Rounded corners */
+                line-height: 1.6; /* Line height for readability */
+                font-size: 12px; /* Font size */
+            }
+
+                /* Style for ordered list numbers */
+                ol li::marker {
+                    color: #e74c3c; /* Change color of list item numbers */
+                    font-weight: bold; /* Make numbers bold */
+                }
+        /* Hover effect */
+        li:hover {
+            background-color: #e3f4ff;
+            border-radius: 4px;
+            padding-left: 3.1em; /* Adjust padding to account for the hover effect */
+        }
+
+            li:hover::after {
+                background-color: #333; /* Darker bullet on hover */
+            }
+    </style>
+</head>
+<body>
+    <ol class="tree">
+        <li>Menu</li>
+        <li>Home</li>
+        <li>
+            Setup
+            <ol>
+                <li>
+                    Geographical Information
+                    <ol>
+                        <li>
+                            Country Info
+                            <ol>
+                                <li>Country List</li>
+                                <li>Add a Country</li>
+                            </ol>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    Calendar
+                    <ol>
+                        <li>
+                            Financial Year
+                            <ol>
+                                <li>Financial Year List</li>
+                                <li>Add a Financial Year</li>
+                            </ol>
+                        </li>
+                        <li>
+                            Leave
+                            <ol>
+                                <li>
+                                    Leave Type
+                                    <ol>
+                                        <li>Leave Type List</li>
+                                        <li>Add a Leave Type</li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    Leave Calendar
+                                    <ol>
+                                        <li>Leave Calendar List</li>
+                                        <li>Add a Leave Calendar</li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    Bank Information
+                    <ol>
+                        <li>
+                            Bank
+                            <ol>
+                                <li>
+                                    Branch
+                                    <ol>
+                                        <li>Branch List</li>
+                                        <li>Add a Branch</li>
+                                    </ol>
+                                </li>
+                                <li>Bank List</li>
+                                <li>Add a Bank</li>
+                            </ol>
+                        </li>
+                        <li>
+                            Currency
+                            <ol>
+                                <li>
+                                    Currency Conversion Rate
+                                    <ol>
+                                        <li>Conversion Rate List</li>
+                                        <li>Add a Conversion</li>
+                                    </ol>
+                                </li>
+                                <li>Currency List</li>
+                                <li>Add a Currency</li>
+                            </ol>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    Transaction
+                    <ol>
+                        <li>
+                            Transaction Auto Step
+                            <ol>
+                                <li>Transaction Auto Step List</li>
+                                <li>Add a Transaction Auto Step</li>
+                            </ol>
+                        </li>
+                        <li>
+                            Sub Section Transaction
+                            <ol>
+                                <li>Sub Section Transaction List</li>
+                                <li>Add a Sub Section Transaction List</li>
+                            </ol>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    Entity Value Text
+                    <ol>
+                        <li>Entity Value Text List</li>
+                        <li>Add a Entity Value Text</li>
+                    </ol>
+                </li>
+            </ol>
+        </li>
+        <li>
+            Company
+            <ol>
+                <li>
+                    Business
+                    <ol>
+                        <li>
+                            Branch
+                            <ol>
+                                <li>
+                                    Branch Type
+                                    <ol>
+                                        <li>Branch Type List</li>
+                                        <li>Add a Branch Type</li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    Branch Cost Center
+                                    <ol>
+                                        <li>Branch Cost Center List</li>
+                                        <li>Add a Branch Cost Center</li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    Department
+                                    <ol>
+                                        <li>
+                                            Section
+                                            <ol>
+                                                <li>
+                                                    Sub Section
+                                                    <ol>
+                                                        <li>Sub Section List</li>
+                                                        <li>Add a Sub Section</li>
+                                                    </ol>
+                                                </li>
+                                                <li>Section List</li>
+                                                <li>Add a Section</li>
+                                            </ol>
+                                        </li>
+                                        <li>Department List</li>
+                                        <li>Add a Department</li>
+                                    </ol>
+                                </li>
+                                <li>Branch List</li>
+                                <li>Add a Branch</li>
+                            </ol>
+                        </li>
+                        <li>Business List</li>
+                        <li>Add a Business</li>
+                    </ol>
+                </li>
+                <li>
+                    Business Line
+                    <ol>
+                        <li>Business Line List</li>
+                        <li>Add a Business Line</li>
+                    </ol>
+                </li>
+            </ol>
+        </li>
+        <li>
+            CRM
+            <ol>
+                <li>
+                    Contacts
+                    <ol>
+                        <li>Contact List</li>
+                        <li>Add a Contact</li>
+                    </ol>
+                </li>
+            </ol>
+        </li>
+        <li>Inventory</li>
+        <li>Sales Order</li>
+        <li>Transport</li>
+        <li>Accounts and Finance</li>
+        <li>Help Desk</li>
+        <li>
+            HRMS
+            <ol>
+                <li>
+                    Setup
+                    <ol>
+                        <li>
+                            Working Shift
+                            <ol>
+                                <li>Working Shift List</li>
+                                <li>Add a Working Shift</li>
+                            </ol>
+                        </li>
+                        <li>
+                            Employee
+                            <ol>
+                                <li>
+                                    Designation
+                                    <ol>
+                                        <li>Designation List</li>
+                                        <li>Add a Designation</li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+                </li>
+                <li>Employees</li>
+                <li>Attendance</li>
+            </ol>
+        </li>
+        <li>
+            Security
+            <ol>
+                <li>
+                    Security Role
+                    <ol>
+                        <li>Role List</li>
+                        <li>Add a Role</li>
+                    </ol>
+                </li>
+                <li>Classic Menu</li>
+            </ol>
+        </li>
+        <li>
+            Admin
+            <ol>
+                <li>
+                    Database
+                    <ol>
+                        <li>Backup List</li>
+                        <li>Create a Backup</li>
+                    </ol>
+                </li>
+            </ol>
+        </li>
+    </ol>
+</body>
+</html>

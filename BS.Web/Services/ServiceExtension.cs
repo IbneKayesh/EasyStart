@@ -1,6 +1,4 @@
-﻿using BS.Infra.Services.HelpDesk.Setup;
-
-namespace BS.Web.Services
+﻿namespace BS.Web.Services
 {
     internal static class ServiceExtension
     {
@@ -12,6 +10,9 @@ namespace BS.Web.Services
                 .UseSqlServer(configuration.GetConnectionString(StaticKeys.ConnectionString))
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
+            //Accounts
+            services.AddTransient<LoanService>();
+
             //Admin
             
             //Application

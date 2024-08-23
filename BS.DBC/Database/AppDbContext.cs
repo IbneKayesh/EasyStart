@@ -1,4 +1,6 @@
-﻿namespace BS.DBC.Database
+﻿using BS.DMO.Models.Accounts.BankLoan;
+
+namespace BS.DBC.Database
 {
     public class AppDbContext : DbContext
     {
@@ -17,6 +19,12 @@
             modelBuilder.Entity<MENU_ROLE>().HasKey(sf => new { sf.MENU_ID, sf.ROLE_ID });
             base.OnModelCreating(modelBuilder);
         }
+        //Accounts
+        public DbSet<BANK_LOAN_SCHEDULE> BANK_LOAN_SCHEDULE { get; set; }
+        public DbSet<BANK_LOAN_PAYMENTS> BANK_LOAN_PAYMENTS { get; set; }
+        public DbSet<BANK_LOAN_MASTER> BANK_LOAN_MASTER { get; set; }
+        public DbSet<BANK_LOAN_FINES> BANK_LOAN_FINES { get; set; }
+
         //Admin
 
         //Application

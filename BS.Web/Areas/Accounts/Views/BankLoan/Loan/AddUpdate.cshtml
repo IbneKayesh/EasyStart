@@ -1,0 +1,107 @@
+﻿@model BS.DMO.Models.Accounts.BankLoan.BANK_LOAN_MASTER
+@{
+    ViewData["Title"] = "Loan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Add/Edit @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+        </div>
+    </div>
+    <form asp-action="AddUpdate">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="ID" type="hidden" />
+            <input asp-for="TRN_NO" type="hidden" />
+            <input asp-for="REF_TRN_ID" type="hidden" />
+            <input asp-for="END_DATE" type="hidden" />
+            <input asp-for="DUE_AMOUNT" type="hidden" />
+            <input asp-for="RowVersion" type="hidden" />
+            <div class="row">
+                <div class="col-md-3">
+                    <label asp-for="BRANCH_COST_CENTER_ID" class="control-label"></label>
+                    <select asp-for="BRANCH_COST_CENTER_ID" asp-items="@ViewBag.BRANCH_COST_CENTER_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="BRANCH_COST_CENTER_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="START_DATE" class="control-label"></label>
+                    <input asp-for="START_DATE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Start Date">
+                    <span asp-validation-for="START_DATE" class="text-danger"></span>
+                </div>
+                <div class="col-md-7">
+                    <label asp-for="TRN_NOTE" class="control-label"></label>
+                    <input asp-for="TRN_NOTE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Trn Note">
+                    <span asp-validation-for="TRN_NOTE" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label asp-for="LOAN_AMOUNT" class="control-label"></label>
+                    <input asp-for="LOAN_AMOUNT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Loan Amount">
+                    <span asp-validation-for="LOAN_AMOUNT" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="INTEREST_RATE" class="control-label"></label>
+                    <input asp-for="INTEREST_RATE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Interest Rate">
+                    <span asp-validation-for="INTEREST_RATE" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="TOTAL_AMOUNT" class="control-label"></label>
+                    <input asp-for="TOTAL_AMOUNT" type="text" class="form-control form-control-sm" placeholder="Total Amount" readonly>
+                    <span asp-validation-for="TOTAL_AMOUNT" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="NO_OF_SCHEDULE" class="control-label"></label>
+                    <input asp-for="NO_OF_SCHEDULE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="No Of Schedule">
+                    <span asp-validation-for="NO_OF_SCHEDULE" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="IS_ACTIVE" class="control-label"></label>
+                    <input asp-for="IS_ACTIVE" type="checkbox" class="custom-input custom-input-xs">
+                    <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <table class="table table-hover table-bordered table-xs">
+                    <tr>
+                        <th>Schedule No</th>
+                        <th>Loan Amount</th>
+                        <th>Interest Amount</th>
+                        <th>Total Amount</th>
+                        <th>Due Date</th>
+                    </tr>
+                    @for (int i = 0; i < Model.BANK_LOAN_SCHEDULE.Count; i++)
+                    {
+                        var item = Model.BANK_LOAN_SCHEDULE[i];
+                        <tr>
+                            <td>
+                                <input name="@Model.BANK_LOAN_SCHEDULE[i].ID" type="hidden" value="@item.ID" />
+                                <input name="BANK_LOAN_SCHEDULE[@i].MASTER_ID" type="hidden" value="@item.MASTER_ID" />
+                                <input name="BANK_LOAN_SCHEDULE[@i].SCHEDULE_NO" class="form-control form-control-sm" value="@item.SCHEDULE_NO" readonly>
+                            </td>
+                            <td><input name="BANK_LOAN_SCHEDULE[@i].LOAN_AMOUNT" class="form-control form-control-sm" value="@item.LOAN_AMOUNT" readonly></td>
+                            <td><input name="BANK_LOAN_SCHEDULE[@i].INTEREST_AMOUNT" class="form-control form-control-sm" value="@item.INTEREST_AMOUNT" readonly></td>
+                            <td><input name="BANK_LOAN_SCHEDULE[@i].TOTAL_AMOUNT" class="form-control form-control-sm" value="@item.TOTAL_AMOUNT" readonly></td>
+                            <td><input name="BANK_LOAN_SCHEDULE[@i].DUE_DATE" class="form-control form-control-sm" autocomplete="off" placeholder="Due Date" value="@item.DUE_DATE"></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Index" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left"></i> Back</a>
+            <button class="btn btn-sm btn-info" type="reset"><i class="fa fa-undo"></i> Reset</button>
+            <button type="submit" name="submitButton" value="Apply" class="btn btn-sm btn-success"><i class="fa fa-cogs"></i> Apply</button>
+            <button type="submit" name="submitButton" value="Save" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Submit</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

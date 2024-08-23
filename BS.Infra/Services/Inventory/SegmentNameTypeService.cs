@@ -39,7 +39,7 @@
                     var entity = dbCtx.SEGMENT_NAME_TYPE.Find(obj.ID);
                     if (entity != null)
                     {
-                        if (entity.RowVersion.SequenceEqual(obj.RowVersion))
+                        if (entity.RowVersion!.SequenceEqual(obj.RowVersion!))
                         {
                             //TODO : Update property
                             entity.SEGMENT_NAME = obj.SEGMENT_NAME;

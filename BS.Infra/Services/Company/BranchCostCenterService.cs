@@ -96,7 +96,7 @@ JOIN BANK_BRANCH BB ON BCC.BANK_BRANCH_ID = BB.ID";
             FormattableString sql = $@"SELECT BI.*
                     FROM BRANCH_COST_CENTER BI
                     WHERE BI.IS_ACTIVE = 1
-                    ORDER BY BI.BRANCH_COST_CENTER_NAME";
+                    ORDER BY BI.COST_CENTER_NAME";
             return dbCtx.Database.SqlQuery<BRANCH_COST_CENTER>(sql).ToList();
         }
         public BRANCH_COST_CENTER GetById(string id)

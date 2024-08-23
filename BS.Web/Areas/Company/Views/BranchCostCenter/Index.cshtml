@@ -41,7 +41,7 @@
                             @Html.DisplayFor(modelItem => item.MAX_BALANCE_LIMIT)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.OPEN_DATE)
+                            @item.OPEN_DATE.ToString(item.DATE_DISPLAY_FORMAT)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.IS_ACTIVE)
