@@ -21,24 +21,27 @@
                 List<ROUTINE_TASK> objList = new List<ROUTINE_TASK>();
                 foreach (var item in obj.ROUTINE_TASK_VM)
                 {
-                    objList.Add(new ROUTINE_TASK
+                    if (item.IS_DONE=="true")
                     {
-                        //new entity
-                        ID = Guid.NewGuid().ToString(),
-                        USER_ID = userId,
-                        ROUTINE_NAMES_ID = item.ROUTINE_NAMES_ID,
-                        ROUTINE_DATE = dateTime,
-                        ROUTINE_NOTE = item.ROUTINE_NOTE,
-                        IS_DONE = item.IS_DONE == "true" ? true : false,
-                        //Start Audit
-                        //obj.IS_ACTIVE = true;
-                        CREATE_USER = userId,
-                        CREATE_DATE = dateTime,
-                        UPDATE_USER = userId,
-                        UPDATE_DATE = dateTime,
-                        REVISE_NO = 0,
-                        //End Audit
-                    });
+                        objList.Add(new ROUTINE_TASK
+                        {
+                            //new entity
+                            ID = Guid.NewGuid().ToString(),
+                            USER_ID = userId,
+                            ROUTINE_NAMES_ID = item.ROUTINE_NAMES_ID,
+                            ROUTINE_DATE = dateTime,
+                            ROUTINE_NOTE = item.ROUTINE_NOTE,
+                            IS_DONE = item.IS_DONE == "true" ? true : false,
+                            //Start Audit
+                            //obj.IS_ACTIVE = true;
+                            CREATE_USER = userId,
+                            CREATE_DATE = dateTime,
+                            UPDATE_USER = userId,
+                            UPDATE_DATE = dateTime,
+                            REVISE_NO = 0,
+                            //End Audit
+                        });
+                    }                   
                 }
                 dbCtx.ROUTINE_TASK.AddRange(objList);
                 eQResult.rows = dbCtx.SaveChanges();

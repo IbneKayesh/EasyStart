@@ -18,7 +18,7 @@ namespace BS.Infra.Services.Setup
               "xx-xxxxx";
         }
 
-        public string CreateTransactionNo(AppDbContext dbCtx, string transactionId, string subSectionId, DateTime dateTime)
+        public string CreateTransactionNo(AppDbContext dbCtx, string transactionId, string subSectionId, DateTime dateTime, bool IgnoreSubSectionValidation=false)
         {
             int last_no = 1;
             string shortName = "";
@@ -30,19 +30,26 @@ namespace BS.Infra.Services.Setup
             }
             else
             {
-                var sectionEntity = dbCtx.SUB_SECTIONS.AsNoTracking().Where(x => x.IS_ACTIVE == true && x.ID == subSectionId).FirstOrDefault();
-                if (sectionEntity == null)
+                if (!IgnoreSubSectionValidation)
                 {
-                    //inactive or empty or not allowed
-                    return string.Empty;
+                    var sectionEntity = dbCtx.SUB_SECTIONS.AsNoTracking().Where(x => x.IS_ACTIVE == true && x.ID == subSectionId).FirstOrDefault();
+                    if (sectionEntity == null)
+                    {
+                        //inactive or empty or not allowed
+                        return string.Empty;
+                    }
+                    shortName = sectionEntity.SHORT_NAME;
                 }
-                shortName = sectionEntity.SHORT_NAME;
+                else
+                {
+                    shortName = "ES";
+                }
 
                 TRN_LAST_NO_LIST obj = new TRN_LAST_NO_LIST();
                 obj.ID = Guid.NewGuid().ToString();
                 obj.TRANSACTION_ID = transactionId.ToString();
                 obj.SUB_SECTION_ID = subSectionId;
-                obj.SHORT_NAME = sectionEntity.SHORT_NAME;
+                obj.SHORT_NAME = shortName;
                 obj.YEAR_ID = dateTime.Year;
                 obj.MONTH_ID = dateTime.Month;
                 obj.LAST_NO = last_no;
@@ -53,7 +60,7 @@ namespace BS.Infra.Services.Setup
                 dbCtx.Entry(obj).State = EntityState.Detached;
             }
             // Update trn with same trn
-            UpdateTransactionNo(dbCtx, TransactionID.SB, subSectionId, dateTime);
+            UpdateTransactionNo(dbCtx, transactionId, subSectionId, dateTime);
 
             return transactionId.ToString() +
                 dateTime.ToString("yyMMdd") +

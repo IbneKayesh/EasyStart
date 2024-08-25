@@ -1,6 +1,6 @@
-﻿@model IEnumerable<BS.DMO.Models.HRMS.Employee.EMPLOYEES>
+﻿@model IEnumerable<BS.DMO.Models.Accounts.BankLoan.BANK_LOAN_MASTER>
 @{
-    ViewData["Title"] = "Employees";
+    ViewData["Title"] = "Loan";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="card card-primary card-outline">
@@ -15,9 +15,17 @@
         <table class="table table-hover table-xs">
             <thead>
                 <tr>
-                    <th>Employee No</th>
-                    <th>Employee Name</th>
-                    <th>Designation</th>
+                    <th>Cost Center</th>
+                    <th>Trn No</th>
+                    <th>Ref</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Note</th>
+                    <th>Loan</th>
+                    <th>Rate</th>
+                    <th>Total</th>
+                    <th>No Of Schedules</th>
+                    <th>Due</th>
                     <th>Status</th>
                     <th>#</th>
                 </tr>
@@ -27,19 +35,42 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.EMP_NO)
+                            @Html.DisplayFor(modelItem => item.BRANCH_COST_CENTER_ID)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.EMP_NAME)
+                            @Html.DisplayFor(modelItem => item.TRN_NO)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.DESIG_ID)
+                            @Html.DisplayFor(modelItem => item.REF_TRN_ID)
+                        </td>
+                        <td>
+                            @item.START_DATE.ToString(item.DATE_DISPLAY_FORMAT)
+                        </td>
+                        <td>
+                            @item.END_DATE.ToString(item.DATE_DISPLAY_FORMAT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TRN_NOTE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LOAN_AMOUNT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.INTEREST_RATE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TOTAL_AMOUNT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NO_OF_SCHEDULE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DUE_AMOUNT)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.IS_ACTIVE)
                         </td>
                         <td>
-                            <a class="btn btn-primary btn-xs" asp-area="Setup" asp-controller="Department" asp-action="Index" asp-route-id="@item.ID"><i class="fa fa-eye"></i> Branch</a>
                             <a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-edit"></i> Edit</a>
                             <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="/Company/Business/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button>
                         </td>

@@ -1,7 +1,4 @@
-﻿using BS.DMO.Models.Accounts.BankLoan;
-using BS.Infra.Services.Company;
-using Microsoft.VisualBasic;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using BS.DMO.ViewModels.Accounts.BankLoan;
 
 namespace BS.Web.Areas.Accounts.Controllers.BankLoan
 {
@@ -22,16 +19,17 @@ namespace BS.Web.Areas.Accounts.Controllers.BankLoan
         }
         public IActionResult Index()
         {
-            var entityList = employeesS.GetAll();
+            var entityList = loanS.GetAll();
             return View(ViewPathFinder.ViewName(this.GetType(), "Index"), entityList);
         }
         public IActionResult Create()
         {
             Dropdown_CreateEdit();
-            return View(ViewPathFinder.ViewName(this.GetType(), "AddUpdate"), new BANK_LOAN_MASTER());
+            var obj = loanS.NewLoanMaster();
+            return View(ViewPathFinder.ViewName(this.GetType(), "AddUpdate"), obj);
         }
         [HttpPost]
-        public IActionResult AddUpdate(BANK_LOAN_MASTER obj)
+        public IActionResult AddUpdate(NEW_BANK_LOAN_MASTER_VM obj)
         {
             Dropdown_CreateEdit();
             EQResult eQResult = new EQResult();
@@ -39,24 +37,27 @@ namespace BS.Web.Areas.Accounts.Controllers.BankLoan
             if (buttonClicked == "Apply")
             {
                 ModelState.Clear();
-                decimal TotalAmount = (obj.INTEREST_RATE / 100) * obj.LOAN_AMOUNT;
-                obj.TOTAL_AMOUNT = obj.LOAN_AMOUNT + TotalAmount;
-                if (obj.LOAN_AMOUNT < 1)
+                decimal TotalAmount = (obj.BANK_LOAN_MASTER.INTEREST_RATE / 100) * obj.BANK_LOAN_MASTER.LOAN_AMOUNT;
+                obj.BANK_LOAN_MASTER.TOTAL_AMOUNT = obj.BANK_LOAN_MASTER.LOAN_AMOUNT + TotalAmount;
+                obj.BANK_LOAN_MASTER.DUE_AMOUNT = obj.BANK_LOAN_MASTER.LOAN_AMOUNT + TotalAmount;
+                if (obj.BANK_LOAN_MASTER.LOAN_AMOUNT < 1)
                 {
                     ModelState.AddModelError("", "Enter correct loan amount");
+                    obj.BANK_LOAN_SCHEDULE = new List<BANK_LOAN_SCHEDULE>();
                 }
-                if (obj.NO_OF_SCHEDULE < 1)
+                if (obj.BANK_LOAN_MASTER.NO_OF_SCHEDULE < 1)
                 {
                     ModelState.AddModelError("", "Enter correct number of schedule");
+                    obj.BANK_LOAN_SCHEDULE = new List<BANK_LOAN_SCHEDULE>();
                 }
                 else
                 {
-                    DateTime date = obj.START_DATE;
-                    decimal eachValue = obj.LOAN_AMOUNT / obj.NO_OF_SCHEDULE;
-                    decimal eachIntrValue = (obj.INTEREST_RATE / 100) * eachValue;
+                    DateTime date = obj.BANK_LOAN_MASTER.START_DATE;
+                    decimal eachValue = obj.BANK_LOAN_MASTER.LOAN_AMOUNT / obj.BANK_LOAN_MASTER.NO_OF_SCHEDULE;
+                    decimal eachIntrValue = (obj.BANK_LOAN_MASTER.INTEREST_RATE / 100) * eachValue;
 
                     List<BANK_LOAN_SCHEDULE> objList = new List<BANK_LOAN_SCHEDULE>();
-                    for (int i = 1; i <= obj.NO_OF_SCHEDULE; i++)
+                    for (int i = 1; i <= obj.BANK_LOAN_MASTER.NO_OF_SCHEDULE; i++)
                     {
                         BANK_LOAN_SCHEDULE bls = new BANK_LOAN_SCHEDULE();
                         bls.SCHEDULE_NO = i;
@@ -67,12 +68,18 @@ namespace BS.Web.Areas.Accounts.Controllers.BankLoan
                         objList.Add(bls);
                     }
                     obj.BANK_LOAN_SCHEDULE = objList;
+                    obj.BANK_LOAN_MASTER.END_DATE = date.AddMonths(obj.BANK_LOAN_MASTER.NO_OF_SCHEDULE);
                 }
                 return View(ViewPathFinder.ViewName(this.GetType(), "AddUpdate"), obj);
             }
             else if (buttonClicked == "Save")
             {
-                if (ModelState.IsValid)
+                if (obj.BANK_LOAN_SCHEDULE.Count == 0)
+                {
+                    ModelState.Clear();
+                    ModelState.AddModelError("", "Apply loan calculation");
+                }
+                else if (ModelState.IsValid)
                 {
                     eQResult = loanS.Insert(obj, user_session.USER_ID);
                     TempData["msg"] = eQResult.messages;
@@ -98,7 +105,7 @@ namespace BS.Web.Areas.Accounts.Controllers.BankLoan
         {
             if (!string.IsNullOrWhiteSpace(id))
             {
-                var entity = employeesS.GetById(id);
+                var entity = loanS.GetById(id);
                 if (entity != null)
                 {
                     Dropdown_CreateEdit();

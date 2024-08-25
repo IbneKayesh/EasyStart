@@ -26,7 +26,6 @@
 
 <!-- Tempusdominus Bootstrap 4 (date time)-->
 <script src="~/assets/plugins/moment/moment.min.js"></script>
-<script src="~/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 
 <!-- AdminLTE App -->
 <script src="~/assets/dist/js/adminlte.min.js"></script>
@@ -112,11 +111,7 @@
         $('.select2').select2();
 
         //Date picker
-        $('.datepicker').datetimepicker({
-            format: 'L'
-        });
-        //Date and time picker
-        $('.datetimepicker').datetimepicker({ icons: { time: 'far fa-clock' } });
+        $(".datepicker").datepicker();
     });
     //Sweet Alert
     @Html.Raw(TempData["msg"]);

@@ -63,9 +63,5 @@
         [Required(ErrorMessage = "{0} is required")]
         [Column(TypeName = "decimal(18, 6)")]
         public decimal DUE_AMOUNT { get; set; } = 0;
-
-
-        [NotMapped]
-        public List<BANK_LOAN_SCHEDULE>? BANK_LOAN_SCHEDULE = new List<BANK_LOAN_SCHEDULE>();
     }
 }
