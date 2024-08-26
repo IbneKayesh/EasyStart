@@ -13,12 +13,13 @@
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 1)]
         public string ID { get; set; }
 
-        [Display(Name = "Trn Id")]
+        [Display(Name = "Schedule Id")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
-        public string? MASTER_ID { get; set; }
+        public string? BANK_LOAN_SCHEDULE_ID { get; set; }
 
         [Display(Name = "Payment Info")]
         [Required(ErrorMessage = "{0} is required")]
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         public string? PAYMENT_INFO { get; set; }
 
         [Display(Name = "Fine Amount")]

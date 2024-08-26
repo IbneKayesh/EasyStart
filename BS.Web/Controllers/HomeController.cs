@@ -18,7 +18,7 @@ namespace BS.Web.Controllers
         public IActionResult Index()
         {
             string table_script = string.Empty;
-            table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<BANK_LOAN_SCHEDULE>();
+            table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<BANK_LOAN_FINES>();
             //table_script = Services.Power.ClassObjectSanitizer.SetForSave<DELIVERY_AGENT>();
             //table_script = Services.Power.RazorSanitizer.Create<BANK_LOAN_MASTER>();
             //table_script = Services.Power.RazorSanitizer.Select<PRODUCTS>();

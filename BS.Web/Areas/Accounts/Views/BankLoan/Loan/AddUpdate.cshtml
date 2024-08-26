@@ -26,12 +26,12 @@
                 </div>
                 <div class="col-md-2">
                     <label asp-for="BANK_LOAN_MASTER.TRN_NO" class="control-label"></label>
-                    <input asp-for="BANK_LOAN_MASTER.TRN_NO" type="text" class="custom-input custom-input-xsdatepicker" placeholder="Trn No" readonly>
+                    <input asp-for="BANK_LOAN_MASTER.TRN_NO" type="text" class="custom-input custom-input-xs" placeholder="Trn No" readonly>
                     <span asp-validation-for="BANK_LOAN_MASTER.TRN_NO" class="text-danger"></span>
                 </div>
                 <div class="col-md-2">
                     <label asp-for="BANK_LOAN_MASTER.START_DATE" class="control-label"></label>
-                    <input asp-for="BANK_LOAN_MASTER.START_DATE" type="text" class="custom-input custom-input-xsdatepicker" autocomplete="off" placeholder="Start Date">
+                    <input asp-for="BANK_LOAN_MASTER.START_DATE" type="text" class="custom-input custom-input-xs datepicker" autocomplete="off" placeholder="Start Date">
                     <span asp-validation-for="BANK_LOAN_MASTER.START_DATE" class="text-danger"></span>
                 </div>
                 <div class="col-md-2">
@@ -87,20 +87,29 @@
                         <th>Due Date</th>
                         <th>#</th>
                     </tr>
-                    @for (int i = 0; i < Model.BANK_LOAN_SCHEDULE.Count; i++)
+                    @for (int i = 0; i < Model.BANK_LOAN_SCHEDULE_VM.Count; i++)
                     {
-                        var item = Model.BANK_LOAN_SCHEDULE[i];
+                        var item = Model.BANK_LOAN_SCHEDULE_VM[i];
                         <tr>
                             <td>
-                                <input name="BANK_LOAN_SCHEDULE[@i].ID" type="hidden" value="@item.ID" />
-                                <input name="BANK_LOAN_SCHEDULE[@i].MASTER_ID" type="hidden" value="@item.MASTER_ID" />
-                                <input name="BANK_LOAN_SCHEDULE[@i].SCHEDULE_NO" class="form-control form-control-sm" value="@item.SCHEDULE_NO" readonly>
+                                <input name="BANK_LOAN_SCHEDULE_VM[@i].ID" type="hidden" value="@item.ID" />
+                                <input name="BANK_LOAN_SCHEDULE_VM[@i].BANK_LOAN_MASTER_ID" type="hidden" value="@item.BANK_LOAN_MASTER_ID" />
+                                <input name="BANK_LOAN_SCHEDULE_VM[@i].SCHEDULE_NO" class="form-control form-control-sm" value="@item.SCHEDULE_NO" readonly>
                             </td>
-                            <td><input name="BANK_LOAN_SCHEDULE[@i].LOAN_AMOUNT" class="form-control form-control-sm" value="@item.LOAN_AMOUNT" readonly></td>
-                            <td><input name="BANK_LOAN_SCHEDULE[@i].INTEREST_AMOUNT" class="form-control form-control-sm" value="@item.INTEREST_AMOUNT" readonly></td>
-                            <td><input name="BANK_LOAN_SCHEDULE[@i].TOTAL_AMOUNT" class="form-control form-control-sm" value="@item.TOTAL_AMOUNT" readonly></td>
-                            <td><input name="BANK_LOAN_SCHEDULE[@i].DUE_DATE" class="DUE_DATE form-control form-control-sm datepicker" autocomplete="off" placeholder="Due Date" value="@item.DUE_DATE"></td>
-                            <td><a class="btn btn-primary btn-xs" asp-area="Accounts" asp-controller="Loan" asp-action="Payment" asp-route-id="@item.ID"><i class="fa fa-pen"></i> Payment</a></td>
+                            <td><input name="BANK_LOAN_SCHEDULE_VM[@i].LOAN_AMOUNT" class="form-control form-control-sm" value="@item.LOAN_AMOUNT" readonly></td>
+                            <td><input name="BANK_LOAN_SCHEDULE_VM[@i].INTEREST_AMOUNT" class="form-control form-control-sm" value="@item.INTEREST_AMOUNT" readonly></td>
+                            <td><input name="BANK_LOAN_SCHEDULE_VM[@i].TOTAL_AMOUNT" class="form-control form-control-sm" value="@item.TOTAL_AMOUNT" readonly></td>
+                            <td><input name="BANK_LOAN_SCHEDULE_VM[@i].DUE_DATE" class="DUE_DATE form-control form-control-sm datepicker" autocomplete="off" placeholder="Due Date" value="@item.DUE_DATE"></td>
+                            <td>
+                                @if (!item.IS_PAID)
+                                {
+                                    <a class="btn btn-primary btn-xs" asp-area="Accounts" asp-controller="Loan" asp-action="Payment" asp-route-id="@item.ID"><i class="fa fa-pen"></i> Payment</a>
+                                }
+                                @if (!item.IS_FINE)
+                                {
+                                    <a class="btn btn-primary btn-xs" asp-area="Accounts" asp-controller="Loan" asp-action="FinePayment" asp-route-id="@item.ID"><i class="fa fa-pen"></i> Fine</a>
+                                }
+                            </td>
                         </tr>
                     }
                 </table>

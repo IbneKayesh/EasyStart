@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BS.DMO.Models.Accounts.BankLoan.BANK_LOAN_MASTER>
+﻿@model IEnumerable<BS.DMO.ViewModels.Accounts.BankLoan.BANK_LOAN_MASTER_VM>
 @{
     ViewData["Title"] = "Loan";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +7,10 @@
     <div class="card-header">
         <h3 class="card-title">Find your @ViewData["Title"]</h3>
         <div class="card-tools">
-            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+            @if (Model.Any() && Model.First().ALLOW_ADD)
+            {
+                <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+            }
         </div>
     </div>
 
@@ -35,7 +38,7 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.BRANCH_COST_CENTER_ID)
+                            @Html.DisplayFor(modelItem => item.COST_CENTER_NAME)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.TRN_NO)
@@ -71,8 +74,14 @@
                             @Html.DisplayFor(modelItem => item.IS_ACTIVE)
                         </td>
                         <td>
-                            <a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-edit"></i> Edit</a>
-                            <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="/Company/Business/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button>
+                            @if (item.ALLOW_EDIT)
+                            {
+                                <a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-edit"></i> Edit</a>
+                            }
+                            @if (item.ALLOW_DELETE)
+                            {
+                                <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="/Company/Business/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button>
+                            }
                         </td>
                     </tr>
                 }

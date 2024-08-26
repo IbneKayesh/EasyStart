@@ -12,9 +12,9 @@
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 1)]
         public string ID { get; set; }
 
-        [Display(Name = "Trn Id")]
+        [Display(Name = "Loan ID")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
-        public string? MASTER_ID { get; set; }
+        public string? BANK_LOAN_MASTER_ID { get; set; }
 
         [Display(Name = "Schedule No")]
         [Required(ErrorMessage = "{0} is required")]
@@ -40,19 +40,5 @@
         [Display(Name = "Due Date")]
         [Required(ErrorMessage = "{0} is required")]
         public DateTime DUE_DATE { get; set; }
-
-
-        [NotMapped]
-        [Display(Name = "Is Paid")]
-        public bool IS_PAID { get; set; }
-
-        [NotMapped]
-        [Display(Name = "Is Fine")]
-        public bool IS_FINE { get; set; }
-
-        [NotMapped]
-        public List<BANK_LOAN_PAYMENTS>? BANK_LOAN_PAYMENTS { get; set; }
-        [NotMapped]
-        public List<BANK_LOAN_FINES>? BANK_LOAN_FINES { get; set; }
     }
 }

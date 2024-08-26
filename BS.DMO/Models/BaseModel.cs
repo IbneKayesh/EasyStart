@@ -17,6 +17,9 @@ namespace BS.DMO.Models
             //Data Edit Restrict for multiple Users
 
             DATE_DISPLAY_FORMAT = AppDateFormat.DATE_DISPLAY_FORMAT;
+            ALLOW_ADD = true;
+            ALLOW_EDIT = true;
+            ALLOW_DELETE = true;
         }
 
         [Display(Name = "Status")]
@@ -40,5 +43,14 @@ namespace BS.DMO.Models
 
         [NotMapped]
         public string DATE_DISPLAY_FORMAT { get; set; }
+
+        [NotMapped]
+        public bool ALLOW_ADD { get; set; }
+
+        [NotMapped]
+        public bool ALLOW_EDIT { get; set; }
+
+        [NotMapped]
+        public bool ALLOW_DELETE { get; set; }
     }
 }
