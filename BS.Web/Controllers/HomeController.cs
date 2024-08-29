@@ -1,5 +1,3 @@
-using BS.DMO.Models.Accounts.BankLoan;
-using BS.DMO.Models.HRMS.Employee;
 using BS.DMO.Models.SalesOrder;
 
 namespace BS.Web.Controllers
@@ -18,9 +16,9 @@ namespace BS.Web.Controllers
         public IActionResult Index()
         {
             string table_script = string.Empty;
-            table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<BANK_LOAN_FINES>();
-            //table_script = Services.Power.ClassObjectSanitizer.SetForSave<DELIVERY_AGENT>();
-            //table_script = Services.Power.RazorSanitizer.Create<BANK_LOAN_MASTER>();
+            table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<SB_CHILD>();
+            //table_script = Services.Power.ClassObjectSanitizer.SetForSave<PRODUCTS>();
+            //table_script = Services.Power.RazorSanitizer.Create<PRODUCTS>();
             //table_script = Services.Power.RazorSanitizer.Select<PRODUCTS>();
 
             return View("Index", table_script);

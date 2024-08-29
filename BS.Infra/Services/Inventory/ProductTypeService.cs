@@ -44,9 +44,6 @@
                             //TODO : Update property
                             entity.TYPE_NAME = obj.TYPE_NAME;
                             entity.TYPE_DESC = obj.TYPE_DESC;
-                            entity.IS_MASTER_PRODUCT = obj.IS_MASTER_PRODUCT;
-                            entity.IS_PURCHASE = obj.IS_PURCHASE;
-                            entity.IS_SALES = obj.IS_SALES;
                             entity.IS_STOCK = obj.IS_STOCK;
                             //Start Audit
                             entity.IS_ACTIVE = obj.IS_ACTIVE;

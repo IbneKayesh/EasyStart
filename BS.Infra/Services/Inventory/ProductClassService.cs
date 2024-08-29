@@ -16,21 +16,21 @@ namespace BS.Infra.Services.Inventory
             eQResult.entities = "PRODUCT_CLASS";
             try
             {
-                if (obj.DISCOUNT_PCT > 0 && obj.DISCOUNT_VALUE > 0)
-                {
-                    eQResult.messages = NotifyService.Error("Enter Discount % or Value, Both are not allowed for same Class");
-                    return eQResult;
-                }
-                if ((obj.DISCOUNT_PCT > 0 || obj.DISCOUNT_VALUE > 0) && !obj.IS_DISCOUNT)
-                {
-                    eQResult.messages = NotifyService.Error("Make checked Allow Discount");
-                    return eQResult;
-                }
-                if (obj.IS_DISCOUNT && (obj.DISCOUNT_PCT <= 0 || obj.DISCOUNT_VALUE <= 0))
-                {
-                    eQResult.messages = NotifyService.Error("Enter Discount % or Value");
-                    return eQResult;
-                }
+                //if (obj.DISCOUNT_PCT > 0 && obj.DISCOUNT_VALUE > 0)
+                //{
+                //    eQResult.messages = NotifyService.Error("Enter Discount % or Value, Both are not allowed for same Class");
+                //    return eQResult;
+                //}
+                //if ((obj.DISCOUNT_PCT > 0 || obj.DISCOUNT_VALUE > 0) && !obj.IS_DISCOUNT)
+                //{
+                //    eQResult.messages = NotifyService.Error("Make checked Allow Discount");
+                //    return eQResult;
+                //}
+                //if (obj.IS_DISCOUNT && (obj.DISCOUNT_PCT <= 0 || obj.DISCOUNT_VALUE <= 0))
+                //{
+                //    eQResult.messages = NotifyService.Error("Enter Discount % or Value");
+                //    return eQResult;
+                //}
 
                 if (obj.ID == Guid.Empty.ToString())
                 {
@@ -63,9 +63,10 @@ namespace BS.Infra.Services.Inventory
                             //TODO : Update property
                             entity.CLASS_NAME = obj.CLASS_NAME;
                             entity.CLASS_DESC = obj.CLASS_DESC;
+                            entity.IS_MASTER_PRODUCT = obj.IS_MASTER_PRODUCT;
+                            entity.IS_PURCHASE = obj.IS_PURCHASE;
+                            entity.IS_SALES = obj.IS_SALES;
                             entity.IS_DISCOUNT = obj.IS_DISCOUNT;
-                            entity.DISCOUNT_PCT = obj.DISCOUNT_PCT;
-                            entity.DISCOUNT_VALUE = obj.DISCOUNT_VALUE;
                             //Start Audit
                             entity.IS_ACTIVE = obj.IS_ACTIVE;
                             entity.UPDATE_USER = userId;

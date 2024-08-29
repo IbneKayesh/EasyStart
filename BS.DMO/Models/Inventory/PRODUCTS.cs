@@ -31,10 +31,6 @@
         [Required(ErrorMessage = "{0} is required")]
         public string? PRODUCT_CATEGORY_ID { get; set; }
 
-        [Display(Name = "Brand")]
-        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
-        [Required(ErrorMessage = "{0} is required")]
-        public string? PRODUCT_BRAND_ID { get; set; }
 
         [Display(Name = "UOM")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
@@ -58,11 +54,6 @@
         [Display(Name = "Description")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         public string? PRODUCT_DESC { get; set; }
-
-
-        [Display(Name = "Image")]
-        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
-        public string? PRODUCT_IMG { get; set; }
 
 
         [Display(Name = "Last Purchase Rate")]
@@ -95,27 +86,8 @@
         [Column(TypeName = "decimal(18, 6)")]
         public decimal BASE_PRICE { get; set; }
 
-
         [Display(Name = "Weight Per Unit")]
-        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
-        public string? WEIGHT_PER_UNIT { get; set; }
-
-        [Display(Name = "Weight Formula")]
-        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
-        public string? WEIGHT_FORMULA { get; set; }
-
-        [Display(Name = "Net Weight")]
-        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
-        public string? NET_WEIGHT { get; set; }
-
-
-        [Display(Name = "Price Formula")]
-        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
-        public string? PRICE_FORMULA { get; set; }
-
-        [Display(Name = "Net Price")]
         [Column(TypeName = "decimal(18, 6)")]
-        public decimal NET_PRICE { get; set; }
-
+        public decimal? WEIGHT_PER_UNIT { get; set; }
     }
 }

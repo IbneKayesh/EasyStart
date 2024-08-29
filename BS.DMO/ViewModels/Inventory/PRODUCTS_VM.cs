@@ -15,9 +15,6 @@
         [Display(Name = "Category Name")]
         public string? CATEGORY_NAME { get; set; }
 
-        [Display(Name = "Brand Name")]
-        public string? BRAND_NAME { get; set; }
-
         [Display(Name = "UOM")]
         public string? UNIT_NAME { get; set; }
     }

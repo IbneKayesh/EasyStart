@@ -1,4 +1,5 @@
 ﻿using BS.DMO.Models.HelpDesk;
+using BS.DMO.ViewModels.Accounts.BankLoan;
 using Microsoft.EntityFrameworkCore;
 
 namespace BS.Infra.Services.Accounts.BankLoan
@@ -17,7 +18,7 @@ namespace BS.Infra.Services.Accounts.BankLoan
             var obj = new NEW_BANK_LOAN_MASTER_VM();
             obj.BANK_LOAN_MASTER = new BANK_LOAN_MASTER();
             obj.BANK_LOAN_MASTER.TRN_NO = TrnLastNoListService.CreateTransactionNo(TransactionID.BLC);
-            obj.BANK_LOAN_SCHEDULE_VM = new List<BANK_LOAN_SCHEDULE_VM>();
+            obj.BANK_LOAN_SCHEDULE = new List<BANK_LOAN_SCHEDULE>();
             return obj;
         }
         public EQResult Insert(NEW_BANK_LOAN_MASTER_VM obj, string userId)
@@ -49,11 +50,11 @@ namespace BS.Infra.Services.Accounts.BankLoan
                         //End Audit
 
                         dbCtx.BANK_LOAN_MASTER.Add(obj.BANK_LOAN_MASTER);
-                        List<BANK_LOAN_SCHEDULE> blsList = new List<BANK_LOAN_SCHEDULE>();
-                        foreach (var item in obj.BANK_LOAN_SCHEDULE_VM)
+                        //List<BANK_LOAN_SCHEDULE> blsList = new List<BANK_LOAN_SCHEDULE>();
+                        foreach (var item in obj.BANK_LOAN_SCHEDULE)
                         {
-                            BANK_LOAN_SCHEDULE bank_loan_schedule = new BANK_LOAN_SCHEDULE();
-                            ObjectMappingHelper.MapProperties<BANK_LOAN_SCHEDULE_VM, BANK_LOAN_SCHEDULE>(item, bank_loan_schedule);
+                            //BANK_LOAN_SCHEDULE bank_loan_schedule = new BANK_LOAN_SCHEDULE();
+                            //ObjectMappingHelper.MapProperties<BANK_LOAN_SCHEDULE_VM, BANK_LOAN_SCHEDULE>(item, bank_loan_schedule);
 
                             //new entity
                             item.ID = Guid.NewGuid().ToString();
@@ -67,9 +68,9 @@ namespace BS.Infra.Services.Accounts.BankLoan
                             item.UPDATE_DATE = dateTime;
                             //item.REVISE_NO = 0;
                             //End Audit
-                            blsList.Add(bank_loan_schedule);
+                            //blsList.Add(bank_loan_schedule);
                         }
-                        dbCtx.BANK_LOAN_SCHEDULE.AddRange(blsList);
+                        dbCtx.BANK_LOAN_SCHEDULE.AddRange(obj.BANK_LOAN_SCHEDULE);
                         eQResult.rows = dbCtx.SaveChanges();
                         eQResult.success = true;
                         eQResult.messages = NotifyService.SaveSuccess();
@@ -103,11 +104,11 @@ namespace BS.Infra.Services.Accounts.BankLoan
                                 var entityList = dbCtx.BANK_LOAN_SCHEDULE.Where(x => x.BANK_LOAN_MASTER_ID == obj.BANK_LOAN_MASTER.ID).ToList();
                                 dbCtx.BANK_LOAN_SCHEDULE.RemoveRange(entityList);
 
-                                List<BANK_LOAN_SCHEDULE> blsList = new List<BANK_LOAN_SCHEDULE>();
-                                foreach (var item in obj.BANK_LOAN_SCHEDULE_VM)
+                                //List<BANK_LOAN_SCHEDULE> blsList = new List<BANK_LOAN_SCHEDULE>();
+                                foreach (var item in obj.BANK_LOAN_SCHEDULE)
                                 {
-                                    BANK_LOAN_SCHEDULE bank_loan_schedule = new BANK_LOAN_SCHEDULE();
-                                    ObjectMappingHelper.MapProperties<BANK_LOAN_SCHEDULE_VM, BANK_LOAN_SCHEDULE>(item, bank_loan_schedule);
+                                    //BANK_LOAN_SCHEDULE bank_loan_schedule = new BANK_LOAN_SCHEDULE();
+                                    //ObjectMappingHelper.MapProperties<BANK_LOAN_SCHEDULE_VM, BANK_LOAN_SCHEDULE>(item, bank_loan_schedule);
 
                                     //new entity
                                     item.ID = Guid.NewGuid().ToString();
@@ -122,7 +123,7 @@ namespace BS.Infra.Services.Accounts.BankLoan
                                     //item.REVISE_NO = 0;
                                     //End Audit
                                 }
-                                dbCtx.BANK_LOAN_SCHEDULE.AddRange(blsList);
+                                dbCtx.BANK_LOAN_SCHEDULE.AddRange(obj.BANK_LOAN_SCHEDULE);
 
                                 eQResult.rows = dbCtx.SaveChanges();
                                 eQResult.success = true;
@@ -180,81 +181,76 @@ namespace BS.Infra.Services.Accounts.BankLoan
             param.Add(new SqlParameter(parameterName: "MASTER_ID", id));
             var obj = new NEW_BANK_LOAN_MASTER_VM();
             obj.BANK_LOAN_MASTER = new BANK_LOAN_MASTER();
-            obj.BANK_LOAN_SCHEDULE_VM = new List<BANK_LOAN_SCHEDULE_VM>();
+            obj.BANK_LOAN_SCHEDULE = new List<BANK_LOAN_SCHEDULE>();
 
             string sql = $@"SELECT BI.*
                     FROM BANK_LOAN_MASTER BI
                     WHERE BI.ID = @MASTER_ID";
             obj.BANK_LOAN_MASTER = dbCtx.Database.SqlQueryRaw<BANK_LOAN_MASTER>(sql, param.ToArray()).ToList().FirstOrDefault();
-            sql = $@"SELECT BLS.*, cast(case when BLP.PAY_AMOUNT IS NULL then 0 else 1 end as bit) IS_PAID,
-                    cast(case when BLF.FINE_AMOUNT IS NULL then 0 else 1 end as bit) IS_FINE
+            sql = $@"SELECT *
                     FROM BANK_LOAN_SCHEDULE BLS
-					LEFT JOIN BANK_LOAN_PAYMENTS BLP on BLS.ID = BLP.BANK_LOAN_SCHEDULE_ID
-                    LEFT JOIN BANK_LOAN_FINES BLF on BLS.ID = BLF.BANK_LOAN_SCHEDULE_ID
                     WHERE BLS.BANK_LOAN_MASTER_ID = @MASTER_ID ORDER BY BLS.SCHEDULE_NO";
 
-            obj.BANK_LOAN_SCHEDULE_VM = dbCtx.Database.SqlQueryRaw<BANK_LOAN_SCHEDULE_VM>(sql, param.ToArray()).ToList();
+            obj.BANK_LOAN_SCHEDULE = dbCtx.Database.SqlQueryRaw<BANK_LOAN_SCHEDULE>(sql, param.ToArray()).ToList();
+            obj.BANK_LOAN_MASTER.ALLOW_EDIT = false;
             return obj;
         }
 
-        public BANK_LOAN_PAYMENTS GetPaymentByScheduleId(string scheduleId)
+        public BANK_LOAN_SCHEDULE GetByScheduleId(string id)
         {
             List<object> param = new List<object>();
-            param.Add(new SqlParameter(parameterName: "scheduleId", scheduleId));
-            var sql = $@"SELECT * FROM BANK_LOAN_SCHEDULE WHERE ID = @scheduleId";
+            param.Add(new SqlParameter(parameterName: "ID", id));
+            var sql = $@"SELECT * FROM BANK_LOAN_SCHEDULE WHERE ID = @ID";
             var scheduleEntity = dbCtx.Database.SqlQueryRaw<BANK_LOAN_SCHEDULE>(sql, param.ToArray()).FirstOrDefault();
 
             if (scheduleEntity != null)
             {
-                sql = $@"SELECT * FROM BANK_LOAN_PAYMENTS WHERE BANK_LOAN_SCHEDULE_ID = @scheduleId";
-
-                var paymentEntity = dbCtx.Database.SqlQueryRaw<BANK_LOAN_PAYMENTS>(sql, param.ToArray()).FirstOrDefault();
-
-                if (paymentEntity != null)
-                {
-                    paymentEntity.ALLOW_ADD = false;
-                    return paymentEntity;
-                }
-                else
-                {
-                    return new BANK_LOAN_PAYMENTS()
-                    {
-                        PAYMENT_INFO = scheduleEntity.SCHEDULE_NO + " payment",
-                        BANK_LOAN_SCHEDULE_ID = scheduleId,
-                        PAY_AMOUNT = scheduleEntity.TOTAL_AMOUNT,
-                        PAY_DATE = DateTime.Now
-                    };
-                }
+                scheduleEntity.PAYMENT_INFO = scheduleEntity.SCHEDULE_NO + " payment";
+                scheduleEntity.PAY_AMOUNT = scheduleEntity.TOTAL_AMOUNT;
+                scheduleEntity.PAY_DATE = DateTime.Now;
+                return scheduleEntity;
             }
             else
             {
-                return new BANK_LOAN_PAYMENTS()
-                {
-                    BANK_LOAN_SCHEDULE_ID = scheduleId,
-                    ALLOW_ADD = false
-                };
+                return new BANK_LOAN_SCHEDULE();
             }
         }
 
-        public EQResult InsertPayment(BANK_LOAN_PAYMENTS obj, string userId)
+        public EQResult InsertPayment(BANK_LOAN_SCHEDULE obj, string userId)
         {
             DateTime dateTime = DateTime.Now;
             EQResult eQResult = new EQResult();
-            eQResult.entities = "BANK_LOAN_PAYMENTS";
+            eQResult.entities = "BANK_LOAN_SCHEDULE";
             try
             {
-                string total_due = $@"UPDATE BANK_LOAN_MASTER
-SET DUE_AMOUNT = TOTAL_AMOUNT - (
-    SELECT COALESCE(SUM(BLP.PAY_AMOUNT), 0)
-    FROM BANK_LOAN_SCHEDULE BLS
-    INNER JOIN BANK_LOAN_PAYMENTS BLP ON BLS.ID = BLP.BANK_LOAN_SCHEDULE_ID
-    WHERE BLS.BANK_LOAN_MASTER_ID = BANK_LOAN_MASTER.ID )
-WHERE ID = (
-    SELECT BLS.BANK_LOAN_MASTER_ID
-    FROM BANK_LOAN_SCHEDULE BLS
-    WHERE BLS.ID = '{obj.BANK_LOAN_SCHEDULE_ID}')";
+                string total_due = $@"WITH ScheduleSums AS (
+    SELECT
+        BANK_LOAN_MASTER_ID,
+        COALESCE(SUM(PAY_AMOUNT), 0) AS TotalPayAmount,
+        COALESCE(SUM(FINE_AMOUNT), 0) AS TotalFineAmount
+    FROM BANK_LOAN_SCHEDULE
+	WHERE BANK_LOAN_SCHEDULE.BANK_LOAN_MASTER_ID = '{obj.BANK_LOAN_MASTER_ID}'
+    GROUP BY BANK_LOAN_MASTER_ID
+)
+UPDATE BANK_LOAN_MASTER
+SET
+    DUE_AMOUNT = TOTAL_AMOUNT - COALESCE(ss.TotalPayAmount, 0),
+    FINE_AMOUNT = COALESCE(ss.TotalFineAmount, 0)
+FROM ScheduleSums ss
+WHERE BANK_LOAN_MASTER.ID = ss.BANK_LOAN_MASTER_ID";
+                //        string total_due = $@"UPDATE BANK_LOAN_MASTER
+                //SET DUE_AMOUNT = TOTAL_AMOUNT - (
+                //    SELECT COALESCE(SUM(BLP.PAY_AMOUNT), 0)
+                //    FROM BANK_LOAN_SCHEDULE BLS
+                //    INNER JOIN BANK_LOAN_PAYMENTS BLP ON BLS.ID = BLP.BANK_LOAN_SCHEDULE_ID
+                //    WHERE BLS.BANK_LOAN_MASTER_ID = BANK_LOAN_MASTER.ID )
+                //WHERE ID = (
+                //    SELECT BLS.BANK_LOAN_MASTER_ID
+                //    FROM BANK_LOAN_SCHEDULE BLS
+                //    WHERE BLS.ID = '{obj.BANK_LOAN_SCHEDULE_ID}')";
+
                 //old entity
-                var entity = dbCtx.BANK_LOAN_PAYMENTS.Find(obj.ID);
+                var entity = dbCtx.BANK_LOAN_SCHEDULE.Find(obj.ID);
                 if (entity != null)
                 {
                     if (entity.RowVersion.SequenceEqual(obj.RowVersion))
@@ -263,6 +259,8 @@ WHERE ID = (
                         entity.PAYMENT_INFO = obj.PAYMENT_INFO;
                         entity.PAY_AMOUNT = obj.PAY_AMOUNT;
                         entity.PAY_DATE = obj.PAY_DATE;
+                        entity.FINE_AMOUNT = obj.FINE_AMOUNT;
+                        entity.FINE_DATE = obj.FINE_DATE;
                         //Start Audit
                         entity.IS_ACTIVE = obj.IS_ACTIVE;
                         entity.UPDATE_USER = userId;
@@ -284,22 +282,9 @@ WHERE ID = (
                 }
                 else
                 {
-                    //new entity
-                    obj.ID = Guid.NewGuid().ToString();
-                    //Start Audit
-                    //obj.IS_ACTIVE = true;
-                    obj.CREATE_USER = userId;
-                    obj.CREATE_DATE = dateTime;
-                    obj.UPDATE_USER = userId;
-                    obj.UPDATE_DATE = dateTime;
-                    //obj.REVISE_NO = 0;
-                    //End Audit
 
-                    dbCtx.BANK_LOAN_PAYMENTS.Add(obj);
-                    eQResult.rows = dbCtx.SaveChanges();
-                    eQResult.success = true;
-                    eQResult.messages = NotifyService.SaveSuccess();
-                    dbCtx.Database.ExecuteSqlRaw(total_due);
+                    eQResult.messages = NotifyService.NotFoundString();
+                    eQResult.success = false;
                     return eQResult;
                 }
             }
@@ -309,7 +294,60 @@ WHERE ID = (
                                 ? ex.InnerException?.Message ?? ex.Message
                                 : ex.Message;
                 error = error.Replace("'", "");
-                eQResult.messages = NotifyService.Error(error);
+                //eQResult.messages = NotifyService.Error(error);
+                eQResult.messages = error;
+                eQResult.success = false;
+                return eQResult;
+            }
+            finally
+            {
+                dbCtx.Dispose();
+            }
+        }
+
+
+
+        public EQResult Delete(string id, string userId)
+        {
+            EQResult eQResult = new EQResult();
+            eQResult.entities = "BANK_LOAN_MASTER";
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                eQResult.messages = NotifyService.InvalidRequestString();
+                return eQResult;
+            }
+            try
+            {
+                //check child entity
+                int anyChild = dbCtx.BANK_LOAN_MASTER.Where(x => x.ID == id && x.IS_APPROVE).Count();
+                if (anyChild > 0)
+                {
+                    eQResult.messages = NotifyService.DeleteHasChildString("Already approve", anyChild, "Loan");
+                    return eQResult;
+                }
+
+                //old entity
+                var entity = dbCtx.BANK_LOAN_MASTER.Find(id);
+                if (entity != null)
+                {
+                    //TODO : Delete property
+                    dbCtx.BANK_LOAN_MASTER.Remove(entity);
+                    dbCtx.BANK_LOAN_SCHEDULE.RemoveRange(dbCtx.BANK_LOAN_SCHEDULE.Where(x => x.BANK_LOAN_MASTER_ID == id));
+                    eQResult.rows = dbCtx.SaveChanges();
+                    eQResult.success = true;
+                    eQResult.messages = NotifyService.DeletedSuccessString(entity.TRN_NO!);
+                    return eQResult;
+                }
+                else
+                {
+                    eQResult.messages = NotifyService.NotFoundString();
+                    return eQResult;
+                }
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message == string.Empty ? ex.InnerException.Message : ex.Message;
+                eQResult.messages = msg.Replace("'", "");
                 return eQResult;
             }
             finally

@@ -1,4 +1,4 @@
-﻿@model BS.DMO.Models.Accounts.BankLoan.BANK_LOAN_PAYMENTS
+﻿@model BS.DMO.Models.Accounts.BankLoan.BANK_LOAN_SCHEDULE
 @{
     ViewData["Title"] = "Loan Payment";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,10 +14,15 @@
         <div class="card-body">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="ID" type="hidden" />
-            <input asp-for="BANK_LOAN_SCHEDULE_ID" type="hidden" />
+            <input asp-for="BANK_LOAN_MASTER_ID" type="hidden" />
             <input asp-for="RowVersion" type="hidden" />
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-1">
+                    <label asp-for="SCHEDULE_NO" class="control-label"></label>
+                    <input asp-for="SCHEDULE_NO" type="text" class="custom-input custom-input-xs" readonly>
+                    <span asp-validation-for="SCHEDULE_NO" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
                     <label asp-for="PAYMENT_INFO" class="control-label"></label>
                     <input asp-for="PAYMENT_INFO" type="text" class="custom-input custom-input-xs" autocomplete="off" placeholder="Payment Info">
                     <span asp-validation-for="PAYMENT_INFO" class="text-danger"></span>
@@ -32,10 +37,15 @@
                     <input asp-for="PAY_DATE" type="text" class="custom-input custom-input-xs datepicker" autocomplete="off" placeholder="Payment Date">
                     <span asp-validation-for="PAY_DATE" class="text-danger"></span>
                 </div>
-                <div class="col-md-1">
-                    <label asp-for="IS_ACTIVE" class="control-label"></label>
-                    <input asp-for="IS_ACTIVE" type="checkbox" class="custom-input custom-input-xs">
-                    <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
+                <div class="col-md-2">
+                    <label asp-for="FINE_AMOUNT" class="control-label"></label>
+                    <input asp-for="FINE_AMOUNT" class="custom-input custom-input-xs" placeholder="Fine Amount">
+                    <span asp-validation-for="FINE_AMOUNT" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="FINE_DATE" class="control-label"></label>
+                    <input asp-for="FINE_DATE" type="text" class="custom-input custom-input-xs datepicker" autocomplete="off" placeholder="Fine Date">
+                    <span asp-validation-for="FINE_DATE" class="text-danger"></span>
                 </div>
             </div>
         </div>

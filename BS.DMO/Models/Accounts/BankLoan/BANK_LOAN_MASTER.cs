@@ -1,6 +1,6 @@
 ﻿namespace BS.DMO.Models.Accounts.BankLoan
 {
-    public class BANK_LOAN_MASTER : BaseModel
+    public class BANK_LOAN_MASTER : PostingModel
     {
         public BANK_LOAN_MASTER()
         {
@@ -63,5 +63,10 @@
         [Required(ErrorMessage = "{0} is required")]
         [Column(TypeName = "decimal(18, 6)")]
         public decimal DUE_AMOUNT { get; set; } = 0;
+
+        [Display(Name = "Fine Amount")]
+        [Required(ErrorMessage = "{0} is required")]
+        [Column(TypeName = "decimal(18, 6)")]
+        public decimal FINE_AMOUNT { get; set; } = 0;
     }
 }

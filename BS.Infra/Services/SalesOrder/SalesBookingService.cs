@@ -1,4 +1,5 @@
-﻿using BS.DMO.StaticValues;
+﻿using BS.DMO.Models.SalesOrder;
+using BS.DMO.StaticValues;
 using BS.DMO.ViewModels.Inventory;
 using BS.Infra.Services.Setup;
 using BS.Infra.Services.Utility;
@@ -52,7 +53,7 @@ namespace BS.Infra.Services.SalesOrder
 
                         sb_master.TRN_ID = TransactionID.SB;
                         sb_master.TRN_NO = trnLastNoListS.CreateTransactionNo(dbCtx, TransactionID.SB, obj.SB_MASTER_VM.FROM_SUB_SECTION_ID, dateTime);
-                        if(sb_master.TRN_NO == null)
+                        if (sb_master.TRN_NO == null)
                         {
                             eQResult.messages = NotifyService.Error("An error occurred while creating the New transaction");
                             return eQResult;
@@ -78,7 +79,30 @@ namespace BS.Infra.Services.SalesOrder
                         //End Audit
 
                         dbCtx.SB_MASTER.Add(sb_master);
-                        eQResult.rows = dbCtx.SaveChanges();                        
+
+                        List<SB_CHILD> sbcList = new List<SB_CHILD>();
+                        foreach (var item in obj.SB_CHILD_VM)
+                        {
+                            SB_CHILD sb_child = new SB_CHILD();
+                            ObjectMappingHelper.MapProperties<SB_CHILD_VM, SB_CHILD>(item, sb_child);
+
+                            //new entity
+                            sb_child.ID = Guid.NewGuid().ToString();
+                            sb_child.MASTER_ID = sb_master.ID;
+
+                            //Start Audit
+                            //item.IS_ACTIVE = true;
+                            sb_child.CREATE_USER = userId;
+                            sb_child.CREATE_DATE = dateTime;
+                            sb_child.UPDATE_USER = userId;
+                            sb_child.UPDATE_DATE = dateTime;
+                            //item.REVISE_NO = 0;
+                            //End Audit
+                            sbcList.Add(sb_child);
+                        }
+                        dbCtx.SB_CHILD.AddRange(sbcList);
+
+                        eQResult.rows = dbCtx.SaveChanges();
                         eQResult.success = true;
                         eQResult.messages = NotifyService.SaveSuccess();
                     }
@@ -115,6 +139,31 @@ namespace BS.Infra.Services.SalesOrder
                                 entity.REVISE_NO = entity.REVISE_NO + 1;
                                 //End Audit
                                 dbCtx.Entry(entity).State = EntityState.Modified;
+
+                                var entityList = dbCtx.SB_CHILD.Where(x => x.MASTER_ID == obj.SB_MASTER_VM.ID).ToList();
+                                dbCtx.SB_CHILD.RemoveRange(entityList);
+                                List<SB_CHILD> sbcList = new List<SB_CHILD>();
+                                foreach (var item in obj.SB_CHILD_VM)
+                                {
+                                    SB_CHILD sb_child = new SB_CHILD();
+                                    ObjectMappingHelper.MapProperties<SB_CHILD_VM, SB_CHILD>(item, sb_child);
+
+                                    //new entity
+                                    item.ID = Guid.NewGuid().ToString();
+                                    item.MASTER_ID = sb_master.ID;
+
+                                    //Start Audit
+                                    //item.IS_ACTIVE = true;
+                                    item.CREATE_USER = userId;
+                                    item.CREATE_DATE = dateTime;
+                                    item.UPDATE_USER = userId;
+                                    item.UPDATE_DATE = dateTime;
+                                    //item.REVISE_NO = 0;
+                                    //End Audit
+                                    sbcList.Add(sb_child);
+                                }
+                                dbCtx.SB_CHILD.AddRange(sbcList);
+
                                 eQResult.rows = dbCtx.SaveChanges();
                                 eQResult.success = true;
                                 eQResult.messages = NotifyService.EditSuccess();
@@ -156,7 +205,25 @@ namespace BS.Infra.Services.SalesOrder
         }
 
 
+        public NEW_SB_VM GetById(string id)
+        {
+            var obj = new NEW_SB_VM();
+            obj.SB_MASTER_VM = new SB_MASTER_VM();
+            obj.SB_CHILD_VM = new List<SB_CHILD_VM>();
 
+            var sb_master = dbCtx.SB_MASTER.Find(id);
+            ObjectMappingHelper.MapProperties<SB_MASTER, SB_MASTER_VM>(sb_master, obj.SB_MASTER_VM);
+
+            var sb_child = dbCtx.SB_CHILD.Where(x => x.MASTER_ID == id).ToList();
+            foreach (var item in sb_child)
+            {
+                var sb_child_vm = new SB_CHILD_VM();
+                ObjectMappingHelper.MapProperties<SB_CHILD, SB_CHILD_VM>(item, sb_child_vm);
+                obj.SB_CHILD_VM.Add(sb_child_vm);
+            }            
+
+            return obj;
+        }
         public List<SB_MASTER> GetAllUnposted()
         {
             FormattableString sql = $@"SELECT SB.* FROM SB_MASTER SB";

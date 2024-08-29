@@ -17,9 +17,6 @@
                 <tr>
                     <th>Type Name</th>
                     <th>Description</th>
-                    <th>Is Master Product</th>
-                    <th>Allow Purchase</th>
-                    <th>Allow Sales</th>
                     <th>Generate Stock</th>
                     <th>Status</th>
                     <th>#</th>
@@ -34,15 +31,6 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.TYPE_DESC)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IS_MASTER_PRODUCT)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IS_PURCHASE)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IS_SALES)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.IS_STOCK)

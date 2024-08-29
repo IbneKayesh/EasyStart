@@ -21,9 +21,7 @@ namespace BS.DBC.Database
         }
         //Accounts
         public DbSet<BANK_LOAN_SCHEDULE> BANK_LOAN_SCHEDULE { get; set; }
-        public DbSet<BANK_LOAN_PAYMENTS> BANK_LOAN_PAYMENTS { get; set; }
         public DbSet<BANK_LOAN_MASTER> BANK_LOAN_MASTER { get; set; }
-        public DbSet<BANK_LOAN_FINES> BANK_LOAN_FINES { get; set; }
 
         //Admin
 

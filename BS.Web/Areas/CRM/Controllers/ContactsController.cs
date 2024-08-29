@@ -1,6 +1,4 @@
-﻿using BS.DMO.Models.CRM;
-
-namespace BS.Web.Areas.CRM.Controllers
+﻿namespace BS.Web.Areas.CRM.Controllers
 {
     [Area("CRM")]
     public class ContactsController : BaseController

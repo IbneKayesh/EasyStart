@@ -10,6 +10,6 @@ namespace BS.DMO.ViewModels.Accounts.BankLoan
         }
         public BANK_LOAN_MASTER BANK_LOAN_MASTER { get; set; }
 
-        public List<BANK_LOAN_SCHEDULE_VM>? BANK_LOAN_SCHEDULE_VM { get; set; }
+        public List<BANK_LOAN_SCHEDULE>? BANK_LOAN_SCHEDULE { get; set; }
     }
 }

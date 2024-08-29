@@ -8,15 +8,10 @@ namespace BS.Web.Areas.Accounts.Controllers.BankLoan
     {
         private readonly LoanService loanS;
         private readonly BranchCostCenterService branchCostCenterS;
-
-        private readonly EmployeesService employeesS;
-        private readonly DesignationService designationS;
-        public LoanController(LoanService _loanService, BranchCostCenterService _branchCostCenterService, EmployeesService _employeesService, DesignationService _designationService)
+        public LoanController(LoanService _loanService, BranchCostCenterService _branchCostCenterService)
         {
             loanS = _loanService;
             branchCostCenterS = _branchCostCenterService;
-            employeesS = _employeesService;
-            designationS = _designationService;
         }
         public IActionResult Index()
         {
@@ -42,15 +37,16 @@ namespace BS.Web.Areas.Accounts.Controllers.BankLoan
                 decimal TotalAmount = (obj.BANK_LOAN_MASTER.INTEREST_RATE / 100) * obj.BANK_LOAN_MASTER.LOAN_AMOUNT;
                 obj.BANK_LOAN_MASTER.TOTAL_AMOUNT = obj.BANK_LOAN_MASTER.LOAN_AMOUNT + TotalAmount;
                 obj.BANK_LOAN_MASTER.DUE_AMOUNT = obj.BANK_LOAN_MASTER.LOAN_AMOUNT + TotalAmount;
+                obj.BANK_LOAN_MASTER.FINE_AMOUNT = 0;
                 if (obj.BANK_LOAN_MASTER.LOAN_AMOUNT < 1)
                 {
                     ModelState.AddModelError("", "Enter correct loan amount");
-                    obj.BANK_LOAN_SCHEDULE_VM = new List<BANK_LOAN_SCHEDULE_VM>();
+                    obj.BANK_LOAN_SCHEDULE = new List<BANK_LOAN_SCHEDULE>();
                 }
                 if (obj.BANK_LOAN_MASTER.NO_OF_SCHEDULE < 1)
                 {
                     ModelState.AddModelError("", "Enter correct number of schedule");
-                    obj.BANK_LOAN_SCHEDULE_VM = new List<BANK_LOAN_SCHEDULE_VM>();
+                    obj.BANK_LOAN_SCHEDULE = new List<BANK_LOAN_SCHEDULE>();
                 }
                 else
                 {
@@ -58,10 +54,10 @@ namespace BS.Web.Areas.Accounts.Controllers.BankLoan
                     decimal eachValue = obj.BANK_LOAN_MASTER.LOAN_AMOUNT / obj.BANK_LOAN_MASTER.NO_OF_SCHEDULE;
                     decimal eachIntrValue = (obj.BANK_LOAN_MASTER.INTEREST_RATE / 100) * eachValue;
 
-                    List<BANK_LOAN_SCHEDULE_VM> objList = new List<BANK_LOAN_SCHEDULE_VM>();
+                    List<BANK_LOAN_SCHEDULE> objList = new List<BANK_LOAN_SCHEDULE>();
                     for (int i = 1; i <= obj.BANK_LOAN_MASTER.NO_OF_SCHEDULE; i++)
                     {
-                        BANK_LOAN_SCHEDULE_VM bls = new BANK_LOAN_SCHEDULE_VM();
+                        BANK_LOAN_SCHEDULE bls = new BANK_LOAN_SCHEDULE();
                         bls.SCHEDULE_NO = i;
                         bls.LOAN_AMOUNT = Math.Round(eachValue, 6);
                         bls.INTEREST_AMOUNT = Math.Round(eachIntrValue, 6);
@@ -69,17 +65,18 @@ namespace BS.Web.Areas.Accounts.Controllers.BankLoan
                         bls.DUE_DATE = date.AddMonths(i);
                         objList.Add(bls);
                     }
-                    obj.BANK_LOAN_SCHEDULE_VM = objList;
+                    obj.BANK_LOAN_SCHEDULE = objList;
                     obj.BANK_LOAN_MASTER.END_DATE = date.AddMonths(obj.BANK_LOAN_MASTER.NO_OF_SCHEDULE);
                 }
                 return View(ViewPathFinder.ViewName(this.GetType(), "AddUpdate"), obj);
             }
             else if (buttonClicked == "Save")
             {
-                if (obj.BANK_LOAN_SCHEDULE_VM.Count == 0)
+                if (obj.BANK_LOAN_SCHEDULE == null || obj.BANK_LOAN_SCHEDULE.Count == 0)
                 {
                     ModelState.Clear();
                     ModelState.AddModelError("", "Apply loan calculation");
+                    obj.BANK_LOAN_SCHEDULE = new List<BANK_LOAN_SCHEDULE>();
                 }
                 else if (ModelState.IsValid)
                 {
@@ -88,7 +85,7 @@ namespace BS.Web.Areas.Accounts.Controllers.BankLoan
 
                     if (eQResult.success && eQResult.rows > 0)
                     {
-                        return RedirectToAction(nameof(Index));
+                        return RedirectToAction(nameof(Edit), new { id = obj.BANK_LOAN_MASTER.ID });
                     }
                 }
                 else
@@ -132,7 +129,7 @@ namespace BS.Web.Areas.Accounts.Controllers.BankLoan
 
         public IActionResult Delete(string id)
         {
-            EQResult eQResult = employeesS.Delete(id, user_session.USER_ID);
+            EQResult eQResult = loanS.Delete(id, user_session.USER_ID);
             return Json(eQResult);
         }
 
@@ -142,7 +139,7 @@ namespace BS.Web.Areas.Accounts.Controllers.BankLoan
         {
             if (!string.IsNullOrWhiteSpace(id))
             {
-                var entity = loanS.GetPaymentByScheduleId(id);
+                var entity = loanS.GetByScheduleId(id);
                 if (entity != null)
                 {
                     return View(ViewPathFinder.ViewName(this.GetType(), "Payment"), entity);
@@ -159,24 +156,23 @@ namespace BS.Web.Areas.Accounts.Controllers.BankLoan
             return RedirectToAction(nameof(Index));
         }
         [HttpPost]
-        public IActionResult Payment(BANK_LOAN_PAYMENTS obj)
+        public IActionResult Payment(BANK_LOAN_SCHEDULE obj)
         {
             EQResult eQResult = new EQResult();
-            if (ModelState.IsValid)
+            //    if (ModelState.IsValid)
+            //    {
+            eQResult = loanS.InsertPayment(obj, user_session.USER_ID);
+            TempData["msg"] = eQResult.messages;
+            if (eQResult.success && eQResult.rows > 0)
             {
-                eQResult = loanS.InsertPayment(obj, user_session.USER_ID);
-                TempData["msg"] = eQResult.messages;
-
-                if (eQResult.success && eQResult.rows > 0)
-                {
-                    return RedirectToAction(nameof(Index));
-                }
+                return RedirectToAction(nameof(Edit), new { id = obj.BANK_LOAN_MASTER_ID });
             }
-            else
-            {
-                var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
-                ModelState.AddModelError("", errors);
-            }
+            //    }
+            //    else
+            //    {
+            //var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+            ModelState.AddModelError("", eQResult.messages);
+            //}
             return View(ViewPathFinder.ViewName(this.GetType(), "Payment"), obj);
         }
     }

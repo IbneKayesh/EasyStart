@@ -42,8 +42,25 @@
                         if (entity.RowVersion.SequenceEqual(obj.RowVersion))
                         {
                             //TODO : Update property
-                            //entity.CATEGORY_NAME = obj.CATEGORY_NAME;
-                            //entity.CATEGORY_DESC = obj.CATEGORY_DESC;
+
+                            entity.BUSINESS_LINE_ID = obj.BUSINESS_LINE_ID;
+                            entity.PRODUCT_TYPE_ID = obj.PRODUCT_TYPE_ID;
+                            entity.PRODUCT_CLASS_ID = obj.PRODUCT_CLASS_ID;
+                            entity.PRODUCT_CATEGORY_ID = obj.PRODUCT_CATEGORY_ID;
+                            entity.UNIT_CHILD_ID = obj.UNIT_CHILD_ID;
+                            entity.PRODUCT_CODE = obj.PRODUCT_CODE;
+                            entity.BAR_CODE = obj.BAR_CODE;
+                            entity.PRODUCT_NAME = obj.PRODUCT_NAME;
+                            entity.PRODUCT_DESC = obj.PRODUCT_DESC;
+                            entity.LAST_PURCHASE_RATE = obj.LAST_PURCHASE_RATE;
+                            entity.LAST_SALES_RATE = obj.LAST_SALES_RATE;
+                            entity.HAS_WARRANTY = obj.HAS_WARRANTY;
+                            entity.HAS_EXPIRY = obj.HAS_EXPIRY;
+                            entity.IS_MAIN_PRODUCT = obj.IS_MAIN_PRODUCT;
+                            entity.VAT_PCT = obj.VAT_PCT;
+                            entity.BASE_PRICE = obj.BASE_PRICE;
+                            entity.WEIGHT_PER_UNIT = obj.WEIGHT_PER_UNIT;
+
                             //Start Audit
                             entity.IS_ACTIVE = obj.IS_ACTIVE;
                             entity.UPDATE_USER = userId;
@@ -82,15 +99,14 @@
 
         public List<PRODUCTS_VM> GetAll()
         {
-            FormattableString sql = $@"Select P.*,BL.BUSINESS_LINE_NAME,PT.TYPE_NAME, PC.CLASS_NAME, PCT.CATEGORY_NAME, PB.BRAND_NAME, UC.UNIT_NAME
+            FormattableString sql = $@"Select P.*,BL.BUSINESS_LINE_NAME,PT.TYPE_NAME, PC.CLASS_NAME, PCT.CATEGORY_NAME, UC.UNIT_NAME
 from PRODUCTS P
 Join BUSINESS_LINE BL on P.BUSINESS_LINE_ID = BL.ID
 Join PRODUCT_TYPE PT on P.PRODUCT_TYPE_ID = PT.ID
 Join PRODUCT_CLASS PC on P.PRODUCT_CLASS_ID = PC.ID
 Join PRODUCT_CATEGORY PCT on P.PRODUCT_CATEGORY_ID = PCT.ID
-Join PRODUCT_BRAND PB on P.PRODUCT_BRAND_ID =PB.ID
 Join UNIT_CHILD UC on P.UNIT_CHILD_ID = UC.ID
-                            ORDER BY P.PRODUCT_NAME";
+                            ORDER BY BL.BUSINESS_LINE_NAME,PT.TYPE_NAME, PC.CLASS_NAME, PCT.CATEGORY_NAME, P.PRODUCT_NAME";
             return dbCtx.Database.SqlQuery<PRODUCTS_VM>(sql).ToList();
         }
         public List<PRODUCTS> GetAllActive()
@@ -156,5 +172,21 @@ Join UNIT_CHILD UC on P.UNIT_CHILD_ID = UC.ID
             }
         }
 
+
+        public List<PRODUCTS_VM> GetProductsForSalesBookingByName(string productName)
+        {
+            List<object> param = new List<object>();
+            param.Add(new SqlParameter("@productName", "%" + productName + "%"));
+            string sql = @"Select P.*,BL.BUSINESS_LINE_NAME,PT.TYPE_NAME, PC.CLASS_NAME, PCT.CATEGORY_NAME, UC.UNIT_NAME
+from PRODUCTS P
+Join BUSINESS_LINE BL on P.BUSINESS_LINE_ID = BL.ID
+Join PRODUCT_TYPE PT on P.PRODUCT_TYPE_ID = PT.ID
+Join PRODUCT_CLASS PC on P.PRODUCT_CLASS_ID = PC.ID AND PC.IS_ACTIVE = 1 and PC.IS_SALES = 1
+Join PRODUCT_CATEGORY PCT on P.PRODUCT_CATEGORY_ID = PCT.ID
+Join UNIT_CHILD UC on P.UNIT_CHILD_ID = UC.ID WHERE P.IS_ACTIVE = 1 AND P.PRODUCT_NAME LIKE @productName
+                            ORDER BY BL.BUSINESS_LINE_NAME,PT.TYPE_NAME, PC.CLASS_NAME, PCT.CATEGORY_NAME, P.PRODUCT_NAME";
+            return dbCtx.Database.SqlQueryRaw<PRODUCTS_VM>(sql, param.ToArray()).ToList();
+        }
+        
     }
 }

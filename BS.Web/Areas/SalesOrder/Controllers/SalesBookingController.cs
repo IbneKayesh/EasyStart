@@ -1,4 +1,6 @@
-﻿namespace BS.Web.Areas.SalesOrder.Controllers
+﻿using BS.DMO.Models.Inventory;
+
+namespace BS.Web.Areas.SalesOrder.Controllers
 {
     [Area("SalesOrder")]
     public class SalesBookingController : BaseController
@@ -27,6 +29,23 @@
             Dropdown_CreateEdit();
             var obj = salesBookingS.NewSalesBooking(user_session.USER_ID, user_session.USER_NAME);
             return View("AddUpdate", obj);
+        }
+        public IActionResult Edit(string id)
+        {
+            Dropdown_CreateEdit();
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                var entity = salesBookingS.GetById(id);
+                if (entity != null)
+                {
+                    return View("AddUpdate", entity);
+                }
+                else
+                {
+                    TempData["msg"] = NotifyService.NotFound();
+                }
+            }
+            return RedirectToAction("Create");
         }
         [HttpPost]
         public IActionResult AddUpdate(NEW_SB_VM obj)

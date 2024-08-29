@@ -17,10 +17,10 @@
                 <tr>
                     <th>Class Name</th>
                     <th>Description</th>
-                    <th>Discount</th>
-                    <th>Invoice Value</th>
-                    <th>Discount Percent</th>
-                    <th>Discount Value</th>
+                    <th>Is Master Product</th>
+                    <th>Allow Purchase</th>
+                    <th>Allow Sales</th>
+                    <th>Allow Discount</th>
                     <th>Status</th>
                     <th>#</th>
                 </tr>
@@ -36,16 +36,16 @@
                             @Html.DisplayFor(modelItem => item.CLASS_DESC)
                         </td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.IS_MASTER_PRODUCT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IS_PURCHASE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IS_SALES)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.IS_DISCOUNT)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.INVOICE_VALUE)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DISCOUNT_PCT)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DISCOUNT_VALUE)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.IS_ACTIVE)

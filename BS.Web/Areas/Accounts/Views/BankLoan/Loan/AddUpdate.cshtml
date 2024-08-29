@@ -56,7 +56,7 @@
                     <input asp-for="BANK_LOAN_MASTER.INTEREST_RATE" class="custom-input custom-input-xs" autocomplete="off" placeholder="Interest Rate">
                     <span asp-validation-for="BANK_LOAN_MASTER.INTEREST_RATE" class="text-danger"></span>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <label asp-for="BANK_LOAN_MASTER.TOTAL_AMOUNT" class="control-label"></label>
                     <input asp-for="BANK_LOAN_MASTER.TOTAL_AMOUNT" class="custom-input custom-input-xs" placeholder="Total Amount" readonly>
                     <span asp-validation-for="BANK_LOAN_MASTER.TOTAL_AMOUNT" class="text-danger"></span>
@@ -67,6 +67,11 @@
                     <span asp-validation-for="BANK_LOAN_MASTER.DUE_AMOUNT" class="text-danger"></span>
                 </div>
                 <div class="col-md-2">
+                    <label asp-for="BANK_LOAN_MASTER.FINE_AMOUNT" class="control-label"></label>
+                    <input asp-for="BANK_LOAN_MASTER.FINE_AMOUNT" class="custom-input custom-input-xs" readonly>
+                    <span asp-validation-for="BANK_LOAN_MASTER.FINE_AMOUNT" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
                     <label asp-for="BANK_LOAN_MASTER.NO_OF_SCHEDULE" class="control-label"></label>
                     <input asp-for="BANK_LOAN_MASTER.NO_OF_SCHEDULE" class="custom-input custom-input-xs" autocomplete="off" placeholder="No Of Schedule">
                     <span asp-validation-for="BANK_LOAN_MASTER.NO_OF_SCHEDULE" class="text-danger"></span>
@@ -85,29 +90,33 @@
                         <th>Interest Amount</th>
                         <th>Total Amount</th>
                         <th>Due Date</th>
+                        <th>Pay Amount</th>
+                        <th>Pay Date</th>
+                        <th>Fine Amount</th>
+                        <th>Fine Date</th>
                         <th>#</th>
                     </tr>
-                    @for (int i = 0; i < Model.BANK_LOAN_SCHEDULE_VM.Count; i++)
+                    @for (int i = 0; i < Model.BANK_LOAN_SCHEDULE.Count; i++)
                     {
-                        var item = Model.BANK_LOAN_SCHEDULE_VM[i];
+                        var item = Model.BANK_LOAN_SCHEDULE[i];
                         <tr>
                             <td>
-                                <input name="BANK_LOAN_SCHEDULE_VM[@i].ID" type="hidden" value="@item.ID" />
-                                <input name="BANK_LOAN_SCHEDULE_VM[@i].BANK_LOAN_MASTER_ID" type="hidden" value="@item.BANK_LOAN_MASTER_ID" />
-                                <input name="BANK_LOAN_SCHEDULE_VM[@i].SCHEDULE_NO" class="form-control form-control-sm" value="@item.SCHEDULE_NO" readonly>
+                                <input name="BANK_LOAN_SCHEDULE[@i].ID" type="hidden" value="@item.ID" />
+                                <input name="BANK_LOAN_SCHEDULE[@i].BANK_LOAN_MASTER_ID" type="hidden" value="@item.BANK_LOAN_MASTER_ID" />
+                                <input name="BANK_LOAN_SCHEDULE[@i].SCHEDULE_NO" class="form-control form-control-sm" value="@item.SCHEDULE_NO" readonly>
                             </td>
-                            <td><input name="BANK_LOAN_SCHEDULE_VM[@i].LOAN_AMOUNT" class="form-control form-control-sm" value="@item.LOAN_AMOUNT" readonly></td>
-                            <td><input name="BANK_LOAN_SCHEDULE_VM[@i].INTEREST_AMOUNT" class="form-control form-control-sm" value="@item.INTEREST_AMOUNT" readonly></td>
-                            <td><input name="BANK_LOAN_SCHEDULE_VM[@i].TOTAL_AMOUNT" class="form-control form-control-sm" value="@item.TOTAL_AMOUNT" readonly></td>
-                            <td><input name="BANK_LOAN_SCHEDULE_VM[@i].DUE_DATE" class="DUE_DATE form-control form-control-sm datepicker" autocomplete="off" placeholder="Due Date" value="@item.DUE_DATE"></td>
+                            <td><input name="BANK_LOAN_SCHEDULE[@i].LOAN_AMOUNT" class="form-control form-control-sm" value="@item.LOAN_AMOUNT"></td>
+                            <td><input name="BANK_LOAN_SCHEDULE[@i].INTEREST_AMOUNT" class="form-control form-control-sm" value="@item.INTEREST_AMOUNT"></td>
+                            <td><input name="BANK_LOAN_SCHEDULE[@i].TOTAL_AMOUNT" class="form-control form-control-sm" value="@item.TOTAL_AMOUNT"></td>
+                            <td><input name="BANK_LOAN_SCHEDULE[@i].DUE_DATE" class="DUE_DATE form-control form-control-sm datepicker" autocomplete="off" placeholder="Due Date" value="@item.DUE_DATE"></td>
+                            <td>@item.PAY_AMOUNT</td>
+                            <td>@item.PAY_DATE?.ToString(item.DATE_DISPLAY_FORMAT)</td>
+                            <td>@item.FINE_AMOUNT</td>
+                            <td>@item.FINE_DATE?.ToString(item.DATE_DISPLAY_FORMAT)</td>
                             <td>
-                                @if (!item.IS_PAID)
+                                @if (item.PAY_AMOUNT == 0)
                                 {
                                     <a class="btn btn-primary btn-xs" asp-area="Accounts" asp-controller="Loan" asp-action="Payment" asp-route-id="@item.ID"><i class="fa fa-pen"></i> Payment</a>
-                                }
-                                @if (!item.IS_FINE)
-                                {
-                                    <a class="btn btn-primary btn-xs" asp-area="Accounts" asp-controller="Loan" asp-action="FinePayment" asp-route-id="@item.ID"><i class="fa fa-pen"></i> Fine</a>
                                 }
                             </td>
                         </tr>
@@ -119,7 +128,10 @@
             <a asp-action="Index" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left"></i> Back</a>
             <button class="btn btn-sm btn-info" type="reset"><i class="fa fa-undo"></i> Reset</button>
             <button type="submit" name="submitButton" value="Apply" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i> Apply</button>
-            <button type="submit" name="submitButton" value="Save" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Submit</button>
+            @if (Model.BANK_LOAN_MASTER.ALLOW_EDIT)
+            {
+                <button type="submit" name="submitButton" value="Save" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Submit</button>
+            }
         </div>
     </form>
 </div>

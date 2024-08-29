@@ -22,30 +22,18 @@
         public string? CLASS_DESC { get; set; }
 
 
-        //Discount
+
+
+        [Display(Name = "Is Master Product")]
+        public bool IS_MASTER_PRODUCT { get; set; }
+
+        [Display(Name = "Allow Purchase")]
+        public bool IS_PURCHASE { get; set; }
+
+        [Display(Name = "Allow Sales")]
+        public bool IS_SALES { get; set; }
 
         [Display(Name = "Allow Discount")]
         public bool IS_DISCOUNT { get; set; }
-
-
-        [Display(Name = "Total Invoice Value")]
-        [Required(ErrorMessage = "{0} is required")]
-        [Column(TypeName = "decimal(18, 4)")]
-        [Range(minimum:0, double.MaxValue, ErrorMessage = "{0} length is {2} between {1}")]
-        public decimal INVOICE_VALUE { get; set; }
-
-
-        [Display(Name = "Discount %")]
-        [Required(ErrorMessage = "{0} is required")]
-        [Column(TypeName = "decimal(18, 4)")]
-        [Range(minimum: 0, double.MaxValue, ErrorMessage = "{0} length is {2} between {1}")]
-        public decimal DISCOUNT_PCT { get; set; }
-
-
-        [Display(Name = "Discount Value")]
-        [Required(ErrorMessage = "{0} is required")]
-        [Column(TypeName = "decimal(18, 4)")]
-        [Range(minimum: 0, double.MaxValue, ErrorMessage = "{0} length is {2} between {1}")]
-        public decimal DISCOUNT_VALUE { get; set; }
     }
 }

@@ -29,6 +29,7 @@
                     <th>Total</th>
                     <th>No Of Schedules</th>
                     <th>Due</th>
+                    <th>Fine</th>
                     <th>Status</th>
                     <th>#</th>
                 </tr>
@@ -71,6 +72,9 @@
                             @Html.DisplayFor(modelItem => item.DUE_AMOUNT)
                         </td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.FINE_AMOUNT)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.IS_ACTIVE)
                         </td>
                         <td>
@@ -80,7 +84,7 @@
                             }
                             @if (item.ALLOW_DELETE)
                             {
-                                <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="/Company/Business/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button>
+                                <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="/Accounts/Loan/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button>
                             }
                         </td>
                     </tr>

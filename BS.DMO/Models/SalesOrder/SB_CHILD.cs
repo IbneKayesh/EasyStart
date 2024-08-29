@@ -10,8 +10,8 @@
         }
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "ID")]
-        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 1)]
-        public string ID { get; set; }
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
+        public string? ID { get; set; }
 
         [Display(Name = "Trn Id")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
@@ -56,7 +56,7 @@
 
         [Display(Name = "Rate")]
         [Column(TypeName = "decimal(18, 6)")]
-        public decimal PRODUCT_RATE { get; set; }
+        public decimal PRODUCT_RATE { get; set; } = 0;
 
         [Display(Name = "Qty")]
         [Column(TypeName = "decimal(18, 6)")]
@@ -65,25 +65,25 @@
 
         [Display(Name = "VAT%")]
         [Column(TypeName = "decimal(18, 6)")]
-        public decimal VAT_PCT { get; set; }
+        public decimal VAT_PCT { get; set; } = 0;
 
         [Display(Name = "Discount%")]
         [Column(TypeName = "decimal(18, 6)")]
-        public decimal DISCOUNT_PCT { get; set; }
+        public decimal DISCOUNT_PCT { get; set; } = 0;
 
         [Display(Name = "Discount Amount")]
         [Column(TypeName = "decimal(18, 6)")]
-        public decimal DISCOUNT_AMOUNT { get; set; }
+        public decimal DISCOUNT_AMOUNT { get; set; } = 0;
 
 
         [Display(Name = "Amount")]
         [Column(TypeName = "decimal(18, 6)")]
         public decimal PRODUCT_AMOUNT { get; set; }
 
-        
+
         [Display(Name = "Weight")]
         [Column(TypeName = "decimal(18, 6)")]
-        public decimal PRODUCT_WEIGHT { get; set; }
+        public decimal PRODUCT_WEIGHT { get; set; } = 0;
 
 
         [Display(Name = "Ref/SKU")]
@@ -104,6 +104,6 @@
         public string? CONTACT_ADDRESS_ID { get; set; }
 
         [Display(Name = "Delivery Date")]
-        public DateTime DELIVERY_DATE { get; set; }
+        public DateTime? DELIVERY_DATE { get; set; }
     }
 }

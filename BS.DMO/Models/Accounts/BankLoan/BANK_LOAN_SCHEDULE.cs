@@ -40,5 +40,27 @@
         [Display(Name = "Due Date")]
         [Required(ErrorMessage = "{0} is required")]
         public DateTime DUE_DATE { get; set; }
+
+
+        //payment
+        [Display(Name = "Payment Info")]
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
+        public string? PAYMENT_INFO { get; set; }
+
+        [Display(Name = "Payment Amount")]
+        [Column(TypeName = "decimal(18, 6)")]
+        public decimal PAY_AMOUNT { get; set; } = 0;
+
+        [Display(Name = "Payment Date")]
+        public DateTime? PAY_DATE { get; set; }
+
+
+        //fine
+        [Display(Name = "Fine Amount")]
+        [Column(TypeName = "decimal(18, 6)")]
+        public decimal FINE_AMOUNT { get; set; } = 0;
+
+        [Display(Name = "Fine Date")]
+        public DateTime? FINE_DATE { get; set; }
     }
 }
