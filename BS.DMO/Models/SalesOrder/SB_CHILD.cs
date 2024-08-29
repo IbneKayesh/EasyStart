@@ -5,6 +5,7 @@
         public SB_CHILD()
         {
             ID = Guid.Empty.ToString();
+            IS_SAMPLE = false;
             DELIVERY_DATE = DateTime.Now.AddDays(3);
         }
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -25,7 +26,8 @@
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         public string? REF_TRN_LINE_ID { get; set; } = "";
 
-
+        [Display(Name = "Is Sample")]
+        public bool IS_SAMPLE { get; set; }
 
         [Display(Name = "Product Id")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]

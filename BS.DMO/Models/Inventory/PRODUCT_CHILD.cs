@@ -1,31 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BS.DMO.Models.Inventory
+﻿namespace BS.DMO.Models.Inventory
 {
-    public class PRODUCT_CHILD
+    public class PRODUCT_CHILD : BaseModel
     {
-        public PRODUCT_CHILD()
-        {
-            ID = Guid.Empty.ToString();
-        }
-        public string ID { get; set; }
+        [Display(Name = "Product ID")]
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 3)]
+        [Required(ErrorMessage = "{0} is required")]
+        public string? PRODUCT_ID { get; set; }
 
-        public string? UNIT_CHILD_ID { get; set; }
-        public string? PRODUCT_BRAND_ID { get; set; }
-        public string? PRODUCT_TYPE_ID { get; set; }
-        public string? PRODUCT_CLASS_ID { get; set; }
-        public string? PRODUCT_CATEGORY_ID { get; set; }
+        [Display(Name = "Product Child ID")]
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 3)]
+        [Required(ErrorMessage = "{0} is required")]
+        public string? PRODUCT_CHILD_ID { get; set; }
 
+        [Display(Name = "Product Child Qty")]
+        [Column(TypeName = "decimal(18, 6)")]
+        public decimal PRODUCT_CHILD_QTY { get; set; }
 
-        public string? BAR_CODE { get; set; }
-        public string? PRODUCT_NAME { get; set; }
-        public string? PRODUCT_DESC { get; set; }
-        public string? PRODUCT_IMG { get; set; }
-        public decimal LAST_PURCHASE_RATE { get; set; }
-        public decimal LAST_SALES_RATE { get; set; }
+        [Display(Name = "Wastage Child %")]
+        [Column(TypeName = "decimal(18, 6)")]
+        public decimal PRODUCT_CHILD_WASTAGE_PCT { get; set; }
+
+        [Display(Name = "Wastage Child Qty")]
+        [Column(TypeName = "decimal(18, 6)")]
+        public decimal PRODUCT_CHILD_WASTAGE_QTY { get; set; }
+
+        [Display(Name = "Product Child Net Qty")]
+        [Column(TypeName = "decimal(18, 6)")]
+        public decimal PRODUCT_CHILD_NET_QTY { get; set; }
+
+        [Display(Name = "Product Child Value")]
+        [Column(TypeName = "decimal(18, 6)")]
+        public decimal PRODUCT_CHILD_VALUE { get; set; }
+
+        [Display(Name = "Raw Material")]
+        public bool IS_RM { get; set; }
+
+        [Display(Name = "Finished Goods")]
+        public bool IS_FG { get; set; }
     }
 }
