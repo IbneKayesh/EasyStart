@@ -145,6 +145,12 @@
             var obj = contactsS.GetByName(search_term.ToLower());
             return Json(obj);
         }
+        [HttpPost]
+        public IActionResult FindCustomerBillTo(string search_term)
+        {
+            var obj = contactsS.GetByName(search_term.ToLower());
+            return Json(obj);
+        }
         public IActionResult FindCustomerDefaultAddress(string customerId)
         {
             var obj = contactsS.GetById_ContactDefaultAddress(customerId);

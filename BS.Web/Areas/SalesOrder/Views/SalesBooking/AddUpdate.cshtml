@@ -9,13 +9,13 @@
         <input asp-for="SB_MASTER_VM.ID" type="hidden" />
         <input asp-for="SB_MASTER_VM.TRN_ID" type="hidden" />
         <input asp-for="SB_MASTER_VM.CONTACT_ID" type="hidden" />
-        <input asp-for="SB_MASTER_VM.CONTACT_ADDRESS_ID" type="hidden" />
+        <input asp-for="SB_MASTER_VM.CONTACT_BILL_TO_ID" type="hidden" />
         <input asp-for="SB_MASTER_VM.DELIVERY_ADDRESS_ID" type="hidden" />
         <input asp-for="SB_MASTER_VM.FROM_USER_ID" type="hidden" />
         <input asp-for="SB_MASTER_VM.TO_USER_ID" type="hidden" />
         <input asp-for="SB_MASTER_VM.RowVersion" type="hidden" />
-        <div class="card card-primary card-outline">
-            <div class="card-header">
+        <div class="card card-primary card-outline mb-1">
+            <div class="card-header p-2 mb-1">
                 <h4 class="card-title w-100">
                     <a class="d-block w-100 collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="false">
                         <i class="fas fa-cog"></i> Process
@@ -23,7 +23,7 @@
                 </h4>
             </div>
             <div id="collapseOne" class="collapse" data-parent="#accordion" style="">
-                <div class="card-body">
+                <div class="card-body p-1">
                     <span class="fas fa-cog text-success"> Transaction</span>
                     <div class="row border pb-2">
                         <div class="col-md-2">
@@ -87,8 +87,8 @@
                 </div>
             </div>
         </div>
-        <div class="card card-info card-outline">
-            <div class="card-header">
+        <div class="card card-info card-outline mb-1">
+            <div class="card-header p-2 mb-1">
                 <h4 class="card-title w-100">
                     <a class="d-block w-100" data-toggle="collapse" href="#collapseTwo">
                         <i class="fas fa-hammer"></i>  Order
@@ -96,7 +96,7 @@
                 </h4>
             </div>
             <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                <div class="card-body">
+                <div class="card-body p-1">
                     <span class="fas fa-user text-info"> Customer</span>
                     <div class="row border pb-2">
                         <div class="col-md-2">
@@ -105,9 +105,9 @@
                             <span asp-validation-for="SB_MASTER_VM.CONTACT_NAME" class="text-danger"></span>
                         </div>
                         <div class="col-md-2">
-                            <label asp-for="SB_MASTER_VM.BILL_OFFICE_ADDRESS" class="control-label"></label>
-                            <input asp-for="SB_MASTER_VM.BILL_OFFICE_ADDRESS" type="text" class="custom-input custom-input-xs" autocomplete="off" placeholder="Customer Bill Address">
-                            <span asp-validation-for="SB_MASTER_VM.BILL_OFFICE_ADDRESS" class="text-danger"></span>
+                            <label asp-for="SB_MASTER_VM.CONTACT_BILL_TO_NAME" class="control-label"></label>
+                            <input asp-for="SB_MASTER_VM.CONTACT_BILL_TO_NAME" type="text" class="custom-input custom-input-xs" autocomplete="off" placeholder="Bill Address">
+                            <span asp-validation-for="SB_MASTER_VM.CONTACT_BILL_TO_NAME" class="text-danger"></span>
                         </div>
                         <div class="col-md-2">
                             <label asp-for="SB_MASTER_VM.DELIVERY_ADDRESS" class="control-label"></label>
@@ -126,7 +126,7 @@
                         </div>
                         <div class="col-md-2">
                             <label asp-for="SB_MASTER_VM.CONTACT_NOTE" class="control-label"></label>
-                            <input asp-for="SB_MASTER_VM.CONTACT_NOTE" type="text" class="custom-input custom-input-xs" autocomplete="off" placeholder="Contact Note">
+                            <input asp-for="SB_MASTER_VM.CONTACT_NOTE" type="text" class="custom-input custom-input-xs" autocomplete="off" placeholder="Customer Note">
                             <span asp-validation-for="SB_MASTER_VM.CONTACT_NOTE" class="text-danger"></span>
                         </div>
                     </div>
@@ -156,17 +156,17 @@
                         </div>
                         <div class="col-md-2">
                             <label asp-for="SB_MASTER_VM.LAST_SDD_DATE" class="control-label"></label>
-                            <input asp-for="SB_MASTER_VM.LAST_SDD_DATE" type="text" class="custom-input custom-input-xs datetimepicker-input" data-toggle="datetimepicker" data-target="#SB_MASTER_VM_LAST_SDD_DATE" autocomplete="off" placeholder="Last MFG Date">
+                            <input asp-for="SB_MASTER_VM.LAST_SDD_DATE" type="text" class="custom-input custom-input-xs datepicker" autocomplete="off" placeholder="Last MFG Date">
                             <span asp-validation-for="SB_MASTER_VM.LAST_SDD_DATE" class="text-danger"></span>
                         </div>
                         <div class="col-md-2">
                             <label asp-for="SB_MASTER_VM.LAST_MFG_DATE" class="control-label"></label>
-                            <input asp-for="SB_MASTER_VM.LAST_MFG_DATE" type="text" class="custom-input custom-input-xs datetimepicker-input" data-toggle="datetimepicker" data-target="#SB_MASTER_VM_LAST_MFG_DATE" autocomplete="off" placeholder="Last MFG Date">
+                            <input asp-for="SB_MASTER_VM.LAST_MFG_DATE" type="text" class="custom-input custom-input-xs datepicker" autocomplete="off" placeholder="Last MFG Date">
                             <span asp-validation-for="SB_MASTER_VM.LAST_MFG_DATE" class="text-danger"></span>
                         </div>
                         <div class="col-md-2">
                             <label asp-for="SB_MASTER_VM.LAST_DELIVERY_DATE" class="control-label"></label>
-                            <input asp-for="SB_MASTER_VM.LAST_DELIVERY_DATE" type="text" class="custom-input custom-input-xs datetimepicker-input" data-toggle="datetimepicker" data-target="#SB_MASTER_VM_LAST_DELIVERY_DATE" autocomplete="off" placeholder="Last Delivery Date">
+                            <input asp-for="SB_MASTER_VM.LAST_DELIVERY_DATE" type="text" class="custom-input custom-input-xs datepicker" autocomplete="off" placeholder="Last Delivery Date">
                             <span asp-validation-for="SB_MASTER_VM.LAST_DELIVERY_DATE" class="text-danger"></span>
                         </div>
                     </div>
@@ -196,8 +196,8 @@
                 </div>
             </div>
         </div>
-        <div class="card card-warning card-outline">
-            <div class="card-header">
+        <div class="card card-warning card-outline mb-1">
+            <div class="card-header p-2 mb-1">
                 <h4 class="card-title w-100">
                     <a class="d-block w-100" data-toggle="collapse" href="#collapseThree">
                         <i class="fas fa-dollar-sign"></i> Order Value
@@ -205,7 +205,7 @@
                 </h4>
             </div>
             <div id="collapseThree" class="collapse" data-parent="#accordion">
-                <div class="card-body">
+                <div class="card-body p-1">
                     <div class="row">
                         <div class="col-md-2">
                             <label asp-for="SB_MASTER_VM.TRN_AMOUNT" class="control-label"></label>
@@ -276,8 +276,8 @@
                 </div>
             </div>
         </div>
-        <div class="card card-gray card-outline">
-            <div class="card-header">
+        <div class="card card-gray card-outline mb-1">
+            <div class="card-header p-2 mb-1">
                 <h4 class="card-title w-100">
                     <a class="d-block w-100" data-toggle="collapse" href="#collapseFour">
                         <i class="fas fa-check"></i> Authorize
@@ -285,7 +285,7 @@
                 </h4>
             </div>
             <div id="collapseFour" class="collapse" data-parent="#accordion">
-                <div class="card-body">
+                <div class="card-body p-1">
                     <div class="row">
                         <div class="col-md-3">
                             <label asp-for="SB_MASTER_VM.IS_CANCELLED" class="control-label"></label>
@@ -311,7 +311,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <label asp-for="SB_MASTER_VM.IS_POSTED" class="control-label"></label>
-                            <input asp-for="SB_MASTER_VM.IS_POSTED" type="checkbox" class="custom-input custom-input-xs" disabled>
+                            <input asp-for="SB_MASTER_VM.IS_POSTED" type="checkbox" class="custom-input custom-input-xs @(Model.SB_MASTER_VM.IS_POSTED == true ? "disabled" : "")">
                             <span asp-validation-for="SB_MASTER_VM.IS_POSTED" class="text-danger"></span>
                         </div>
                         <div class="col-md-3">
@@ -332,8 +332,11 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
+                            @{
+                                string isApprove = (Model.SB_MASTER_VM.IS_POSTED && Model.SB_MASTER_VM.IS_APPROVE) || (!Model.SB_MASTER_VM.IS_POSTED && !Model.SB_MASTER_VM.IS_APPROVE) ? "disabled" : "";
+                            }
                             <label asp-for="SB_MASTER_VM.IS_APPROVE" class="control-label"></label>
-                            <input asp-for="SB_MASTER_VM.IS_APPROVE" type="checkbox" class="custom-input custom-input-xs" disabled>
+                            <input asp-for="SB_MASTER_VM.IS_APPROVE" type="checkbox" class="custom-input custom-input-xs @isApprove">
                             <span asp-validation-for="SB_MASTER_VM.IS_APPROVE" class="text-danger"></span>
                         </div>
                         <div class="col-md-3">
@@ -363,8 +366,8 @@
             </div>
         </div>
     </div>
-    <div class="card card-indigo card-outline">
-        <div class="card-header">
+    <div class="card card-indigo card-outline mb-1e">
+        <div class="card-header p-2 mb-1">
             <h3 class="card-title"><i class="fas fa-tag"></i> Products</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -372,41 +375,41 @@
                 </button>
             </div>
         </div>
-        <div class="card-body table-responsive">
-            <table class="table table-xs table-bordered" style="width:100%">
-                <thead class="table-secondary">
+        <div class="card-body p-1 scrollable-table">
+            <table class="table table-xs table-bordered"">
+                <thead class="table-success">
                     <tr>
-                        <th>Product Name</th>
-                        <th>Description</th>
-                        <th>Unit</th>
-                        <th>Rate</th>
-                        <th>Qty</th>
-                        <th>VAT %</th>
-                        <th>Discount %</th>
-                        <th>Discount Amount</th>
-                        <th>Product Amount</th>
-                        <th>Weight</th>
-                        <th>Ref/SKU</th>
-                        <th>Line Note</th>
-                        <th>Packing Note</th>
-                        <th>Delivery Address</th>
-                        <th>Delivery Date</th>
-                        <th>#</th>
+                        <th style="width:200px">Product Name</th>
+                        <th style="width:250px">Description</th>
+                        <th style="width:100px">Unit</th>
+                        <th style="width:100px">Rate</th>
+                        <th style="width:100px">Qty</th>
+                        <th style="width:100px">VAT %</th>
+                        <th style="width:100px">Discount %</th>
+                        <th style="width:100px">Discount Amount</th>
+                        <th style="width:100px">Product Amount</th>
+                        <th style="width:100px">Weight</th>
+                        <th style="width:100px">Ref/SKU</th>
+                        <th style="width:100px">Line Note</th>
+                        <th style="width:100px">Packing Note</th>
+                        <th style="width:100px">Delivery Address</th>
+                        <th style="width:50px">Delivery Date</th>
+                        <th style="width:50px">Sample</th>
+                        <th style="width:50px">#</th>
                     </tr>
                 </thead>
-                <tbody class="DATA_ENTRY table-primary">
+                <tbody class="DATA_ENTRY table-warning">
                     <tr>
                         <td>
                             <input id="ID" name="SB_CHILD_VM.ID" type="hidden" class="clear" />
                             <input id="MASTER_ID" name="SB_CHILD_VM.MASTER_ID" type="hidden" class="clear" />
-                            <input id="LINE_NO" name="SB_CHILD_VM.LINE_NO" type="hidden" class="clear" />
+                            <input id="LINE_NO" name="SB_CHILD_VM.LINE_NO" type="hidden" value="0" class="" />
                             <input id="REF_TRN_LINE_ID" name="SB_CHILD_VM.REF_TRN_LINE_ID" type="hidden" class="clear" />
-                            <input id="IS_SAMPLE" name="SB_CHILD_VM.IS_SAMPLE" type="hidden" class="clear" />
                             <input id="PRODUCT_ID" name="SB_CHILD_VM.PRODUCT_ID" type="hidden" class="clear" />
                             <input id="MAIN_PRODUCT_ID" name="SB_CHILD_VM.MAIN_PRODUCT_ID" type="hidden" class="clear" />
                             <input id="PACK_ID" name="SB_CHILD_VM.PACK_ID" type="hidden" class="clear" />
                             <input id="UNIT_ID" name="SB_CHILD_VM.UNIT_ID" type="hidden" class="clear" />
-                            <input id="CONTACT_ADDRESS_ID" name="SB_CHILD_VM.CONTACT_ADDRESS_ID" type="hidden" class="clear" />
+                            <input id="DELIVERY_ADDRESS_ID" name="SB_CHILD_VM.DELIVERY_ADDRESS_ID" type="hidden" class="clear" />
                             <input id="PRODUCT_NAME" name="SB_CHILD_VM.PRODUCT_NAME" type="text" class="custom-input custom-input-xs need clear" title="Product Name" placeholder="Name" autocomplete="off" />
                         </td>
                         <td>
@@ -419,7 +422,7 @@
                             <input id="PRODUCT_RATE" name="SB_CHILD_VM.PRODUCT_RATE" type="number" class="custom-input custom-input-xs clear" title="Rate" placeholder="Rate" autocomplete="off" />
                         </td>
                         <td>
-                            <input id="PRODUCT_QTY" name="SB_CHILD_VM.PRODUCT_QTY" type="number" class="custom-input custom-input-xs clear" title="Quantity" placeholder="Qty" autocomplete="off" />
+                            <input id="PRODUCT_QTY" name="SB_CHILD_VM.PRODUCT_QTY" type="number" class="custom-input custom-input-xs need clear" title="Quantity" placeholder="Qty" autocomplete="off" />
                         </td>
                         <td>
                             <input id="VAT_PCT" name="SB_CHILD_VM.VAT_PCT" type="number" class="custom-input custom-input-xs" min="0" max="100" title="VAT %" placeholder="VAT %" autocomplete="off" value="0" />
@@ -446,14 +449,16 @@
                             <input id="PACKING_NOTE" name="SB_CHILD_VM.PACKING_NOTE" type="text" class="custom-input custom-input-xs" title="Packing Note" placeholder="Packing Note" />
                         </td>
                         <td>
-                            <input id="DELIVERY_ADDRESS" name="SB_CHILD_VM.DELIVERY_ADDRESS" class="custom-input custom-input-xs datetimepicker-input" title="Delivery Address" placeholder="Delivery Address" />
+                            <input id="DELIVERY_ADDRESS" name="SB_CHILD_VM.DELIVERY_ADDRESS" class="custom-input custom-input-xs" title="Delivery Address" placeholder="Delivery Address" />
                         </td>
                         <td>
                             <input id="DELIVERY_DATE" name="SB_CHILD_VM.DELIVERY_DATE" type="date" class="custom-input custom-input-xs" title="Delivery Date" placeholder="Delivery Date" />
                         </td>
                         <td>
+                            <input id="IS_SAMPLE" name="SB_CHILD_VM.IS_SAMPLE" type="checkbox" class="custom-input custom-input-xs" title="Is Sample" value="false"/>
+                        </td>
+                        <td>
                             <button type="button" onclick="AddNewRow(this);" class="btn btn-xs btn-primary @(Model.SB_MASTER_VM.IS_POSTED ? "d-none" : "")" title="Add new Line"><span class="fas fa-plus-circle"></span></button>
-                            <button type="button" class="remove-row btn btn-xs btn-danger" data-id="0" title="Remove this line"><i class="fa fa-trash"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -462,59 +467,61 @@
                     {
                         <tr>
                             <td>
-                                <input asp-for="@SB_CHILD_VM.ID" type="hidden" value="0" class="clear" />
-                                <input asp-for="@SB_CHILD_VM.MASTER_ID" type="hidden" class="clear" />
-                                <input asp-for="@SB_CHILD_VM.LINE_NO" type="hidden" class="clear" />
-                                <input asp-for="@SB_CHILD_VM.REF_TRN_LINE_ID" type="hidden" class="clear" />
-                                <input asp-for="@SB_CHILD_VM.IS_SAMPLE" type="hidden" class="clear" />
-                                <input asp-for="@SB_CHILD_VM.PRODUCT_ID" type="hidden" class="clear" />
-                                <input asp-for="@SB_CHILD_VM.MAIN_PRODUCT_ID" type="hidden" class="clear" />
-                                <input asp-for="@SB_CHILD_VM.PACK_ID" type="hidden" class="clear" />
-                                <input asp-for="@SB_CHILD_VM.UNIT_ID" type="hidden" class="clear" />
-                                <input asp-for="@SB_CHILD_VM.CONTACT_ADDRESS_ID" type="hidden" class="clear" />
-                                <input asp-for="@SB_CHILD_VM.PRODUCT_NAME" type="text" class="custom-input custom-input-xs clear" title="Product Name" placeholder="Product Name" autocomplete="off" />
+                                <input asp-for="@SB_CHILD_VM.ID" type="hidden" value="0" class="" />
+                                <input asp-for="@SB_CHILD_VM.MASTER_ID" type="hidden" class="" />
+                                <input asp-for="@SB_CHILD_VM.LINE_NO" type="hidden" class="" />
+                                <input asp-for="@SB_CHILD_VM.REF_TRN_LINE_ID" type="hidden" class="" />
+                                <input asp-for="@SB_CHILD_VM.PRODUCT_ID" type="hidden" class="" />
+                                <input asp-for="@SB_CHILD_VM.MAIN_PRODUCT_ID" type="hidden" class="" />
+                                <input asp-for="@SB_CHILD_VM.PACK_ID" type="hidden" class="" />
+                                <input asp-for="@SB_CHILD_VM.UNIT_ID" type="hidden" class="" />
+                                <input asp-for="@SB_CHILD_VM.DELIVERY_ADDRESS_ID" type="hidden" class="" />
+                                <input asp-for="@SB_CHILD_VM.PRODUCT_NAME" type="text" class="custom-input custom-input-xs" title="Product Name" placeholder="Product Name" autocomplete="off" />
                             </td>
                             <td>
-                                <input asp-for="@SB_CHILD_VM.PRODUCT_DESC" type="text" class="custom-input custom-input-xs clear" title="Description" placeholder="Product Details" autocomplete="off" />
+                                <input asp-for="@SB_CHILD_VM.PRODUCT_DESC" type="text" class="custom-input custom-input-xs" title="Description" placeholder="Product Details" autocomplete="off" />
                             </td>
                             <td>
-                                <input asp-for="@SB_CHILD_VM.UNIT_NAME" type="text" class="custom-input custom-input-xs clear" title="Unit" placeholder="Unit" readonly />
+                                <input asp-for="@SB_CHILD_VM.UNIT_NAME" type="text" class="custom-input custom-input-xs" title="Unit" placeholder="Unit" readonly />
                             </td>
                             <td>
-                                <input asp-for="@SB_CHILD_VM.PRODUCT_RATE" type="number" class="custom-input custom-input-xs clear" title="Rate" placeholder="Rate" autocomplete="off" />
+                                <input asp-for="@SB_CHILD_VM.PRODUCT_RATE" type="number" class="custom-input custom-input-xs" title="Rate" placeholder="Rate" autocomplete="off" />
                             </td>
                             <td>
-                                <input asp-for="@SB_CHILD_VM.PRODUCT_QTY" type="number" class="custom-input custom-input-xs clear" title="Quantity" placeholder="Qty" autocomplete="off" />
+                                <input asp-for="@SB_CHILD_VM.PRODUCT_QTY" type="number" class="custom-input custom-input-xs" title="Quantity" placeholder="Qty" autocomplete="off" />
                             </td>
                             <td>
-                                <input asp-for="@SB_CHILD_VM.VAT_PCT" type="number" class="custom-input custom-input-xs clear" min="0" max="100" title="VAT %" placeholder="VAT %" autocomplete="off" value="0" />
+                                <input asp-for="@SB_CHILD_VM.VAT_PCT" type="number" class="custom-input custom-input-xs" min="0" max="100" title="VAT %" placeholder="VAT %" autocomplete="off" value="0" />
                             </td>
                             <td>
-                                <input asp-for="@SB_CHILD_VM.DISCOUNT_PCT" type="number" class="custom-input custom-input-xs clear" min="0" max="100" title="Discount %" placeholder="Discount %" autocomplete="off" value="0" />
+                                <input asp-for="@SB_CHILD_VM.DISCOUNT_PCT" type="number" class="custom-input custom-input-xs" min="0" max="100" title="Discount %" placeholder="Discount %" autocomplete="off" value="0" />
                             </td>
                             <td>
-                                <input asp-for="@SB_CHILD_VM.DISCOUNT_AMOUNT" type="number" class="custom-input custom-input-xs clear" min="0" max="100" title="Discount Amount" placeholder="Discount" autocomplete="off" value="0" />
+                                <input asp-for="@SB_CHILD_VM.DISCOUNT_AMOUNT" type="number" class="custom-input custom-input-xs" min="0" max="100" title="Discount Amount" placeholder="Discount" autocomplete="off" value="0" />
                             </td>
                             <td>
-                                <input asp-for="@SB_CHILD_VM.PRODUCT_AMOUNT" class="custom-input custom-input-xs clear" title="Product Amount" placeholder="Amount" readonly />
+                                <input asp-for="@SB_CHILD_VM.PRODUCT_AMOUNT" class="custom-input custom-input-xs" title="Product Amount" placeholder="Amount" readonly />
                             </td>
                             <td>
-                                <input asp-for="@SB_CHILD_VM.PRODUCT_WEIGHT" type="text" class="custom-input custom-input-xs clear" title="Product Weight" placeholder="Product Weight" readonly />
+                                <input asp-for="@SB_CHILD_VM.PRODUCT_WEIGHT" type="text" class="custom-input custom-input-xs" title="Product Weight" placeholder="Product Weight" readonly />
                             </td>
                             <td>
-                                <input asp-for="@SB_CHILD_VM.REF_SKU" type="text" class="custom-input custom-input-xs clear" title="Ref / SKU" placeholder="Ref / SKU" />
+                                <input asp-for="@SB_CHILD_VM.REF_SKU" type="text" class="custom-input custom-input-xs" title="Ref / SKU" placeholder="Ref / SKU" />
                             </td>
                             <td>
-                                <input asp-for="@SB_CHILD_VM.LINE_NOTE" type="text" class="custom-input custom-input-xs clear" title="Line Note" placeholder="Line Note" />
+                                <input asp-for="@SB_CHILD_VM.LINE_NOTE" type="text" class="custom-input custom-input-xs" title="Line Note" placeholder="Line Note" />
                             </td>
                             <td>
                                 <input asp-for="@SB_CHILD_VM.PACKING_NOTE" type="text" class="custom-input custom-input-xs" title="Packing Note" placeholder="Packing Note" />
                             </td>
                             <td>
-                                <input asp-for="@SB_CHILD_VM.DELIVERY_ADDRESS" class="custom-input custom-input-xs datetimepicker-input" title="Delivery Address" placeholder="Delivery Address" />
+                                <input asp-for="@SB_CHILD_VM.DELIVERY_ADDRESS" class="custom-input custom-input-xs" title="Delivery Address" placeholder="Delivery Address" />
                             </td>
                             <td>
                                 <input asp-for="@SB_CHILD_VM.DELIVERY_DATE" type="date" class="custom-input custom-input-xs" title="Delivery Date" placeholder="Delivery Date" />
+                            </td>
+                            <td>
+                                <input asp-for="@SB_CHILD_VM.IS_SAMPLE" type="checkbox" class="custom-input custom-input-xs" title="Is Sample" />
                             </td>
                             <td>
                                 <button type="button" class="remove-row btn btn-xs btn-danger" data-id="0" title="Remove this line"><i class="fa fa-trash"></i></button>
@@ -527,7 +534,7 @@
         <div class="card-footer">
             <a asp-action="Index" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left"></i> Back</a>
             <button class="btn btn-sm btn-info" type="reset"><i class="fa fa-undo"></i> Reset</button>
-            <button type="submit" id="btnSubmit" class="btn btn-sm btn-success mx-1 @(Model.SB_MASTER_VM.IS_POSTED == true ? "d-none" : "")" onclick="formSubmitView('DATA_DETAIL');" formaction="@Url.Action("AddUpdate")" title="Apply and save"><i class="fa fa-save"></i> Submit</button>
+            <button type="submit" id="btnSubmit" class="btn btn-sm btn-success mx-1 @(Model.SB_MASTER_VM.IS_POSTED == true  && Model.SB_MASTER_VM.IS_APPROVE == true ? "d-none" : "")" onclick="formSubmitView('DATA_DETAIL');" formaction="@Url.Action("AddUpdate")" title="Apply and save"><i class="fa fa-save"></i> Submit</button>
         </div>
     </div>
 </form>
@@ -537,29 +544,29 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     <script>
-        var csInputJsonMapping = {
+        var CustomerInputJsonMapping = {
             'label': ['CONTACT_GROUP', 'CONTACT_NAME', 'CONTACT_PERSON'],
             'value': 'CONTACT_NAME',
             'SB_MASTER_VM_CONTACT_ID': 'ID',
             'SB_MASTER_VM_CUSTOMER_REF_NO': 'CONTACT_PERSON',
-            'SB_MASTER_VM_DELIVERY_ADDRESS_ID': 'ID',
-            'SB_MASTER_VM_DELIVERY_ADDRESS': 'CONTACT_NAME',
+            'SB_MASTER_VM_CONTACT_BILL_TO_ID': 'ID',
+            'SB_MASTER_VM_CONTACT_BILL_TO_NAME': 'CONTACT_NAME',
         };
-        autocompletesearch('/CRM/Contacts/FindCustomer', 3, 'SB_MASTER_VM_CONTACT_NAME', csInputJsonMapping);
+        autocompletesearch('/CRM/Contacts/FindCustomer', 3, 'SB_MASTER_VM_CONTACT_NAME', CustomerInputJsonMapping);
 
         $("#SB_MASTER_VM_CONTACT_NAME").blur(function () {
             let contactId = $('#SB_MASTER_VM_CONTACT_ID').val();
             if (contactId) {
 
-                $('#SB_MASTER_VM_CONTACT_ADDRESS_ID').val('');
-                $('#SB_MASTER_VM_BILL_OFFICE_ADDRESS').val('');
+                $('#SB_MASTER_VM_DELIVERY_ADDRESS_ID').val('');
+                $('#SB_MASTER_VM_DELIVERY_ADDRESS').val('');
 
                 $.ajax({
                     url: `/CRM/Contacts/FindCustomerDefaultAddress?customerId=${contactId}`,
                     type: 'GET',
                     success: function (response) {
-                        $('#SB_MASTER_VM_CONTACT_ADDRESS_ID').val(response.ID);
-                        $('#SB_MASTER_VM_BILL_OFFICE_ADDRESS').val(response.OFFICE_ADDRESS);
+                        $('#SB_MASTER_VM_DELIVERY_ADDRESS_ID').val(response.ID);
+                        $('#SB_MASTER_VM_DELIVERY_ADDRESS').val(response.OFFICE_ADDRESS);
                     },
                     error: function (error) {
                         console.error('Error fetching contact address:', error);
@@ -570,15 +577,23 @@
             }
         });
 
-        var csInputJsonMapping_FUser = {
+        var CustomerBillToIJM = {
+            'label': ['CONTACT_GROUP', 'CONTACT_NAME', 'CONTACT_PERSON'],
+            'value': 'CONTACT_NAME',
+            'SB_MASTER_VM_CONTACT_BILL_TO_ID': 'ID',
+            'SB_MASTER_VM_CONTACT_BILL_TO_NAME': 'CONTACT_NAME',
+        };
+        autocompletesearch('/CRM/Contacts/FindCustomerBillTo', 3, 'SB_MASTER_VM_CONTACT_BILL_TO_NAME', CustomerBillToIJM);
+
+        var FromUserIJM = {
             'label': ['EMP_NO', 'EMP_NAME'],
             'value': 'EMP_NAME',
             'SB_MASTER_VM_TO_USER_ID': 'ID',
             'SB_MASTER_VM_TO_USER_NAME': 'EMP_NAME',
         };
-        autocompletesearch('/HRMS/Employees/FindEmployee', 3, 'SB_MASTER_VM_TO_USER_NAME', csInputJsonMapping_FUser);
+        autocompletesearch('/HRMS/Employees/FindEmployee', 3, 'SB_MASTER_VM_TO_USER_NAME', FromUserIJM);
 
-        var csInputJsonMapping_Products = {
+        var ProductsIJM = {
             'label': ['PRODUCT_NAME', 'PRODUCT_CODE', 'BASE_PRICE'],
             'value': 'PRODUCT_NAME',
             'PRODUCT_ID': 'ID',
@@ -590,21 +605,7 @@
             'VAT_PCT': 'VAT_PCT',
             'PRODUCT_WEIGHT': 'WEIGHT_PER_UNIT',
         };
-        autocompletesearch('/Inventory/Products/FindProductsForSalesBooking', 3, 'PRODUCT_NAME', csInputJsonMapping_Products);
-
-
-
-        $(function () {
-            $('#SB_MASTER_VM_LAST_SDD_DATE').datetimepicker(
-                { icons: { time: 'far fa-clock' } }
-            );
-            $('#SB_MASTER_VM_LAST_MFG_DATE').datetimepicker({
-                format: 'L'
-            });
-            $('#SB_MASTER_VM_LAST_DELIVERY_DATE').datetimepicker({
-                format: 'L'
-            });
-        });
+        autocompletesearch('/Inventory/Products/FindProductsForSalesBooking', 3, 'PRODUCT_NAME', ProductsIJM);
 
         //create a new row to data detail table
         function AddNewRow(button) {
@@ -674,6 +675,9 @@
                 $.notify('At least one Product is required', 'warn');
                 return;
             }
+            $("tbody.DATA_ENTRY > tr").remove();
+            $('#btnSubmit').addClass('disabled').children().addClass('fa-spin');
+            
             // Remove previously added hidden inputs
             //$("#frm1 input[name^='PO_DETAIL']").remove();
             // Iterate over each row in the tbody

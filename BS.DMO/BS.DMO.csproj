@@ -10,7 +10,6 @@
     <Folder Include="Models\HRMS\Payroll\" />
     <Folder Include="Models\MyDrive\" />
     <Folder Include="Models\PM\" />
-    <Folder Include="Models\Utility\" />
   </ItemGroup>
 
 </Project>

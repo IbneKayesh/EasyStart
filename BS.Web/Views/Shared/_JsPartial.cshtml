@@ -118,7 +118,7 @@
 
     $(function () {
         $("#example1").DataTable({
-            "responsive": true, 
+            "responsive": true,
             "lengthChange": false,
             "autoWidth": false,
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
@@ -179,6 +179,7 @@
             var delButton = $(this);
             var url = delButton.data('url');
             alertify.confirm('Delete', "Do you want to delete now?", function () {
+                delButton.children().addClass('fa-spin');
                 delButton.prop('disabled', true);
                 $.get(url, function (data, status) {
                     delButton.prop('disabled', false);

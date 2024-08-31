@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BS.DMO.Models.SalesOrder.SB_MASTER>
+﻿@model IEnumerable<BS.DMO.ViewModels.SalesOrder.SB_MASTER_VM>
 @{
     ViewData["Title"] = "Sales Bookings";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -17,6 +17,15 @@
                 <tr>
                     <th>SB No</th>
                     <th>Date</th>
+                    <th>Customer</th>
+                    <th>Sample</th>
+                    <th>SDD</th>
+                    <th>FGD</th>
+                    <th>LDD</th>
+                    <th>Amount</th>
+                    <th>Posted</th>
+                    <th>Approve</th>
+                    <th>Next Step</th>
                     <th>Status</th>
                     <th>#</th>
                 </tr>
@@ -29,14 +38,41 @@
                             @Html.DisplayFor(modelItem => item.TRN_NO)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.TRN_DATE)
+                            @item.TRN_DATE.ToString(item.DATE_DISPLAY_FORMAT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CONTACT_NAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.REQUIRED_SAMPLE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SDD)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FGD)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LDD)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TRN_AMOUNT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IS_POSTED)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IS_APPROVE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NEXT_STEP)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.IS_ACTIVE)
                         </td>
                         <td>
                             <a class="btn btn-primary btn-xs" asp-area="Setup" asp-controller="Department" asp-action="Index" asp-route-id="@item.ID"><i class="fa fa-eye"></i> Branch</a>
-                            <a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-edit"></i> Edit</a>
+                            <a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@item.ID" onclick="$(this).children().addClass('fa-spin');"><i class="fa fa-edit"></i> Edit</a>
                             <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="BankInfo/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button>
                         </td>
                     </tr>

@@ -101,7 +101,7 @@
 
         [Display(Name = "Delivery Address")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
-        public string? CONTACT_ADDRESS_ID { get; set; }
+        public string? DELIVERY_ADDRESS_ID { get; set; }
 
         [Display(Name = "Delivery Date")]
         public DateTime? DELIVERY_DATE { get; set; }

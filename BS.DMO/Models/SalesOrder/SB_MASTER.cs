@@ -87,7 +87,7 @@
         [Display(Name = "Customer Bill To Id")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         [Required(ErrorMessage = "{0} is required")]
-        public string? CONTACT_ADDRESS_ID { get; set; }
+        public string? CONTACT_BILL_TO_ID { get; set; }
 
         [Display(Name = "Delivery Address Id")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
@@ -118,7 +118,7 @@
         [Display(Name = "Sample")]
         public bool REQUIRED_SAMPLE { get; set; }
 
-        [Display(Name = "Contact Note")]
+        [Display(Name = "Customer Note")]
         [StringLength(250, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         public string? CONTACT_NOTE { get; set; }
 
@@ -137,12 +137,21 @@
         [Required(ErrorMessage = "{0} is required")]
         public DateTime LAST_DELIVERY_DATE { get; set; }
 
+        /// <summary>
+        /// Sample Delivery Days
+        /// </summary>
         [Display(Name = "SDD Days")]
         public int SDD { get; set; } = 0;
 
+        /// <summary>
+        /// Manufacturing Days
+        /// </summary>
         [Display(Name = "MFG Days")]
         public int FGD { get; set; } = 0;
 
+        /// <summary>
+        /// Last Dalivery Days
+        /// </summary>
         [Display(Name = "Delivery Days")]
         public int LDD { get; set; } = 0;
 
