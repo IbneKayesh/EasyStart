@@ -1,4 +1,5 @@
 ﻿global using BS.DBC.Database;
+global using BS.DMO.Models.Accounts.BankLoan;
 global using BS.DMO.Models.Admin;
 global using BS.DMO.Models.Application;
 global using BS.DMO.Models.Company;
@@ -38,4 +39,3 @@ global using Microsoft.AspNetCore.Mvc.Rendering;
 global using Microsoft.Data.SqlClient;
 global using Microsoft.EntityFrameworkCore;
 global using System.Diagnostics;
-global using BS.DMO.Models.Accounts.BankLoan;

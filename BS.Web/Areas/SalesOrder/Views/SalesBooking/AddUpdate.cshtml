@@ -491,13 +491,13 @@
                                 <input asp-for="@SB_CHILD_VM.PRODUCT_QTY" type="number" class="custom-input custom-input-xs" title="Quantity" placeholder="Qty" autocomplete="off" />
                             </td>
                             <td>
-                                <input asp-for="@SB_CHILD_VM.VAT_PCT" type="number" class="custom-input custom-input-xs" min="0" max="100" title="VAT %" placeholder="VAT %" autocomplete="off" value="0" />
+                                <input asp-for="@SB_CHILD_VM.VAT_PCT" type="number" class="custom-input custom-input-xs" min="0" max="100" title="VAT %" placeholder="VAT %" autocomplete="off" />
                             </td>
                             <td>
-                                <input asp-for="@SB_CHILD_VM.DISCOUNT_PCT" type="number" class="custom-input custom-input-xs" min="0" max="100" title="Discount %" placeholder="Discount %" autocomplete="off" value="0" />
+                                <input asp-for="@SB_CHILD_VM.DISCOUNT_PCT" type="number" class="custom-input custom-input-xs" min="0" max="100" title="Discount %" placeholder="Discount %" autocomplete="off" />
                             </td>
                             <td>
-                                <input asp-for="@SB_CHILD_VM.DISCOUNT_AMOUNT" type="number" class="custom-input custom-input-xs" min="0" max="100" title="Discount Amount" placeholder="Discount" autocomplete="off" value="0" />
+                                <input asp-for="@SB_CHILD_VM.DISCOUNT_AMOUNT" type="number" class="custom-input custom-input-xs" min="0" max="100" title="Discount Amount" placeholder="Discount" autocomplete="off" />
                             </td>
                             <td>
                                 <input asp-for="@SB_CHILD_VM.PRODUCT_AMOUNT" class="custom-input custom-input-xs" title="Product Amount" placeholder="Amount" readonly />
@@ -521,7 +521,7 @@
                                 <input asp-for="@SB_CHILD_VM.DELIVERY_DATE" type="date" class="custom-input custom-input-xs" title="Delivery Date" placeholder="Delivery Date" />
                             </td>
                             <td>
-                                <input asp-for="@SB_CHILD_VM.IS_SAMPLE" type="checkbox" class="custom-input custom-input-xs" title="Is Sample" />
+                                <input asp-for="@SB_CHILD_VM.IS_SAMPLE" type="checkbox" class="custom-input custom-input-xs" title="Is Sample" value="@(SB_CHILD_VM.IS_SAMPLE ? "true" : "false")" />
                             </td>
                             <td>
                                 <button type="button" class="remove-row btn btn-xs btn-danger" data-id="0" title="Remove this line"><i class="fa fa-trash"></i></button>
@@ -544,6 +544,12 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     <script>
+          $(document).ready(function() {
+           $('input[type="checkbox"]').change(function() {
+                var isChecked = $(this).is(':checked');
+                $(this).val(isChecked);
+            });
+        });
         var CustomerInputJsonMapping = {
             'label': ['CONTACT_GROUP', 'CONTACT_NAME', 'CONTACT_PERSON'],
             'value': 'CONTACT_NAME',

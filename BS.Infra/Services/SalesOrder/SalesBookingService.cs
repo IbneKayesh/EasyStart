@@ -1,7 +1,4 @@
-﻿using BS.DMO.Models.Utility;
-using BS.Infra.Services.Utility;
-
-namespace BS.Infra.Services.SalesOrder
+﻿namespace BS.Infra.Services.SalesOrder
 {
     public class SalesBookingService
     {
@@ -96,10 +93,57 @@ namespace BS.Infra.Services.SalesOrder
             LDD = ldd_duration.Days;
             sb_master.LDD = LDD;
 
-            //total
+            //disc % and amount both
+            bool DiscPctAmount = obj.SB_CHILD_VM.Where(x => x.DISCOUNT_PCT > 0 && x.DISCOUNT_AMOUNT > 0).Any();
+            if (DiscPctAmount)
+            {
+                eQResult.messages = "Discount % and Discount amount both are not allowed for an item";
+                return eQResult;
+            }
+            bool DiscPct100 = obj.SB_CHILD_VM.Where(x => x.DISCOUNT_PCT > 100).Any();
+            if (DiscPct100)
+            {
+                eQResult.messages = "Discount % more than 100 is not allowed for an item";
+                return eQResult;
+            }
+            //total child and master
+            var TRN_AMOUNT = 0M;
+            var DISCOUNT_AMOUNT = 0M;
+            var VAT_AMOUNT = 0M;
+            foreach (SB_CHILD_VM item in obj.SB_CHILD_VM)
+            {
+                var itemAmount = item.PRODUCT_RATE * item.PRODUCT_QTY;
+                TRN_AMOUNT += itemAmount;
 
+                var itemVatAmount = 0M;
+                if (item.VAT_PCT > 0)
+                {
+                    itemVatAmount = itemAmount * (item.VAT_PCT / 100);
+                }
+                VAT_AMOUNT += itemVatAmount;
+                var withVAT = itemAmount + itemVatAmount;
 
+                var itemDiscAmount = 0M;
+                if (item.DISCOUNT_PCT > 0)
+                {
+                    itemDiscAmount = withVAT * (item.DISCOUNT_PCT / 100);
+                }
+                else
+                {
+                    itemDiscAmount = item.DISCOUNT_AMOUNT;
+                }
+                DISCOUNT_AMOUNT += itemDiscAmount;
+                //assign to item amount
+                item.PRODUCT_AMOUNT = withVAT - itemDiscAmount;
+            }
+            sb_master.TRN_AMOUNT = TRN_AMOUNT;
+            sb_master.DISCOUNT_AMOUNT = DISCOUNT_AMOUNT;
+            sb_master.VAT_AMOUNT = VAT_AMOUNT;
+            sb_master.NET_AMOUNT = (TRN_AMOUNT + VAT_AMOUNT + sb_master.CHARGE_AMOUNT) - (DISCOUNT_AMOUNT + sb_master.ADD_DISCOUNT_AMOUNT);
+            //payment
+            sb_master.DUE_AMOUNT = sb_master.NET_AMOUNT - (sb_master.ADVANCED_PAYMENT_AMOUNT + sb_master.PAID_AMOUNT);
 
+            //start saving data
             using (var trn = dbCtx.Database.BeginTransaction())
             {
                 try
@@ -146,14 +190,17 @@ namespace BS.Infra.Services.SalesOrder
                         dbCtx.SB_MASTER.Add(sb_master);
 
 
+                        int i = 0;
                         foreach (var item in obj.SB_CHILD_VM)
                         {
+                            i++;
                             SB_CHILD sb_child = new SB_CHILD();
                             ObjectMappingHelper.MapProperties<SB_CHILD_VM, SB_CHILD>(item, sb_child);
 
                             //new entity
                             sb_child.ID = Guid.NewGuid().ToString();
                             sb_child.MASTER_ID = sb_master.ID;
+                            sb_child.LINE_NO = i;
                             sb_child.DELIVERY_DATE = item.DELIVERY_DATE ?? obj.SB_MASTER_VM.LAST_DELIVERY_DATE;
                             sb_child.DELIVERY_ADDRESS_ID = item.DELIVERY_ADDRESS_ID ?? obj.SB_MASTER_VM.DELIVERY_ADDRESS_ID;
                             //Start Audit
@@ -255,15 +302,17 @@ namespace BS.Infra.Services.SalesOrder
 
                         var entityList = dbCtx.SB_CHILD.Where(x => x.MASTER_ID == obj.SB_MASTER_VM.ID);
                         dbCtx.SB_CHILD.RemoveRange(entityList);
-
+                        int i = 0;
                         foreach (var item in obj.SB_CHILD_VM)
                         {
+                            i++;
                             SB_CHILD sb_child = new SB_CHILD();
                             ObjectMappingHelper.MapProperties<SB_CHILD_VM, SB_CHILD>(item, sb_child);
 
                             //new entity
                             sb_child.ID = Guid.NewGuid().ToString();
                             sb_child.MASTER_ID = sb_master.ID;
+                            sb_child.LINE_NO = i;
                             sb_child.DELIVERY_DATE = item.DELIVERY_DATE ?? obj.SB_MASTER_VM.LAST_DELIVERY_DATE;
                             sb_child.DELIVERY_ADDRESS_ID = item.DELIVERY_ADDRESS_ID ?? obj.SB_MASTER_VM.DELIVERY_ADDRESS_ID;
                             //Start Audit
@@ -341,6 +390,58 @@ JOIN CONTACTS BT ON SM.CONTACT_BILL_TO_ID = BT.ID
 JOIN CONTACT_ADDRESS CA ON SM.DELIVERY_ADDRESS_ID = CA.ID
 LEFT JOIN EMPLOYEES E ON SM.TO_USER_ID = E.ID ORDER BY SM.TRN_NO DESC";
             return dbCtx.Database.SqlQueryRaw<SB_MASTER_VM>(sql).ToList();
+        }
+
+        public EQResult Delete(string id)
+        {
+            EQResult eQResult = new EQResult();
+            eQResult.entities = "SB_MASTER";
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                eQResult.messages = NotifyService.InvalidRequestString();
+                return eQResult;
+            }
+            try
+            {
+                //check child entity
+                //int anyChild = dbCtx.BANK_BRANCH.Where(x => x.BANK_ID == id).Count();
+                //if (anyChild > 0)
+                //{
+                //    eQResult.messages = NotifyService.DeleteHasChildString("Branch", anyChild, "Bank");
+                //    return eQResult;
+                //}
+
+                //old entity
+                var entity = dbCtx.SB_MASTER.FirstOrDefault(x => x.IS_APPROVE && x.ID == id);
+                if (entity != null)
+                {
+                    //TODO : Delete property
+                    dbCtx.SB_MASTER.Remove(entity);
+
+                    //child delete
+                    dbCtx.SB_CHILD.RemoveRange(dbCtx.SB_CHILD.Where(x => x.MASTER_ID == id));
+
+                    eQResult.rows = dbCtx.SaveChanges();
+                    eQResult.success = true;
+                    eQResult.messages = NotifyService.DeletedSuccessString(entity.TRN_NO!);
+                    return eQResult;
+                }
+                else
+                {
+                    eQResult.messages = NotifyService.NotFoundString();
+                    return eQResult;
+                }
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message == string.Empty ? ex.InnerException.Message : ex.Message;
+                eQResult.messages = msg.Replace("'", "");
+                return eQResult;
+            }
+            finally
+            {
+                dbCtx.Dispose();
+            }
         }
     }
 }

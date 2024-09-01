@@ -1,6 +1,4 @@
-﻿using BS.DMO.Models.Inventory;
-
-namespace BS.Web.Areas.SalesOrder.Controllers
+﻿namespace BS.Web.Areas.SalesOrder.Controllers
 {
     [Area("SalesOrder")]
     public class SalesBookingController : BaseController
@@ -108,6 +106,11 @@ namespace BS.Web.Areas.SalesOrder.Controllers
             ViewBag.SHIPPING_TYPE_ID = new SelectList(shipping_type_id, "VALUE_ID", "VALUE_NAME", shipping_type_id.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
             ViewBag.PAYMENT_MODE = new SelectList(payment_mode, "VALUE_ID", "VALUE_NAME", payment_mode.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
             ViewBag.PAYMENT_METHOD = new SelectList(payment_method, "VALUE_ID", "VALUE_NAME", payment_method.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+        }
+        public IActionResult Delete(string id)
+        {
+            EQResult eQResult = salesBookingS.Delete(id);
+            return Json(eQResult);
         }
     }
 }

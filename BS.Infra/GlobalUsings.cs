@@ -24,3 +24,4 @@ global using BS.Infra.Services.Setup;
 global using BS.Infra.Services.Utility;
 global using Microsoft.Data.SqlClient;
 global using Microsoft.EntityFrameworkCore;
+global using BS.DMO.Models.Utility;
