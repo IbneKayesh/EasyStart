@@ -16,7 +16,6 @@
     <Folder Include="Areas\Transport\Data\" />
     <Folder Include="Areas\Transport\Models\" />
     <Folder Include="wwwroot\db_backup\" />
-    <Folder Include="wwwroot\tabler\" />
   </ItemGroup>
 
   <ItemGroup>

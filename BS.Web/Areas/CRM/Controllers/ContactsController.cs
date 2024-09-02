@@ -139,21 +139,31 @@
 
 
         //API
-        [HttpPost]
-        public IActionResult FindCustomer(string search_term)
+        //[HttpPost]
+        //public IActionResult FindCustomer(string search_term)
+        //{
+        //    var obj = contactsS.GetByName(search_term.ToLower());
+        //    return Json(obj);
+        //}
+        public IActionResult ShowCustomer()
         {
-            var obj = contactsS.GetByName(search_term.ToLower());
+            var obj = contactsS.GetAllCustomer();
             return Json(obj);
         }
         [HttpPost]
-        public IActionResult FindCustomerBillTo(string search_term)
+        public IActionResult FindCustomerBillTo(string contactId)
         {
-            var obj = contactsS.GetByName(search_term.ToLower());
+            var obj = contactsS.GetAllCustomerGroupById(contactId);
             return Json(obj);
         }
         public IActionResult FindCustomerDefaultAddress(string customerId)
         {
             var obj = contactsS.GetById_ContactDefaultAddress(customerId);
+            return Json(obj);
+        }
+        public IActionResult FindCustomerAddress(string customerId)
+        {
+            var obj = contactsS.GetAll_ContactAddress(customerId);
             return Json(obj);
         }
     }

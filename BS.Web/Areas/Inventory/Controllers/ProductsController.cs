@@ -102,5 +102,11 @@
             var obj = productsS.GetProductsForSalesBookingByName(search_term.ToLower());
             return Json(obj);
         }
+        [HttpPost]
+        public IActionResult FindProductsForSalesBooking2(string productName)
+        {
+            var obj = productsS.GetProductsForSalesBookingByName(productName.ToLower());
+            return Json(obj);
+        }
     }
 }

@@ -116,6 +116,21 @@ namespace BS.Infra.Services.CRM
         {
            return dbCtx.CONTACTS.Where(x=>x.IS_CUSTOMER && x.CONTACT_NAME.Contains(contactName)).ToList();
         }
+        public List<CONTACTS> GetAllCustomer()
+        {
+           return dbCtx.CONTACTS.Where(x=>x.IS_CUSTOMER).ToList();
+        }  
+        
+        public List<CONTACTS> GetAllCustomerGroupById(string contactId)
+        {
+            string sql = @"select C.* from CONTACTS C
+Join CONTACTS CB on C.CONTACT_GROUP = CB.CONTACT_GROUP
+Where C.IS_CUSTOMER = 1 AND CB.ID = @ID";
+
+            List<object> param = new List<object>();
+            param.Add(new SqlParameter("@ID", contactId));
+            return dbCtx.Database.SqlQueryRaw<CONTACTS>(sql, param.ToArray()).ToList();
+        }
         public List<CONTACTS> GetAllActive()
         {
             FormattableString sql = $@"SELECT BI.*
@@ -274,16 +289,16 @@ namespace BS.Infra.Services.CRM
         }
         public CONTACT_ADDRESS GetById_ContactAddress(string id)
         {
-            FormattableString sql = $@"SELECT BI.*
+            string sql = $@"SELECT BI.*
                     FROM CONTACT_ADDRESS BI
                     WHERE BI.ID = {id}";
-            return dbCtx.Database.SqlQuery<CONTACT_ADDRESS>(sql).ToList().FirstOrDefault();
+            return dbCtx.Database.SqlQueryRaw<CONTACT_ADDRESS>(sql).ToList().FirstOrDefault();
         }
 
         public CONTACT_ADDRESS GetById_ContactDefaultAddress(string id)
         {
-            FormattableString sql = $@"SELECT CA.* FROM CONTACT_ADDRESS CA WHERE CA.CONTACT_ID = {id} And CA.IS_DEFAULT = 1";
-            return dbCtx.Database.SqlQuery<CONTACT_ADDRESS>(sql).ToList().FirstOrDefault();
+            string sql = $@"SELECT CA.* FROM CONTACT_ADDRESS CA WHERE CA.CONTACT_ID ='{id}' AND CA.IS_DEFAULT = 1";
+            return dbCtx.Database.SqlQueryRaw<CONTACT_ADDRESS>(sql).ToList().FirstOrDefault();
         }
 
         public EQResult Delete_ContactAddress(string id)
