@@ -17,36 +17,34 @@
             <input asp-for="ID" type="hidden" />
             <input asp-for="RowVersion" type="hidden" />
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="BRANCH_ID" class="control-label"></label>
                     <select asp-for="BRANCH_ID" asp-items="@ViewBag.BRANCH_ID" class="form-control form-control-sm">
                     </select>
                     <span asp-validation-for="BRANCH_ID" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="BANK_BRANCH_ID" class="control-label"></label>
                     <select asp-for="BANK_BRANCH_ID" asp-items="@ViewBag.BANK_BRANCH_ID" class="form-control form-control-sm">
                     </select>
                     <span asp-validation-for="BANK_BRANCH_ID" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label asp-for="COST_CENTER_NAME" class="control-label"></label>
                     <input asp-for="COST_CENTER_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Cost Center Name">
                     <span asp-validation-for="COST_CENTER_NAME" class="text-danger"></span>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="MAX_BALANCE_LIMIT" class="control-label"></label>
                     <input asp-for="MAX_BALANCE_LIMIT" class="form-control form-control-sm" autocomplete="off" placeholder="Max Balance Limit">
                     <span asp-validation-for="MAX_BALANCE_LIMIT" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="OPEN_DATE" class="control-label"></label>
                     <input asp-for="OPEN_DATE" class="form-control form-control-sm" autocomplete="off" placeholder="Open Date">
                     <span asp-validation-for="OPEN_DATE" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-1">
                     <label asp-for="IS_ACTIVE" class="control-label"></label>
                     <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
                     <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>

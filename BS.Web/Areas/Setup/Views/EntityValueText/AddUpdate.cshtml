@@ -16,36 +16,33 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="RowVersion" type="hidden" />
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="VALUE_ID" class="control-label"></label>
                     <input asp-for="VALUE_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Value ID">
                     <span asp-validation-for="VALUE_ID" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="VALUE_NAME" class="control-label"></label>
                     <input asp-for="VALUE_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Display Text">
                     <span asp-validation-for="VALUE_NAME" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label asp-for="ENTITY_ID" class="control-label"></label>
-                    @* <input asp-for="ENTITY_ID" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Entity / Virtual Table Name"> *@
                     <select asp-for="ENTITY_ID" asp-items="@ViewBag.ENTITY_ID" class="form-control form-control-sm">
                     </select>
                     <span asp-validation-for="ENTITY_ID" class="text-danger"></span>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label asp-for="ENTITY_DESCRIPTION" class="control-label"></label>
                     <input asp-for="ENTITY_DESCRIPTION" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Entity Description">
                     <span asp-validation-for="ENTITY_DESCRIPTION" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-1">
                     <label asp-for="IS_DEFAULT" class="control-label"></label>
                     <input asp-for="IS_DEFAULT" type="checkbox" class="form-control form-control-sm">
                     <span asp-validation-for="IS_DEFAULT" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-1">
                     <label asp-for="IS_ACTIVE" class="control-label"></label>
                     <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
                     <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>

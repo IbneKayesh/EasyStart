@@ -18,12 +18,12 @@
             <input asp-for="CONTACT_ID" type="hidden" />
             <input asp-for="RowVersion" type="hidden" />
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <label asp-for="CONTACT_PERSON" class="control-label"></label>
                     <input asp-for="CONTACT_PERSON" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Contact Person">
                     <span asp-validation-for="CONTACT_PERSON" class="text-danger"></span>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <label asp-for="CONTACT_NO" class="control-label"></label>
                     <input asp-for="CONTACT_NO" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Contact No">
                     <span asp-validation-for="CONTACT_NO" class="text-danger"></span>
@@ -33,19 +33,17 @@
                     <input asp-for="EMAIL_ADDRESS" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Email Address">
                     <span asp-validation-for="EMAIL_ADDRESS" class="text-danger"></span>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                     <label asp-for="OFFICE_ADDRESS" class="control-label"></label>
                     <input asp-for="OFFICE_ADDRESS" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Office Address">
                     <span asp-validation-for="OFFICE_ADDRESS" class="text-danger"></span>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <label asp-for="IS_DEFAULT" class="control-label"></label>
                     <input asp-for="IS_DEFAULT" type="checkbox" class="form-control form-control-sm">
                     <span asp-validation-for="IS_DEFAULT" class="text-danger"></span>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <label asp-for="IS_ACTIVE" class="control-label"></label>
                     <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
                     <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>

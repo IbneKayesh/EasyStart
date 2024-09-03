@@ -6,5 +6,8 @@
 
         [Display(Name = "Category")]
         public string? CATEGORY_NAME { get; set; }
+
+        [Display(Name = "Has Address")]
+        public int? HAS_ADDRESS { get; set; }
     }
 }

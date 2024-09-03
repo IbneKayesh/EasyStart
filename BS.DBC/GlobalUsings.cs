@@ -16,3 +16,5 @@ global using BS.DMO.Models.Transport;
 global using Microsoft.EntityFrameworkCore;
 global using System.Data;
 global using System.Reflection;
+global using BS.DMO.Models.Accounts.BankLoan;
+global using BS.DMO.Models.SFM.Setup;

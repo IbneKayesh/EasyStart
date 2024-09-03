@@ -69,7 +69,7 @@
                         <td>
                             <a class="btn btn-primary btn-xs" asp-area="Setup" asp-controller="Department" asp-action="Index" asp-route-id="@item.ID"><i class="fa fa-eye"></i> Branch</a>
                             <a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-edit"></i> Edit</a>
-                            <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="BankInfo/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button>
+                            <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="/Company/Branch/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button>
                         </td>
                     </tr>
                 }

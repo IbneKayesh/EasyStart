@@ -1,6 +1,4 @@
-﻿using BS.DMO.Models.Accounts.BankLoan;
-
-namespace BS.DBC.Database
+﻿namespace BS.DBC.Database
 {
     public class AppDbContext : DbContext
     {
@@ -95,6 +93,9 @@ namespace BS.DBC.Database
         public DbSet<TRN_AUTO_STEP> TRN_AUTO_STEP { get; set; }
         public DbSet<SUB_SECTIONS_TRN_ID> SUB_SECTIONS_TRN_ID { get; set; }
         public DbSet<TRN_LAST_NO_LIST> TRN_LAST_NO_LIST { get; set; }
+        
+        //Shop Floor Management
+        public DbSet<PROCESS_MASTER> PROCESS_MASTER { get; set; }
         
         //Transport
         public DbSet<DELIVERY_AGENT> DELIVERY_AGENT { get; set; }

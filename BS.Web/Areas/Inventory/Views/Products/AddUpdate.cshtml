@@ -18,9 +18,8 @@
             <input asp-for="LAST_PURCHASE_RATE" type="hidden" />
             <input asp-for="LAST_SALES_RATE" type="hidden" />
             <input asp-for="RowVersion" type="hidden" />
-
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <label asp-for="BUSINESS_LINE_ID" class="control-label"></label>
                     <select asp-for="BUSINESS_LINE_ID" asp-items="@ViewBag.BUSINESS_LINE_ID" class="form-control form-control-sm">
                     </select>
@@ -38,7 +37,7 @@
                     </select>
                     <span asp-validation-for="PRODUCT_CLASS_ID" class="text-danger"></span>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <label asp-for="PRODUCT_CATEGORY_ID" class="control-label"></label>
                     <select asp-for="PRODUCT_CATEGORY_ID" asp-items="@ViewBag.PRODUCT_CATEGORY_ID" class="form-control form-control-sm">
                     </select>
@@ -50,13 +49,13 @@
                     </select>
                     <span asp-validation-for="UNIT_CHILD_ID" class="text-danger"></span>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-md-2">
                     <label asp-for="PRODUCT_CODE" class="control-label"></label>
                     <input asp-for="PRODUCT_CODE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Product Code">
                     <span asp-validation-for="PRODUCT_CODE" class="text-danger"></span>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-md-2">
                     <label asp-for="BAR_CODE" class="control-label"></label>
                     <input asp-for="BAR_CODE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Barcode">
@@ -72,9 +71,7 @@
                     <input asp-for="PRODUCT_DESC" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Description">
                     <span asp-validation-for="PRODUCT_DESC" class="text-danger"></span>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <label asp-for="HAS_WARRANTY" class="control-label"></label>
                     <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
                     <span asp-validation-for="HAS_WARRANTY" class="text-danger"></span>
@@ -84,7 +81,9 @@
                     <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
                     <span asp-validation-for="HAS_EXPIRY" class="text-danger"></span>
                 </div>
-                <div class="col-md-2">
+            </div>
+            <div class="row">
+                <div class="col-md-1">
                     <label asp-for="IS_MAIN_PRODUCT" class="control-label"></label>
                     <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
                     <span asp-validation-for="IS_MAIN_PRODUCT" class="text-danger"></span>

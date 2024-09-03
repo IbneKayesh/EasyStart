@@ -5,6 +5,7 @@
         public BRANCH_COST_CENTER()
         {
             ID = Guid.Empty.ToString();
+            OPEN_DATE =  DateTime.Now;
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

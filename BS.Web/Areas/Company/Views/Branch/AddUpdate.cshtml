@@ -17,13 +17,13 @@
             <input asp-for="ID" type="hidden" />
             <input asp-for="RowVersion" type="hidden" />
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label asp-for="BRANCH_TYPE_ID" class="control-label"></label>
                     <select asp-for="BRANCH_TYPE_ID" asp-items="@ViewBag.BRANCH_TYPE_ID" class="form-control form-control-sm">
                     </select>
                     <span asp-validation-for="BRANCH_TYPE_ID" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label asp-for="BUSINESS_ID" class="control-label"></label>
                     <select asp-for="BUSINESS_ID" asp-items="@ViewBag.BUSINESS_ID" class="form-control form-control-sm">
                     </select>
@@ -34,48 +34,46 @@
                     <input asp-for="BRANCH_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Branch Name">
                     <span asp-validation-for="BRANCH_NAME" class="text-danger"></span>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="SHORT_NAME" class="control-label"></label>
                     <input asp-for="SHORT_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Short Name">
                     <span asp-validation-for="SHORT_NAME" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+            </div>
+            <div class="row">
+                <div class="col-md-5">
                     <label asp-for="ADDRESS_INFO" class="control-label"></label>
                     <input asp-for="ADDRESS_INFO" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Address">
                     <span asp-validation-for="ADDRESS_INFO" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label asp-for="CONTACT_NAME" class="control-label"></label>
                     <input asp-for="CONTACT_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Contact Name">
                     <span asp-validation-for="CONTACT_NAME" class="text-danger"></span>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="CONTACT_NO" class="control-label"></label>
                     <input asp-for="CONTACT_NO" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Contact No">
                     <span asp-validation-for="CONTACT_NO" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="EMAIL_ADDRESS" class="control-label"></label>
                     <input asp-for="EMAIL_ADDRESS" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Email">
                     <span asp-validation-for="EMAIL_ADDRESS" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+            </div>
+            <div class="row">
+                <div class="col-md-2">
                     <label asp-for="MAX_EMPLOYEE" class="control-label"></label>
                     <input asp-for="MAX_EMPLOYEE" class="form-control form-control-sm" autocomplete="off" placeholder="Max Employee">
                     <span asp-validation-for="MAX_EMPLOYEE" class="text-danger"></span>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label asp-for="MAX_SALARY" class="control-label"></label>
                     <input asp-for="MAX_SALARY" class="form-control form-control-sm" autocomplete="off" placeholder="Max Total Salary">
                     <span asp-validation-for="MAX_SALARY" class="text-danger"></span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-1">
                     <label asp-for="IS_ACTIVE" class="control-label"></label>
                     <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
                     <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
