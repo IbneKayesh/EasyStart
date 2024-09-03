@@ -1,5 +1,0 @@
-//ID
-//PROCESS_MASTER_ID
-//QC_NAME
-//SEQUENCE_NO
-//PROCESS_IN_SEC //Per Unit Duration
