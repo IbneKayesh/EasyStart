@@ -40,5 +40,9 @@
         [Display(Name = "Open Date")]
         [Required(ErrorMessage = "{0} is required")]
         public DateTime OPEN_DATE { get; set; }
+
+
+        [Display(Name = "Day Cash Only")]
+        public bool IS_DAY_CASH { get; set; }
     }
 }

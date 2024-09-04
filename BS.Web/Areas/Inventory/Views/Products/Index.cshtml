@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BS.DMO.ViewModels.Inventory.PRODUCTS_VM>
+﻿@model BS.DMO.ViewModels.Inventory.PRODUCTS_IDX
 @{
     ViewData["Title"] = "Products";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,7 +10,31 @@
             <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
         </div>
     </div>
-
+    <form asp-action="Index">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <input asp-for="type_name" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Type Name">
+                    <span asp-validation-for="type_name" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <input asp-for="class_name" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Class Name">
+                    <span asp-validation-for="class_name" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <input asp-for="category_name" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Category Name">
+                    <span asp-validation-for="category_name" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <input asp-for="product_name" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Product Name">
+                    <span asp-validation-for="product_name" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-search"></i> Search</button>
+        </div>
+    </form>
     <div class="card-body table-responsive">
         <table id="example3" class="table table-hover table-xs">
             <thead>
@@ -37,7 +61,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @foreach (var item in Model.PRODUCTS_VM)
                 {
                     <tr>
                         <td>

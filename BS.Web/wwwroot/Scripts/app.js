@@ -145,3 +145,10 @@ function SearchGrid(options) {
         }
     });
 }
+
+$(document).ready(function () {
+    $('input[type="checkbox"]').change(function () {
+        var isChecked = $(this).is(':checked');
+        $(this).val(isChecked);
+    });
+});

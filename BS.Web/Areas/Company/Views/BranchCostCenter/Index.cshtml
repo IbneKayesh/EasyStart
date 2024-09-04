@@ -20,6 +20,7 @@
                     <th>Cost Center Name</th>
                     <th>Max Balance Limit</th>
                     <th>Open Date</th>
+                    <th>Day Cash Only</th>
                     <th>Status</th>
                     <th>#</th>
                 </tr>
@@ -42,6 +43,9 @@
                         </td>
                         <td>
                             @item.OPEN_DATE.ToString(item.DATE_DISPLAY_FORMAT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IS_DAY_CASH)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.IS_ACTIVE)

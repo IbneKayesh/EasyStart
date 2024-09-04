@@ -1,4 +1,6 @@
-﻿namespace BS.Web.Areas.Inventory.Controllers
+﻿using BS.DMO.ViewModels.Inventory;
+
+namespace BS.Web.Areas.Inventory.Controllers
 {
     [Area("Inventory")]
     public class ProductsController : BaseController
@@ -26,10 +28,11 @@
             productBrandS = _productBrandService;
             unitChildS = _unitChildService;
         }
-        public IActionResult Index()
+        public IActionResult Index(PRODUCTS_IDX obj)
         {
-            var entityList = productsS.GetAll();
-            return View(entityList);
+            var entityList = productsS.GetAll(obj);
+            obj.PRODUCTS_VM = entityList;
+            return View(obj);
         }
         public IActionResult Create()
         {

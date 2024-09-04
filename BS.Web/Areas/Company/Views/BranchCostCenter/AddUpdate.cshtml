@@ -17,7 +17,7 @@
             <input asp-for="ID" type="hidden" />
             <input asp-for="RowVersion" type="hidden" />
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <label asp-for="BRANCH_ID" class="control-label"></label>
                     <select asp-for="BRANCH_ID" asp-items="@ViewBag.BRANCH_ID" class="form-control form-control-sm">
                     </select>
@@ -43,6 +43,11 @@
                     <label asp-for="OPEN_DATE" class="control-label"></label>
                     <input asp-for="OPEN_DATE" class="form-control form-control-sm" autocomplete="off" placeholder="Open Date">
                     <span asp-validation-for="OPEN_DATE" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="IS_DAY_CASH" class="control-label"></label>
+                    <input asp-for="IS_DAY_CASH" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_DAY_CASH" class="text-danger"></span>
                 </div>
                 <div class="col-md-1">
                     <label asp-for="IS_ACTIVE" class="control-label"></label>

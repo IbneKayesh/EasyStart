@@ -116,12 +116,7 @@ function ShowAddress() {
     });
 }
 
-$(document).ready(function () {
-    $('input[type="checkbox"]').change(function () {
-        var isChecked = $(this).is(':checked');
-        $(this).val(isChecked);
-    });
-});
+
 
 
 var FromUserIJM = {
@@ -179,7 +174,32 @@ $("#PRODUCT_NAME").blur(function () {
     }
 });
 
-
+$("#DELIVERY_ADDRESS").blur(function () {
+    var contactId = $('#SB_MASTER_VM_CONTACT_ID').val();
+    if (contactId == "") {
+        alertify.error('No contact selected');
+        return;
+    }
+    new SearchGrid({
+        Title: "Customer Address",
+        ColsName: "ID,CONTACT_PERSON,CONTACT_NO,OFFICE_ADDRESS,IS_DEFAULT",
+        ColsTitle: "ID,Person,Contact No,Address,Default",
+        ColsHidden: "ID",
+        DataUrl: "/CRM/Contacts/FindCustomerAddress",
+        DataMethod: "GET",
+        DataParams: { "customerId": contactId },
+        onSelect: function (selectedData) {
+            if (selectedData.length > 0) {
+                var sd = selectedData[0];
+                $('#DELIVERY_ADDRESS_ID').val(sd.ID);
+                $('#DELIVERY_ADDRESS').val(sd.OFFICE_ADDRESS);
+            }
+            else {
+                alertify.error('No contact selected');
+            }
+        }
+    });
+});
 
 //create a new row to data detail table
 function AddNewRow(button) {

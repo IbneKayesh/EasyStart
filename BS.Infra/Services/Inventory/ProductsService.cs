@@ -97,17 +97,50 @@
             }
         }
 
-        public List<PRODUCTS_VM> GetAll()
+        public List<PRODUCTS_VM> GetAll(PRODUCTS_IDX obj)
         {
-            FormattableString sql = $@"Select P.*,BL.BUSINESS_LINE_NAME,PT.TYPE_NAME, PC.CLASS_NAME, PCT.CATEGORY_NAME, UC.UNIT_NAME
+            var conditions = new List<string>();
+            List<SqlParameter> param = new List<SqlParameter>();
+
+            if (!string.IsNullOrWhiteSpace(obj.type_name))
+            {
+                conditions.Add("P.PRODUCT_NAME LIKE @PRODUCT_NAME");
+                param.Add(new SqlParameter("@PRODUCT_NAME", "%" + obj.type_name + "%"));
+            }
+            if (!string.IsNullOrWhiteSpace(obj.class_name))
+            {
+                conditions.Add("PC.CLASS_NAME LIKE @CLASS_NAME");
+                param.Add(new SqlParameter("@CLASS_NAME", "%" + obj.class_name + "%"));
+            }
+
+            if (!string.IsNullOrWhiteSpace(obj.category_name))
+            {
+                conditions.Add("PCT.CATEGORY_NAME LIKE @CATEGORY_NAME");
+                param.Add(new SqlParameter("@CATEGORY_NAME", "%" + obj.category_name + "%"));
+            }
+
+            if (!string.IsNullOrWhiteSpace(obj.category_name))
+            {
+                conditions.Add("PCT.CATEGORY_NAME LIKE @CATEGORY_NAME");
+                param.Add(new SqlParameter("@CATEGORY_NAME", "%" + obj.category_name + "%"));
+            }
+
+            if (!string.IsNullOrWhiteSpace(obj.product_name))
+            {
+                conditions.Add("P.PRODUCT_NAME LIKE @PRODUCT_NAME");
+                param.Add(new SqlParameter("@PRODUCT_NAME", "%" + obj.product_name + "%"));
+            }
+            string criteria = conditions.Count > 0 ? "WHERE " + string.Join(" AND ", conditions) : "";
+
+            string sql = $@"Select P.*,BL.BUSINESS_LINE_NAME,PT.TYPE_NAME, PC.CLASS_NAME, PCT.CATEGORY_NAME, UC.UNIT_NAME
 from PRODUCTS P
 Join BUSINESS_LINE BL on P.BUSINESS_LINE_ID = BL.ID
 Join PRODUCT_TYPE PT on P.PRODUCT_TYPE_ID = PT.ID
 Join PRODUCT_CLASS PC on P.PRODUCT_CLASS_ID = PC.ID
 Join PRODUCT_CATEGORY PCT on P.PRODUCT_CATEGORY_ID = PCT.ID
-Join UNIT_CHILD UC on P.UNIT_CHILD_ID = UC.ID
+Join UNIT_CHILD UC on P.UNIT_CHILD_ID = UC.ID {criteria}
                             ORDER BY BL.BUSINESS_LINE_NAME,PT.TYPE_NAME, PC.CLASS_NAME, PCT.CATEGORY_NAME, P.PRODUCT_NAME";
-            return dbCtx.Database.SqlQuery<PRODUCTS_VM>(sql).ToList();
+            return dbCtx.Database.SqlQueryRaw<PRODUCTS_VM>(sql, param.ToArray()).ToList();
         }
         public List<PRODUCTS> GetAllActive()
         {
@@ -187,6 +220,6 @@ Join UNIT_CHILD UC on P.UNIT_CHILD_ID = UC.ID WHERE P.IS_ACTIVE = 1 AND P.PRODUC
                             ORDER BY BL.BUSINESS_LINE_NAME,PT.TYPE_NAME, PC.CLASS_NAME, PCT.CATEGORY_NAME, P.PRODUCT_NAME";
             return dbCtx.Database.SqlQueryRaw<PRODUCTS_VM>(sql, param.ToArray()).ToList();
         }
-        
+
     }
 }

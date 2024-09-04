@@ -124,7 +124,7 @@ namespace BS.Web.Areas.Accounts.Controllers.BankLoan
 
         private void Dropdown_CreateEdit()
         {
-            ViewBag.BRANCH_COST_CENTER_ID = new SelectList(branchCostCenterS.GetAllActive(), "ID", "COST_CENTER_NAME");
+            ViewBag.BRANCH_COST_CENTER_ID = new SelectList(branchCostCenterS.GetCashNonCash(), "ID", "COST_CENTER_NAME");
         }
 
         public IActionResult Delete(string id)

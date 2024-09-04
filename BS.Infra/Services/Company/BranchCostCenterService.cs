@@ -47,6 +47,7 @@
                             entity.COST_CENTER_NAME = obj.COST_CENTER_NAME;
                             entity.MAX_BALANCE_LIMIT = obj.MAX_BALANCE_LIMIT;
                             entity.OPEN_DATE = obj.OPEN_DATE;
+                            entity.IS_DAY_CASH = obj.IS_DAY_CASH;
                             //Start Audit
                             entity.IS_ACTIVE = obj.IS_ACTIVE;
                             entity.UPDATE_USER = userId;
@@ -96,6 +97,14 @@ JOIN BANK_BRANCH BB ON BCC.BANK_BRANCH_ID = BB.ID";
             FormattableString sql = $@"SELECT BI.*
                     FROM BRANCH_COST_CENTER BI
                     WHERE BI.IS_ACTIVE = 1
+                    ORDER BY BI.COST_CENTER_NAME";
+            return dbCtx.Database.SqlQuery<BRANCH_COST_CENTER>(sql).ToList();
+        }
+        public List<BRANCH_COST_CENTER> GetCashNonCash()
+        {
+            FormattableString sql = $@"SELECT BI.*
+                    FROM BRANCH_COST_CENTER BI
+                    WHERE BI.IS_ACTIVE = 1 AND BI.IS_DAY_CASH = 0
                     ORDER BY BI.COST_CENTER_NAME";
             return dbCtx.Database.SqlQuery<BRANCH_COST_CENTER>(sql).ToList();
         }
