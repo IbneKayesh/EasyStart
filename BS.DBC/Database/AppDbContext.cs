@@ -58,17 +58,19 @@
         public DbSet<DESIGNATION> DESIGNATION { get; set; }
         public DbSet<EMPLOYEES> EMPLOYEES { get; set; }
         //Inventory
-        public DbSet<PRODUCT_BRAND> PRODUCT_BRAND { get; set; }
-        public DbSet<PRODUCT_CATEGORY> PRODUCT_CATEGORY { get; set; }
-        public DbSet<PRODUCT_CLASS> PRODUCT_CLASS { get; set; }
-        public DbSet<PRODUCT_GROUP> PRODUCT_GROUP { get; set; }
-        public DbSet<PRODUCT_SOURCE> PRODUCT_SOURCE { get; set; }
+        public DbSet<ITEM_GROUP_TYPE> ITEM_GROUP_TYPE { get; set; }
+        public DbSet<ITEM_ATTRIBUTE> ITEM_ATTRIBUTE { get; set; }
+        public DbSet<ITEM_ATTRIBUTE_VALUE> ITEM_ATTRIBUTE_VALUE { get; set; }
+        public DbSet<ITEM_GROUP> ITEM_GROUP { get; set; }
+        public DbSet<ITEM_SUB_GROUP> ITEM_SUB_GROUP { get; set; }
+        public DbSet<ITEM_TYPE> ITEM_TYPE { get; set; }
+        public DbSet<ITEM_CATEGORY> ITEM_CATEGORY { get; set; }
+        public DbSet<ITEM_CLASS> ITEM_CLASS { get; set; }
+        public DbSet<ITEM_STATUS> ITEM_STATUS { get; set; }
+        public DbSet<ITEM_MASTER> ITEM_MASTER { get; set; }
+
         public DbSet<UNIT_CHILD> UNIT_CHILD { get; set; }
         public DbSet<UNIT_MASTER> UNIT_MASTER { get; set; }
-        public DbSet<PRODUCT_SEGMENTS> PRODUCT_SEGMENTS { get; set; }
-        public DbSet<SEGMENT_NAME_TYPE> SEGMENT_NAME_TYPE { get; set; }
-        public DbSet<PRODUCT_TYPE> PRODUCT_TYPE { get; set; }
-        public DbSet<PRODUCT_STATUS> PRODUCT_STATUS { get; set; }
         public DbSet<PRODUCTS> PRODUCTS { get; set; }
         //My Drive
         //PM

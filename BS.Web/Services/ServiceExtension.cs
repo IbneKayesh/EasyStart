@@ -49,17 +49,19 @@
             services.AddTransient<WorkShiftService>();
             services.AddTransient<EmployeesService>();
             //Inventory
-            services.AddTransient<ProductBrandService>();
-            services.AddTransient<ProductCategoryService>();
-            services.AddTransient<ProductClassService>();
-            services.AddTransient<ProductGroupService>();
-            services.AddTransient<ProductSourceService>();
+            services.AddTransient<ItemAttributeService>();
+            services.AddTransient<ItemAttributeValueService>();
+            services.AddTransient<ItemGroupTypeService>();
+            services.AddTransient<ItemGroupService>();
+            services.AddTransient<ItemSubGroupService>();
+            services.AddTransient<ItemCategoryService>();
+            services.AddTransient<ItemTypeService>();
+            services.AddTransient<ItemStatusService>();
+
+            services.AddTransient<ItemClassService>();
             services.AddTransient<UnitChildService>();
             services.AddTransient<UnitMasterService>();
-            services.AddTransient<SegmentNameTypeService>();
-            services.AddTransient<ProductTypeService>();
-            services.AddTransient<ProductStatusService>();
-            services.AddTransient<ProductSegmentService>();
+            services.AddTransient<ItemMasterService>();
             services.AddTransient<ProductsService>();
             //My Drive
             //PM

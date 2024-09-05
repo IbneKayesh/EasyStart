@@ -1,0 +1,86 @@
+﻿@model BS.DMO.Models.Inventory.ITEM_SUB_GROUP
+@{
+    ViewData["Title"] = "Item Sub Group";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Add/Edit @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+        </div>
+    </div>
+    <form asp-action="AddUpdate">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="ID" type="hidden" />
+            <input asp-for="RowVersion" type="hidden" />
+            <div class="row">
+                <div class="col-md-2">
+                    <label asp-for="ITEM_GROUP_ID" class="control-label"></label>
+                    <select asp-for="ITEM_GROUP_ID" asp-items="@ViewBag.ITEM_GROUP_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="ITEM_GROUP_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="ITEM_SUB_GROUP_NAME" class="control-label"></label>
+                    <input asp-for="ITEM_SUB_GROUP_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Sub Group Name">
+                    <span asp-validation-for="ITEM_SUB_GROUP_NAME" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="ITEM_SUB_GROUP_DESC" class="control-label"></label>
+                    <input asp-for="ITEM_SUB_GROUP_DESC" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Description">
+                    <span asp-validation-for="ITEM_SUB_GROUP_DESC" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="IS_FG_RM" class="control-label"></label>
+                    <input asp-for="IS_FG_RM" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_FG_RM" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="IS_STOCK" class="control-label"></label>
+                    <input asp-for="IS_STOCK" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_STOCK" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="HS_CODE" class="control-label"></label>
+                    <input asp-for="HS_CODE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="HS Code">
+                    <span asp-validation-for="HS_CODE" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label asp-for="CODE_PREFIX" class="control-label"></label>
+                    <input asp-for="CODE_PREFIX" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Code Prefix">
+                    <span asp-validation-for="CODE_PREFIX" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="LEAD_DAYS" class="control-label"></label>
+                    <input asp-for="LEAD_DAYS" class="form-control form-control-sm" autocomplete="off" placeholder="Lead Days">
+                    <span asp-validation-for="LEAD_DAYS" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="ITEM_SUB_GROUP_IMG" class="control-label"></label>
+                    <input asp-for="ITEM_SUB_GROUP_IMG" type="file" class="form-control form-control-sm">
+                    <span asp-validation-for="ITEM_SUB_GROUP_IMG" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="IS_ACTIVE" class="control-label"></label>
+                    <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Index" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left"></i> Back</a>
+            <button class="btn btn-sm btn-info" type="reset"><i class="fa fa-undo"></i> Reset</button>
+            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Submit</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -16,10 +16,10 @@ namespace BS.Web.Controllers
         public IActionResult Index()
         {
             string table_script = string.Empty;
-            table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<SB_CHILD>();
-            table_script = Services.Power.ClassObjectSanitizer.SetForSave<SB_MASTER>();
-            //table_script = Services.Power.RazorSanitizer.Create<PRODUCTS>();
-            table_script = Services.Power.RazorSanitizer.Select<SB_MASTER>();
+            table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<ITEM_MASTER>();
+            table_script = Services.Power.ClassObjectSanitizer.SetForSave<ITEM_MASTER>();
+            table_script = Services.Power.RazorSanitizer.Create<ITEM_MASTER>();
+            table_script = Services.Power.RazorSanitizer.Select<ITEM_MASTER>();
 
             return View("Index", table_script);
         }

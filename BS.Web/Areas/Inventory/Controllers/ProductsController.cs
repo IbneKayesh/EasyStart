@@ -7,17 +7,15 @@ namespace BS.Web.Areas.Inventory.Controllers
     {
         private readonly ProductsService productsS;
         private readonly BusinessLineService businessLineS;
-        private readonly ProductTypeService productTypeS;
-        private readonly ProductClassService productClassS;
-        private readonly ProductCategoryService productCategoryS;
-        private readonly ProductBrandService productBrandS;
+        private readonly ItemTypeService productTypeS;
+        private readonly ItemClassService productClassS;
+        private readonly ItemCategoryService productCategoryS;
         private readonly UnitChildService unitChildS;
         public ProductsController(ProductsService _productsService,
             BusinessLineService _businessLineService,
-            ProductTypeService _productTypeService,
-            ProductClassService _productClassService,
-            ProductCategoryService _productCategoryService,
-            ProductBrandService _productBrandService,
+            ItemTypeService _productTypeService,
+            ItemClassService _productClassService,
+            ItemCategoryService _productCategoryService,
             UnitChildService _unitChildService)
         {
             productsS = _productsService;
@@ -25,7 +23,6 @@ namespace BS.Web.Areas.Inventory.Controllers
             productTypeS = _productTypeService;
             productClassS = _productClassService;
             productCategoryS = _productCategoryService;
-            productBrandS = _productBrandService;
             unitChildS = _unitChildService;
         }
         public IActionResult Index(PRODUCTS_IDX obj)

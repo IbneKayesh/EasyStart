@@ -1,4 +1,5 @@
-﻿namespace BS.DMO.ViewModels.Inventory
+﻿
+namespace BS.DMO.ViewModels.Inventory
 {
     public class PRODUCTS_IDX
     {

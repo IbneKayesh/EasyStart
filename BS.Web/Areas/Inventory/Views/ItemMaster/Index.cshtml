@@ -1,0 +1,135 @@
+﻿@model BS.DMO.ViewModels.Inventory.PRODUCTS_IDX
+@{
+    ViewData["Title"] = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Find your @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+        </div>
+    </div>
+    <form asp-action="Index">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <input asp-for="type_name" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Type Name">
+                    <span asp-validation-for="type_name" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <input asp-for="class_name" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Class Name">
+                    <span asp-validation-for="class_name" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <input asp-for="category_name" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Category Name">
+                    <span asp-validation-for="category_name" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <input asp-for="product_name" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Product Name">
+                    <span asp-validation-for="product_name" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-search"></i> Search</button>
+        </div>
+    </form>
+    <div class="card-body table-responsive">
+        <table id="example3" class="table table-hover table-xs">
+            <thead>
+                <tr>
+                    <th>Business Line</th>
+                    <th>Product Type</th>
+                    <th>Product Class</th>
+                    <th>Product Category</th>
+                    <th>Unit Child</th>
+                    <th>Product Code</th>
+                    <th>Barcode</th>
+                    <th>Product Name</th>
+                    <th>Description</th>
+                    <th>Last Purchase Rate</th>
+                    <th>Last Sales Rate</th>
+                    <th>Has Warranty</th>
+                    <th>Has Expiry</th>
+                    <th>Is Main Product</th>
+                    <th>VAT %</th>
+                    <th>Base Price</th>
+                    <th>Weight Per Unit</th>
+                    <th>Status</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.PRODUCTS_VM)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BUSINESS_LINE_NAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TYPE_NAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CLASS_NAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CATEGORY_NAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UNIT_NAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PRODUCT_CODE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BAR_CODE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PRODUCT_NAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PRODUCT_DESC)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LAST_PURCHASE_RATE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LAST_SALES_RATE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HAS_WARRANTY)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HAS_EXPIRY)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IS_MAIN_PRODUCT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VAT_PCT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BASE_PRICE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WEIGHT_PER_UNIT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IS_ACTIVE)
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-secondary btn-xs dropdown-toggle" data-toggle="dropdown">Action</button>
+                                <ul class="dropdown-menu action-list">
+                                    <li><a class="btn btn-primary btn-xs btn-block" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-edit"></i> Edit</a></li>
+                                    <li><button type="button" class="btn btn-danger btn-xs btn-block delete-confirm" data-url="BankInfo/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
