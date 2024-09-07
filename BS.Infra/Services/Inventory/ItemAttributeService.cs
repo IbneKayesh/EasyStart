@@ -7,6 +7,7 @@
         {
             dbCtx = _dbContext;
         }
+
         public EQResult Insert(ITEM_ATTRIBUTE obj, string userId)
         {
             EQResult eQResult = new EQResult();
@@ -41,11 +42,8 @@
                     {
                         if (entity.RowVersion.SequenceEqual(obj.RowVersion))
                         {
-                            //check is it already used or not
                             //TODO : Update property
-                            entity.ITEM_ATTRIBUTE_NAME = obj.ITEM_ATTRIBUTE_NAME;
                             entity.ITEM_ATTRIBUTE_SHORT_NAME = obj.ITEM_ATTRIBUTE_SHORT_NAME;
-                            entity.ADD_TO_NAME = obj.ADD_TO_NAME;
                             //Start Audit
                             entity.IS_ACTIVE = obj.IS_ACTIVE;
                             entity.UPDATE_USER = userId;
@@ -145,5 +143,19 @@
                 dbCtx.Dispose();
             }
         }
+
+
+//        public List<ITEM_ATTRIBUTE_VM> GetSetupBySubGroupId(string item_sub_group_id)
+//        {
+//            List<object> param = new List<object>();
+//            param.Add(new SqlParameter("@ITEM_SUB_GROUP_ID", item_sub_group_id));
+//            string sql = $@"SELECT IA.ITEM_ATTRIBUTE_NAME,IA.ITEM_ATTRIBUTE_SHORT_NAME,
+//IST.ATTRIBUTE_SEQ, IST.DEFAULT_VALUE,IST.ADD_TO_NAME
+//FROM ITEM_SETUP IST
+//JOIN ITEM_ATTRIBUTE IA ON IST.ITEM_ATTRIBUTE_ID = IA.ID
+//WHERE IST.ITEM_SUB_GROUP_ID = @ITEM_SUB_GROUP_ID
+//ORDER BY IST.ATTRIBUTE_SEQ";
+//            return dbCtx.Database.SqlQueryRaw<ITEM_ATTRIBUTE_VM>(sql, param.ToArray()).ToList();
+//        }
     }
 }

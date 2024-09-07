@@ -57,7 +57,6 @@
             services.AddTransient<ItemCategoryService>();
             services.AddTransient<ItemTypeService>();
             services.AddTransient<ItemStatusService>();
-
             services.AddTransient<ItemClassService>();
             services.AddTransient<UnitChildService>();
             services.AddTransient<UnitMasterService>();

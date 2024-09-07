@@ -141,16 +141,43 @@ var ProductsIJM = {
 };
 autocompletesearch('/Inventory/Products/FindProductsForSalesBooking', 3, 'PRODUCT_NAME1', ProductsIJM);
 
+var ColsName1;
+var ColsTitle1;
+var ColsHidden1;
+var isgi = 'cf32e179-a0c6-437a-8f5a-27517586bb06';
+function GetTableSetup() {
+    $.ajax({
+        url: "/Inventory/ItemMaster/GetTableSetup",
+        dataType: "json",
+        type: "POST",
+        data: { item_sub_group_id: isgi },
+        success: function (data) {
+            ColsName1 = data.COLUMN_NAME;
+            ColsTitle1 = data.COLUMN_TITLE;
+            ColsHidden1 = data.COLUMN_HIDDEN;
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX Error:", status, error);
+        }
+    });
+}
 
 $("#PRODUCT_NAME").blur(function () {
+    GetTableSetup();
+    if (ColsName1 == "undefined") {
+        return;
+    }
     let productName = $('#PRODUCT_NAME').val();
     if (productName) {
         new SearchGrid({
             Title: "Products",
-            ColsName: "ID,PRODUCT_NAME,PRODUCT_DESC,UNIT_CHILD_ID,UNIT_NAME,BASE_PRICE,VAT_PCT,WEIGHT_PER_UNIT",
-            ColsTitle: "ID,Product,Description,UNIT_CHILD_ID,Unit,Base Price, VAT %, Weight per Unit",
-            ColsHidden: "ID,UNIT_CHILD_ID",
-            DataUrl: "/Inventory/Products/FindProductsForSalesBooking2",
+            //ColsName: "ID,PRODUCT_NAME,PRODUCT_DESC,UNIT_CHILD_ID,UNIT_NAME,BASE_PRICE,VAT_PCT,WEIGHT_PER_UNIT," + ,
+            //ColsTitle: "ID,Product,Description,UNIT_CHILD_ID,Unit,Base Price, VAT %, Weight per Unit",
+            //ColsHidden: "ID,UNIT_CHILD_ID",
+            ColsName: "ID,HS_CODE,LEAD_DAYS,MASTER_ITEM_CODE,MASTER_BAR_CODE,ITEM_NAME,WARRANTY_DAYS,EXPIRY_DAYS,IS_MAIN_ITEM,VAT_PCT,BASE_PRICE,ITEM_CODE,BAR_CODE,ITEM_DESC," + ColsName1,
+            ColsTitle: "ID,HS Code,Lead Days,MASTER_ITEM_CODE,MASTER_BAR_CODE,Item Name,Warranty,Expiry,Main Item?,Vat%,Base Price,Code,Barcode,Item Detail," + ColsTitle1,
+            ColsHidden: "ID,MASTER_ITEM_CODE,MASTER_BAR_CODE," + ColsHidden1,
+            DataUrl: "/Inventory/ItemMaster/GetItemDetailsForSalesBookingBySubGroupIDByItemName",
             DataMethod: "POST",
             DataParams: { "productName": productName },
             onSelect: function (selectedData) {

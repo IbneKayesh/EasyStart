@@ -1,6 +1,6 @@
-﻿@model BS.DMO.Models.Inventory.ITEM_CLASS
+﻿@model BS.DMO.Models.Inventory.ITEM_SETUP
 @{
-    ViewData["Title"] = "Item Class";
+    ViewData["Title"] = "Create Item Setup";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,27 +11,34 @@
             <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
         </div>
     </div>
-    <form asp-action="AddUpdate">
+    <form asp-action="CreateSetup">
         <div class="card-body">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="ID" type="hidden" />
+            <input asp-for="ITEM_SUB_GROUP_ID" type="hidden" />
             <input asp-for="RowVersion" type="hidden" />
             <div class="row">
-
                 <div class="col-md-4">
-                    <label asp-for="CLASS_NAME" class="control-label"></label>
-                    <input asp-for="CLASS_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Class Name">
-                    <span asp-validation-for="CLASS_NAME" class="text-danger"></span>
+                    <label asp-for="ITEM_ATTRIBUTE_VALUE_ID" class="control-label"></label>
+                    <select asp-for="ITEM_ATTRIBUTE_VALUE_ID" asp-items="@ViewBag.ITEM_ATTRIBUTE_VALUE_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="ITEM_ATTRIBUTE_VALUE_ID" class="text-danger"></span>
                 </div>
-                <div class="col-md-5">
-                    <label asp-for="CLASS_DESC" class="control-label"></label>
-                    <input asp-for="CLASS_DESC" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Description">
-                    <span asp-validation-for="CLASS_DESC" class="text-danger"></span>
+               <div class="col-md-2">
+                    <label asp-for="ITEM_ATTRIBUTE_ID" class="control-label"></label>
+                    <select asp-for="ITEM_ATTRIBUTE_ID" asp-items="@ViewBag.ITEM_ATTRIBUTE_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="ITEM_ATTRIBUTE_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="DEFAULT_VALUE" class="control-label"></label>
+                    <input asp-for="DEFAULT_VALUE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Detault Value">
+                    <span asp-validation-for="DEFAULT_VALUE" class="text-danger"></span>
                 </div>
                 <div class="col-md-1">
-                    <label asp-for="ALLOW_QTY_SPLIT" class="control-label"></label>
-                    <input asp-for="ALLOW_QTY_SPLIT" type="checkbox" class="form-control form-control-sm">
-                    <span asp-validation-for="ALLOW_QTY_SPLIT" class="text-danger"></span>
+                    <label asp-for="ADD_TO_NAME" class="control-label"></label>
+                    <input asp-for="ADD_TO_NAME" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="ADD_TO_NAME" class="text-danger"></span>
                 </div>
                 <div class="col-md-1">
                     <label asp-for="IS_ACTIVE" class="control-label"></label>
@@ -39,6 +46,7 @@
                     <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
                 </div>
             </div>
+
         </div>
         <div class="card-footer">
             <a asp-action="Index" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left"></i> Back</a>

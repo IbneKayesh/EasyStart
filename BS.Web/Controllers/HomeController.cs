@@ -17,9 +17,10 @@ namespace BS.Web.Controllers
         {
             string table_script = string.Empty;
             table_script = Services.Power.ModelToTable.GenerateCreateTableQuery<ITEM_MASTER>();
-            table_script = Services.Power.ClassObjectSanitizer.SetForSave<ITEM_MASTER>();
-            table_script = Services.Power.RazorSanitizer.Create<ITEM_MASTER>();
-            table_script = Services.Power.RazorSanitizer.Select<ITEM_MASTER>();
+            //table_script = Services.Power.ModelToTable.GenerateSelect<ITEM_SUB_GROUP>();
+            //table_script = Services.Power.ClassObjectSanitizer.SetForSave<ITEM_MASTER>();
+            //table_script = Services.Power.RazorSanitizer.Create<ITEM_MASTER>();
+            //table_script = Services.Power.RazorSanitizer.Select<ITEM_MASTER>();
 
             return View("Index", table_script);
         }

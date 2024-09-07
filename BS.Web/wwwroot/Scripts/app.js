@@ -59,7 +59,7 @@ function SearchGrid(options) {
 
     // Create modal HTML structure
     var modalHTML = `<div class="modal fade" id="dynamicModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="modalLabel">Search result of - ${title}</h5>
@@ -67,7 +67,7 @@ function SearchGrid(options) {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
+              <div class="modal-body table-responsive">
                     <table id="searchDataTable" class="display nowrap table-sm" style="cursor:pointer; width:100%;">
                         <thead class="table-info">
                             <tr>

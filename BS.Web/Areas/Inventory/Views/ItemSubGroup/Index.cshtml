@@ -24,6 +24,7 @@
                     <th>Code Prefix</th>
                     <th>Lead Days</th>
                     <th>Image</th>
+                    <th>Setup</th>
                     <th>Status</th>
                     <th>#</th>
                 </tr>
@@ -60,12 +61,15 @@
                             @Html.DisplayFor(modelItem => item.ITEM_SUB_GROUP_IMG)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.IS_ACTIVE)
+                            @Html.DisplayFor(modelItem => item.ITEM_SETUP_COUNT)
                         </td>
                         <td>
-                            <a class="btn btn-primary btn-xs" asp-area="Setup" asp-controller="Department" asp-action="Index" asp-route-id="@item.ID"><i class="fa fa-eye"></i> Branch</a>
-                            <a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-edit"></i> Edit</a>
+                            @Html.DisplayFor(modelItem => item.IS_ACTIVE)
+                        </td>
+                        <td><a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-edit"></i> Edit</a>
                             <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="/Inventory/ProductCategory/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button>
+                          <a class="btn btn-primary btn-xs" asp-action="SetupList" asp-route-item_sub_group_id="@item.ID"><i class="fa fa-edit"></i> Setup List</a>
+                          <a class="btn btn-primary btn-xs" asp-action="CreateSetup" asp-route-item_sub_group_id="@item.ID"><i class="fa fa-plus"></i> Create Setup</a>
                         </td>
                     </tr>
                 }

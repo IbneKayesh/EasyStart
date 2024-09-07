@@ -71,6 +71,7 @@
 
         public DbSet<UNIT_CHILD> UNIT_CHILD { get; set; }
         public DbSet<UNIT_MASTER> UNIT_MASTER { get; set; }
+        public DbSet<ITEM_SETUP> ITEM_SETUP { get; set; }
         public DbSet<PRODUCTS> PRODUCTS { get; set; }
         //My Drive
         //PM

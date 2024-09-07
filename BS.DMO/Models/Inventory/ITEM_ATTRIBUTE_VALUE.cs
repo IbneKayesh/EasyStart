@@ -16,7 +16,7 @@
         [Required(ErrorMessage = "{0} is required")]
         public string? ITEM_ATTRIBUTE_ID { get; set; }
 
-        [Display(Name = "Attribute Name")]
+        [Display(Name = "Attribute Value")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 2)]
         [Required(ErrorMessage = "{0} is required")]
         public string? ATTRIBUTE_VALUE { get; set; }

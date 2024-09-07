@@ -53,6 +53,27 @@ namespace BS.Web.Services.Power
             return sb.ToString();
         }
 
+        public static string GenerateSelect<T>()
+        {
+            Type type = typeof(T);
+            var tableName = type.Name;
+            var properties = type.GetProperties();
+            var sb = new StringBuilder();
+            sb.AppendLine($"SELECT ");
+            foreach (var prop in properties)
+            {
+                if (IsNotMapped(prop))
+                {
+                    continue;
+                }
+                var columnName = prop.Name;
+                sb.AppendLine($"{columnName},");
+            }
+            sb.Length--; // Remove last comma
+            sb.AppendLine($"FROM [{tableName}]");
+            return sb.ToString();
+        }
+
         private static string GetSqlDataType(PropertyInfo prop)
         {
             var type = prop.PropertyType;

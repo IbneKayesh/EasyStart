@@ -16,12 +16,6 @@
         [Required(ErrorMessage = "{0} is required")]
         public string? ITEM_SUB_GROUP_ID { get; set; }
 
-        [Display(Name = "Type Id")]
-        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
-        [Required(ErrorMessage = "{0} is required")]
-        public string? ITEM_TYPE_ID { get; set; }
-
-
         [Display(Name = "Class")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         [Required(ErrorMessage = "{0} is required")]
@@ -32,40 +26,41 @@
         [Required(ErrorMessage = "{0} is required")]
         public string? ITEM_CATEGORY_ID { get; set; }
 
-
-        [Display(Name = "UOM")]
+        [Display(Name = "Type Id")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         [Required(ErrorMessage = "{0} is required")]
-        public string? UNIT_CHILD_ID { get; set; }
+        public string? ITEM_TYPE_ID { get; set; }
 
         [Display(Name = "Status Id")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         [Required(ErrorMessage = "{0} is required")]
         public string? ITEM_STATUS_ID { get; set; }
 
-
-        [Display(Name = "Item Name")]
-        [StringLength(200, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
+        [Display(Name = "UOM")]
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         [Required(ErrorMessage = "{0} is required")]
-        public string? ITEM_NAME { get; set; }
-
-
+        public string? UNIT_CHILD_ID { get; set; }
 
         [Display(Name = "Code")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
-        public string? ITEM_CODE { get; set; }
+        public string? MASTER_ITEM_CODE { get; set; }
 
         [Display(Name = "Barcode")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
-        public string? BAR_CODE { get; set; }
+        public string? MASTER_BAR_CODE { get; set; }
 
-        [Display(Name = "Has Warranty")]
+        [Display(Name = "Item Name")]
+        [StringLength(200, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 2)]
         [Required(ErrorMessage = "{0} is required")]
-        public bool HAS_WARRANTY { get; set; } = false;
+        public string? ITEM_NAME { get; set; }
 
-        [Display(Name = "Has Expiry")]
+        [Display(Name = "Warranty (Days)")]
         [Required(ErrorMessage = "{0} is required")]
-        public bool HAS_EXPIRY { get; set; } = false;
+        public int WARRANTY_DAYS { get; set; } = 0;
+
+        [Display(Name = "Expiry (Days)")]
+        [Required(ErrorMessage = "{0} is required")]
+        public int EXPIRY_DAYS { get; set; } = 0;
 
         [Display(Name = "Is Main Item")]
         [Required(ErrorMessage = "{0} is required")]

@@ -22,12 +22,6 @@
         public string? CLASS_DESC { get; set; }
 
 
-
-
-        [Display(Name = "Is Main Product")]
-        [Required(ErrorMessage = "{0} is required")]
-        public bool IS_MAIN_PRODUCT { get; set; } = true;
-
         [Display(Name = "Allow Qty Split")]
         public bool ALLOW_QTY_SPLIT { get; set; } = false;
     }

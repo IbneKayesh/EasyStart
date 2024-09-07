@@ -1,6 +1,6 @@
-﻿@model BS.DMO.Models.Inventory.PRODUCTS
+﻿@model BS.DMO.Models.Inventory.ITEM_MASTER
 @{
-    ViewData["Title"] = "Product";
+    ViewData["Title"] = "Item Master";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,33 +15,37 @@
         <div class="card-body">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="ID" type="hidden" />
-            <input asp-for="LAST_PURCHASE_RATE" type="hidden" />
-            <input asp-for="LAST_SALES_RATE" type="hidden" />
             <input asp-for="RowVersion" type="hidden" />
             <div class="row">
-                <div class="col-md-2">
-                    <label asp-for="BUSINESS_LINE_ID" class="control-label"></label>
-                    <select asp-for="BUSINESS_LINE_ID" asp-items="@ViewBag.BUSINESS_LINE_ID" class="form-control form-control-sm">
+               <div class="col-md-2">
+                    <label asp-for="ITEM_SUB_GROUP_ID" class="control-label"></label>
+                    <select asp-for="ITEM_SUB_GROUP_ID" asp-items="@ViewBag.ITEM_SUB_GROUP_ID" class="form-control form-control-sm">
                     </select>
-                    <span asp-validation-for="BUSINESS_LINE_ID" class="text-danger"></span>
+                    <span asp-validation-for="ITEM_SUB_GROUP_ID" class="text-danger"></span>
                 </div>
                 <div class="col-md-2">
-                    <label asp-for="PRODUCT_TYPE_ID" class="control-label"></label>
-                    <select asp-for="PRODUCT_TYPE_ID" asp-items="@ViewBag.PRODUCT_TYPE_ID" class="form-control form-control-sm">
+                    <label asp-for="ITEM_CLASS_ID" class="control-label"></label>
+                    <select asp-for="ITEM_CLASS_ID" asp-items="@ViewBag.ITEM_CLASS_ID" class="form-control form-control-sm">
                     </select>
-                    <span asp-validation-for="PRODUCT_TYPE_ID" class="text-danger"></span>
+                    <span asp-validation-for="ITEM_CLASS_ID" class="text-danger"></span>
+                </div>
+               <div class="col-md-2">
+                    <label asp-for="ITEM_CATEGORY_ID" class="control-label"></label>
+                    <select asp-for="ITEM_CATEGORY_ID" asp-items="@ViewBag.ITEM_CATEGORY_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="ITEM_CATEGORY_ID" class="text-danger"></span>
+                </div>
+                 <div class="col-md-2">
+                    <label asp-for="ITEM_TYPE_ID" class="control-label"></label>
+                    <select asp-for="ITEM_TYPE_ID" asp-items="@ViewBag.ITEM_TYPE_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="ITEM_TYPE_ID" class="text-danger"></span>
                 </div>
                 <div class="col-md-2">
-                    <label asp-for="PRODUCT_CLASS_ID" class="control-label"></label>
-                    <select asp-for="PRODUCT_CLASS_ID" asp-items="@ViewBag.PRODUCT_CLASS_ID" class="form-control form-control-sm">
+                    <label asp-for="ITEM_STATUS_ID" class="control-label"></label>
+                    <select asp-for="ITEM_STATUS_ID" asp-items="@ViewBag.ITEM_STATUS_ID" class="form-control form-control-sm">
                     </select>
-                    <span asp-validation-for="PRODUCT_CLASS_ID" class="text-danger"></span>
-                </div>
-                <div class="col-md-2">
-                    <label asp-for="PRODUCT_CATEGORY_ID" class="control-label"></label>
-                    <select asp-for="PRODUCT_CATEGORY_ID" asp-items="@ViewBag.PRODUCT_CATEGORY_ID" class="form-control form-control-sm">
-                    </select>
-                    <span asp-validation-for="PRODUCT_CATEGORY_ID" class="text-danger"></span>
+                    <span asp-validation-for="ITEM_STATUS_ID" class="text-danger"></span>
                 </div>
                 <div class="col-md-2">
                     <label asp-for="UNIT_CHILD_ID" class="control-label"></label>
@@ -49,45 +53,30 @@
                     </select>
                     <span asp-validation-for="UNIT_CHILD_ID" class="text-danger"></span>
                 </div>
-                <div class="col-md-2">
-                    <label asp-for="PRODUCT_CODE" class="control-label"></label>
-                    <input asp-for="PRODUCT_CODE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Product Code">
-                    <span asp-validation-for="PRODUCT_CODE" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label asp-for="ITEM_NAME" class="control-label"></label>
+                    <input asp-for="ITEM_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Item Name">
+                    <span asp-validation-for="ITEM_NAME" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="WARRANTY_DAYS" class="control-label"></label>
+                    <input asp-for="WARRANTY_DAYS" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Warranty (Days)">
+                    <span asp-validation-for="WARRANTY_DAYS" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="EXPIRY_DAYS" class="control-label"></label>
+                    <input asp-for="EXPIRY_DAYS" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Expiry (Days)">
+                    <span asp-validation-for="EXPIRY_DAYS" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="IS_MAIN_ITEM" class="control-label"></label>
+                    <input asp-for="IS_MAIN_ITEM" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_MAIN_ITEM" class="text-danger"></span>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-2">
-                    <label asp-for="BAR_CODE" class="control-label"></label>
-                    <input asp-for="BAR_CODE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Barcode">
-                    <span asp-validation-for="BAR_CODE" class="text-danger"></span>
-                </div>
-                <div class="col-md-4">
-                    <label asp-for="PRODUCT_NAME" class="control-label"></label>
-                    <input asp-for="PRODUCT_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Product Name">
-                    <span asp-validation-for="PRODUCT_NAME" class="text-danger"></span>
-                </div>
-                <div class="col-md-4">
-                    <label asp-for="PRODUCT_DESC" class="control-label"></label>
-                    <input asp-for="PRODUCT_DESC" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Description">
-                    <span asp-validation-for="PRODUCT_DESC" class="text-danger"></span>
-                </div>
-                <div class="col-md-1">
-                    <label asp-for="HAS_WARRANTY" class="control-label"></label>
-                    <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
-                    <span asp-validation-for="HAS_WARRANTY" class="text-danger"></span>
-                </div>
-                <div class="col-md-1">
-                    <label asp-for="HAS_EXPIRY" class="control-label"></label>
-                    <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
-                    <span asp-validation-for="HAS_EXPIRY" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-1">
-                    <label asp-for="IS_MAIN_PRODUCT" class="control-label"></label>
-                    <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
-                    <span asp-validation-for="IS_MAIN_PRODUCT" class="text-danger"></span>
-                </div>
                 <div class="col-md-2">
                     <label asp-for="VAT_PCT" class="control-label"></label>
                     <input asp-for="VAT_PCT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="VAT %">
@@ -99,9 +88,14 @@
                     <span asp-validation-for="BASE_PRICE" class="text-danger"></span>
                 </div>
                 <div class="col-md-2">
-                    <label asp-for="WEIGHT_PER_UNIT" class="control-label"></label>
-                    <input asp-for="WEIGHT_PER_UNIT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Weight Per Unit">
-                    <span asp-validation-for="WEIGHT_PER_UNIT" class="text-danger"></span>
+                    <label asp-for="ITEM_IMG" class="control-label"></label>
+                    <input asp-for="ITEM_IMG" type="file" class="form-control form-control-sm" autocomplete="off" placeholder="Image">
+                    <span asp-validation-for="ITEM_IMG" class="text-danger"></span>
+                </div>
+                <div class="col-md-5">
+                    <label asp-for="SPECIAL_INSTRUCTION" class="control-label"></label>
+                    <input asp-for="SPECIAL_INSTRUCTION" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Special Instruction">
+                    <span asp-validation-for="SPECIAL_INSTRUCTION" class="text-danger"></span>
                 </div>
                 <div class="col-md-1">
                     <label asp-for="IS_ACTIVE" class="control-label"></label>

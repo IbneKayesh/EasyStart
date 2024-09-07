@@ -5,7 +5,6 @@
         public ITEM_ATTRIBUTE()
         {
             ID = Guid.Empty.ToString();
-            ADD_TO_NAME = true;
         }
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "ID")]
@@ -20,9 +19,6 @@
         [Display(Name = "Attribute Short Name")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         public string? ITEM_ATTRIBUTE_SHORT_NAME { get; set; }
-
-        [Display(Name = "Add to Name")]
-        public bool ADD_TO_NAME { get; set; }
 
 
         //[Display(Name = "Data Type Name")]

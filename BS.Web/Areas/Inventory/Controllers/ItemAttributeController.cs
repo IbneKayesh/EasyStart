@@ -65,7 +65,6 @@
             EQResult eQResult = ItemAttributeS.Delete(id);
             return Json(eQResult);
         }
-
         public IActionResult ViewAttributeValue(string id)
         {
             if (!string.IsNullOrWhiteSpace(id))

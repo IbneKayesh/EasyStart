@@ -1,0 +1,61 @@
+﻿@model List<BS.DMO.ViewModels.Inventory.ITEM_SETUP_VM>
+@{
+    ViewData["Title"] = "Item Setup List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Find your @ViewData["Title"]</h3>
+        <div class="card-tools">
+            @if(Model.Count > 0)
+            {
+                <a class="btn btn-primary btn-xs btn-block" asp-action="CreateSetup" asp-route-item_sub_group_id="@Model.First().ITEM_SUB_GROUP_ID"><i class="fa fa-plus"></i> Create Setup</a>
+            }
+        </div>
+    </div>
+    <div class="card-body table-responsive">
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>Attribute Value</th>
+                    <th>Attribute Name</th>
+                    <th>Default Value</th>
+                    <th>Add to Name</th>
+                    <th>Status</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ITEM_ATTRIBUTE_VALUE_ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ITEM_ATTRIBUTE_NAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DEFAULT_VALUE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ADD_TO_NAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IS_ACTIVE)
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-secondary btn-xs dropdown-toggle" data-toggle="dropdown">Action</button>
+                                <ul class="dropdown-menu action-list">
+                                    <li><a class="btn btn-primary btn-xs btn-block" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-edit"></i> Edit</a></li>
+                                    <li><button type="button" class="btn btn-danger btn-xs btn-block delete-confirm" data-url="BankInfo/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
