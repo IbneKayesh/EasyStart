@@ -2,6 +2,7 @@
 {
     public class LEAVE_CALENDAR : BaseModel
     {
+        //holiday calender
         public LEAVE_CALENDAR()
         {
             ID = Guid.Empty.ToString();

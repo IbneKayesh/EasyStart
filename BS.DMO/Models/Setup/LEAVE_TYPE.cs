@@ -2,6 +2,7 @@
 {
     public class LEAVE_TYPE : BaseModel
     {
+        //it should be holiday
         public LEAVE_TYPE()
         {
             ID = Guid.Empty.ToString();
