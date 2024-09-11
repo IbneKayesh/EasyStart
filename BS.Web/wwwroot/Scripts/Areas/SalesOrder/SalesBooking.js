@@ -144,13 +144,14 @@ autocompletesearch('/Inventory/Products/FindProductsForSalesBooking', 3, 'PRODUC
 var ColsName1;
 var ColsTitle1;
 var ColsHidden1;
-var isgi = 'cf32e179-a0c6-437a-8f5a-27517586bb06';
-function GetTableSetup() {
+var selectedItemSubGroupId;
+function ItemSubGroupIdChange() {
+    selectedItemSubGroupId  = document.getElementById('ITEM_SUB_GROUP_ID').value;
     $.ajax({
         url: "/Inventory/ItemMaster/GetTableSetup",
         dataType: "json",
         type: "POST",
-        data: { item_sub_group_id: isgi },
+        data: { item_sub_group_id: selectedItemSubGroupId },
         success: function (data) {
             ColsName1 = data.COLUMN_NAME;
             ColsTitle1 = data.COLUMN_TITLE;
@@ -161,9 +162,7 @@ function GetTableSetup() {
         }
     });
 }
-
 $("#PRODUCT_NAME").blur(function () {
-    GetTableSetup();
     if (ColsName1 == "undefined") {
         return;
     }
@@ -179,7 +178,7 @@ $("#PRODUCT_NAME").blur(function () {
             ColsHidden: "ID,MASTER_ITEM_CODE,MASTER_BAR_CODE," + ColsHidden1,
             DataUrl: "/Inventory/ItemMaster/GetItemDetailsForSalesBookingBySubGroupIDByItemName",
             DataMethod: "POST",
-            DataParams: { "productName": productName },
+            DataParams: { "item_sub_group_id": selectedItemSubGroupId,  "productName": productName },
             onSelect: function (selectedData) {
                 if (selectedData.length > 0) {
                     var sd = selectedData[0];

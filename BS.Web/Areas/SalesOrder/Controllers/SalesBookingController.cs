@@ -7,14 +7,17 @@
         private readonly SubSectionService subSectionS;
         private readonly EntityValueTextService entityValueTextS;
         private readonly ContactsService contactsS;
+        private readonly ItemSubGroupService ItemSubGroupS;
         public SalesBookingController(SalesBookingService _salesBookingService,
             SubSectionService _subSectionService,
-            EntityValueTextService _entityValueTextService, ContactsService _contactsService)
+            EntityValueTextService _entityValueTextService, ContactsService _contactsService,
+            ItemSubGroupService itemSubGroupService)
         {
             salesBookingS = _salesBookingService;
             subSectionS = _subSectionService;
             entityValueTextS = _entityValueTextService;
             contactsS = _contactsService;
+            ItemSubGroupS = itemSubGroupService;
         }
 
         public IActionResult Index()
@@ -106,6 +109,7 @@
             ViewBag.SHIPPING_TYPE_ID = new SelectList(shipping_type_id, "VALUE_ID", "VALUE_NAME", shipping_type_id.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
             ViewBag.PAYMENT_MODE = new SelectList(payment_mode, "VALUE_ID", "VALUE_NAME", payment_mode.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
             ViewBag.PAYMENT_METHOD = new SelectList(payment_method, "VALUE_ID", "VALUE_NAME", payment_method.FirstOrDefault(x => x.IS_DEFAULT).VALUE_ID);
+            ViewBag.ITEM_SUB_GROUP_ID = new SelectList(ItemSubGroupS.GetForSales(), "ID", "ITEM_SUB_GROUP_NAME");
         }
         public IActionResult Delete(string id)
         {

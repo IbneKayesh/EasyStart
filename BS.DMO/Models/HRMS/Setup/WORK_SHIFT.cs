@@ -26,7 +26,7 @@
         public TimeSpan OUT_TIME_START { get; set; }
 
         [Display(Name = "Out Time (End)")]
-        public TimeSpan OUT_TIME_START { get; set; }
+        public TimeSpan OUT_TIME_END { get; set; }
 
         [Display(Name = "Grace Minute")]
         [Required(ErrorMessage = "{0} is required")]

@@ -5,6 +5,14 @@
         public EMPLOYEES()
         {
             ID = Guid.Empty.ToString();
+            BIRTH_DATE = DateTime.Now;
+            JOIN_DATE = DateTime.Now;
+            CONFIRM_DATE = DateTime.Now.AddMonths(6);
+
+            //not mapped
+            EMP_ADDRESS = new List<EMP_ADDRESS>();
+            EMP_EXPERIENCE = new List<EMP_EXPERIENCE>();
+            EMP_EDU = new List<EMP_EDU>();
         }
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "ID")]
@@ -22,8 +30,7 @@
         public string? EMP_NAME { get; set; }
 
         [Display(Name = "Employee Photo")]
-        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 3)]
-        [Required(ErrorMessage = "{0} is required")]
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         public string? EMP_PHOTO { get; set; }
 
         [Display(Name = "Card 1")]
@@ -50,18 +57,18 @@
         [StringLength(15, ErrorMessage = "{0} length is between {2} and {1}", MinimumLength = 0)]
         [Required(ErrorMessage = "{0} is required")]
         public string? GENDER_ID { get; set; }
-        
+
         [Display(Name = "Marital Status")]
         [Required(ErrorMessage = "{0} is required")]
-        [StringLength(10, ErrorMessage = "{0} length is between {2} and {1}", MinimumLength = 0)]
-        public string? MARITAIL_STATUS { get; set; }
+        [StringLength(15, ErrorMessage = "{0} length is between {2} and {1}", MinimumLength = 0)]
+        public string? MARITAL_STATUS { get; set; }
 
         [Display(Name = "Spouse Name")]
         [StringLength(100, ErrorMessage = "{0} length is between {2} and {1}", MinimumLength = 3)]
         public string? SPOUSE_NAME { get; set; }
 
         [Display(Name = "Blood Group")]
-        [StringLength(100, ErrorMessage = "{0} length is between {2} and {1}", MinimumLength = 3)]
+        [StringLength(100, ErrorMessage = "{0} length is between {2} and {1}", MinimumLength = 0)]
         public string? BLOOD_GROUP { get; set; }
 
         [Display(Name = "National ID")]
@@ -78,7 +85,7 @@
 
         [Display(Name = "Nationality")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
-        public string? NATIONALITY  { get; set; }
+        public string? NATIONALITY { get; set; }
 
         [Display(Name = "Father Name")]
         [Required(ErrorMessage = "{0} is required")]
@@ -108,5 +115,14 @@
         [Display(Name = "Confirm Date")]
         [Required(ErrorMessage = "{0} is required")]
         public DateTime CONFIRM_DATE { get; set; }
+
+
+        //non mapped
+        [NotMapped]
+        public List<EMP_ADDRESS>? EMP_ADDRESS { get; set; }
+        [NotMapped]
+        public List<EMP_EXPERIENCE>? EMP_EXPERIENCE { get; set; }
+        [NotMapped]
+        public List<EMP_EDU>? EMP_EDU { get; set; }
     }
 }

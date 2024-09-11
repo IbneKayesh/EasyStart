@@ -107,6 +107,12 @@ ISG.UPDATE_DATE,ISG.REVISE_NO,ISG.RowVersion,IG.ITEM_GROUP_NAME ORDER BY ISG.ITE
             FormattableString sql = $@"select * from ITEM_SUB_GROUP WHERE IS_ACTIVE = 1 order by ITEM_SUB_GROUP_NAME";
             return dbCtx.Database.SqlQuery<ITEM_SUB_GROUP>(sql).ToList();
         }
+
+        public List<ITEM_SUB_GROUP> GetForSales()
+        {
+            FormattableString sql = $@"select * from ITEM_SUB_GROUP WHERE IS_ACTIVE = 1 AND IS_FG_RM = 1 order by ITEM_SUB_GROUP_NAME";
+            return dbCtx.Database.SqlQuery<ITEM_SUB_GROUP>(sql).ToList();
+        }
         public ITEM_SUB_GROUP GetById(string id)
         {
             FormattableString sql = $@"Select * from ITEM_SUB_GROUP WHERE ID = {id}";

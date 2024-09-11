@@ -26,7 +26,8 @@ namespace BS.DMO.Models.HRMS.Employee
 
         [Display(Name = "Passing Year")]
         [Required(ErrorMessage = "{0} is required")]
-        public int EDU_YEAR { get; set; }
+        [StringLength(20, ErrorMessage = "{0} length is between {2} and {1}", MinimumLength = 2)]
+        public string? EDU_YEAR { get; set; }
 
         [Display(Name = "Passing Grade")]
         [Required(ErrorMessage = "{0} is required")]

@@ -1,0 +1,44 @@
+﻿@model BS.DMO.Models.HRMS.Employee.EMP_EDU
+@{
+    Layout = null;
+}
+<form asp-area="HRMS" asp-controller="Employees" asp-action="EditEdu" id="partialForm" method="post" onkeydown="return event.key != 'Enter';">
+    <div class="card-body">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="ID" type="hidden" />
+        <input asp-for="EMP_ID" type="hidden" />
+        <input asp-for="RowVersion" type="hidden" />
+        <div class="row">
+            <div class="col-md-1">
+                <label asp-for="IS_CERTIFICATE" class="control-label"></label>
+                <input asp-for="IS_CERTIFICATE" type="checkbox" class="form-control form-control-sm">
+                <span asp-validation-for="IS_CERTIFICATE" class="text-danger"></span>
+            </div>
+            <div class="col-md-3">
+                <label asp-for="EDU_TITLE" class="control-label"></label>
+                <input asp-for="EDU_TITLE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Education Title">
+                <span asp-validation-for="EDU_TITLE" class="text-danger"></span>
+            </div>
+            <div class="col-md-2">
+                <label asp-for="EDU_YEAR" class="control-label"></label>
+                <input asp-for="EDU_YEAR" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Passing Year">
+                <span asp-validation-for="EDU_YEAR" class="text-danger"></span>
+            </div>
+            <div class="col-md-2">
+                <label asp-for="EDU_GRADE" class="control-label"></label>
+                <input asp-for="EDU_GRADE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Passing Grade">
+                <span asp-validation-for="EDU_GRADE" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="INSTITUE_NAME" class="control-label"></label>
+                <input asp-for="INSTITUE_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Institue Name">
+                <span asp-validation-for="INSTITUE_NAME" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

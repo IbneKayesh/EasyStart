@@ -1,0 +1,34 @@
+﻿@model BS.DMO.Models.HRMS.Employee.EMP_EXPERIENCE
+@{
+    Layout = null;
+}
+<form asp-area="HRMS" asp-controller="Employees" asp-action="EditExperience" id="partialForm" method="post" onkeydown="return event.key != 'Enter';">
+    <div class="card-body">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="ID" type="hidden" />
+        <input asp-for="EMP_ID" type="hidden" />
+        <input asp-for="RowVersion" type="hidden" />
+        <div class="row">
+            <div class="col-md-4">
+                <label asp-for="COMPANY_NAME" class="control-label"></label>
+                <input asp-for="COMPANY_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Company Name">
+                <span asp-validation-for="COMPANY_NAME" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="WORKING_AREA" class="control-label"></label>
+                <input asp-for="WORKING_AREA" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Working Area">
+                <span asp-validation-for="WORKING_AREA" class="text-danger"></span>
+            </div>
+            <div class="col-md-2">
+                <label asp-for="EXP_YEAR" class="control-label"></label>
+                <input asp-for="EXP_YEAR" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="From, To year">
+                <span asp-validation-for="EXP_YEAR" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

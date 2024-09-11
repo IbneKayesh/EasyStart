@@ -102,9 +102,9 @@ namespace BS.Web.Areas.Inventory.Controllers
 
         //API
         [HttpPost]
-        public IActionResult GetItemDetailsForSalesBookingBySubGroupIDByItemName(string item_sub_group_id)
+        public IActionResult GetItemDetailsForSalesBookingBySubGroupIDByItemName(string item_sub_group_id, string productName)
         {
-            var obj = ItemMasterS.GetItemDetailsForSalesBookingBySubGroupIDByItemName(item_sub_group_id);
+            var obj = ItemMasterS.GetItemDetailsForSalesBookingBySubGroupIDByItemName(item_sub_group_id, productName);
             return Json(obj);
         }
         [HttpPost]

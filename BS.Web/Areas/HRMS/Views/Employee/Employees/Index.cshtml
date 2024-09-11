@@ -17,7 +17,13 @@
                 <tr>
                     <th>Employee No</th>
                     <th>Employee Name</th>
-                    <th>Designation</th>
+                    <th>Card No 1</th>
+                    <th>Contact No</th>
+                    <th>Gender</th>
+                    <th>Blood Group</th>
+                    <th>Join Date</th>
+                    <th>Confirm Date</th>
+                    <th>Service Duration</th>
                     <th>Status</th>
                     <th>#</th>
                 </tr>
@@ -33,15 +39,41 @@
                             @Html.DisplayFor(modelItem => item.EMP_NAME)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.DESIG_ID)
+                            @Html.DisplayFor(modelItem => item.CARD_NO1)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.IS_ACTIVE)
+                            @Html.DisplayFor(modelItem => item.CONTACT_NO)
                         </td>
                         <td>
-                            <a class="btn btn-primary btn-xs" asp-area="Setup" asp-controller="Department" asp-action="Index" asp-route-id="@item.ID"><i class="fa fa-eye"></i> Branch</a>
-                            <a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-edit"></i> Edit</a>
-                            <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="/Company/Business/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button>
+                            @Html.DisplayFor(modelItem => item.GENDER_ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BLOOD_GROUP)
+                        </td>
+                        <td>
+                            @item.JOIN_DATE.ToString(item.DATE_DISPLAY_FORMAT)
+                        </td>
+                        <td>
+                            @item.CONFIRM_DATE.ToString(item.DATE_DISPLAY_FORMAT)
+                        </td>
+                        <td>
+                            @{
+                                var joinDate = @item.JOIN_DATE;
+                                var today = DateTime.Now;
+                                var difference = today - joinDate;
+
+                                var years = difference.Days / 365;
+                                var months = (difference.Days % 365) / 30;
+                                var days = (difference.Days % 365) % 30;
+
+                                <span>@years year(s) @months month(s) @days day(s)</span>
+                            }
+                        </td>
+                        <td>
+                            <span class='far @(item.IS_ACTIVE ? "fa-check-circle":"fa-times-circle") fa-lg'></span>
+                        </td>
+                        <td><a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@item.ID" title="Edit"><i class="far fa-edit"></i></a>
+                            <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="/Company/Business/Delete/@item.ID" title="Delete"><i class="far fa-trash-alt"></i></button>
                         </td>
                     </tr>
                 }

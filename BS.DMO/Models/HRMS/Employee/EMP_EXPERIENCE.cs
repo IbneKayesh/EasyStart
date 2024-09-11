@@ -23,11 +23,12 @@ namespace BS.DMO.Models.HRMS.Employee
 
         [Display(Name = "Working Area")]
         [Required(ErrorMessage = "{0} is required")]
-        [StringLength(20, ErrorMessage = "{0} length is between {2} and {1}", MinimumLength = 2)]
+        [StringLength(300, ErrorMessage = "{0} length is between {2} and {1}", MinimumLength = 2)]
         public string? WORKING_AREA { get; set; }
 
         [Display(Name = "Experience Year")]
         [Required(ErrorMessage = "{0} is required")]
-        public decimal EXP_YEAR { get; set; }
+        [StringLength(50, ErrorMessage = "{0} length is between {2} and {1}", MinimumLength = 2)]
+        public string? EXP_YEAR { get; set; }
     }
 }

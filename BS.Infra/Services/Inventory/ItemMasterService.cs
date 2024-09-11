@@ -232,15 +232,22 @@ ORDER BY IST.ITEM_ATTRIBUTE_VALUE_ID";
             generateTable.COLUMN_HIDDEN = string.Join(",", AllCols);
             return generateTable;
         }
-        public List<ITEM_DETAILS_VM> GetItemDetailsForSalesBookingBySubGroupIDByItemName(string item_sub_group_id)
+        public List<ITEM_DETAILS_VM> GetItemDetailsForSalesBookingBySubGroupIDByItemName(string item_sub_group_id, string productName)
         {
-            string sql = $@"SELECT IMD.ID,ISG.HS_CODE,ISG.LEAD_DAYS,IM.MASTER_ITEM_CODE,IM.MASTER_BAR_CODE,IM.ITEM_NAME,IM.WARRANTY_DAYS,IM.EXPIRY_DAYS,IM.IS_MAIN_ITEM,
+            string isTop50 = "";
+            if (string.IsNullOrWhiteSpace(productName))
+            {
+                isTop50 = "TOP 50";
+            }
+            List<SqlParameter> param = new List<SqlParameter>();
+            param.Add(new SqlParameter("@ITEM_SUB_GROUP_ID", item_sub_group_id));
+            string sql = $@"SELECT {isTop50} IMD.ID,ISG.HS_CODE,ISG.LEAD_DAYS,IM.MASTER_ITEM_CODE,IM.MASTER_BAR_CODE,IM.ITEM_NAME,IM.WARRANTY_DAYS,IM.EXPIRY_DAYS,IM.IS_MAIN_ITEM,
 IM.VAT_PCT,IM.BASE_PRICE,IMD.ITEM_CODE,IMD.BAR_CODE,IMD.ITEM_DESC,ATTRIBUTE_VALUE1,ATTRIBUTE_VALUE2,ATTRIBUTE_VALUE3,ATTRIBUTE_VALUE4,ATTRIBUTE_VALUE5,ATTRIBUTE_VALUE6,ATTRIBUTE_VALUE7,ATTRIBUTE_VALUE8,ATTRIBUTE_VALUE9,ATTRIBUTE_VALUE10,ATTRIBUTE_VALUE11,ATTRIBUTE_VALUE12,ATTRIBUTE_VALUE13,ATTRIBUTE_VALUE14,ATTRIBUTE_VALUE15
 FROM ITEM_MASTER IM
 JOIN ITEM_SUB_GROUP ISG ON IM.ITEM_SUB_GROUP_ID= ISG.ID
 LEFT JOIN ITEM_DETAILS IMD ON IM.ID= IMD.ITEM_MASTER_ID
-WHERE ISG.IS_FG_RM = 1";
-            return dbCtx.Database.SqlQueryRaw<ITEM_DETAILS_VM>(sql).ToList();
+WHERE ISG.IS_FG_RM = 1 AND ISG.ID = @ITEM_SUB_GROUP_ID";
+            return dbCtx.Database.SqlQueryRaw<ITEM_DETAILS_VM>(sql, param.ToArray()).ToList();
         }
 
 

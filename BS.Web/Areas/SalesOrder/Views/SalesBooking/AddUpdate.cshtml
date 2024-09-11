@@ -387,6 +387,14 @@
             </div>
         </div>
         <div class="card-body p-1 scrollable-table">
+            <div class="row">
+                <div class="col-md-2 mb-2">
+                    <label asp-for="ITEM_SUB_GROUP_ID" class="control-label"></label>
+                    <select asp-for="ITEM_SUB_GROUP_ID" asp-items="@ViewBag.ITEM_SUB_GROUP_ID" class="form-control form-control-sm" onchange="ItemSubGroupIdChange()">
+                    </select>
+                    <span asp-validation-for="ITEM_SUB_GROUP_ID" class="text-danger"></span>
+                </div>
+            </div>
             <table class="table table-xs table-bordered" ">
                 <thead class="table-success">
                     <tr>

@@ -104,12 +104,6 @@ function SearchGrid(options) {
             visible: !colsHidden.includes(col.trim())
         };
     });
-    // Add column definition for the extra column
-    //columns.push({
-    //    data: null,
-    //    defaultContent: '<button class="btn btn-sm btn-danger">Click!</button>',
-    //    orderable: false
-    //});
     var table = $('#searchDataTable').DataTable({
         ajax: {
             url: options.DataUrl,
@@ -125,8 +119,41 @@ function SearchGrid(options) {
         pageLength: 5,
         select: {
             style: 'multi' // Enable multiple row selection
+        },
+        createdRow: function (row, data, dataIndex) {
+            // Loop through each cell in the row
+            $(row).find('td').each(function (cellIndex) {
+                var columnName = table.settings().init().columns[cellIndex].data;
+                console.log(columnName);
+                var cellData = $(this).text();
+                // Create an input element with the cell's data
+                var input = $('<input>', {
+                    type: 'text',
+                    value: cellData,
+                    class: 'editable-cell'
+                });
+                // Replace the cell content with the input
+                $(this).empty().append(input);
+            });
+        },
+        drawCallback: function () {
+            // You might need to handle additional logic after the table is drawn
+            // For example, adding event listeners to the inputs
+            $('.editable-cell').on('change', function () {
+                // Handle cell value change
+                var newValue = $(this).val();
+                console.log('Cell value changed to:', newValue);
+            });
         }
     });
+
+    // Add column definition for the extra column
+    columns.push({
+        data: null,
+        defaultContent: '<input type="checkbox" class="form-control form-control-sm"></input>',
+        orderable: false
+    });
+
     // Handle row selection
     $('#searchDataTable tbody').on('click', 'tr', function () {
         $(this).toggleClass('selected bg-info'); // Toggle selection

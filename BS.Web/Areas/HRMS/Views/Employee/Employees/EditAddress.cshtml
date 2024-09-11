@@ -1,0 +1,29 @@
+﻿@model BS.DMO.Models.HRMS.Employee.EMP_ADDRESS
+@{
+    Layout = null;
+}
+<form asp-area="HRMS" asp-controller="Employees" asp-action="EditAddress" id="partialForm" method="post" onkeydown="return event.key != 'Enter';">
+    <div class="card-body">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="ID" type="hidden" />
+        <input asp-for="EMP_ID" type="hidden" />
+        <input asp-for="RowVersion" type="hidden" />
+        <div class="row">
+            <div class="col-md-1">
+                <label asp-for="IS_PRESENT" class="control-label"></label>
+                <input asp-for="IS_PRESENT" type="checkbox" class="form-control form-control-sm">
+                <span asp-validation-for="IS_PRESENT" class="text-danger"></span>
+            </div>
+            <div class="col-md-11">
+                <label asp-for="ADDRESS_DETAIL" class="control-label"></label>
+                <input asp-for="ADDRESS_DETAIL" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Address details">
+                <span asp-validation-for="ADDRESS_DETAIL" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

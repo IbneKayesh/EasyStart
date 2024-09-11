@@ -148,6 +148,11 @@
     $('#PartialPopModal').on('show.bs.modal', function (e) {
         var url = $(e.relatedTarget).data('url');
         var title = $(e.relatedTarget).data('title') || 'Modal Title';
+        var footerButton = $(e.relatedTarget).data('button');
+        console.log(footerButton)
+        if (footerButton == '0'){
+            $('.modal-footer').hide();
+        }
         $('#PartialModalLabel').text(title);
         if (url) {
             $('#modalBodyId').load(url, function (response, status, xhr) {
@@ -194,7 +199,7 @@
                     $.notify('An error occurred: ' + errorThrown, 'error');
                 });
             }, function () {
-                alertify.error('Cancel')
+                alertify.error('Action was cancelled')
             })
         })
     });

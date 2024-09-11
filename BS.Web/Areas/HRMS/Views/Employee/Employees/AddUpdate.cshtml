@@ -3,6 +3,9 @@
     ViewData["Title"] = "Employees";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 
 <div class="card card-primary card-outline">
     <div class="card-header">
@@ -11,33 +14,256 @@
             <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
         </div>
     </div>
-    <form asp-action="AddUpdate">
+    <form asp-area="HRMS" asp-controller="Employees" asp-action="AddUpdate">
         <div class="card-body">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="ID" type="hidden" />
             <input asp-for="RowVersion" type="hidden" />
-            <div class="row">
-                <div class="col-md-1">
-                    <label asp-for="EMP_NO" class="control-label"></label>
-                    <input asp-for="EMP_NO" class="custom-input custom-input-xs" autocomplete="off" placeholder="Employee No">
-                    <span asp-validation-for="EMP_NO" class="text-danger"></span>
+            <div class="timeline timeline-inverse">
+                <!-- timeline time label -->
+                <div class="time-label">
+                    <span class="bg-danger">
+                        Employee Registration
+                    </span>
                 </div>
-                <div class="col-md-2">
-                    <label asp-for="EMP_NAME" class="control-label"></label>
-                    <input asp-for="EMP_NAME" type="text" class="custom-input custom-input-xs" autocomplete="off" placeholder="Employee Name">
-                    <span asp-validation-for="EMP_NAME" class="text-danger"></span>
+                <!-- /.timeline-label -->
+                <!-- timeline item -->
+                <div>
+                    <i class="fas fa-user bg-primary"></i>
+                    <div class="timeline-item">
+                        <span class="time"><i class="fas fa-user"></i> Enter information correctly</span>
+                        <h3 class="timeline-header">Employee Information</h3>
+                        <div class="timeline-body row">
+                            <div class="col-md-2">
+                                <label asp-for="EMP_NO" class="control-label"></label>
+                                <input asp-for="EMP_NO" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Employee No">
+                                <span asp-validation-for="EMP_NO" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="EMP_NAME" class="control-label"></label>
+                                <input asp-for="EMP_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Employee Name">
+                                <span asp-validation-for="EMP_NAME" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-3">
+                                <label asp-for="CARD_NO1" class="control-label"></label>
+                                <input asp-for="CARD_NO1" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Card No 1">
+                                <span asp-validation-for="CARD_NO1" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-3">
+                                <label asp-for="CARD_NO2" class="control-label"></label>
+                                <input asp-for="CARD_NO2" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Card No 2">
+                                <span asp-validation-for="CARD_NO2" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <label asp-for="JOIN_DATE" class="control-label"></label>
+                                <input asp-for="JOIN_DATE" type="text" class="form-control form-control-sm datepicker" autocomplete="off" placeholder="Join Date">
+                                <span asp-validation-for="JOIN_DATE" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <label asp-for="CONFIRM_DATE" class="control-label"></label>
+                                <input asp-for="CONFIRM_DATE" type="text" class="form-control form-control-sm datepicker" autocomplete="off" placeholder="Confirm Date">
+                                <span asp-validation-for="CONFIRM_DATE" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-1">
+                                <label asp-for="IS_ACTIVE" class="control-label"></label>
+                                <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
+                                <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-2">
-                    <label asp-for="DESIG_ID" class="control-label"></label>
-                    <select asp-for="DESIG_ID" asp-items="@(new SelectList(ViewBag.DESIG_ID, "ID", "DESIGNATION_NAME"))" class="custom-input custom-input-xs">
-                        <option value="">Select an option</option>
-                    </select>
-                    <span asp-validation-for="DESIG_ID" class="text-danger"></span>
+                <!-- END timeline item -->
+                <!-- timeline item -->
+                <div>
+                    <i class="fas fa-envelope bg-warning"></i>
+                    <div class="timeline-item">
+                        <span class="time"><i class="fas fa-user-secret"></i> Enter Personal Information</span>
+                        <h3 class="timeline-header">Personal Information</h3>
+                        <div class="timeline-body row">
+                            <div class="col-md-2">
+                                <label asp-for="CONTACT_NO" class="control-label"></label>
+                                <input asp-for="CONTACT_NO" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Contact No">
+                                <span asp-validation-for="CONTACT_NO" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <label asp-for="EMAIL_ADDRESS" class="control-label"></label>
+                                <input asp-for="EMAIL_ADDRESS" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Email Address">
+                                <span asp-validation-for="EMAIL_ADDRESS" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <label asp-for="BIRTH_DATE" class="control-label"></label>
+                                <input asp-for="BIRTH_DATE" type="text" class="form-control form-control-sm datepicker" autocomplete="off" placeholder="Birth Date">
+                                <span asp-validation-for="BIRTH_DATE" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <label asp-for="GENDER_ID" class="control-label"></label>
+                                <select asp-for="GENDER_ID" asp-items="@ViewBag.GENDER_ID" class="form-control form-control-sm">
+                                </select>
+                                <span asp-validation-for="GENDER_ID" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <label asp-for="MARITAL_STATUS" class="control-label"></label>
+                                <select asp-for="MARITAL_STATUS" asp-items="@ViewBag.MARITAL_STATUS" class="form-control form-control-sm">
+                                </select>
+                                <span asp-validation-for="MARITAL_STATUS" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <label asp-for="SPOUSE_NAME" class="control-label"></label>
+                                <input asp-for="SPOUSE_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Spuce Name">
+                                <span asp-validation-for="SPOUSE_NAME" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <label asp-for="BLOOD_GROUP" class="control-label"></label>
+                                <select asp-for="BLOOD_GROUP" asp-items="@ViewBag.BLOOD_GROUP" class="form-control form-control-sm">
+                                </select>
+                                <span asp-validation-for="BLOOD_GROUP" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <label asp-for="NATIONAL_IDNO" class="control-label"></label>
+                                <input asp-for="NATIONAL_IDNO" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="National ID">
+                                <span asp-validation-for="NATIONAL_IDNO" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <label asp-for="PASSPORT_NO" class="control-label"></label>
+                                <input asp-for="PASSPORT_NO" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Passport No">
+                                <span asp-validation-for="PASSPORT_NO" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <label asp-for="TIN_NO" class="control-label"></label>
+                                <input asp-for="TIN_NO" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="TIN">
+                                <span asp-validation-for="TIN_NO" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <label asp-for="NATIONALITY" class="control-label"></label>
+                                <select asp-for="NATIONALITY" asp-items="@ViewBag.NATIONALITY" class="form-control form-control-sm">
+                                </select>
+                                <span asp-validation-for="NATIONALITY" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-3">
+                                <label asp-for="FATHER_NAME" class="control-label"></label>
+                                <input asp-for="FATHER_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Father Name">
+                                <span asp-validation-for="FATHER_NAME" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-3">
+                                <label asp-for="MOTHER_NAME" class="control-label"></label>
+                                <input asp-for="MOTHER_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Mother Name">
+                                <span asp-validation-for="MOTHER_NAME" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <label asp-for="PARENTS_CONACT" class="control-label"></label>
+                                <input asp-for="PARENTS_CONACT" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Parents Contact">
+                                <span asp-validation-for="PARENTS_CONACT" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-3">
+                                <label asp-for="REFERENCE_PERSON" class="control-label"></label>
+                                <input asp-for="REFERENCE_PERSON" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Reference Person">
+                                <span asp-validation-for="REFERENCE_PERSON" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-1">
-                    <label asp-for="IS_ACTIVE" class="control-label"></label>
-                    <input asp-for="IS_ACTIVE" type="checkbox" class="custom-input custom-input-xs">
-                    <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
+                <!-- END timeline item -->
+                <!-- timeline item -->
+                <div>
+                    <i class="fas fa-camera bg-purple"></i>
+                    <div class="timeline-item">
+                        <span class="time"><i class="fas fa-camera"></i> Employee Photo</span>
+                        <h3 class="timeline-header">Photo</h3>
+                        <div class="timeline-body">
+                        </div>
+                    </div>
+                </div>
+                <!-- END timeline item -->
+                <!-- timeline item -->
+                <div>
+                    <i class="fas fa-home bg-green"></i>
+                    <div class="timeline-item">
+                        <span class="time">
+                            <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#PartialPopModal" data-url="@Url.Action("EditAddress", "Employees", new { area = "HRMS", empId = Model.ID })" data-title="Edit Address" data-button="1">
+                                <i class="fas fa-plus"></i> Add new Address
+                            </button>
+                        </span>
+                        <h3 class="timeline-header">Address</h3>
+                        <div class="timeline-body">
+                            @if (Model.EMP_ADDRESS != null)
+                            {
+                                <table class="table table-sm">
+                                    @foreach (var addr in Model.EMP_ADDRESS)
+                                    {
+                                        <tr>
+                                            <td><span class='far @(addr.IS_PRESENT ? "fa-check-circle":"fa-times-circle")'></span></td>
+                                            <td>@addr.ADDRESS_DETAIL</td>
+                                            <td><i class="far fa-edit btn btn-xs btn-default" data-toggle="modal" data-target="#PartialPopModal" data-url="@Url.Action("EditAddress", "Employees", new { area = "HRMS", addrId = addr.ID })" data-title="Edit Address" data-button="1"></i></td>
+                                        </tr>
+                                    }
+                                </table>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- END timeline item -->
+                <!-- timeline item -->
+                <div>
+                    <i class="fas fa-school bg-purple"></i>
+                    <div class="timeline-item">
+                        <span class="time">
+                            <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#PartialPopModal" data-url="@Url.Action("EditEdu", "Employees", new { area = "HRMS", empId = Model.ID })" data-title="Edit Education" data-button="1">
+                                <i class="fas fa-plus"></i> Add new Education
+                            </button>
+                        </span>
+                        <h3 class="timeline-header">Education</h3>
+                        <div class="timeline-body">
+                            @if (Model.EMP_EDU != null)
+                            {
+                                <table class="table table-sm">
+                                    @foreach (var edu in Model.EMP_EDU)
+                                    {
+                                        <tr>
+                                            <td><span class='far @(edu.IS_CERTIFICATE ? "fa-check-circle":"fa-times-circle")'></span></td>
+                                            <td>@edu.EDU_TITLE</td>
+                                            <td>@edu.EDU_YEAR</td>
+                                            <td>@edu.EDU_GRADE</td>
+                                            <td>@edu.INSTITUE_NAME</td>
+                                            <td><i class="far fa-edit btn btn-xs btn-default" data-toggle="modal" data-target="#PartialPopModal" data-url="@Url.Action("EditEdu", "Employees", new { area = "HRMS", eduId = edu.ID })" data-title="Edit Education" data-button="1"></i></td>
+                                        </tr>
+                                    }
+                                </table>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- END timeline item -->
+                <!-- timeline item -->
+                <div>
+                    <i class="fas fa-hammer bg-blue"></i>
+                    <div class="timeline-item">
+                        <span class="time">
+                            <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#PartialPopModal" data-url="@Url.Action("EditExperience", "Employees", new { area = "HRMS", empId = Model.ID })" data-title="Edit Experience" data-button="1">
+                                <i class="fas fa-plus"></i> Add new Experience
+                            </button>
+                        </span>
+                        <h3 class="timeline-header">Experience</h3>
+                        <div class="timeline-body">
+                            @if (Model.EMP_EXPERIENCE != null)
+                            {
+                                <table class="table table-sm">
+                                    @foreach (var expr in Model.EMP_EXPERIENCE)
+                                    {
+                                        <tr>
+                                            <td>@expr.COMPANY_NAME</td>
+                                            <td>@expr.WORKING_AREA</td>
+                                            <td>@expr.EXP_YEAR</td>
+                                            <td><i class="far fa-edit btn btn-xs btn-default" data-toggle="modal" data-target="#PartialPopModal" data-url="@Url.Action("EditExperience", "Employees", new { area = "HRMS", expId = expr.ID })" data-title="Edit Experience" data-button="1"></i></td>
+                                        </tr>
+                                    }
+                                </table>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- END timeline item -->
+                <div>
+                    <i class="far fa-clock bg-gray"></i>
                 </div>
             </div>
         </div>
