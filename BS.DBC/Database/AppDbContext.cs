@@ -60,6 +60,7 @@
         public DbSet<EMP_ADDRESS> EMP_ADDRESS { get; set; }
         public DbSet<EMP_EXPERIENCE> EMP_EXPERIENCE { get; set; }
         public DbSet<EMP_EDU> EMP_EDU { get; set; }
+        public DbSet<EMP_DESIG> EMP_DESIG { get; set; }
         //Inventory
         public DbSet<ITEM_GROUP_TYPE> ITEM_GROUP_TYPE { get; set; }
         public DbSet<ITEM_ATTRIBUTE> ITEM_ATTRIBUTE { get; set; }

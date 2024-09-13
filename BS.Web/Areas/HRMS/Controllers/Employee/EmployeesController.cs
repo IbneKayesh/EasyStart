@@ -1,4 +1,6 @@
-﻿namespace BS.Web.Areas.HRMS.Controllers.Employee
+﻿using BS.DMO.Models.Inventory;
+
+namespace BS.Web.Areas.HRMS.Controllers.Employee
 {
     [Area("HRMS")]
     public class EmployeesController : BaseController
@@ -39,7 +41,7 @@
             }
             else
             {
-                var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+                var errors = ValidateModelData.GET_MODEL_ERRORS(ModelState);
                 ModelState.AddModelError("", errors);
             }
             Dropdown_CreateEdit();
@@ -69,7 +71,6 @@
 
         private void Dropdown_CreateEdit()
         {
-            ViewBag.DESIG_ID = designationS.GetAllActive();
             ViewBag.GENDER_ID = new SelectList(CommonData.GetGender());
             ViewBag.MARITAL_STATUS = new SelectList(CommonData.GetMaritalStatus());
             ViewBag.BLOOD_GROUP = new SelectList(CommonData.GetBloodGroup());
@@ -116,7 +117,7 @@
             }
             else
             {
-                var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+                var errors = ValidateModelData.GET_MODEL_ERRORS(ModelState);
                 TempData["msg"] = NotifyService.Error(errors);
             }
             return RedirectToAction(nameof(Edit), new { id = obj.EMP_ID });
@@ -155,7 +156,7 @@
             }
             else
             {
-                var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+                var errors = ValidateModelData.GET_MODEL_ERRORS(ModelState);
                 TempData["msg"] = NotifyService.Error(errors);
             }
             return RedirectToAction(nameof(Edit), new { id = obj.EMP_ID });
@@ -194,12 +195,55 @@
             }
             else
             {
-                var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+                var errors = ValidateModelData.GET_MODEL_ERRORS(ModelState);
                 TempData["msg"] = NotifyService.Error(errors);
             }
             return RedirectToAction(nameof(Edit), new { id = obj.EMP_ID });
         }
 
+        public IActionResult EditDesignation(string empId, string desigId)
+        {
+            EditDesignation();
+            var obj = new EMP_DESIG();
+            obj.EMP_ID = empId;
+
+            if (!string.IsNullOrEmpty(desigId))
+            {
+                var entity = employeesS.GetDesignationByID(desigId);
+                if (entity != null)
+                {
+                    obj = entity;
+                }
+            }
+            return View(ViewPathFinder.ViewName(GetType(), "EditDesignation"), obj);
+        }
+        [HttpPost]
+        public IActionResult EditDesignation(EMP_DESIG obj)
+        {
+            EQResult eQResult = new EQResult();
+            if (ModelState.IsValid)
+            {
+                eQResult = employeesS.InsertDesignation(obj, user_session.USER_ID);
+                if (eQResult.success && eQResult.rows > 0)
+                {
+                    TempData["msg"] = eQResult.messages;
+                }
+                else
+                {
+                    TempData["msg"] = eQResult.messages;
+                }
+            }
+            else
+            {
+                var errors = ValidateModelData.GET_MODEL_ERRORS(ModelState);
+                TempData["msg"] = NotifyService.Error(errors);
+            }
+            return RedirectToAction(nameof(Edit), new { id = obj.EMP_ID });
+        }
+        private void EditDesignation()
+        {
+            ViewBag.DESIG_ID = new SelectList(designationS.GetAllActive(), "ID", "DESIGNATION_NAME");
+        }
 
         //API
         [HttpPost]

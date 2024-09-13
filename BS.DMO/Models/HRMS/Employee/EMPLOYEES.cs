@@ -1,4 +1,6 @@
-﻿namespace BS.DMO.Models.HRMS.Employee
+﻿using BS.DMO.ViewModels.HRMS.Employee;
+
+namespace BS.DMO.Models.HRMS.Employee
 {
     public class EMPLOYEES : BaseModel
     {
@@ -13,6 +15,7 @@
             EMP_ADDRESS = new List<EMP_ADDRESS>();
             EMP_EXPERIENCE = new List<EMP_EXPERIENCE>();
             EMP_EDU = new List<EMP_EDU>();
+            EMP_DESIG_VM = new List<EMP_DESIG_VM>();
         }
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "ID")]
@@ -124,5 +127,7 @@
         public List<EMP_EXPERIENCE>? EMP_EXPERIENCE { get; set; }
         [NotMapped]
         public List<EMP_EDU>? EMP_EDU { get; set; }
+        [NotMapped]
+        public List<EMP_DESIG_VM>? EMP_DESIG_VM { get; set; }
     }
 }

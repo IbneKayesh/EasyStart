@@ -1,5 +1,5 @@
-﻿using BS.Infra.DbHelper;
-using BS.Web.Services;
+﻿using BS.Helper;
+using BS.Infra;
 
 namespace BS.Web.Areas.Setup.Controllers
 {
@@ -36,7 +36,7 @@ namespace BS.Web.Areas.Setup.Controllers
             }
             else
             {
-                var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+                var errors = ValidateModelData.GET_MODEL_ERRORS(ModelState);
                 ModelState.AddModelError("", errors);
             }
             return View(obj);

@@ -37,7 +37,7 @@
             }
             else
             {
-                var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+                var errors = ValidateModelData.GET_MODEL_ERRORS(ModelState);
                 ModelState.AddModelError("", errors);
             }
             return View(obj);

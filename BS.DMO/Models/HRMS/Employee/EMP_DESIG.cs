@@ -5,6 +5,8 @@
         public EMP_DESIG()
         {
             ID = Guid.Empty.ToString();
+            FROM_DATE = DateTime.Now;
+            TO_DATE = DateTime.Now.AddYears(50);
         }
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "ID")]

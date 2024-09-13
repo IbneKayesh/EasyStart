@@ -44,7 +44,7 @@ namespace BS.Web.Areas.Inventory.Controllers
             }
             else
             {
-                var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+                var errors = ValidateModelData.GET_MODEL_ERRORS(ModelState);
                 ModelState.AddModelError("", errors);
             }
             Dropdown_CreateEdit();
@@ -113,7 +113,7 @@ namespace BS.Web.Areas.Inventory.Controllers
             }
             else
             {
-                var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+                var errors = ValidateModelData.GET_MODEL_ERRORS(ModelState);
                 ModelState.AddModelError("", errors);
             }
             return View(obj);

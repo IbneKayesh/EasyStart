@@ -1,0 +1,43 @@
+﻿@model BS.DMO.Models.HRMS.Employee.EMP_DESIG
+@{
+    Layout = null;
+}
+<form asp-area="HRMS" asp-controller="Employees" asp-action="EditDesignation" id="partialForm" method="post" onkeydown="return event.key != 'Enter';">
+    <div class="card-body">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="ID" type="hidden" />
+        <input asp-for="EMP_ID" type="hidden" />
+        <input asp-for="RowVersion" type="hidden" />
+        <div class="row">
+            <div class="col-md-4">
+                <label asp-for="DESIG_ID" class="control-label"></label>
+                <select asp-for="DESIG_ID" asp-items="@ViewBag.DESIG_ID" class="form-control form-control-sm">
+                </select>
+                <span asp-validation-for="DESIG_ID" class="text-danger"></span>
+            </div>
+            <div class="col-md-2">
+                <label asp-for="FROM_DATE" class="control-label"></label>
+                <input asp-for="FROM_DATE" type="datetime-local" class="form-control form-control-sm datepicker" autocomplete="off" placeholder="From Date">
+                <span asp-validation-for="FROM_DATE" class="text-danger"></span>
+            </div>
+            <div class="col-md-2">
+                <label asp-for="TO_DATE" class="control-label"></label>
+                <input asp-for="TO_DATE" type="datetime-local" class="form-control form-control-sm datepicker" autocomplete="off" placeholder="To Date">
+                <span asp-validation-for="TO_DATE" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="DESIG_NOTE" class="control-label"></label>
+                <input asp-for="DESIG_NOTE" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Note *">
+                <span asp-validation-for="DESIG_NOTE" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</form>
+@{
+    await Html.RenderPartialAsync("_JsPartial");
+}
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

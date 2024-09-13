@@ -1,4 +1,7 @@
-﻿namespace BS.Web.Areas.CRM.Controllers
+﻿using BS.Helper;
+using BS.Infra;
+
+namespace BS.Web.Areas.CRM.Controllers
 {
     [Area("CRM")]
     public class ContactsController : BaseController
@@ -37,7 +40,7 @@
             }
             else
             {
-                var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+                var errors = ValidateModelData.GET_MODEL_ERRORS(ModelState);
                 ModelState.AddModelError("", errors);
             }
             return View(obj);
@@ -126,7 +129,7 @@
             }
             else
             {
-                var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+                var errors = ValidateModelData.GET_MODEL_ERRORS(ModelState);
                 ModelState.AddModelError("", errors);
             }
             return View(obj);

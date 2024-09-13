@@ -3,10 +3,6 @@
     ViewData["Title"] = "Employees";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
-
 <div class="card card-primary card-outline">
     <div class="card-header">
         <h3 class="card-title">Add/Edit @ViewData["Title"]</h3>
@@ -22,12 +18,12 @@
             <div class="timeline timeline-inverse">
                 <!-- timeline time label -->
                 <div class="time-label">
-                    <span class="bg-danger">
-                        Employee Registration
+                    <span class="bg-default">
+                        @Model.JOIN_DATE.ToString(Model.DATE_DISPLAY_FORMAT)
                     </span>
                 </div>
                 <!-- /.timeline-label -->
-                <!-- timeline item -->
+                <!-- timeline employee information -->
                 <div>
                     <i class="fas fa-user bg-primary"></i>
                     <div class="timeline-item">
@@ -73,7 +69,7 @@
                     </div>
                 </div>
                 <!-- END timeline item -->
-                <!-- timeline item -->
+                <!-- timeline personal information -->
                 <div>
                     <i class="fas fa-envelope bg-warning"></i>
                     <div class="timeline-item">
@@ -95,7 +91,7 @@
                                 <input asp-for="BIRTH_DATE" type="text" class="form-control form-control-sm datepicker" autocomplete="off" placeholder="Birth Date">
                                 <span asp-validation-for="BIRTH_DATE" class="text-danger"></span>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <label asp-for="GENDER_ID" class="control-label"></label>
                                 <select asp-for="GENDER_ID" asp-items="@ViewBag.GENDER_ID" class="form-control form-control-sm">
                                 </select>
@@ -139,12 +135,12 @@
                                 </select>
                                 <span asp-validation-for="NATIONALITY" class="text-danger"></span>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <label asp-for="FATHER_NAME" class="control-label"></label>
                                 <input asp-for="FATHER_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Father Name">
                                 <span asp-validation-for="FATHER_NAME" class="text-danger"></span>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <label asp-for="MOTHER_NAME" class="control-label"></label>
                                 <input asp-for="MOTHER_NAME" type="text" class="form-control form-control-sm" autocomplete="off" placeholder="Mother Name">
                                 <span asp-validation-for="MOTHER_NAME" class="text-danger"></span>
@@ -163,7 +159,7 @@
                     </div>
                 </div>
                 <!-- END timeline item -->
-                <!-- timeline item -->
+                <!-- timeline photo -->
                 <div>
                     <i class="fas fa-camera bg-purple"></i>
                     <div class="timeline-item">
@@ -174,7 +170,7 @@
                     </div>
                 </div>
                 <!-- END timeline item -->
-                <!-- timeline item -->
+                <!-- timeline address -->
                 <div>
                     <i class="fas fa-home bg-green"></i>
                     <div class="timeline-item">
@@ -202,7 +198,7 @@
                     </div>
                 </div>
                 <!-- END timeline item -->
-                <!-- timeline item -->
+                <!-- timeline education -->
                 <div>
                     <i class="fas fa-school bg-purple"></i>
                     <div class="timeline-item">
@@ -233,7 +229,7 @@
                     </div>
                 </div>
                 <!-- END timeline item -->
-                <!-- timeline item -->
+                <!-- timeline experience -->
                 <div>
                     <i class="fas fa-hammer bg-blue"></i>
                     <div class="timeline-item">
@@ -262,8 +258,38 @@
                     </div>
                 </div>
                 <!-- END timeline item -->
+                <!-- timeline designation -->
                 <div>
-                    <i class="far fa-clock bg-gray"></i>
+                    <i class="fas fa-hammer bg-blue"></i>
+                    <div class="timeline-item">
+                        <span class="time">
+                            <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#PartialPopModal" data-url="@Url.Action("EditDesignation", "Employees", new { area = "HRMS", empId = Model.ID })" data-title="Edit Designation" data-button="1">
+                                <i class="fas fa-plus"></i> Add new Designation
+                            </button>
+                        </span>
+                        <h3 class="timeline-header">Designation</h3>
+                        <div class="timeline-body">
+                            @if (Model.EMP_DESIG_VM != null)
+                            {
+                                <table class="table table-sm">
+                                    @foreach (var desig in Model.EMP_DESIG_VM)
+                                    {
+                                        <tr>
+                                            <td>@desig.DESIGNATION_NAME</td>
+                                            <td>@desig.FROM_DATE.ToString(desig.DATE_DISPLAY_FORMAT)</td>
+                                            <td>@desig.TO_DATE.ToString(desig.DATE_DISPLAY_FORMAT)</td>
+                                            <td>@desig.DESIG_NOTE</td>
+                                            <td><i class="far fa-edit btn btn-xs btn-default" data-toggle="modal" data-target="#PartialPopModal" data-url="@Url.Action("EditDesignation", "Employees", new { area = "HRMS", desigId = desig.ID })" data-title="Edit Designation" data-button="1"></i></td>
+                                        </tr>
+                                    }
+                                </table>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- END timeline item -->
+                <div>
+                    <i class="far fa-clock bg-gray"></i>     
                 </div>
             </div>
         </div>

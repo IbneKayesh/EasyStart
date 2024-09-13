@@ -1,4 +1,6 @@
-﻿namespace BS.Web.Areas.Inventory.Controllers
+﻿using BS.Helper;
+
+namespace BS.Web.Areas.Inventory.Controllers
 {
     [Area("Inventory")]
     public class ItemGroupTypeController : BaseController
@@ -33,7 +35,7 @@
             }
             else
             {
-                var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+                var errors = ValidateModelData.GET_MODEL_ERRORS(ModelState);
                 ModelState.AddModelError("", errors);
             }
             return View(obj);

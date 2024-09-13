@@ -1,7 +1,4 @@
-﻿using BS.DMO.Models.Company;
-using BS.DMO.ViewModels.Accounts.BankLoan;
-
-namespace BS.Web.Areas.Accounts.Controllers.BankLoan
+﻿namespace BS.Web.Areas.Accounts.Controllers.BankLoan
 {
     [Area("Accounts")]
     public class LoanController : BaseController
@@ -90,7 +87,7 @@ namespace BS.Web.Areas.Accounts.Controllers.BankLoan
                 }
                 else
                 {
-                    var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+                    var errors = ValidateModelData.GET_MODEL_ERRORS(ModelState);
                     ModelState.AddModelError("", errors);
                 }
                 return View(ViewPathFinder.ViewName(this.GetType(), "AddUpdate"), obj);
@@ -170,7 +167,7 @@ namespace BS.Web.Areas.Accounts.Controllers.BankLoan
             //    }
             //    else
             //    {
-            //var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+            //var errors = ValidateModelData.GET_MODEL_ERRORS(ModelState);
             ModelState.AddModelError("", eQResult.messages);
             //}
             return View(ViewPathFinder.ViewName(this.GetType(), "Payment"), obj);

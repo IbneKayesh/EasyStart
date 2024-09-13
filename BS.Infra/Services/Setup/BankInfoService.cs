@@ -1,7 +1,4 @@
-﻿using BS.Infra.DbHelper;
-using BS.Infra.Services.Utility;
-
-namespace BS.Infra.Services.Setup
+﻿namespace BS.Infra.Services.Setup
 {
     public class BankInfoService
     {

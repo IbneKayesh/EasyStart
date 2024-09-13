@@ -17,16 +17,16 @@
         public string? SHIFT_NAME { get; set; }
 
         [Display(Name = "In Time (Start)")]
-        public TimeSpan IN_TIME_START { get; set; }
+        public DateTime IN_TIME_START { get; set; }
 
         [Display(Name = "In Time (End)")]
-        public TimeSpan IN_TIME_END { get; set; }
+        public DateTime IN_TIME_END { get; set; }
 
         [Display(Name = "Out Time (Start)")]
-        public TimeSpan OUT_TIME_START { get; set; }
+        public DateTime OUT_TIME_START { get; set; }
 
         [Display(Name = "Out Time (End)")]
-        public TimeSpan OUT_TIME_END { get; set; }
+        public DateTime OUT_TIME_END { get; set; }
 
         [Display(Name = "Grace Minute")]
         [Required(ErrorMessage = "{0} is required")]
@@ -35,6 +35,7 @@
 
         [Display(Name = "Max OT Hours")]
         [Required(ErrorMessage = "{0} is required")]
+        [Range(0, 8, ErrorMessage = "{0} range is between {2} and {1}")]
         public int MAX_OT_HOUR { get; set; } = 0;
     }
 }

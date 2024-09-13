@@ -1,4 +1,6 @@
-﻿namespace BS.Infra.Services.SalesOrder
+﻿using BS.Helper;
+
+namespace BS.Infra.Services.SalesOrder
 {
     public class SalesBookingService
     {
@@ -40,7 +42,7 @@
                 eQResult.messages = "At least one product information is required";
                 return eQResult;
             }
-            ObjectMappingHelper.MapProperties<SB_MASTER_VM, SB_MASTER>(obj.SB_MASTER_VM, sb_master);
+            ObjectMapping.MapProperties<SB_MASTER_VM, SB_MASTER>(obj.SB_MASTER_VM, sb_master);
 
             //find max last delivery date from details
             List<DateTime> LastDeliveryDateList = new List<DateTime>();
@@ -195,7 +197,7 @@
                         {
                             i++;
                             SB_CHILD sb_child = new SB_CHILD();
-                            ObjectMappingHelper.MapProperties<SB_CHILD_VM, SB_CHILD>(item, sb_child);
+                            ObjectMapping.MapProperties<SB_CHILD_VM, SB_CHILD>(item, sb_child);
 
                             //new entity
                             sb_child.ID = Guid.NewGuid().ToString();
@@ -307,7 +309,7 @@
                         {
                             i++;
                             SB_CHILD sb_child = new SB_CHILD();
-                            ObjectMappingHelper.MapProperties<SB_CHILD_VM, SB_CHILD>(item, sb_child);
+                            ObjectMapping.MapProperties<SB_CHILD_VM, SB_CHILD>(item, sb_child);
 
                             //new entity
                             sb_child.ID = Guid.NewGuid().ToString();

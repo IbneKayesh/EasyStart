@@ -45,9 +45,12 @@ namespace BS.Infra.Services.HRMS.Setup
                         {
                             //TODO : Update property
                             entity.SHIFT_NAME = obj.SHIFT_NAME;
-                            //entity.IN_TIME = obj.IN_TIME;
-                            //entity.OUT_TIME = obj.OUT_TIME;
-                            //entity.GRACE_TIME = obj.GRACE_TIME;
+                            entity.IN_TIME_START = obj.IN_TIME_START;
+                            entity.IN_TIME_END = obj.IN_TIME_END;
+                            entity.OUT_TIME_START = obj.OUT_TIME_START;
+                            entity.OUT_TIME_END = obj.OUT_TIME_END;
+                            entity.GRACE_MINUTE = obj.GRACE_MINUTE;
+                            entity.MAX_OT_HOUR = obj.MAX_OT_HOUR;
                             //Start Audit
                             entity.IS_ACTIVE = obj.IS_ACTIVE;
                             entity.UPDATE_USER = userId;

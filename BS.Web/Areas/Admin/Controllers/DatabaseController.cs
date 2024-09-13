@@ -1,5 +1,4 @@
-﻿using BS.DMO.Models.Setup;
-using BS.Infra.DbHelper;
+﻿using BS.Infra;
 
 namespace BS.Web.Areas.Admin.Controllers
 {

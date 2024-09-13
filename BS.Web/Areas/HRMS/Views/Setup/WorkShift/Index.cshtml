@@ -15,11 +15,14 @@
         <table class="table table-hover table-sm">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>In Time</th>
-                    <th>Out Time</th>
-                    <th>Out Time</th>
-                    <th>Grace Time</th>
+                    <th>Shift Name</th>
+                    <th>In Time Start</th>
+                    <th>In Time End</th>
+                    <th>Out Time Start</th>
+                    <th>Out Time End</th>
+                    <th>Duration</th>
+                    <th>Grace Minute</th>
+                    <th>Max OT Hours</th>
                     <th>Status</th>
                     <th>#</th>
                 </tr>
@@ -30,16 +33,31 @@
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.SHIFT_NAME)
-                        </td>@* 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IN_TIME)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.OUT_TIME)
+                            @item.IN_TIME_START.ToString("HH:mm:ss")
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.GRACE_TIME)
-                        </td> *@
+                            @item.IN_TIME_END.ToString("HH:mm:ss")
+                        </td>
+                        <td>
+                            @item.OUT_TIME_START.ToString("HH:mm:ss")
+                        </td>
+                        <td>
+                            @item.OUT_TIME_END.ToString("HH:mm:ss")
+                        </td>
+                        <td>
+                            @{
+                                var totalHours = @item.OUT_TIME_START - @item.IN_TIME_END;
+                            }
+                            @totalHours
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GRACE_MINUTE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MAX_OT_HOUR)
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.IS_ACTIVE)
                         </td>

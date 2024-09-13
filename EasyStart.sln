@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BS.DS", "BS.DS\BS.DS.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BS.Infra", "BS.Infra\BS.Infra.csproj", "{5E698B0C-C6D8-4F6D-94C8-41080A21408D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BS.Helper", "BS.Helper\BS.Helper.csproj", "{72FDC1F2-F20D-4426-8728-8DEA2683E5B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{5E698B0C-C6D8-4F6D-94C8-41080A21408D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E698B0C-C6D8-4F6D-94C8-41080A21408D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E698B0C-C6D8-4F6D-94C8-41080A21408D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72FDC1F2-F20D-4426-8728-8DEA2683E5B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72FDC1F2-F20D-4426-8728-8DEA2683E5B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72FDC1F2-F20D-4426-8728-8DEA2683E5B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72FDC1F2-F20D-4426-8728-8DEA2683E5B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

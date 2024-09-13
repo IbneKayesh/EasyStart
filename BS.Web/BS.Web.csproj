@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BS.Helper\BS.Helper.csproj" />
     <ProjectReference Include="..\BS.Infra\BS.Infra.csproj" />
   </ItemGroup>
 

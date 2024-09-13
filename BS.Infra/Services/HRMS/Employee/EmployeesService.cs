@@ -1,4 +1,7 @@
-﻿namespace BS.Infra.Services.HRMS.Employee
+﻿using BS.DMO.ViewModels.HRMS.Employee;
+using BS.Helper;
+
+namespace BS.Infra.Services.HRMS.Employee
 {
     public class EmployeesService : BaseService
     {
@@ -162,6 +165,11 @@
             sql = $"select * from EMP_EDU where EMP_ID = '{entity.ID}'";
             entity.EMP_EDU = dbCtx.Database.SqlQueryRaw<EMP_EDU>(sql).ToList();
 
+            sql = $@"SELECT ED.*,DG.DESIGNATION_NAME FROM EMP_DESIG ED
+                     JOIN DESIGNATION DG ON ED.DESIG_ID = DG.ID
+                     WHERE ED.EMP_ID = '{entity.ID}'";
+            entity.EMP_DESIG_VM = dbCtx.Database.SqlQueryRaw<EMP_DESIG_VM>(sql).ToList();
+
             return entity;
         }
 
@@ -324,6 +332,7 @@
                     WHERE BI.ID = {id}";
             return dbCtx.Database.SqlQuery<EMP_ADDRESS>(sql).ToList().FirstOrDefault();
         }
+        //experience
         public EMP_EXPERIENCE GetExperienceByID(string id)
         {
             FormattableString sql = $@"SELECT BI.*
@@ -415,7 +424,7 @@
                 dbCtx.Dispose();
             }
         }
-        
+        //education
         public EMP_EDU GetEduByID(string id)
         {
             FormattableString sql = $@"SELECT BI.*
@@ -509,7 +518,136 @@
                 dbCtx.Dispose();
             }
         }
-        
+        //designation
+        public EMP_DESIG GetDesignationByID(string id)
+        {
+            FormattableString sql = $@"SELECT BI.*
+                    FROM EMP_DESIG BI
+                    WHERE BI.ID = {id}";
+            return dbCtx.Database.SqlQuery<EMP_DESIG>(sql).ToList().FirstOrDefault();
+        }
+        public EQResult InsertDesignation(EMP_DESIG obj, string userId)
+        {
+            EQResult eQResult = new EQResult();
+            eQResult.entities = "EMP_DESIG";
+            if (obj.EMP_ID == Guid.Empty.ToString())
+            {
+                eQResult.success = false;
+                eQResult.messages = NotifyService.Warning("Save employee information first");
+                return eQResult;
+            }
+            if (obj.FROM_DATE > obj.TO_DATE)
+            {
+                eQResult.success = false;
+                eQResult.messages = NotifyService.Warning("To date must be ahead from start date");
+                return eQResult;
+            }
+            //for edit
+            if (obj.ID != Guid.Empty.ToString())
+            {
+                var old_entity = dbCtx.EMP_DESIG.Where(x => x.EMP_ID == obj.EMP_ID && x.ID != obj.ID).ToList();
+                if (old_entity.Count() > 0)
+                {
+                    DateTime MaxEndDate = DateTimeHelper.FindMinDate(old_entity.Select(x => x.TO_DATE).ToList());
+                    if (MaxEndDate > obj.FROM_DATE)
+                    {
+                        eQResult.success = false;
+                        eQResult.messages = NotifyService.Warning("Start date must be ahead from last designation end date");
+                        return eQResult;
+                    }
+                }
+            }
+            else
+            {
+                //for new entry
+                var old_entity = dbCtx.EMP_DESIG.Where(x => x.EMP_ID == obj.EMP_ID).ToList();
+                if (old_entity.Count() > 0)
+                {
+                    DateTime MaxEndDate = DateTimeHelper.FindMinDate(old_entity.Select(x => x.TO_DATE).ToList());
+                    if (MaxEndDate > obj.FROM_DATE)
+                    {
+                        eQResult.success = false;
+                        eQResult.messages = NotifyService.Warning("Start date must be ahead from last designation end date");
+                        return eQResult;
+                    }
+                }
+            }
+            
+            try
+            {
+                if (obj.ID == Guid.Empty.ToString())
+                {
+                    //new entity
+                    obj.ID = Guid.NewGuid().ToString();
+
+                    //Start Audit
+                    //obj.IS_ACTIVE = true;
+                    obj.CREATE_USER = userId;
+                    obj.CREATE_DATE = DateTime.Now;
+                    obj.UPDATE_USER = userId;
+                    obj.UPDATE_DATE = DateTime.Now;
+                    //obj.REVISE_NO = 0;
+                    //End Audit
+
+                    dbCtx.EMP_DESIG.Add(obj);
+                    eQResult.rows = dbCtx.SaveChanges();
+                    eQResult.success = true;
+                    eQResult.messages = NotifyService.SaveSuccess();
+
+                    //Notification
+                    return eQResult;
+                }
+                else
+                {
+                    //old entity
+                    var entity = dbCtx.EMP_DESIG.Find(obj.ID);
+                    if (entity != null)
+                    {
+                        if (entity.RowVersion.SequenceEqual(obj.RowVersion))
+                        {
+                            //TODO : Update property
+                            entity.DESIG_ID = obj.DESIG_ID;
+                            entity.FROM_DATE = obj.FROM_DATE;
+                            entity.TO_DATE = obj.TO_DATE;
+                            entity.DESIG_NOTE = obj.DESIG_NOTE;
+                            //Start Audit
+                            entity.IS_ACTIVE = obj.IS_ACTIVE;
+                            entity.UPDATE_USER = userId;
+                            entity.UPDATE_DATE = DateTime.Now;
+                            entity.REVISE_NO = entity.REVISE_NO + 1;
+                            //End Audit
+                            dbCtx.Entry(entity).State = EntityState.Modified;
+                            eQResult.rows = dbCtx.SaveChanges();
+                            eQResult.success = true;
+                            eQResult.messages = NotifyService.EditSuccess();
+
+
+                            //Notification
+                            return eQResult;
+                        }
+                        else
+                        {
+                            eQResult.messages = NotifyService.EditRestricted();
+                            return eQResult;
+                        }
+                    }
+                    else
+                    {
+                        eQResult.messages = NotifyService.NotFound();
+                        return eQResult;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                eQResult.messages = NotifyService.Error(ex.Message == string.Empty ? ex.InnerException.Message : ex.Message);
+                return eQResult;
+            }
+            finally
+            {
+                dbCtx.Dispose();
+            }
+        }
 
     }
 }

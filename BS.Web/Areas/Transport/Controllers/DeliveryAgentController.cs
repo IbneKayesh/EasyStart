@@ -40,7 +40,7 @@ namespace BS.Web.Areas.Transport.Controllers
             }
             else
             {
-                var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+                var errors = ValidateModelData.GET_MODEL_ERRORS(ModelState);
                 ModelState.AddModelError("", errors);
             }
             Dropdown_CreateEdit();

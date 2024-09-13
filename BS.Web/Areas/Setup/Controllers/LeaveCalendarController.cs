@@ -1,4 +1,6 @@
-﻿namespace BS.Web.Areas.Setup.Controllers
+﻿
+
+namespace BS.Web.Areas.Setup.Controllers
 {
     [Area("Setup")]
     public class LeaveCalendarController : BaseController
@@ -40,7 +42,7 @@
             }
             else
             {
-                var errors = UtilityService.GET_MODEL_ERRORS(ModelState);
+                var errors = ValidateModelData.GET_MODEL_ERRORS(ModelState);
                 ModelState.AddModelError("", errors);
             }
             return View(obj);
