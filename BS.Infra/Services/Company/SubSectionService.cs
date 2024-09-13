@@ -104,6 +104,18 @@ ORDER BY D.ID, S.SUB_SECTION_NAME";
             return dbCtx.Database.SqlQuery<SUB_SECTIONS>(sql).ToList();
         }
 
+        public List<SUB_SECTIONS_DDOWN> GetAllActiveForDropDown()
+        {
+            FormattableString sql = $@"SELECT SS.ID, SS.SUB_SECTION_NAME +' - '+ S.SECTION_NAME +' - '+ D.DEPARTMENT_NAME +' - '+ B.BRANCH_NAME SUB_SECTION_NAME
+                    FROM SUB_SECTIONS SS
+					JOIN SECTIONS S ON SS.SECTION_ID = S.ID
+					JOIN DEPARTMENTS D ON S.DEPARTMENT_ID = D.ID
+					JOIN BRANCH B ON D.BRANCH_ID = B.ID
+                    WHERE SS.IS_ACTIVE = 1
+                    ORDER BY  SS.SUB_SECTION_NAME, S.SECTION_NAME, D.DEPARTMENT_NAME, B.BRANCH_NAME";
+            return dbCtx.Database.SqlQuery<SUB_SECTIONS_DDOWN>(sql).ToList();
+        }
+
         public List<SUB_SECTIONS> GetAllByTrnID(string trnId)
         {
             FormattableString sql = $@"SELECT SS.*

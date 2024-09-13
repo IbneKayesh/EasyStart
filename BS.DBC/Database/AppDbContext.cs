@@ -61,6 +61,10 @@
         public DbSet<EMP_EXPERIENCE> EMP_EXPERIENCE { get; set; }
         public DbSet<EMP_EDU> EMP_EDU { get; set; }
         public DbSet<EMP_DESIG> EMP_DESIG { get; set; }
+        public DbSet<EMP_WORK_SHIFT> EMP_WORK_SHIFT { get; set; }
+        public DbSet<SALARY_CYCLES> SALARY_CYCLES { get; set; }
+        public DbSet<EMP_SALARY_CYCLES> EMP_SALARY_CYCLES { get; set; }
+
         //Inventory
         public DbSet<ITEM_GROUP_TYPE> ITEM_GROUP_TYPE { get; set; }
         public DbSet<ITEM_ATTRIBUTE> ITEM_ATTRIBUTE { get; set; }

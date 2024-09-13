@@ -48,7 +48,7 @@
                             @Html.DisplayFor(modelItem => item.UPPER_BOUND)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.IS_ACTIVE)
+                            <span class='far @(item.IS_ACTIVE ? "fa-check-circle":"fa-times-circle") fa-lg'></span>
                         </td>
                         <td>
                             <a class="btn btn-primary btn-xs" asp-area="Setup" asp-controller="Department" asp-action="Index" asp-route-id="@item.ID"><i class="fa fa-eye"></i> Branch</a>

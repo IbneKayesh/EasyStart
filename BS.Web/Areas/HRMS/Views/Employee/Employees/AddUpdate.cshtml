@@ -264,10 +264,10 @@
                     <div class="timeline-item">
                         <span class="time">
                             <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#PartialPopModal" data-url="@Url.Action("EditDesignation", "Employees", new { area = "HRMS", empId = Model.ID })" data-title="Edit Designation" data-button="1">
-                                <i class="fas fa-plus"></i> Add new Designation
+                                <i class="fas fa-plus"></i> Add new Work
                             </button>
                         </span>
-                        <h3 class="timeline-header">Designation</h3>
+                        <h3 class="timeline-header">Work and Designation</h3>
                         <div class="timeline-body">
                             @if (Model.EMP_DESIG_VM != null)
                             {
@@ -275,11 +275,39 @@
                                     @foreach (var desig in Model.EMP_DESIG_VM)
                                     {
                                         <tr>
+                                            <td>@desig.SUB_SECTION_NAME</td>
                                             <td>@desig.DESIGNATION_NAME</td>
                                             <td>@desig.FROM_DATE.ToString(desig.DATE_DISPLAY_FORMAT)</td>
                                             <td>@desig.TO_DATE.ToString(desig.DATE_DISPLAY_FORMAT)</td>
                                             <td>@desig.DESIG_NOTE</td>
                                             <td><i class="far fa-edit btn btn-xs btn-default" data-toggle="modal" data-target="#PartialPopModal" data-url="@Url.Action("EditDesignation", "Employees", new { area = "HRMS", desigId = desig.ID })" data-title="Edit Designation" data-button="1"></i></td>
+                                        </tr>
+                                    }
+                                </table>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- END timeline item -->
+                <!-- timeline salary cycles -->
+                <div>
+                    <i class="fas fa-hammer bg-blue"></i>
+                    <div class="timeline-item">
+                        <span class="time">
+                            <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#PartialPopModal" data-url="@Url.Action("EditSalaryCycles", "Employees", new { area = "HRMS", empId = Model.ID })" data-title="Edit Salary Cycles" data-button="1">
+                                <i class="fas fa-plus"></i> Add new Salary Cycles
+                            </button>
+                        </span>
+                        <h3 class="timeline-header">Salary Cycles</h3>
+                        <div class="timeline-body">
+                            @if (Model.EMP_SALARY_CYCLES_VM != null)
+                            {
+                                <table class="table table-sm">
+                                    @foreach (var desig in Model.EMP_SALARY_CYCLES_VM)
+                                    {
+                                        <tr>
+                                            <td>@desig.CYCLE_NAME</td>
+                                            <td><i class="far fa-edit btn btn-xs btn-default" data-toggle="modal" data-target="#PartialPopModal" data-url="@Url.Action("EditSalaryCycles", "Employees", new { area = "HRMS", cycleId = desig.ID })" data-title="Edit Designation" data-button="1"></i></td>
                                         </tr>
                                     }
                                 </table>

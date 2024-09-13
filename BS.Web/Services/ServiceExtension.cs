@@ -48,6 +48,8 @@
             services.AddTransient<DesignationService>();
             services.AddTransient<WorkShiftService>();
             services.AddTransient<EmployeesService>();
+            services.AddTransient<EmpWorkShiftService>();
+            services.AddTransient<SalaryCyclesService>();
             //Inventory
             services.AddTransient<ItemAttributeService>();
             services.AddTransient<ItemAttributeValueService>();

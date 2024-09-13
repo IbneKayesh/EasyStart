@@ -1,0 +1,54 @@
+﻿@model BS.DMO.Models.HRMS.Employee.EMP_WORK_SHIFT
+@{
+    ViewData["Title"] = "Employee Work Shift";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Add/Edit @ViewData["Title"]</h3>
+        <div class="card-tools">
+        </div>
+    </div>
+    <form asp-action="AddUpdate">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="ID" type="hidden" />
+            <input asp-for="EMP_ID" type="hidden" />
+            <input asp-for="RowVersion" type="hidden" />
+            <div class="row">
+                <div class="col-md-3">
+                    <label asp-for="WORK_SHIFT_ID" class="control-label"></label>
+                    <select asp-for="WORK_SHIFT_ID" asp-items="@ViewBag.WORK_SHIFT_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="WORK_SHIFT_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="FROM_DATE" class="control-label"></label>
+                    <input asp-for="FROM_DATE" type="text" class="form-control form-control-sm datepicker" autocomplete="off" placeholder="From Date">
+                    <span asp-validation-for="FROM_DATE" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="TO_DATE" class="control-label"></label>
+                    <input asp-for="TO_DATE" type="text" class="form-control form-control-sm datepicker" autocomplete="off" placeholder="To Date">
+                    <span asp-validation-for="TO_DATE" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="IS_ACTIVE" class="control-label"></label>
+                    <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Index" asp-route-empId="@Model.EMP_ID" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left"></i> Back</a>
+            <button class="btn btn-sm btn-info" type="reset"><i class="fa fa-undo"></i> Reset</button>
+            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Submit</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

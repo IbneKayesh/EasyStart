@@ -1,5 +1,4 @@
-﻿using BS.DMO.ViewModels.HRMS.Employee;
-using BS.Helper;
+﻿using BS.Helper;
 
 namespace BS.Infra.Services.HRMS.Employee
 {
@@ -165,10 +164,15 @@ namespace BS.Infra.Services.HRMS.Employee
             sql = $"select * from EMP_EDU where EMP_ID = '{entity.ID}'";
             entity.EMP_EDU = dbCtx.Database.SqlQueryRaw<EMP_EDU>(sql).ToList();
 
-            sql = $@"SELECT ED.*,DG.DESIGNATION_NAME FROM EMP_DESIG ED
+            sql = $@"SELECT ED.*,DG.DESIGNATION_NAME,SS.SUB_SECTION_NAME
+                     FROM EMP_DESIG ED
                      JOIN DESIGNATION DG ON ED.DESIG_ID = DG.ID
+                     JOIN SUB_SECTIONS SS ON ED.SUB_SECTION_ID = SS.ID
                      WHERE ED.EMP_ID = '{entity.ID}'";
             entity.EMP_DESIG_VM = dbCtx.Database.SqlQueryRaw<EMP_DESIG_VM>(sql).ToList();
+
+            sql = $@"SELECT ESC.*,SC.CYCLE_NAME FROM EMP_SALARY_CYCLES ESC JOIN SALARY_CYCLES SC ON ESC.SALARY_CYCLES_ID = SC.ID WHERE ESC.EMP_ID = '{entity.ID}'";
+            entity.EMP_SALARY_CYCLES_VM = dbCtx.Database.SqlQueryRaw<EMP_SALARY_CYCLES_VM>(sql).ToList();
 
             return entity;
         }
@@ -572,7 +576,7 @@ namespace BS.Infra.Services.HRMS.Employee
                     }
                 }
             }
-            
+
             try
             {
                 if (obj.ID == Guid.Empty.ToString())
@@ -607,6 +611,7 @@ namespace BS.Infra.Services.HRMS.Employee
                         {
                             //TODO : Update property
                             entity.DESIG_ID = obj.DESIG_ID;
+                            entity.SUB_SECTION_ID = obj.SUB_SECTION_ID;
                             entity.FROM_DATE = obj.FROM_DATE;
                             entity.TO_DATE = obj.TO_DATE;
                             entity.DESIG_NOTE = obj.DESIG_NOTE;
@@ -649,5 +654,104 @@ namespace BS.Infra.Services.HRMS.Employee
             }
         }
 
+        //salary cycles
+        public EMP_SALARY_CYCLES GetSalaryCyclesByID(string id)
+        {
+            FormattableString sql = $@"SELECT BI.* FROM EMP_SALARY_CYCLES BI WHERE BI.ID = {id}";
+            return dbCtx.Database.SqlQuery<EMP_SALARY_CYCLES>(sql).ToList().FirstOrDefault();
+        }
+        public EQResult InsertSalaryCycles(EMP_SALARY_CYCLES obj, string userId)
+        {
+            EQResult eQResult = new EQResult();
+            eQResult.entities = "EMP_SALARY_CYCLES";
+            if (obj.EMP_ID == Guid.Empty.ToString())
+            {
+                eQResult.success = false;
+                eQResult.messages = NotifyService.Warning("Save employee information first");
+                return eQResult;
+            }
+            if (obj.ID == Guid.Empty.ToString())
+            {
+                bool entity = dbCtx.EMP_SALARY_CYCLES.Where(x => x.EMP_ID == obj.EMP_ID).Any();
+                if (entity)
+                {
+                    eQResult.success = false;
+                    eQResult.messages = NotifyService.Warning("Unable to add multiple salary cycle");
+                    return eQResult;
+                }
+            }
+            try
+            {
+                if (obj.ID == Guid.Empty.ToString())
+                {
+                    //new entity
+                    obj.ID = Guid.NewGuid().ToString();
+
+                    //Start Audit
+                    //obj.IS_ACTIVE = true;
+                    obj.CREATE_USER = userId;
+                    obj.CREATE_DATE = DateTime.Now;
+                    obj.UPDATE_USER = userId;
+                    obj.UPDATE_DATE = DateTime.Now;
+                    //obj.REVISE_NO = 0;
+                    //End Audit
+
+                    dbCtx.EMP_SALARY_CYCLES.Add(obj);
+                    eQResult.rows = dbCtx.SaveChanges();
+                    eQResult.success = true;
+                    eQResult.messages = NotifyService.SaveSuccess();
+
+                    //Notification
+                    return eQResult;
+                }
+                else
+                {
+                    //old entity
+                    var entity = dbCtx.EMP_SALARY_CYCLES.Find(obj.ID);
+                    if (entity != null)
+                    {
+                        if (entity.RowVersion.SequenceEqual(obj.RowVersion))
+                        {
+                            //TODO : Update property
+                            //entity.EMP_ID = obj.EMP_ID;
+                            entity.SALARY_CYCLES_ID = obj.SALARY_CYCLES_ID;
+                            //Start Audit
+                            entity.IS_ACTIVE = obj.IS_ACTIVE;
+                            entity.UPDATE_USER = userId;
+                            entity.UPDATE_DATE = DateTime.Now;
+                            entity.REVISE_NO = entity.REVISE_NO + 1;
+                            //End Audit
+                            dbCtx.Entry(entity).State = EntityState.Modified;
+                            eQResult.rows = dbCtx.SaveChanges();
+                            eQResult.success = true;
+                            eQResult.messages = NotifyService.EditSuccess();
+
+
+                            //Notification
+                            return eQResult;
+                        }
+                        else
+                        {
+                            eQResult.messages = NotifyService.EditRestricted();
+                            return eQResult;
+                        }
+                    }
+                    else
+                    {
+                        eQResult.messages = NotifyService.NotFound();
+                        return eQResult;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                eQResult.messages = NotifyService.Error(ex.Message == string.Empty ? ex.InnerException.Message : ex.Message);
+                return eQResult;
+            }
+            finally
+            {
+                dbCtx.Dispose();
+            }
+        }
     }
 }

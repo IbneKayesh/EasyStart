@@ -72,7 +72,9 @@
                         <td>
                             <span class='far @(item.IS_ACTIVE ? "fa-check-circle":"fa-times-circle") fa-lg'></span>
                         </td>
-                        <td><a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@item.ID" title="Edit"><i class="far fa-edit"></i></a>
+                        <td>
+                            <a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@item.ID" title="Edit"><i class="far fa-edit"></i></a>
+                            <a class="btn btn-primary btn-xs" asp-area="HRMS" asp-controller="EmployeeWorkShift" asp-action="Index" asp-route-empId="@item.ID" title="Work Shift"><i class="far fa-calendar-alt"></i></a>
                             <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="/Company/Business/Delete/@item.ID" title="Delete"><i class="far fa-trash-alt"></i></button>
                         </td>
                     </tr>

@@ -1,0 +1,82 @@
+﻿@model BS.DMO.ViewModels.HRMS.Setup.EMP_WORK_SHIFT_VM_IDX
+@{
+    ViewData["Title"] = "Employee Work Shift";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Find your @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="Create" asp-route-empId="@Model.EMP_ID"><i class="fa fa-plus"></i> Create New</a>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>From Date</th>
+                    <th>To Date</th>
+                    <th>Shift Name</th>
+                    <th>In Time Start</th>
+                    <th>In Time End</th>
+                    <th>Out Time Start</th>
+                    <th>Out Time End</th>
+                    <th>Duration</th>
+                    <th>Grace Minute</th>
+                    <th>Max OT Hours</th>
+                    <th>Status</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.EMP_WORK_SHIFT_VM)
+                {
+                    <tr>
+                        <td>
+                            @item.FROM_DATE.ToString(item.DATE_DISPLAY_FORMAT)
+                        </td>
+                        <td>
+                            @item.TO_DATE.ToString(item.DATE_DISPLAY_FORMAT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SHIFT_NAME)
+                        </td>
+                        <td>
+                            @item.IN_TIME_START.ToString("HH:mm:ss")
+                        </td>
+                        <td>
+                            @item.IN_TIME_END.ToString("HH:mm:ss")
+                        </td>
+                        <td>
+                            @item.OUT_TIME_START.ToString("HH:mm:ss")
+                        </td>
+                        <td>
+                            @item.OUT_TIME_END.ToString("HH:mm:ss")
+                        </td>
+                        <td>
+                            @{
+                                var totalHours = @item.OUT_TIME_START - @item.IN_TIME_END;
+                            }
+                            @totalHours
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GRACE_MINUTE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MAX_OT_HOUR)
+                        </td>
+                        <td>
+                            <span class='far @(item.IS_ACTIVE ? "fa-check-circle":"fa-times-circle") fa-lg'></span>
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" asp-area="Setup" asp-controller="Department" asp-action="Index" asp-route-id="@item.ID"><i class="fa fa-eye"></i> Branch</a>
+                            <a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-edit"></i> Edit</a>
+                            <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="/Company/Business/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿@model BS.DMO.Models.HRMS.Employee.EMP_SALARY_CYCLES
+@{
+    Layout = null;
+}
+<form asp-area="HRMS" asp-controller="Employees" asp-action="EditSalaryCycles" id="partialForm" method="post" onkeydown="return event.key != 'Enter';">
+    <div class="card-body">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="ID" type="hidden" />
+        <input asp-for="EMP_ID" type="hidden" />
+        <input asp-for="RowVersion" type="hidden" />
+        <div class="row">
+            <div class="col-md-4">
+                <label asp-for="SALARY_CYCLES_ID" class="control-label"></label>
+                <select asp-for="SALARY_CYCLES_ID" asp-items="@ViewBag.SALARY_CYCLES_ID" class="form-control form-control-sm">
+                </select>
+                <span asp-validation-for="SALARY_CYCLES_ID" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

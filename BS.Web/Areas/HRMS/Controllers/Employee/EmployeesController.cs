@@ -1,16 +1,21 @@
-﻿using BS.DMO.Models.Inventory;
-
-namespace BS.Web.Areas.HRMS.Controllers.Employee
+﻿namespace BS.Web.Areas.HRMS.Controllers.Employee
 {
     [Area("HRMS")]
     public class EmployeesController : BaseController
     {
         private readonly EmployeesService employeesS;
         private readonly DesignationService designationS;
-        public EmployeesController(EmployeesService _employeesService, DesignationService _designationService)
+        private readonly SubSectionService subSectionS;
+        private readonly SalaryCyclesService salaryCyclesS;
+        public EmployeesController(EmployeesService _employeesService, 
+            DesignationService _designationService,
+            SubSectionService subSectionS,
+            SalaryCyclesService salaryCyclesS)
         {
             employeesS = _employeesService;
             designationS = _designationService;
+            this.subSectionS = subSectionS;
+            this.salaryCyclesS = salaryCyclesS;
         }
         public IActionResult Index()
         {
@@ -243,6 +248,51 @@ namespace BS.Web.Areas.HRMS.Controllers.Employee
         private void EditDesignation()
         {
             ViewBag.DESIG_ID = new SelectList(designationS.GetAllActive(), "ID", "DESIGNATION_NAME");
+            ViewBag.SUB_SECTION_ID = new SelectList(subSectionS.GetAllActiveForDropDown(), "ID", "SUB_SECTION_NAME");
+        }
+
+        public IActionResult EditSalaryCycles(string empId, string cycleId)
+        {
+            EditSalaryCycles();
+            var obj = new EMP_SALARY_CYCLES();
+            obj.EMP_ID = empId;
+
+            if (!string.IsNullOrEmpty(cycleId))
+            {
+                var entity = employeesS.GetSalaryCyclesByID(cycleId);
+                if (entity != null)
+                {
+                    obj = entity;
+                }
+            }
+            return View(ViewPathFinder.ViewName(GetType(), "EditSalaryCycles"), obj);
+        }
+        [HttpPost]
+        public IActionResult EditSalaryCycles(EMP_SALARY_CYCLES obj)
+        {
+            EQResult eQResult = new EQResult();
+            if (ModelState.IsValid)
+            {
+                eQResult = employeesS.InsertSalaryCycles(obj, user_session.USER_ID);
+                if (eQResult.success && eQResult.rows > 0)
+                {
+                    TempData["msg"] = eQResult.messages;
+                }
+                else
+                {
+                    TempData["msg"] = eQResult.messages;
+                }
+            }
+            else
+            {
+                var errors = ValidateModelData.GET_MODEL_ERRORS(ModelState);
+                TempData["msg"] = NotifyService.Error(errors);
+            }
+            return RedirectToAction(nameof(Edit), new { id = obj.EMP_ID });
+        }
+        private void EditSalaryCycles()
+        {
+            ViewBag.SALARY_CYCLES_ID = new SelectList(salaryCyclesS.GetAllActive(), "ID", "CYCLE_NAME");
         }
 
         //API

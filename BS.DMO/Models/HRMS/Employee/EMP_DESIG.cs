@@ -18,6 +18,11 @@
         [Required(ErrorMessage = "{0} is required")]
         public string? EMP_ID { get; set; }
 
+        [Display(Name = "Sub Section Id")]
+        [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
+        [Required(ErrorMessage = "{0} is required")]
+        public string? SUB_SECTION_ID { get; set; }
+
         [Display(Name = "Designation Id")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         [Required(ErrorMessage = "{0} is required")]

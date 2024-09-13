@@ -1,6 +1,4 @@
-﻿using BS.DMO.ViewModels.HRMS.Employee;
-
-namespace BS.DMO.Models.HRMS.Employee
+﻿namespace BS.DMO.Models.HRMS.Employee
 {
     public class EMPLOYEES : BaseModel
     {
@@ -16,6 +14,7 @@ namespace BS.DMO.Models.HRMS.Employee
             EMP_EXPERIENCE = new List<EMP_EXPERIENCE>();
             EMP_EDU = new List<EMP_EDU>();
             EMP_DESIG_VM = new List<EMP_DESIG_VM>();
+            EMP_SALARY_CYCLES_VM = new List<EMP_SALARY_CYCLES_VM>();
         }
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "ID")]
@@ -123,11 +122,17 @@ namespace BS.DMO.Models.HRMS.Employee
         //non mapped
         [NotMapped]
         public List<EMP_ADDRESS>? EMP_ADDRESS { get; set; }
+
         [NotMapped]
         public List<EMP_EXPERIENCE>? EMP_EXPERIENCE { get; set; }
+
         [NotMapped]
         public List<EMP_EDU>? EMP_EDU { get; set; }
+
         [NotMapped]
         public List<EMP_DESIG_VM>? EMP_DESIG_VM { get; set; }
+
+        [NotMapped]
+        public List<EMP_SALARY_CYCLES_VM>? EMP_SALARY_CYCLES_VM { get; set; }
     }
 }

@@ -120,13 +120,13 @@ namespace BS.Infra.Services.HRMS.Setup
             }
             try
             {
-                //check child entity
-                int anyChild = dbCtx.BANK_BRANCH.Where(x => x.BANK_ID == id).Count();
-                if (anyChild > 0)
-                {
-                    eQResult.messages = NotifyService.DeleteHasChildString("Branch", anyChild, "Bank");
-                    return eQResult;
-                }
+                ////check child entity
+                //int anyChild = dbCtx.BANK_BRANCH.Where(x => x.BANK_ID == id).Count();
+                //if (anyChild > 0)
+                //{
+                //    eQResult.messages = NotifyService.DeleteHasChildString("Branch", anyChild, "Bank");
+                //    return eQResult;
+                //}
 
                 //old entity
                 var entity = dbCtx.DESIGNATION.Find(id);

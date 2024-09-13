@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BS.DMO.Models.HRMS.Setup.SALARY_CYCLES>
+@{
+    ViewData["Title"] = "Salary Cycles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Find your @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>Cycle Name</th>
+                    <th>Start Day</th>
+                    <th>End Day</th>
+                    <th>Status</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CYCLE_NAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.START_DAY)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.END_DAY)
+                        </td>
+                        <td>
+                            <span class='far @(item.IS_ACTIVE ? "fa-check-circle":"fa-times-circle") fa-lg'></span>
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" asp-area="Setup" asp-controller="Department" asp-action="Index" asp-route-id="@item.ID"><i class="fa fa-eye"></i> Branch</a>
+                            <a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-edit"></i> Edit</a>
+                            <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="/Company/Business/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

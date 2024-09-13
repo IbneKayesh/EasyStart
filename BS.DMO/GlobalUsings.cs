@@ -10,3 +10,6 @@ global using BS.DMO.Models.Transport;
 global using BS.DMO.ViewModels.HelpDesk;
 global using System.ComponentModel.DataAnnotations;
 global using System.ComponentModel.DataAnnotations.Schema;
+global using BS.DMO.ViewModels.HRMS.Setup;
+global using BS.DMO.Models.HRMS.Employee;
+global using BS.DMO.ViewModels.HRMS.Employee;

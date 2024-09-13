@@ -16,7 +16,7 @@ namespace BS.Web.Controllers
         public IActionResult Index()
         {
             string table_script = string.Empty;
-            table_script = ModelToTable.GenerateCreateTableQuery<EMP_DESIG>();
+            table_script = ModelToTable.GenerateCreateTableQuery<EMP_SALARY_CYCLES>();
             ////table_script = Services.Power.ModelToTable.GenerateSelect<EMPLOYEES>();
             //table_script = Services.Power.ClassObjectSanitizer.SetForSave<EMPLOYEES>();
             //table_script = Services.Power.RazorSanitizer.Create<EMPLOYEES>();
