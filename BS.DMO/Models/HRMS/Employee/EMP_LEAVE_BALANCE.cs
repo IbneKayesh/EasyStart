@@ -15,15 +15,21 @@ namespace BS.DMO.Models.HRMS.Employee
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         [Required(ErrorMessage = "{0} is required")]
         public string? EMP_ID { get; set; }
-        
-        [Display(Name = "Leave Type ID")]
+
+        [Display(Name = "Year Name")]
+        [StringLength(11, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
+        [Required(ErrorMessage = "{0} is required")]
+        public string? FINANCIAL_YEAR_ID { get; set; }
+
+        [Display(Name = "Holiday Type Name")]
         [StringLength(50, ErrorMessage = "{0} length is {2} between {1}", MinimumLength = 0)]
         [Required(ErrorMessage = "{0} is required")]
-        public string? LEAVE_TYPE_ID { get; set; }
+        public string? HOLIDAY_TYPE_ID { get; set; }
 
-        [Display(Name = "Entitle Qty")]
+        [Display(Name = "No of Leave")]
         [Required(ErrorMessage = "{0} is required")]
-        public int ENTITLE_QTY { get; set; }
+        [Range(1, 50, ErrorMessage = "{0} range is between {2} and {1}")]
+        public int NO_OF_LEAVE { get; set; }
 
         [Display(Name = "Used Qty")]
         [Required(ErrorMessage = "{0} is required")]

@@ -1,4 +1,6 @@
-﻿namespace BS.DMO.Models.HRMS.Employee
+﻿using BS.DMO.ViewModels.Setup;
+
+namespace BS.DMO.Models.HRMS.Employee
 {
     public class EMPLOYEES : BaseModel
     {
@@ -15,6 +17,7 @@
             EMP_EDU = new List<EMP_EDU>();
             EMP_DESIG_VM = new List<EMP_DESIG_VM>();
             EMP_SALARY_CYCLES_VM = new List<EMP_SALARY_CYCLES_VM>();
+            EMP_LEAVE_BALANCE_VM = new List<EMP_LEAVE_BALANCE_VM>();
         }
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "ID")]
@@ -134,5 +137,8 @@
 
         [NotMapped]
         public List<EMP_SALARY_CYCLES_VM>? EMP_SALARY_CYCLES_VM { get; set; }
+
+        [NotMapped]
+        public List<EMP_LEAVE_BALANCE_VM>? EMP_LEAVE_BALANCE_VM { get; set; }
     }
 }

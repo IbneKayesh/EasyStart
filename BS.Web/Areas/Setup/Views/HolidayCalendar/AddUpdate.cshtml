@@ -1,0 +1,65 @@
+﻿@model BS.DMO.Models.Setup.HOLIDAY_CALENDAR
+@{
+    ViewData["Title"] = "Holiday Calendar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Add/Edit @ViewData["Title"]</h3>
+        <div class="card-tools">
+            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+        </div>
+    </div>
+    <form asp-action="AddUpdate">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="ID" type="hidden" />
+            <input asp-for="RowVersion" type="hidden" />
+            <div class="row">
+                <div class="col-md-2">
+                    <label asp-for="FINANCIAL_YEAR_ID" class="control-label"></label>
+                    <select asp-for="FINANCIAL_YEAR_ID" asp-items="@ViewBag.FINANCIAL_YEAR_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="FINANCIAL_YEAR_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="HOLIDAY_TYPE_ID" class="control-label"></label>
+                    <select asp-for="HOLIDAY_TYPE_ID" asp-items="@ViewBag.HOLIDAY_TYPE_ID" class="form-control form-control-sm">
+                    </select>
+                    <span asp-validation-for="HOLIDAY_TYPE_ID" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="CALENDAR_DATE" class="control-label"></label>
+                    <input asp-for="CALENDAR_DATE" type="date" class="form-control form-control-sm" autocomplete="off" placeholder="Leave Type Name">
+                    <span asp-validation-for="CALENDAR_DATE" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="IS_WORKING_DAY" class="control-label"></label>
+                    <input asp-for="IS_WORKING_DAY" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_WORKING_DAY" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="NOTE_INFO" class="control-label"></label>
+                    <input asp-for="NOTE_INFO" class="form-control form-control-sm" autocomplete="off" placeholder="Note">
+                    <span asp-validation-for="NOTE_INFO" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="IS_ACTIVE" class="control-label"></label>
+                    <input asp-for="IS_ACTIVE" type="checkbox" class="form-control form-control-sm">
+                    <span asp-validation-for="IS_ACTIVE" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Index" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left"></i> Back</a>
+            <button class="btn btn-sm btn-info" type="reset"><i class="fa fa-undo"></i> Reset</button>
+            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Submit</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

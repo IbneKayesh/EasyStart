@@ -64,6 +64,7 @@
         public DbSet<EMP_WORK_SHIFT> EMP_WORK_SHIFT { get; set; }
         public DbSet<SALARY_CYCLES> SALARY_CYCLES { get; set; }
         public DbSet<EMP_SALARY_CYCLES> EMP_SALARY_CYCLES { get; set; }
+        public DbSet<EMP_LEAVE_BALANCE> EMP_LEAVE_BALANCE { get; set; }
 
         //Inventory
         public DbSet<ITEM_GROUP_TYPE> ITEM_GROUP_TYPE { get; set; }
@@ -98,8 +99,9 @@
         public DbSet<CURRENCY_INFO> CURRENCY_INFO { get; set; }
         public DbSet<CURRENCY_CONV_RATE> CURRENCY_CONV_RATE { get; set; }
         public DbSet<FINANCIAL_YEAR> FINANCIAL_YEAR { get; set; }
-        public DbSet<LEAVE_TYPE> LEAVE_TYPE { get; set; }
-        public DbSet<LEAVE_CALENDAR> LEAVE_CALENDAR { get; set; }
+        public DbSet<HOLIDAY_TYPE> HOLIDAY_TYPE { get; set; }
+        public DbSet<HOLIDAY_CALENDAR> HOLIDAY_CALENDAR { get; set; }
+        public DbSet<YEARLY_LEAVE_CALENDAR> YEARLY_LEAVE_CALENDAR { get; set; }
         public DbSet<ENTITY_VALUE_TEXT> ENTITY_VALUE_TEXT { get; set; }
         public DbSet<TRN_AUTO_STEP> TRN_AUTO_STEP { get; set; }
         public DbSet<SUB_SECTIONS_TRN_ID> SUB_SECTIONS_TRN_ID { get; set; }

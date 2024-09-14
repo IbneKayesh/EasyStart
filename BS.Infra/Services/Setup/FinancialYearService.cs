@@ -115,10 +115,10 @@
             try
             {
                 //check child entity
-                int anyChild = dbCtx.LEAVE_CALENDAR.Where(x => x.FINANCIAL_YEAR_ID == id).Count();
+                int anyChild = dbCtx.HOLIDAY_CALENDAR.Where(x => x.FINANCIAL_YEAR_ID == id).Count();
                 if (anyChild > 0)
                 {
-                    eQResult.messages = NotifyService.DeleteHasChildString("Leave calendar", anyChild, "Financial Year");
+                    eQResult.messages = NotifyService.DeleteHasChildString("Holiday calendar", anyChild, "Financial Year");
                     return eQResult;
                 }
 

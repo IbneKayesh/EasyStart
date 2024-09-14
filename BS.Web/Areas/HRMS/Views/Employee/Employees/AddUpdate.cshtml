@@ -316,6 +316,32 @@
                     </div>
                 </div>
                 <!-- END timeline item -->
+                <!-- timeline yearly leave balance -->
+                <div>
+                    <i class="fas fa-hammer bg-blue"></i>
+                    <div class="timeline-item">
+                        <span class="time">
+                        </span>
+                        <h3 class="timeline-header">Processed Yearly Leave Calendar</h3>
+                        <div class="timeline-body">
+                            @if (Model.EMP_LEAVE_BALANCE_VM != null)
+                            {
+                                <table class="table table-sm">
+                                    @foreach (var elb in Model.EMP_LEAVE_BALANCE_VM)
+                                    {
+                                        <tr>
+                                            <td>@elb.YEAR_NAME</td>
+                                            <td>@elb.HOLIDAY_TYPE_NAME</td>
+                                            <td>@elb.NO_OF_LEAVE</td>
+                                            <td>@elb.USED_QTY</td>
+                                        </tr>
+                                    }
+                                </table>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- END timeline item -->
                 <div>
                     <i class="far fa-clock bg-gray"></i>     
                 </div>

@@ -174,6 +174,13 @@ namespace BS.Infra.Services.HRMS.Employee
             sql = $@"SELECT ESC.*,SC.CYCLE_NAME FROM EMP_SALARY_CYCLES ESC JOIN SALARY_CYCLES SC ON ESC.SALARY_CYCLES_ID = SC.ID WHERE ESC.EMP_ID = '{entity.ID}'";
             entity.EMP_SALARY_CYCLES_VM = dbCtx.Database.SqlQueryRaw<EMP_SALARY_CYCLES_VM>(sql).ToList();
 
+            sql = $@"SELECT LC.*,FY.YEAR_NAME,LT.HOLIDAY_TYPE_NAME
+FROM EMP_LEAVE_BALANCE LC
+JOIN FINANCIAL_YEAR FY ON LC.FINANCIAL_YEAR_ID = FY.ID
+JOIN HOLIDAY_TYPE LT ON LC.HOLIDAY_TYPE_ID = LT.ID 
+WHERE LC.EMP_ID = '{entity.ID}' ORDER BY LC.FINANCIAL_YEAR_ID DESC, LT.IS_APPLICATION_REQUIRED DESC";
+            entity.EMP_LEAVE_BALANCE_VM = dbCtx.Database.SqlQueryRaw<EMP_LEAVE_BALANCE_VM>(sql).ToList();
+
             return entity;
         }
 
@@ -321,7 +328,7 @@ namespace BS.Infra.Services.HRMS.Employee
             }
             catch (Exception ex)
             {
-                eQResult.messages = NotifyService.Error(ex.Message == string.Empty ? ex.InnerException.Message : ex.Message);
+                eQResult.messages = ex.Message == string.Empty ? ex.InnerException.Message : ex.Message;
                 return eQResult;
             }
             finally

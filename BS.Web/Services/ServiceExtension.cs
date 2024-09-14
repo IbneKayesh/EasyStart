@@ -77,8 +77,8 @@
             services.AddTransient<CurrencyInfoService>();
             services.AddTransient<CurrencyConvRateService>();
             services.AddTransient<FinancialYearService>();
-            services.AddTransient<LeaveTypeService>();
-            services.AddTransient<LeaveCalendarService>();
+            services.AddTransient<HolidayTypeService>();
+            services.AddTransient<HolidayCalendarService>();
             services.AddTransient<EntityValueTextService>();
             services.AddTransient<TrnAutoStepService>();
             services.AddTransient<SubSectionsTrnIdService>();
