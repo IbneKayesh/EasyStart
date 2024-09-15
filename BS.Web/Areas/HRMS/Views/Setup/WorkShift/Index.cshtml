@@ -8,6 +8,9 @@
         <h3 class="card-title">Find your @ViewData["Title"]</h3>
         <div class="card-tools">
             <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+            <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#PartialPopModal" data-url="@Url.Action("Create", "WorkShift", new { area = "HRMS" })" data-title="Create new Work Shift" data-button="0">
+                <i class="fas fa-plus"></i> Create New
+            </button>
         </div>
     </div>
 

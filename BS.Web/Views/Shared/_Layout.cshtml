@@ -58,7 +58,11 @@
                     </button>
                 </div>
                 <div class="modal-body p-2">
-                    <div id="modalBodyId"></div>
+                    <div id="modalBodyId">
+                        <div class="overlay">
+                            <i class="fas fa-2x fa-sync fa-spin"></i>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer p-2">
                     <button type="submit" class="btn btn-danger" id="ModalSaveButton">Submit</button>
@@ -111,10 +115,7 @@
                 });
             });
         });
-
-
     </script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

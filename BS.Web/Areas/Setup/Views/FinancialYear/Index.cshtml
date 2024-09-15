@@ -7,7 +7,9 @@
     <div class="card-header">
         <h3 class="card-title">Find your @ViewData["Title"]</h3>
         <div class="card-tools">
-            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+            <span class="btn btn-xs btn-primary" data-toggle="modal" data-target="#PartialPopModal" data-url="@Url.Action("Create", "FinancialYear", new { area = "Setup" })" data-title="Create new @ViewData["Title"]" data-button="1">
+                <i class="fas fa-plus"></i> Create New
+            </span>
         </div>
     </div>
 
@@ -48,7 +50,9 @@
                         </td>
                         <td>
                             <a class="btn btn-primary btn-xs" asp-area="Setup" asp-controller="LeaveCalendar" asp-action="Index" asp-route-id="@item.ID"><i class="fa fa-eye"></i> Leave Calendar</a>
-                            <a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-edit"></i> Edit</a>
+                            <span class="btn btn-xs btn-primary" data-toggle="modal" data-target="#PartialPopModal" data-url="@Url.Action("Edit", "FinancialYear", new { area = "Setup", id = item.ID })" data-title="Edit @ViewData["Title"] - @item.YEAR_NAME" data-button="1">
+                                <i class="fas fa-edit"></i> Edit
+                            </span>
                             <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="/Setup/FinancialYear/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button>
                         </td>
                     </tr>

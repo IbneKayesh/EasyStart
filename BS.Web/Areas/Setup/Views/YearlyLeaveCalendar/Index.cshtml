@@ -7,7 +7,9 @@
     <div class="card-header">
         <h3 class="card-title">Find your @ViewData["Title"]</h3>
         <div class="card-tools">
-            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
+            <span class="btn btn-xs btn-primary" data-toggle="modal" data-target="#PartialPopModal" data-url="@Url.Action("Create", "YearlyLeaveCalendar", new { area = "Setup" })" data-title="Create new @ViewData["Title"]" data-button="1">
+                <i class="fas fa-plus"></i> Create New
+            </span>
             @if(Model != null && Model.Count() > 0)
             {
                 <a class="btn btn-primary btn-xs" asp-action="ProcessEmployeeYearlyLeaveCalendar" asp-route-fyID="@Model.First().FINANCIAL_YEAR_ID"><i class="fa fa-cogs"></i> Process Employee Leave Calendar</a>     
@@ -49,8 +51,10 @@
                         <td>
                             @if (!string.IsNullOrWhiteSpace(item.ID))
                             {
-                                <a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-edit"></i> Edit</a>
-                                <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="/Setup/LeaveCalendar/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button>
+                                <span class="btn btn-xs btn-primary" data-toggle="modal" data-target="#PartialPopModal" data-url="@Url.Action("Edit", "YearlyLeaveCalendar", new { area = "Setup", id = item.ID })" data-title="Edit @ViewData["Title"] - @item.YEAR_NAME" data-button="1">
+                                    <i class="fas fa-edit"></i> Edit
+                                </span>
+                                <button type="button" class="btn btn-danger btn-xs delete-confirm" data-url="/Setup/YearlyLeaveCalendar/Delete/@item.ID"><i class="fa fa-trash"></i> Delete</button>
                             }
                         </td>
                     </tr>

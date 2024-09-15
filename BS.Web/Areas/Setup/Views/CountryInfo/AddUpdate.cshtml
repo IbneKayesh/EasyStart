@@ -1,17 +1,8 @@
 ﻿@model BS.DMO.Models.Setup.COUNTRY_INFO
 @{
-    ViewData["Title"] = "Country";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
-
-<div class="card card-primary card-outline">
-    <div class="card-header">
-        <h3 class="card-title">Add/Edit @ViewData["Title"]</h3>
-        <div class="card-tools">
-            <a class="btn btn-primary btn-xs" asp-action="Create"><i class="fa fa-plus"></i> Create New</a>
-        </div>
-    </div>
-    <form asp-action="AddUpdate">
+    <form asp-area="Setup" asp-controller="CountryInfo" asp-action="AddUpdate" id="partialForm" method="post" onkeydown="return event.key != 'Enter';">
         <div class="card-body">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input asp-for="ID" type="hidden" />
@@ -29,15 +20,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-footer">
-            <a asp-action="Index" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left"></i> Back</a>
-            <button class="btn btn-sm btn-info" type="reset"><i class="fa fa-undo"></i> Reset</button>
-            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-save"></i> Submit</button>
-        </div>
     </form>
-</div>
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
